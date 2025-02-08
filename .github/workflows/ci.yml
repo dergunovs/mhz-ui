@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "23.6.0"
+      - name: Install npm
+        run: npm i -g npm@11.0.0
+      - name: Install
+        run: npm i
+      - name: Build
+        run: npm run build
+      - name: Lint check
+        run: npm run lint
+      - name: TS check
+        run: npm run ts
+      - name: Unit tests
+        run: npm run test
+      - name: Deploy Storybook
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: "packages/ui/storybook-static"
+          target: ${{ secrets.SSH_PATH }}
