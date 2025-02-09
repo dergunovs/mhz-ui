@@ -39,8 +39,8 @@ describe('date', () => {
   test('formats date and time', async () => {
     const DATE = new Date('2025-02-09T17:13:17.427Z');
 
-    expect(formatDateTime(DATE, 'ru')).toStrictEqual(`9 февр. 2025 г., 20:13`);
-    expect(formatDateTime(DATE, 'en')).toStrictEqual(`Feb 9, 2025, 8:13 PM`);
+    expect(formatDateTime(DATE, 'ru')).toStrictEqual(`9 февр. 2025 г., 17:13`);
+    expect(formatDateTime(DATE, 'en')).toStrictEqual(`Feb 9, 2025, 5:13 PM`);
     expect(formatDateTime()).toStrictEqual(`-`);
   });
 
@@ -65,10 +65,10 @@ describe('date', () => {
     vi.setSystemTime(date);
 
     const DAYS = {
-      dateFrom: new Date('2025-01-02T09:00:00.000Z'),
-      dateFromPrev: new Date('2024-12-26T08:59:59.999Z'),
-      dateTo: new Date('2025-01-09T09:00:00.000Z'),
-      dateToPrev: new Date('2025-01-02T08:59:59.999Z'),
+      dateFrom: new Date('2025-01-02T12:00:00.000Z'),
+      dateFromPrev: new Date('2024-12-26T11:59:59.999Z'),
+      dateTo: new Date('2025-01-09T12:00:00.000Z'),
+      dateToPrev: new Date('2025-01-02T11:59:59.999Z'),
     };
 
     expect(getDatesByDayGap(GAP)).toStrictEqual(DAYS);
@@ -83,18 +83,18 @@ describe('date', () => {
 
     const WEEK_DAYS = [
       {
-        dateFrom: new Date('2024-12-22T21:00:00.000Z'),
-        dateTo: new Date('2024-12-29T20:59:59.000Z'),
+        dateFrom: new Date('2024-12-23T00:00:00.000Z'),
+        dateTo: new Date('2024-12-29T23:59:59.000Z'),
         label: '23.12 - 29.12',
       },
       {
-        dateFrom: new Date('2024-12-29T21:00:00.000Z'),
-        dateTo: new Date('2025-01-05T20:59:59.000Z'),
+        dateFrom: new Date('2024-12-30T00:00:00.000Z'),
+        dateTo: new Date('2025-01-05T23:59:59.000Z'),
         label: '30.12 - 05.01',
       },
       {
-        dateFrom: new Date('2025-01-05T21:00:00.000Z'),
-        dateTo: new Date('2025-01-12T20:59:59.000Z'),
+        dateFrom: new Date('2025-01-06T00:00:00.000Z'),
+        dateTo: new Date('2025-01-12T23:59:59.000Z'),
         label: '06.01 - 12.01',
       },
     ];

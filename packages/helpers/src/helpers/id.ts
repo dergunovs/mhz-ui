@@ -4,7 +4,7 @@ export function createTempId(): string {
 
 export function deleteTempId<T extends { _id?: string }>(array: T[], isDeleteAllIds?: boolean): T[] {
   return array.map((obj) => {
-    if (isDeleteAllIds || obj._id?.includes('temp')) {
+    if (isDeleteAllIds || obj._id?.includes('temp-')) {
       delete obj._id;
 
       return obj;

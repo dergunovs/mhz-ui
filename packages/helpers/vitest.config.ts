@@ -6,5 +6,6 @@ export default defineConfig({
     clearMocks: true,
     include: ['**/*.spec.ts'],
     coverage: { provider: 'istanbul', reporter: ['text'], all: true },
+    env: { TZ: 'UTC' },
   },
 });
