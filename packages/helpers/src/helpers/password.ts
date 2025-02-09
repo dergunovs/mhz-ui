@@ -1,4 +1,4 @@
-export function generatePassword() {
+export function generatePassword(): string {
   const symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let password = '';
 

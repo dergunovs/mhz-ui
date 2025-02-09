@@ -1,0 +1,71 @@
+# Helpers
+
+npm i mhz-helpers
+
+## api
+
+`api` единый инстанс axios
+
+`setBaseUrl(url: string) ` установка базового url
+
+`setAuthHeader(token: string)` установка заголовка авторизации
+
+`deleteAuthHeader()` удаление заголовка авторизации
+
+`handleError(error: unknown): string` возврат ошибки из error.response.data.message
+
+## query
+
+`queryClient: QueryClient` queryClient из tanstack query
+
+`vueQueryOptions(toast: { error: (text: string) => void }, logoutUrl: string, tokenName: string): VueQueryPluginOptions` - опции tanstack query для обработки и вывода ошибок, включая логаут при 403
+
+`VueQueryPlugin, useQuery, useMutation, useQueryClient` экспорты из tanstack query
+
+`UseQueryReturnType, UseMutationReturnType, QueryClient` экспорты типов из tanstack query
+
+## clone
+
+`clone(obj: T): T` structuredClone с учётом toRaw для vue объектов
+
+## date
+
+`addZero(value: number): string` добавление нуля к цифре меньше 10
+
+`formatDuration(duration?: number): string` преобразование времени в секундах в формат '1 мин. 09 сек.'
+
+`formatDate(dateRaw?: string | Date | null, lang?: 'ru' | 'en'): string` преобразование даты в формат '7 февр. 2025 г.' с учётом локали
+
+`formatDateTime(dateRaw?: string | Date | null, lang?: 'ru' | 'en'): string` преобразование даты с временем в формат '7 февр. 2025 г. 14:41' с учётом локали
+
+`subtractDates(dateRaw1?: string | Date | null, dateRaw2?: string | Date | null, isRawResult?: boolean): string | number` подсчёт промежутка между датами с преобразованием в формат '1 мин. 09 сек.' или секунды (isRawResult)
+
+`getDatesByDayGap(gap: number): IDatesGap` воврат промежутков дат с заданным диапазоном от текущей даты в сутках, например, для сравнения предыдущего месяца(gap:30) или недели(gap:7) с текущими
+
+`getFirstAndLastWeekDays(weeksCount: number): IWeekDays[]` получение первых и последних дней недель с датами и заголовками, выбор количества недель через weeksCount
+
+## id
+
+`createTempId(): string` - создание временного id с префиксом temp
+
+`deleteTempId<T extends { _id?: string }>(array: T[], , isDeleteAll?: boolean): T[]` удаление у объектов внутри массива поля \_id, если внутри него хранится временный id с префиксом temp или всех полей \_id(isDeleteAll)
+
+## link
+
+`isLinkActive(currentUrl: string, linkUrl: string): boolean` проверка, активна ли текущая страница с учётом главной страницы "/"
+
+## numbers
+
+`formatPercent(percent: number): string` преобразование процентов в формат '+1%'
+
+`getPercentDiff(cur: number, prev: number): number` получение разницы между двумя значениями в процентах
+
+## password
+
+`generatePassword(): string` генерация случайного 8 символьного пароля из букв и цифр
+
+## test
+
+`dataTest(value: string): string` возврат элемента с указанным data-test аттрибутом со скобками и кавычками
+
+`wait(time?: number): Promise<void>` подождать указанное количество милисекунд внутри теста для проверки setTimeout

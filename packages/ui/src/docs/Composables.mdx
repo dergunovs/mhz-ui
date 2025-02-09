@@ -1,0 +1,99 @@
+# Composables
+
+npm i mhz-helpers
+
+## useAuth
+
+`isAuth: Readonly<Ref<boolean>>` получить статус авторизации пользователя
+
+`setAuth(auth: boolean)` установить статус авторизации пользователя
+
+`logout(url: string, deleteAuthHeader: () => void, tokenName: string)` логаут пользователя
+
+`getCookieToken(tokenName: string): string | undefined` получение в cookie токена авторизации
+
+`setCookieToken(token: string, tokenName: string)` установка cookie с токеном авторизации
+
+`deleteCookieToken(tokenName: string)` удаление в cookie токена авторизации
+
+```
+useAuth(): {
+  auth: (token: string, setAuthHeader: (token: string) => void, tokenName: string) => void;
+  redirectIfAuth: (url: string) => void;
+}
+```
+
+Функции авторизации и редиректа на указанный url при авторизации.
+
+## useInfiniteScroll
+
+```
+useInfiniteScroll<T>(): {
+  page: Ref<number>;
+  allData: Ref<T[]>;
+  addData: (data: T[]) => void;
+  handleScroll: (isLoading: boolean, pageToSet: number) => void;
+}
+```
+
+Бесконечный скролл с подгрузкой новых данных.
+
+## usePage
+
+`convertParams(params: Ref<IPageQuery | number>, initiator?: string): IPageSortParams | IPageParams` - преобразование параметров в необходимый формат
+
+```
+usePage(filter?: object): {
+  query: Ref<IPageQuery>;
+  resetQuery: (value: string | ISortOption) => void;
+  setQueryPage: (pageToSet: number) => void;
+  setQueryFilter: (filterToSet?: object) => void;
+}
+```
+
+Загрузка и установка query параметров url: номер страницы, фильтры и направление сортировки.
+
+```
+usePageNumber(): {
+  page: Ref<number>;
+  resetPage: () => void;
+  setPage: (pageToSet: number) => void;
+}
+```
+
+Упрощённая версия загрузки и установки query параметров: только номер страницы.
+
+## usePagination
+
+```
+usePagination<T>(dataRaw: Ref<{ data: T[]; total: number; } | undefined>): {
+  data: ComputedRef<T[] | undefined>;
+  total: ComputedRef<number | undefined>;
+  setPaginationPage: (pageToSet: number, page: number) => number;
+}
+```
+
+Работа пагинации, оптимизированная для компонента UiPagination из mhz-ui.
+
+## usePWA
+
+```
+usePWA(): {
+    installPWA: () => Promise<void>;
+    isShowInstallPWA: Ref<boolean>;
+}
+```
+
+Установка PWA и проверка возможности установки.
+
+## useValidate
+
+```
+useValidator<T>(formData: Ref<T>, rules: Partial<{ [fieldName in keyof T]: RuleItem[] | false; }>): {
+    error: (field: string) => string | undefined;
+    errors: ComputedRef<Record<string, ValidateError[]> | undefined>;
+    isValid: () => boolean;
+}
+```
+
+Валидация реактивных объектов по правилам `required, email, letters, min, max`.

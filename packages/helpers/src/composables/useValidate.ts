@@ -12,7 +12,7 @@ export function useValidator<T>(formData: Ref<T>, rules: Partial<{ [fieldName in
 
   const tries = ref(0);
 
-  function isValid() {
+  function isValid(): boolean {
     tries.value++;
 
     return pass.value && isFinished.value;
@@ -20,7 +20,7 @@ export function useValidator<T>(formData: Ref<T>, rules: Partial<{ [fieldName in
 
   const errors = computed(() => (tries.value ? errorFields.value : undefined));
 
-  function error(field: string) {
+  function error(field: string): string | undefined {
     return errors.value?.[field]?.[0]?.message;
   }
 

@@ -15,14 +15,14 @@ export function logout(url: string, deleteAuthHeader: () => void, tokenName: str
   window.location.href = url;
 }
 
-export function setCookieToken(token: string, tokenName: string) {
-  document.cookie = `${tokenName}=${token};Secure;samesite=strict;`;
-}
-
 export function getCookieToken(tokenName: string): string | undefined {
   const { [tokenName]: token } = Object.fromEntries(document.cookie.split('; ').map((v) => v.split('=')));
 
   return token;
+}
+
+export function setCookieToken(token: string, tokenName: string) {
+  document.cookie = `${tokenName}=${token};Secure;samesite=strict;`;
 }
 
 export function deleteCookieToken(tokenName: string) {

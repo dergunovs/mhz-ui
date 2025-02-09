@@ -12,14 +12,24 @@ export interface IPageQuery {
   filter: object;
 }
 
-export function convertParams(params: Ref<IPageQuery | number>, initiator?: string) {
+export interface IPageParams {
+  page: number;
+}
+
+export interface IPageSortParams extends IPageParams {
+  dir: string;
+  sort?: string;
+  initiator?: string;
+}
+
+export function convertParams(params: Ref<IPageQuery | number>, initiator?: string): IPageSortParams | IPageParams {
   return typeof params.value === 'number'
     ? { page: params.value }
     : {
-        initiator,
         page: params.value.page || 1,
-        sort: params.value.sort.value,
         dir: params.value.sort.isAsc === false ? 'desc' : 'asc',
+        sort: params.value.sort.value,
+        initiator,
         ...params.value.filter,
       };
 }
@@ -28,12 +38,9 @@ export function usePage(filter?: object) {
   const router = useRouter();
   const route = useRoute();
 
-  const query = ref<IPageQuery>({
+  const query: Ref<IPageQuery> = ref({
     page: Number(route.query.page || 1),
-    sort: {
-      value: route.query.sort?.toString(),
-      isAsc: route.query.dir !== 'desc',
-    },
+    sort: { value: route.query.sort?.toString(), isAsc: route.query.dir !== 'desc' },
     filter: { ...filter },
   });
 
@@ -50,9 +57,9 @@ export function usePage(filter?: object) {
 
   function setQueryFilter(filterToSet?: object) {
     query.value = {
-      filter: { ...filterToSet },
       page: 1,
       sort: query.value.sort,
+      filter: { ...filterToSet },
     };
   }
 

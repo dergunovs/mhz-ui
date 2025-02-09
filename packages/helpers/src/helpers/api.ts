@@ -14,6 +14,6 @@ export function deleteAuthHeader() {
   api.defaults.headers.common['Authorization'] = ``;
 }
 
-export function handleError(error: unknown) {
+export function handleError(error: unknown): string {
   return axios.isAxiosError(error) ? error.response?.data.message : '';
 }

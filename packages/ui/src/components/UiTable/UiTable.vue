@@ -76,7 +76,7 @@ const isScrollable = ref(false);
 
 const scrollableText = computed(() => (props.lang === 'ru' ? 'Таблицу можно скроллить →' : 'Table is scrollable →'));
 
-function checkTableSize(): void {
+function checkTableSize() {
   if (tableBlock.value && table.value) {
     const tableBlockSize = Number(getComputedStyle(tableBlock.value).width.slice(0, -2));
     const tableSize = Number(getComputedStyle(table.value).width.slice(0, -2));

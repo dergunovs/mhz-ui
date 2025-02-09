@@ -3,7 +3,7 @@ import { QueryCache, QueryClient, type VueQueryPluginOptions } from '@tanstack/v
 import { logout } from '../composables/useAuth';
 import { handleError, deleteAuthHeader } from './api';
 
-export const queryClient = new QueryClient();
+export const queryClient: QueryClient = new QueryClient();
 
 export function vueQueryOptions(
   toast: { error: (text: string) => void },
