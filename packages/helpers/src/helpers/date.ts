@@ -3,7 +3,7 @@ export function addZero(value: number): string {
 }
 
 export function formatDuration(duration?: number): string {
-  if (!duration) return '0';
+  if (!duration) return '-';
 
   const minutes = Math.floor(duration / 60);
   const seconds = duration - minutes * 60;
@@ -14,7 +14,7 @@ export function formatDuration(duration?: number): string {
 export function formatDate(dateRaw?: string | Date | null, lang?: 'ru' | 'en'): string {
   if (!dateRaw) return '-';
 
-  return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : undefined, {
+  return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -24,7 +24,7 @@ export function formatDate(dateRaw?: string | Date | null, lang?: 'ru' | 'en'): 
 export function formatDateTime(dateRaw?: string | Date | null, lang?: 'ru' | 'en'): string {
   if (!dateRaw) return '-';
 
-  return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : undefined, {
+  return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -34,14 +34,14 @@ export function formatDateTime(dateRaw?: string | Date | null, lang?: 'ru' | 'en
 }
 
 export function subtractDates(
-  dateRaw1?: string | Date | null,
-  dateRaw2?: string | Date | null,
+  dateBig?: string | Date | null,
+  dateSmall?: string | Date | null,
   isRawResult?: boolean
 ): string | number {
-  if (!dateRaw1 || !dateRaw2) return '-';
+  if (!dateBig || !dateSmall) return '-';
 
-  const date1 = new Date(dateRaw1);
-  const date2 = new Date(dateRaw2);
+  const date1 = new Date(dateBig);
+  const date2 = new Date(dateSmall);
 
   const duration = Math.floor(((date1 as unknown as number) - (date2 as unknown as number)) / 1000);
 
