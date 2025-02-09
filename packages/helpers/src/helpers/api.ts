@@ -3,7 +3,7 @@ import axios from 'axios';
 export const api = axios;
 
 export function setBaseURL(url: string) {
-  axios.defaults.baseURL = url;
+  api.defaults.baseURL = url;
 }
 
 export function setAuthHeader(token: string) {
@@ -11,9 +11,9 @@ export function setAuthHeader(token: string) {
 }
 
 export function deleteAuthHeader() {
-  api.defaults.headers.common['Authorization'] = ``;
+  api.defaults.headers.common['Authorization'] = undefined;
 }
 
 export function handleError(error: unknown): string {
-  return axios.isAxiosError(error) ? error.response?.data.message : '';
+  return api.isAxiosError(error) ? error.response?.data.message : '';
 }
