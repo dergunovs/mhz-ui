@@ -98,4 +98,4 @@ useValidator<T>(formData: Ref<T>, rules: Partial<{ [fieldName in keyof T]: RuleI
 }
 ```
 
-Валидация реактивных объектов по правилам `required, email, letters, min, max`.
+Валидация полей реактивного объекта по правилам `required, email, letters, min(value: number), max(value: number)`.
