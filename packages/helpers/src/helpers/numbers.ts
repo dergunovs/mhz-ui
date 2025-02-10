@@ -1,4 +1,4 @@
-export function formatPercent(percent: number): string {
+export function formatPercent(percent: number | null): string {
   return percent === null ? '' : `${percent > 0 ? `+` : ``}${percent}%`;
 }
 
