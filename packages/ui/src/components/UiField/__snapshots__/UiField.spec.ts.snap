@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiField > matches snapshot 1`] = `
+"<div class="_field_24707f"><label><span data-test="ui-field-label">Label</span>
+    <!--v-if-->
+  </label>
+  <div data-test="ui-field">123</div>
+  <!--v-if-->
+</div>"
+`;

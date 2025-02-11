@@ -27,6 +27,10 @@ describe('UiBreadcrumbs', async () => {
     expect(wrapper.findComponent(UiBreadcrumbs)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows breadcrumbs', async () => {
     expect(wrapper.findAll(breadcrumb).length).toBe(LINKS.length);
   });

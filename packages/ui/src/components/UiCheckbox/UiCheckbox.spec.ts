@@ -36,6 +36,10 @@ describe('UiCheckbox', async () => {
     expect(wrapper.findComponent(UiCheckbox)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('emits data by checkbox update', async () => {
     expect(wrapper.find(checkboxInput).attributes('value')).toBe(DEFAULT_MODEL_VALUE.toString());
 

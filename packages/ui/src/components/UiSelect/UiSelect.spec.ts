@@ -1,3 +1,4 @@
+import { nextTick } from 'vue';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest } from 'mhz-helpers';
@@ -26,16 +27,24 @@ describe('UiSelect', async () => {
     expect(wrapper.findComponent(UiSelect)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('toggles options on input click', async () => {
     const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
 
     expect(wrapper.find(selectOptions).exists()).toBe(false);
 
-    await inputComponent.vm.$emit('toggle');
+    inputComponent.vm.$emit('toggle');
+
+    await nextTick();
 
     expect(wrapper.find(selectOptions).exists()).toBe(true);
 
-    await inputComponent.vm.$emit('toggle');
+    inputComponent.vm.$emit('toggle');
+
+    await nextTick();
 
     expect(wrapper.find(selectOptions).exists()).toBe(false);
   });
@@ -43,7 +52,9 @@ describe('UiSelect', async () => {
   it('shows options', async () => {
     const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
 
-    await inputComponent.vm.$emit('toggle');
+    inputComponent.vm.$emit('toggle');
+
+    await nextTick();
 
     expect(wrapper.findAll(selectOption).length).toBe(OPTIONS.length);
     expect(wrapper.findAll(selectOption)[0].text()).toBe(OPTIONS[0]);
@@ -52,7 +63,9 @@ describe('UiSelect', async () => {
   it('sets options', async () => {
     const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
 
-    await inputComponent.vm.$emit('toggle');
+    inputComponent.vm.$emit('toggle');
+
+    await nextTick();
 
     await wrapper.findAll(selectOption)[0].trigger('click');
 
@@ -65,7 +78,9 @@ describe('UiSelect', async () => {
 
     const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
 
-    await inputComponent.vm.$emit('toggle');
+    inputComponent.vm.$emit('toggle');
+
+    await nextTick();
 
     expect(wrapper.findAll(selectOption)[0].text()).toBe(OPTIONS_OBJECTS[0].title);
   });
@@ -75,7 +90,9 @@ describe('UiSelect', async () => {
 
     const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
 
-    await inputComponent.vm.$emit('toggle');
+    inputComponent.vm.$emit('toggle');
+
+    await nextTick();
 
     await wrapper.findAll(selectOption)[0].trigger('click');
 
@@ -90,7 +107,9 @@ describe('UiSelect', async () => {
 
     expect(wrapper.find(selectInputFilter).exists()).toBe(false);
 
-    await inputComponent.vm.$emit('toggle');
+    inputComponent.vm.$emit('toggle');
+
+    await nextTick();
 
     expect(wrapper.find(selectInputFilter).exists()).toBe(true);
   });
@@ -100,13 +119,17 @@ describe('UiSelect', async () => {
 
     const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
 
-    await inputComponent.vm.$emit('toggle');
+    inputComponent.vm.$emit('toggle');
+
+    await nextTick();
 
     const inputFilterComponent = wrapper.findComponent(selectInputFilter) as VueWrapper;
 
     expect(wrapper.findAll(selectOption).length).toBe(OPTIONS.length);
 
-    await inputFilterComponent.vm.$emit('update:modelValue', OPTIONS[1]);
+    inputFilterComponent.vm.$emit('update:modelValue', OPTIONS[1]);
+
+    await nextTick();
 
     expect(wrapper.findAll(selectOption).length).toBe(
       OPTIONS.filter((option) => option.toLowerCase().includes(OPTIONS[1].toLowerCase())).length
@@ -118,13 +141,17 @@ describe('UiSelect', async () => {
 
     const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
 
-    await inputComponent.vm.$emit('toggle');
+    inputComponent.vm.$emit('toggle');
+
+    await nextTick();
 
     const inputFilterComponent = wrapper.findComponent(selectInputFilter) as VueWrapper;
 
     expect(wrapper.find(selectNoResults).exists()).toBe(false);
 
-    await inputFilterComponent.vm.$emit('update:modelValue', '100% not in options');
+    inputFilterComponent.vm.$emit('update:modelValue', '100% not in options');
+
+    await nextTick();
 
     expect(wrapper.findAll(selectOption).length).toBe(0);
     expect(wrapper.find(selectNoResults).exists()).toBe(true);

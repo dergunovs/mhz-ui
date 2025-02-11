@@ -22,6 +22,10 @@ describe('UiRange', async () => {
     expect(wrapper.findComponent(UiRange)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('passes props to range component', async () => {
     expect(wrapper.find(range).attributes('modelvalue')).toBe(MODEL_VALUE.join(','));
     expect(wrapper.find(range).attributes('min')).toBe(MIN.toString());

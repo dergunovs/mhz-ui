@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiSlider > matches snapshot 1`] = `
+"<div class="_container_0323a6">
+  <div class="_thumbs_0323a6"><button type="button" class="_thumb_0323a6" data-active="true" data-test="ui-slider-thumb"><img src="/src/components/UiSlider/images/thumb-1.webp" width="64" height="64" alt="thumb-0" crossorigin="anonymous"></button><button type="button" class="_thumb_0323a6" data-active="false" data-test="ui-slider-thumb"><img src="/src/components/UiSlider/images/thumb-2.webp" width="64" height="64" alt="thumb-1" crossorigin="anonymous"></button><button type="button" class="_thumb_0323a6" data-active="false" data-test="ui-slider-thumb"><img src="/src/components/UiSlider/images/thumb-3.webp" width="64" height="64" alt="thumb-2" crossorigin="anonymous"></button></div>
+  <div class="_slide_0323a6"><img src="/src/components/UiSlider/images/1.jpg" alt="slide-0" crossorigin="anonymous" data-slide="0" data-test="ui-slider-slide"></div>
+</div>"
+`;

@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiBreadcrumbs > matches snapshot 1`] = `
+"<div class="_breadcrumbs_f89176" itemscope="" itemtype="https://schema.org/BreadcrumbList">
+  <div class="_links_f89176" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" data-test="ui-breadcrumb"><a to="/" class="_link_f89176" data-link="true" data-color="default" itemid="/" itemtype="https://schema.org/Thing" itemscope="" itemprop="item" data-test="ui-breadcrumb-link"><span itemprop="name" data-test="ui-breadcrumb-title">Main</span></a><span class="_slash_f89176" data-color="default" data-test="ui-breadcrumb-slash">/</span>
+    <meta itemprop="position" content="1" data-test="ui-breadcrumb-position">
+  </div>
+  <div class="_links_f89176" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" data-test="ui-breadcrumb"><a to="/category" class="_link_f89176" data-link="true" data-color="default" itemid="/category" itemtype="https://schema.org/Thing" itemscope="" itemprop="item" data-test="ui-breadcrumb-link"><span itemprop="name" data-test="ui-breadcrumb-title">Categories</span></a><span class="_slash_f89176" data-color="default" data-test="ui-breadcrumb-slash">/</span>
+    <meta itemprop="position" content="2" data-test="ui-breadcrumb-position">
+  </div>
+  <div class="_links_f89176" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" data-test="ui-breadcrumb">
+    <div to="/cpu" class="_link_f89176" data-link="false" data-color="default" itemid="/cpu" itemtype="https://schema.org/Thing" itemscope="" itemprop="item" data-test="ui-breadcrumb-link"><span itemprop="name" data-test="ui-breadcrumb-title">CPU</span></div>
+    <!--v-if-->
+    <meta itemprop="position" content="3" data-test="ui-breadcrumb-position">
+  </div>
+</div>"
+`;

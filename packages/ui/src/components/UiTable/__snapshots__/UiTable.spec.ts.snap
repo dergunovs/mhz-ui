@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiTable > matches snapshot 1`] = `
+"<div class="_tableBlock_dcc320">
+  <!--v-if-->
+  <table class="_table_dcc320" cellpadding="8" cellspacing="0" border="0">
+    <thead>
+      <tr>
+        <th class="_th_dcc320" data-test="ui-table-header"><label class="_label_dcc320" data-loading="false"><span data-test="ui-table-header-title">Position</span><button class="_sort_dcc320" type="button" data-current="true" data-test="ui-table-header-sort"><span class="_arrow_dcc320" data-current="true" data-loading="false" data-test="ui-table-header-sort-asc"> ↑ </span><span class="_arrow_dcc320" data-current="false" data-loading="false" data-test="ui-table-header-sort-desc"> ↓ </span></button></label></th>
+        <th class="_th_dcc320" data-test="ui-table-header"><label class="_label_dcc320" data-loading="false"><span data-test="ui-table-header-title">Team</span><button class="_sort_dcc320" type="button" data-current="false" data-test="ui-table-header-sort"><span class="_arrow_dcc320" data-current="false" data-loading="false" data-test="ui-table-header-sort-asc"> ↑ </span><span class="_arrow_dcc320" data-current="false" data-loading="false" data-test="ui-table-header-sort-desc"> ↓ </span></button></label></th>
+        <th class="_th_dcc320" data-test="ui-table-header"><label class="_label_dcc320" data-loading="false"><span data-test="ui-table-header-title">Link</span>
+            <!--v-if-->
+          </label></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Frosinone</td>
+        <td>Frosinone.it</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Genoa</td>
+        <td>Genoa.it</td>
+      </tr>
+    </tbody>
+  </table>
+</div>"
+`;

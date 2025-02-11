@@ -27,6 +27,10 @@ describe('UiChart', async () => {
     expect(wrapper.findComponent(UiChart)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows title', async () => {
     expect(wrapper.find(chartTitle).text()).toBe(TITLE);
   });

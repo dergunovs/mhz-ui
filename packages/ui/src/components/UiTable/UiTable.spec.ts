@@ -26,6 +26,10 @@ describe('UiTable', async () => {
     expect(wrapper.findComponent(UiTable)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows table headers', async () => {
     expect(wrapper.findAll(tableHeader).length).toBe(HEADERS.length);
     expect(wrapper.findAll(tableHeaderTitle)[0].text()).toBe(HEADERS[0].title);

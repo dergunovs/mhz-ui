@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiInput > matches snapshot 1`] = `
+"<div class="_inputBlock_7af56e" data-mode="default" tabindex="-1" data-test="ui-input-block"><input class="_input_7af56e" type="text" data-mode="default" data-center="false" data-append-icon="false" tabindex="0" data-test="ui-input" aria-label="input" value="Text example">
+  <!--v-if-->
+</div>"
+`;

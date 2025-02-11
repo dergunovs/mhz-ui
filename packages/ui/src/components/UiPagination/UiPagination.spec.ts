@@ -26,6 +26,10 @@ describe('UiPagination', async () => {
     expect(wrapper.findComponent(UiPagination)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows pagination text', async () => {
     expect(wrapper.find(pagination).text()).toBe(`${PAGE} of ${TOTAL}`);
   });

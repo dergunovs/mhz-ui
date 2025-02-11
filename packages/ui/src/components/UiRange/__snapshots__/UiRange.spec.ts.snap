@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiRange > matches snapshot 1`] = `
+"<div class="_range_c1604e">
+  <slider-stub modelvalue="100,600" disabled="false" min="10" max="1000" step="1" orientation="horizontal" direction="ltr" tooltips="true" options="[object Object]" merge="-1" classes="[object Object]" showtooltip="always" tooltipposition="bottom" lazy="true" aria="[object Object]" data-test="ui-range"></slider-stub>
+</div>"
+`;

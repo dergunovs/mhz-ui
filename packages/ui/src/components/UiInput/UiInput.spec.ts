@@ -30,6 +30,10 @@ describe('UiInput', async () => {
     expect(wrapper.findComponent(UiInput)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('handles v-model behaviour', async () => {
     expect((wrapper.find(input).element as HTMLInputElement).value).toBe(MODEL_VALUE);
 

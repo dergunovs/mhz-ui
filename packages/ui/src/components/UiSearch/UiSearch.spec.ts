@@ -1,3 +1,4 @@
+import { nextTick } from 'vue';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest } from 'mhz-helpers';
@@ -41,6 +42,10 @@ describe('UiSearch', async () => {
     expect(wrapper.findComponent(UiSearch)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows results block by text enter to input', async () => {
     expect(wrapper.find(searchResults).exists()).toBe(false);
 
@@ -68,7 +73,9 @@ describe('UiSearch', async () => {
     const newValue = 'test';
     const inputComponent = wrapper.findComponent(search) as VueWrapper;
 
-    await inputComponent.vm.$emit('update:modelValue', newValue);
+    inputComponent.vm.$emit('update:modelValue', newValue);
+
+    await nextTick();
 
     expect(wrapper.emitted()).not.toHaveProperty('update:modelValue');
 

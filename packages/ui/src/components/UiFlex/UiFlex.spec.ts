@@ -27,6 +27,10 @@ describe('UiFlex', async () => {
     expect(wrapper.findComponent(UiFlex)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows text by slot', async () => {
     expect(wrapper.find(flex).text()).toBe(FIRST_SLOT);
   });

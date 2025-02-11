@@ -1,5 +1,11 @@
 <template>
-  <button :class="$style.close" type="button" :data-small="props.isSmall" :data-delete="props.isDelete">
+  <button
+    :class="$style.close"
+    type="button"
+    :data-small="props.isSmall"
+    :data-delete="props.isDelete"
+    data-test="ui-close"
+  >
     <div :class="$style.line"></div>
     <div :class="$style.line"></div>
   </button>

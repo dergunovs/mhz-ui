@@ -27,6 +27,10 @@ describe('UiModal', async () => {
     expect(wrapper.findComponent(UiModal)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows modal by modelValue props', async () => {
     expect(wrapper.find(modalContainer).exists()).toBe(false);
     expect(wrapper.find(modal).exists()).toBe(false);

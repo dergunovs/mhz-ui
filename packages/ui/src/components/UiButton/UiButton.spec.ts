@@ -30,6 +30,10 @@ describe('UiButton', async () => {
     expect(wrapper.findComponent(UiButton)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows text by slot', async () => {
     expect(wrapper.find(button).text()).toBe(DEFAULT_SLOT);
   });

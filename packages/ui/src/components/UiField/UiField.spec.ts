@@ -25,6 +25,10 @@ describe('UiField', async () => {
     expect(wrapper.findComponent(UiField)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows default slot content', async () => {
     expect(wrapper.find(field).text()).toBe(DEFAULT_SLOT);
   });

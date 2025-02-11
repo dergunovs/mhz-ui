@@ -33,6 +33,10 @@ describe('UiSlider', async () => {
     expect(wrapper.findComponent(UiSlider)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows thumbs', async () => {
     expect(wrapper.findAll(sliderThumb).length).toBe(slides.length);
   });

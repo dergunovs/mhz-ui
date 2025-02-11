@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiUpload > matches snapshot 1`] = `
+"<div class="_container_f06e88">
+  <div class="_upload_f06e88">
+    <div><span data-test="ui-upload-label">Field label</span>
+      <!--v-if-->
+    </div>
+    <div class="_addButton_f06e88">
+      <ui-button-stub layout="secondary" type="button" isdisabled="true" isnarrow="false" istall="false" iswrap="false" icon="[object Object]" data-test="ui-upload-add"></ui-button-stub>
+      <div class="_text_f06e88" data-error="false" data-test="ui-upload-text"> Size up to 10 Mb, jpg, png. </div>
+    </div><input type="file" class="_input_f06e88" accept=".jpg,.png" data-test="ui-upload-input">
+    <!--v-if-->
+    <div class="_file_f06e88" data-test="ui-upload-file-single">
+      <div class="_name_f06e88" data-test="ui-upload-file-name-single">file1.png</div>
+      <ui-button-stub layout="plain" type="button" isdisabled="false" isnarrow="false" istall="false" iswrap="false" data-test="ui-upload-file-remove-single"></ui-button-stub>
+    </div>
+  </div>
+  <div class="_uploadButton_f06e88" data-label="true">
+    <ui-button-stub layout="primary" type="button" isdisabled="false" isnarrow="false" istall="false" iswrap="false" data-test="ui-upload"></ui-button-stub>
+  </div>
+</div>"
+`;

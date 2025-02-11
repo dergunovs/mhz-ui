@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiSelect > matches snapshot 1`] = `
+"<div class="_container_cf7a81">
+  <div class="_input_cf7a81">
+    <ui-input-stub modelvalue="" type="text" isdisabled="false" mode="select" appendicon="[object Object]" isfocus="false" iscenter="false" iscopy="false" ispassword="false" disabled="false" placeholder="Choose variant" data-test="ui-select-input"></ui-input-stub>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;

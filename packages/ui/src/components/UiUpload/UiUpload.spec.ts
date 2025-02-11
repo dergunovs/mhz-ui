@@ -32,6 +32,10 @@ describe('UiUpload', async () => {
     expect(wrapper.findComponent(UiUpload)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('shows label', async () => {
     expect(wrapper.find(uploadLabel).text()).toBe(LABEL);
   });

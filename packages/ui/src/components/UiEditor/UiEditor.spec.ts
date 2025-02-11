@@ -23,6 +23,10 @@ describe('UiEditor', async () => {
     expect(wrapper.findComponent(UiEditor)).toBeTruthy();
   });
 
+  it('matches snapshot', async () => {
+    expect(wrapper.html()).toMatchSnapshot();
+  });
+
   it('has editor', async () => {
     expect(wrapper.find(editor).exists()).toBe(true);
   });

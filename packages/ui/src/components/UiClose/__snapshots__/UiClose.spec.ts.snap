@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiClose > matches snapshot 1`] = `
+"<button class="_close_2f32a4" type="button" data-small="false" data-delete="false" data-test="ui-close">
+  <div class="_line_2f32a4"></div>
+  <div class="_line_2f32a4"></div>
+</button>"
+`;
