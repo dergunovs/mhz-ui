@@ -21,7 +21,7 @@
     </button>
 
     <div :class="$style.text" data-test="ui-pagination">
-      {{ page }} {{ props.lang === 'ru' ? 'из' : 'of' }} {{ total }}
+      {{ page }} {{ props.lang === 'en' ? 'of' : 'из' }} {{ total }}
     </div>
 
     <button
@@ -50,7 +50,7 @@
 interface IProps {
   page: number;
   total?: number;
-  lang?: 'ru';
+  lang?: 'ru' | 'en';
 }
 
 const props = defineProps<IProps>();

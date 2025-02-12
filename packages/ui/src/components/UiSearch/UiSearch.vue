@@ -11,9 +11,17 @@
     />
 
     <div v-if="isShowResults && props.modelValue.length" :class="$style.results" data-test="ui-search-results">
-      <template v-if="props.modelValue.length < 3">{{ ENTER_MORE_SYMBOLS }}</template>
-      <template v-if="props.modelValue.length > 2 && !props.isSuccess">{{ LOADING }}</template>
-      <template v-if="props.modelValue.length > 2 && !isResults && props.isSuccess">{{ NO_RESULTS }}</template>
+      <template v-if="props.modelValue.length < 3">
+        {{ props.lang === 'en' ? ENTER_MORE_SYMBOLS_EN : ENTER_MORE_SYMBOLS }}
+      </template>
+
+      <template v-if="props.modelValue.length > 2 && !props.isSuccess">
+        {{ props.lang === 'en' ? LOADING_EN : LOADING }}
+      </template>
+
+      <template v-if="props.modelValue.length > 2 && !isResults && props.isSuccess">
+        {{ props.lang === 'en' ? NO_RESULTS_EN : NO_RESULTS }}
+      </template>
 
       <template v-if="props.modelValue.length > 2 && isResults && props.isSuccess">
         <div
@@ -54,7 +62,15 @@ import { debounce } from 'perfect-debounce';
 
 import UiInput from '../UiInput/UiInput.vue';
 import IconSearch from './icons/search.svg?component';
-import { DEBOUNCE_TIME, ENTER_MORE_SYMBOLS, LOADING, NO_RESULTS } from './constants';
+import {
+  DEBOUNCE_TIME,
+  ENTER_MORE_SYMBOLS,
+  LOADING,
+  NO_RESULTS,
+  ENTER_MORE_SYMBOLS_EN,
+  LOADING_EN,
+  NO_RESULTS_EN,
+} from './constants';
 
 interface ISearchScheme {
   type: string;
@@ -67,6 +83,7 @@ interface IProps {
   searchScheme: ISearchScheme[];
   results?: { [key: string]: { _id: string }[] };
   isSuccess: boolean;
+  lang?: 'ru' | 'en';
 }
 
 const props = defineProps<IProps>();

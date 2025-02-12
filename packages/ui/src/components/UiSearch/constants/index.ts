@@ -1,6 +1,10 @@
-export const ENTER_MORE_SYMBOLS = 'Please enter 3 or more symbols';
-export const LOADING = 'Loading...';
-export const NO_RESULTS = 'No results';
+export const ENTER_MORE_SYMBOLS = 'Введите хотя бы 3 символа';
+export const LOADING = 'Загрузка';
+export const NO_RESULTS = 'Нет результатов';
+
+export const ENTER_MORE_SYMBOLS_EN = 'Please enter 3 or more symbols';
+export const LOADING_EN = 'Loading...';
+export const NO_RESULTS_EN = 'No results';
 
 export const DEBOUNCE_TIME = 300;
 

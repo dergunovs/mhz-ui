@@ -2,6 +2,6 @@
 
 exports[`UiPagination > matches snapshot 1`] = `
 "<div class="_pagination_dd035a"><button disabled="" class="_button_dd035a" type="button" data-test="ui-pagination-first"> &lt;&lt; </button><button disabled="" class="_button_dd035a" type="button" data-test="ui-pagination-prev"> &lt; </button>
-  <div class="_text_dd035a" data-test="ui-pagination">1 of 20</div><button class="_button_dd035a" type="button" data-test="ui-pagination-next"> &gt; </button><button class="_button_dd035a" type="button" data-test="ui-pagination-last"> &gt;&gt; </button>
+  <div class="_text_dd035a" data-test="ui-pagination">1 из 20</div><button class="_button_dd035a" type="button" data-test="ui-pagination-next"> &gt; </button><button class="_button_dd035a" type="button" data-test="ui-pagination-last"> &gt;&gt; </button>
 </div>"
 `;

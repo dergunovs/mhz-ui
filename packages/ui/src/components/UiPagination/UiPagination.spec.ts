@@ -31,7 +31,7 @@ describe('UiPagination', async () => {
   });
 
   it('shows pagination text', async () => {
-    expect(wrapper.find(pagination).text()).toBe(`${PAGE} of ${TOTAL}`);
+    expect(wrapper.find(pagination).text()).toBe(`${PAGE} из ${TOTAL}`);
   });
 
   it('handles pagination next and last buttons clicks', async () => {

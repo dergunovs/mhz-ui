@@ -30,15 +30,15 @@ interface IProps {
   modelValue: boolean;
   isConfirm?: boolean;
   width?: string;
-  lang?: 'ru';
+  lang?: 'ru' | 'en';
 }
 
 const props = defineProps<IProps>();
 
 const emit = defineEmits<{ 'update:modelValue': [value: boolean]; confirm: [] }>();
 
-const cancelText = computed(() => (props.lang === 'ru' ? 'Отмена' : 'Cancel'));
-const confirmText = computed(() => (props.lang === 'ru' ? 'Подтвердить' : 'onfirm'));
+const cancelText = computed(() => (props.lang === 'en' ? 'Cancel' : 'Отмена'));
+const confirmText = computed(() => (props.lang === 'en' ? 'Confirm' : 'Подтвердить'));
 
 const widthComputed = computed(() => (props.width ? `${props.width}px` : 'auto'));
 const minWidthComputed = computed(() => (props.width ? `${props.width}px` : '50%'));

@@ -87,7 +87,7 @@ interface IProps {
   options?: string[] | number[] | IOption[];
   isFilter?: boolean;
   isDisabled?: boolean;
-  lang?: 'ru';
+  lang?: 'ru' | 'en';
   isClearable?: boolean;
 }
 
@@ -96,9 +96,9 @@ const emit = defineEmits<{ 'update:modelValue': [value: string | number | IOptio
 
 const filterQuery = ref('');
 
-const placeholderText = computed(() => (props.lang === 'ru' ? 'Выбрать' : 'Choose variant'));
-const filterText = computed(() => (props.lang === 'ru' ? 'Фильтровать' : 'Filter Variants'));
-const noResultsText = computed(() => (props.lang === 'ru' ? 'Нет результатов' : 'No results'));
+const placeholderText = computed(() => (props.lang === 'en' ? 'Choose variant' : 'Выбрать'));
+const filterText = computed(() => (props.lang === 'en' ? 'Filter Variants' : 'Фильтровать'));
+const noResultsText = computed(() => (props.lang === 'en' ? 'No results' : 'Нет результатов'));
 
 const isObject = computed(() => typeof props.options?.[0] === 'object');
 

@@ -63,7 +63,7 @@ interface IProps {
   headers: IHeader[];
   modelValue?: IModelValue;
   isLoading?: boolean;
-  lang?: 'ru';
+  lang?: 'ru' | 'en';
 }
 
 const props = defineProps<IProps>();
@@ -74,7 +74,7 @@ const table = ref<HTMLElement>();
 
 const isScrollable = ref(false);
 
-const scrollableText = computed(() => (props.lang === 'ru' ? 'Таблицу можно скроллить →' : 'Table is scrollable →'));
+const scrollableText = computed(() => (props.lang === 'en' ? 'Table is scrollable →' : 'Таблицу можно скроллить →'));
 
 function checkTableSize() {
   if (tableBlock.value && table.value) {

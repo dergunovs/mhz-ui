@@ -43,13 +43,19 @@
           data-test="ui-upload-file"
         >
           <div :class="$style.name" data-test="ui-upload-file-name">{{ fileToUpload.name }}</div>
-          <UiButton @click="remove(fileToUpload)" layout="plain" data-test="ui-upload-file-remove">Remove</UiButton>
+
+          <UiButton @click="remove(fileToUpload)" layout="plain" data-test="ui-upload-file-remove">
+            {{ props.lang === 'en' ? 'Remove' : 'Убрать' }}
+          </UiButton>
         </div>
       </template>
 
       <div v-if="props.isSingle && props.file" :class="$style.file" data-test="ui-upload-file-single">
         <div :class="$style.name" data-test="ui-upload-file-name-single">{{ props.file.name }}</div>
-        <UiButton @click="remove(props.file)" layout="plain" data-test="ui-upload-file-remove-single">Remove</UiButton>
+
+        <UiButton @click="remove(props.file)" layout="plain" data-test="ui-upload-file-remove-single">
+          {{ props.lang === 'en' ? 'Remove' : 'Убрать' }}
+        </UiButton>
       </div>
     </div>
 
@@ -58,7 +64,9 @@
       :class="$style.uploadButton"
       :data-label="!!props.label"
     >
-      <UiButton @click="emit('upload')" data-test="ui-upload">Upload</UiButton>
+      <UiButton @click="emit('upload')" data-test="ui-upload">
+        {{ props.lang === 'en' ? 'Upload' : 'Загрузить' }}
+      </UiButton>
     </div>
   </div>
 </template>
@@ -79,6 +87,7 @@ interface IProps {
   isDisabled?: boolean;
   isRequired?: boolean;
   isSingle?: boolean;
+  lang?: 'ru' | 'en';
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -87,6 +96,7 @@ const props = withDefaults(defineProps<IProps>(), {
   file: undefined,
   files: () => [],
   extensions: () => ['jpg', 'png'],
+  lang: 'ru',
 });
 
 const emit = defineEmits<{ add: [file: File]; remove: [file: File]; upload: [] }>();

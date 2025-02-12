@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<IProps>(), {
 <style module lang="scss">
 .chip {
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
   align-items: center;
   padding: 2px 8px;
