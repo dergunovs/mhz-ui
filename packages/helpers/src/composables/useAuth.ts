@@ -42,8 +42,5 @@ export function useAuth() {
     if (isAuth.value) router.push(url);
   }
 
-  return {
-    auth,
-    redirectIfAuth,
-  };
+  return { auth, redirectIfAuth };
 }
