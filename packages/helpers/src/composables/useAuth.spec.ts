@@ -1,6 +1,6 @@
 import { vi, describe, expect, test } from 'vitest';
 
-import { withSetup, mockedRouter } from '..';
+import { withSetup } from '..';
 import { isAuth, setAuth, logout, getCookieToken, setCookieToken, deleteCookieToken, useAuth } from '.';
 
 const tokenName = 'token';
@@ -70,12 +70,9 @@ describe('useAuth', () => {
 
   test('handles auth', async () => {
     const spySetAuthHeader = vi.fn();
-    const urlToRedirect = '/url';
 
-    const spyRouterPush = vi.spyOn(mockedRouter, 'push');
-
-    withSetup(mockedRouter, () => {
-      const { auth, redirectIfAuth } = useAuth();
+    withSetup(() => {
+      const { auth } = useAuth();
 
       expect(getCookieToken(tokenName)).toStrictEqual('');
       expect(isAuth.value).toStrictEqual(false);
@@ -87,17 +84,6 @@ describe('useAuth', () => {
       expect(spySetAuthHeader).toBeCalledTimes(1);
       expect(spySetAuthHeader).toBeCalledWith(newTokenValue);
       expect(isAuth.value).toStrictEqual(true);
-
-      redirectIfAuth(urlToRedirect);
-
-      expect(spyRouterPush).toBeCalledTimes(1);
-      expect(spyRouterPush).toBeCalledWith(urlToRedirect);
-
-      setAuth(false);
-
-      redirectIfAuth(urlToRedirect);
-
-      expect(spyRouterPush).toBeCalledTimes(1);
     });
   });
 });
