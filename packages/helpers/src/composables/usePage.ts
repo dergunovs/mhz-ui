@@ -44,11 +44,11 @@ export function usePage(filter?: object) {
     filter: { ...filter },
   });
 
-  function resetQuery(value: string | ISortOption) {
+  function resetQuery(sortValue: string | ISortOption) {
     query.value =
-      typeof value === 'string'
-        ? Object.assign(query.value, { page: 1, sort: { value, isAsc: true }, filter: {} })
-        : { ...query.value, page: 1, sort: value };
+      typeof sortValue === 'string'
+        ? Object.assign(query.value, { page: 1, sort: { value: sortValue, isAsc: true }, filter: {} })
+        : { ...query.value, page: 1, sort: sortValue };
   }
 
   function setQueryPage(pageToSet: number) {

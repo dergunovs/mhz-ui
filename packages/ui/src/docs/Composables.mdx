@@ -47,7 +47,7 @@ useInfiniteScroll<T>(): {
 ```
 usePage(filter?: object): {
   query: Ref<IPageQuery>;
-  resetQuery: (value: string | ISortOption) => void;
+  resetQuery: (sortValue: string | ISortOption) => void;
   setQueryPage: (pageToSet: number) => void;
   setQueryFilter: (filterToSet?: object) => void;
 }
