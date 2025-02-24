@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui-helpers",
   "description": "Fake PC hardware store monorepo",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "homepage": "https://ui.9000mhz.ru",
@@ -20,12 +20,12 @@
     "pub": "turbo run build && changeset version && changeset publish"
   },
   "dependencies": {
-    "@changesets/cli": "2.27.12",
+    "@changesets/cli": "2.28.1",
     "ajv": "8.17.1"
   },
   "devDependencies": {
     "@turbo/gen": "2.4.2",
-    "prettier": "3.5.1",
+    "prettier": "3.5.2",
     "turbo": "2.4.2"
   },
   "packageManager": "npm@11.0.0",
