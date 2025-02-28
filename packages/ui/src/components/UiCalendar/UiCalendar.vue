@@ -13,7 +13,13 @@
       @viewChange="(event: ICalendarUpdate) => emit('update', event)"
       @eventClick="(event: ICalendarEvent<unknown>) => emit('eventClick', event)"
       data-test="ui-calendar"
-    />
+    >
+      <template #event="{ event }">
+        <div :class="$style.title" :style="`background: ${event.color}`">
+          {{ event.title }}
+        </div>
+      </template>
+    </VueCal>
   </div>
 </template>
 
@@ -46,6 +52,15 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
   height: v-bind(heightComputed);
 }
 
+.title {
+  width: 100%;
+  font-family: none;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-white);
+  text-align: center;
+}
+
 :global(.vuecal) {
   border-radius: 8px;
 }
@@ -65,20 +80,11 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
   background-color: var(--color-accent);
   border-radius: 50%;
-}
-
-:global(.vuecal--short-events .vuecal__event-title) {
-  width: 100%;
-  font-family: none;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-white);
-  text-align: center;
 }
 
 :global(.vuecal__title-bar) {

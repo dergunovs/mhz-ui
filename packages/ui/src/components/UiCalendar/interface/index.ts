@@ -4,6 +4,7 @@ export interface ICalendarEvent<T> {
   end: Date | null;
   title: string;
   content: T[];
+  color?: string;
 }
 
 export interface ICalendarUpdate {
