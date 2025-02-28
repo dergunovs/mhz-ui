@@ -33,6 +33,8 @@ import {
 interface IDataset {
   data: number[];
   label?: string;
+  borderColor?: string;
+  backgroundColor?: string;
 }
 
 interface IProps {

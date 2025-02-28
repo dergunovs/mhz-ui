@@ -57,7 +57,7 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
   font-family: none;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--color-gray);
   text-align: center;
 }
 
