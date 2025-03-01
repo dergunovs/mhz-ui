@@ -53,12 +53,14 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
 }
 
 .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  height: 100%;
   font-family: none;
   font-size: 1.25rem;
-  font-weight: 700;
   color: var(--color-gray);
-  text-align: center;
 }
 
 :global(.vuecal) {
@@ -72,7 +74,7 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
 :global(.vuecal__cell-events) {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
+  gap: 4px;
   justify-content: center;
 }
 
@@ -80,11 +82,14 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
-  background-color: var(--color-accent);
-  border-radius: 50%;
+  border-radius: 12px;
+}
+
+:global(.vuecal__event--focus) {
+  box-shadow: none;
 }
 
 :global(.vuecal__title-bar) {
@@ -112,6 +117,6 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
 
 :global(.vuecal__cell--selected),
 :global(.vuecal__cell--today) {
-  background-color: var(--color-primary-light-extra);
+  background-color: var(--color-gray-light-extra);
 }
 </style>
