@@ -3,15 +3,17 @@
     <VueCal
       hideViewSelector
       eventsOnMonthView="short"
-      :time="false"
       activeView="month"
       :disableViews="['years', 'year', 'day', 'week']"
-      locale="ru"
+      :time="false"
       :transitions="false"
       :events="props.events"
+      :minDate="props.minDate"
+      locale="ru"
       @ready="(event: ICalendarUpdate) => emit('ready', event)"
       @viewChange="(event: ICalendarUpdate) => emit('update', event)"
       @eventClick="(event: ICalendarEvent<unknown>) => emit('eventClick', event)"
+      @cellClick="(date: Date) => emit('chooseDate', date)"
       data-test="ui-calendar"
     >
       <template #event="{ event }">
@@ -33,14 +35,16 @@ import { ICalendarEvent, ICalendarUpdate } from './interface';
 
 interface IProps {
   height?: string;
+  minDate?: Date;
   events?: ICalendarEvent<unknown>[];
 }
 
 const props = defineProps<IProps>();
 const emit = defineEmits<{
-  ready: [value: ICalendarUpdate];
-  update: [value: ICalendarUpdate];
-  eventClick: [value: ICalendarEvent<unknown>];
+  ready: [dates: ICalendarUpdate];
+  update: [dates: ICalendarUpdate];
+  eventClick: [event: ICalendarEvent<unknown>];
+  chooseDate: [date: Date];
 }>();
 
 const heightComputed = computed(() => (props.height ? `${props.height}px` : '500px'));
