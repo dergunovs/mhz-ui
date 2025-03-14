@@ -24,7 +24,7 @@ describe('query', () => {
       queryClientConfig: {
         queryCache: new QueryCache({
           onError: (error: unknown) => {
-            if ((error as { response: { status: number } }).response.status === 403) {
+            if ((error as { response: { status: number } }).response?.status === 403) {
               logout(logoutUrl, deleteAuthHeader, tokenName);
             }
 
