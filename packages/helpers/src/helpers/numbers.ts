@@ -3,5 +3,5 @@ export function formatPercent(percent: number | null): string {
 }
 
 export function getPercentDiff(cur: number, prev: number): number {
-  return Math.round(((cur - prev) / cur) * 100) || 0;
+  return Math.round(((cur - prev) / prev) * 100) || 0;
 }
