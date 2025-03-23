@@ -62,9 +62,8 @@ const heightComputed = computed(() => (props.height ? `${props.height}px` : '500
   justify-content: center;
   width: 100%;
   height: 100%;
-  font-family: none;
-  font-size: 1.25rem;
-  color: var(--color-gray);
+  font-size: 1.125rem;
+  color: var(--color-gray-light);
 }
 
 :global(.vuecal) {
