@@ -7,3 +7,4 @@ export * from './numbers';
 export * from './query';
 export * from './password';
 export * from './test';
+export * from './scroll';
