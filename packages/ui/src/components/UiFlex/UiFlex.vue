@@ -58,6 +58,8 @@ const gapComputed = computed(() => (props.gap ? `${props.gap}px` : '0'));
 const shrinkComputed = computed(() => (props.shrink ? '1' : '0'));
 
 const growComputed = computed(() => (props.grow ? '1' : '0'));
+
+const widthComputed = computed(() => (props.grow ? '100%' : 'auto'));
 </script>
 
 <style module lang="scss">
@@ -70,6 +72,6 @@ const growComputed = computed(() => (props.grow ? '1' : '0'));
   gap: v-bind(gapComputed);
   align-items: v-bind(alignItemsComputed);
   justify-content: v-bind(justifyContentComputed);
-  width: auto;
+  width: v-bind(widthComputed);
 }
 </style>
