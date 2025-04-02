@@ -26,8 +26,8 @@
       </div>
 
       <button
-        v-if="props.isClearable"
-        @click="emit('update:modelValue', undefined)"
+        v-if="props.isClearable && props.modelValue"
+        @click="emit('update:modelValue', null)"
         type="button"
         :class="$style.clear"
       >
@@ -83,7 +83,7 @@ interface IOption {
 }
 
 interface IProps {
-  modelValue?: string | number | IOption;
+  modelValue?: string | number | IOption | null;
   options?: string[] | number[] | IOption[];
   isFilter?: boolean;
   isDisabled?: boolean;
@@ -92,7 +92,10 @@ interface IProps {
 }
 
 const props = defineProps<IProps>();
-const emit = defineEmits<{ 'update:modelValue': [value: string | number | IOption | undefined]; reachedBottom: [] }>();
+const emit = defineEmits<{
+  'update:modelValue': [value: string | number | IOption | undefined | null];
+  reachedBottom: [];
+}>();
 
 const filterQuery = ref('');
 
