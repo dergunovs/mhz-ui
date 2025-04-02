@@ -27,7 +27,7 @@
 
       <button
         v-if="props.isClearable && props.modelValue"
-        @click="emit('update:modelValue', null)"
+        @click="emit('update:modelValue', undefined)"
         type="button"
         :class="$style.clear"
       >
@@ -93,7 +93,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 const emit = defineEmits<{
-  'update:modelValue': [value: string | number | IOption | undefined | null];
+  'update:modelValue': [value: string | number | IOption | undefined];
   reachedBottom: [];
 }>();
 
