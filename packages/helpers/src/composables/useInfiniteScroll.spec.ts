@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { withSetup } from '../index.js';
-import { useInfiniteScroll } from './index.js';
+import { withSetup } from '..';
+import { useInfiniteScroll } from '.';
 
 interface IData {
   id: number;

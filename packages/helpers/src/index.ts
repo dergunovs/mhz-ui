@@ -1,2 +1,2 @@
-export * from './composables/index.js';
-export * from './helpers/index.js';
+export * from './composables';
+export * from './helpers';

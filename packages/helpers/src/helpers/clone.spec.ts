@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 import { describe, expect, test } from 'vitest';
 
-import { clone } from './index.js';
+import { clone } from '.';
 
 describe('clone', () => {
   test('clones object', async () => {

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { formatPercent, getPercentDiff } from './index.js';
+import { formatPercent, getPercentDiff } from '.';
 
 describe('numbers', () => {
   test('formats percent', async () => {

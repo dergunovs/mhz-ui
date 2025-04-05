@@ -1,6 +1,6 @@
 import { vi, describe, expect, test } from 'vitest';
 
-import { dataTest, wait } from './index.js';
+import { dataTest, wait } from '.';
 
 describe('test', () => {
   test('returns data test element', async () => {
