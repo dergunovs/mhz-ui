@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { generatePassword } from '.';
+import { generatePassword } from './index.js';
 
 describe('numbers', () => {
   test('gets percent diff', async () => {

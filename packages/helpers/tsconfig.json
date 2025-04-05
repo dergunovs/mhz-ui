@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,
-    "module": "ES2022",
-    "moduleResolution": "Node",
+    "module": "node18",
+    "moduleResolution": "nodenext",
     "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

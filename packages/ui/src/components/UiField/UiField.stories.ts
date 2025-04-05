@@ -5,7 +5,7 @@ import { ERROR, LABEL } from './constants';
 import { html } from '@/utils';
 import { UiField, UiInput } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiField> = {
   component: UiField,
   args: {
     label: LABEL,
@@ -19,7 +19,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiField>;
+};
 
 const argTypes = {};
 

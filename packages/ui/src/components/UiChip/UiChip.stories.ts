@@ -5,7 +5,7 @@ import { DEFAULT_SLOT } from './constants';
 import { html } from '@/utils';
 import { UiChip } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiChip> = {
   component: UiChip,
   args: {},
   parameters: {
@@ -15,7 +15,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiChip>;
+};
 
 const argTypes = {
   type: {

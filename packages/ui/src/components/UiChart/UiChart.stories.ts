@@ -5,7 +5,7 @@ import { LABELS, DATASETS, TITLE, TYPE } from './constants';
 import { html } from '@/utils';
 import { UiChart } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiChart> = {
   component: UiChart,
   args: {
     labels: LABELS,
@@ -20,7 +20,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiChart>;
+};
 
 const argTypes = {};
 

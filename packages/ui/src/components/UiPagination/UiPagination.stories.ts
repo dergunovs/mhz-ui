@@ -5,7 +5,7 @@ import { PAGE, TOTAL } from './constants';
 import { html } from '@/utils';
 import { UiPagination } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiPagination> = {
   component: UiPagination,
   args: {
     page: PAGE,
@@ -18,7 +18,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiPagination>;
+};
 
 const argTypes = {};
 

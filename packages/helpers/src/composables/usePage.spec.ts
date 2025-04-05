@@ -1,8 +1,8 @@
 import { ref } from 'vue';
 import { describe, expect, test } from 'vitest';
 
-import { withSetup } from '..';
-import { convertParams, usePage, usePageNumber } from '.';
+import { withSetup } from '../index.js';
+import { convertParams, usePage, usePageNumber } from './index.js';
 
 const newPage = 2;
 const newFilter = { _id: '123' };

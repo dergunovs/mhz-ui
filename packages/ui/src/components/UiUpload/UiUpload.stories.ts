@@ -9,7 +9,7 @@ import { UiUpload } from '@/components';
 let files: File[] = [];
 let file: File | undefined;
 
-const meta = {
+const meta: Meta<typeof UiUpload> = {
   component: UiUpload,
   args: {
     label: LABEL,
@@ -23,7 +23,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiUpload>;
+};
 
 const argTypes = {
   layout: {

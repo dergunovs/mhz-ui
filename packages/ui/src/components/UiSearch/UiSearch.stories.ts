@@ -6,7 +6,7 @@ import { MODEL_VALUE, IS_SUCCESS, RESULTS, SEARCH_SCHEME } from './constants';
 import { html } from '@/utils';
 import { UiSearch } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiSearch> = {
   component: UiSearch,
   args: {
     modelValue: MODEL_VALUE,
@@ -21,7 +21,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiSearch>;
+};
 
 const argTypes = {
   searchScheme: { description: '{ type: string; labels: string[]; url: string }[]' },

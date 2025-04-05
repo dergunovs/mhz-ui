@@ -6,7 +6,7 @@ import { ICalendarEvent } from './interface';
 import { html } from '@/utils';
 import { UiCalendar, UiModal } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiCalendar> = {
   component: UiCalendar,
   args: {
     events: EVENTS,
@@ -18,7 +18,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiCalendar>;
+};
 
 const isShowModal = ref(false);
 const eventContent = ref();

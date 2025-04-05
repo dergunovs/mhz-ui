@@ -8,7 +8,7 @@ import {
   subtractDates,
   getDatesByDayGap,
   getFirstAndLastWeekDays,
-} from '.';
+} from './index.js';
 
 describe('date', () => {
   test('adds zero to number if its less than 10', async () => {

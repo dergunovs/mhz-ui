@@ -6,7 +6,7 @@ import { MODEL_VALUE, IS_CONFIRM } from './constants';
 import { html } from '@/utils';
 import { UiModal, UiButton } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiModal> = {
   component: UiModal,
   args: {
     modelValue: MODEL_VALUE,
@@ -19,7 +19,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiModal>;
+};
 
 const argTypes = {};
 

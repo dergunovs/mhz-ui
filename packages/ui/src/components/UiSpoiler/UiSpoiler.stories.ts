@@ -6,7 +6,7 @@ import { TITLE, MODEL_VALUE } from './constants';
 import { html } from '@/utils';
 import { UiSpoiler } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiSpoiler> = {
   component: UiSpoiler,
   args: {
     title: TITLE,
@@ -19,7 +19,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiSpoiler>;
+};
 
 const argTypes = {};
 

@@ -6,7 +6,7 @@ import { HEADERS, MODEL_VALUE, DEFAULT_SLOT } from './constants';
 import { html } from '@/utils';
 import { UiTable } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiTable> = {
   component: UiTable,
   args: {
     headers: HEADERS,
@@ -19,7 +19,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiTable>;
+};
 
 const argTypes = {
   headers: { description: '{ value: string; title: string }[]' },

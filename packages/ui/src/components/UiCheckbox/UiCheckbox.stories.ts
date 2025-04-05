@@ -3,7 +3,7 @@ import { html } from '@/utils';
 
 import { UiCheckbox } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiCheckbox> = {
   component: UiCheckbox,
   args: {
     modelValue: true,
@@ -16,7 +16,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiCheckbox>;
+};
 
 const argTypes = {
   modelValue: {

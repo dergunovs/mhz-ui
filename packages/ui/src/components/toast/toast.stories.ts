@@ -3,7 +3,7 @@ import { html } from '@/utils';
 
 import ToastStory from '@/components/toast/ToastStory.vue';
 
-const meta = {
+const meta: Meta<typeof ToastStory> = {
   component: ToastStory,
   args: {},
   parameters: {
@@ -13,7 +13,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof ToastStory>;
+};
 
 const argTypes = {};
 

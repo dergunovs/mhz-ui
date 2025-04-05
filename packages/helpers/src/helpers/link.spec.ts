@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { isLinkActive } from '.';
+import { isLinkActive } from './index.js';
 
 describe('link', () => {
   test('checks is link active', async () => {

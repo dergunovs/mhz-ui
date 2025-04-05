@@ -1,7 +1,7 @@
 import { vi, describe, expect, test } from 'vitest';
 
-import { withSetup } from '..';
-import { isAuth, setAuth, logout, getCookieToken, setCookieToken, deleteCookieToken, useAuth } from '.';
+import { withSetup } from '../index.js';
+import { isAuth, setAuth, logout, getCookieToken, setCookieToken, deleteCookieToken, useAuth } from './index.js';
 
 const tokenName = 'token';
 

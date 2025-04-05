@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { createTempId, deleteTempId } from '.';
+import { createTempId, deleteTempId } from './index.js';
 
 describe('id', () => {
   test('creates temp id', async () => {

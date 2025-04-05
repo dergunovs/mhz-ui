@@ -6,7 +6,7 @@ import IconTest from './icons/test.svg?component';
 import { html } from '@/utils';
 import { UiButton } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiButton> = {
   component: UiButton,
   args: {},
   parameters: {
@@ -16,7 +16,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiButton>;
+};
 
 const argTypes = {
   layout: {

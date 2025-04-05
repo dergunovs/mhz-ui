@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/vue3';
 import { html } from '@/utils';
 import { UiClose } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiClose> = {
   component: UiClose,
   args: {},
   parameters: {
@@ -13,7 +13,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiClose>;
+};
 
 const argTypes = {};
 

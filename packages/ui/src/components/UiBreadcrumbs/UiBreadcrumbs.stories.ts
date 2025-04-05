@@ -5,7 +5,7 @@ import { LINKS } from './constants';
 import { html } from '@/utils';
 import { UiBreadcrumbs } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiBreadcrumbs> = {
   component: UiBreadcrumbs,
   args: {
     links: LINKS,
@@ -17,7 +17,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiBreadcrumbs>;
+};
 
 const argTypes = {
   links: {

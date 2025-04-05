@@ -11,7 +11,7 @@ import thumb1 from '@/components/UiSlider/images/thumb-1.webp';
 import thumb2 from '@/components/UiSlider/images/thumb-2.webp';
 import thumb3 from '@/components/UiSlider/images/thumb-3.webp';
 
-const meta = {
+const meta: Meta<typeof UiSlider> = {
   component: UiSlider,
   args: {
     slides: [slide1, slide2, slide3],
@@ -24,7 +24,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiSlider>;
+};
 
 const argTypes = {};
 

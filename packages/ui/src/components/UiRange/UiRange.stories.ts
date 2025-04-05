@@ -6,7 +6,7 @@ import { MODEL_VALUE, MIN, MAX } from './constants';
 import { html } from '@/utils';
 import { UiRange } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiRange> = {
   component: UiRange,
   args: {
     modelValue: MODEL_VALUE,
@@ -20,7 +20,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiRange>;
+};
 
 const argTypes = {};
 

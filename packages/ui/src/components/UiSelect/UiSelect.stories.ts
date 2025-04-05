@@ -6,7 +6,7 @@ import { MODEL_VALUE, OPTIONS, IS_FILTER } from './constants';
 import { html } from '@/utils';
 import { UiSelect } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiSelect> = {
   component: UiSelect,
   args: {
     modelValue: MODEL_VALUE,
@@ -20,7 +20,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiSelect>;
+};
 
 const argTypes = {
   modelValue: { description: 'string | { _id?: string; title: string }' },

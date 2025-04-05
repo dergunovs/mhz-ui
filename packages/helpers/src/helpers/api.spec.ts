@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { describe, expect, test } from 'vitest';
 
-import { api, setBaseURL, setAuthHeader, deleteAuthHeader, handleError } from '.';
+import { api, setBaseURL, setAuthHeader, deleteAuthHeader, handleError } from './index.js';
 
 const TOKEN = '123123123';
 

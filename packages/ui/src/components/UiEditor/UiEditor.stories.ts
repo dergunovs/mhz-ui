@@ -5,7 +5,7 @@ import { MODEL_VALUE } from './constants';
 import { html } from '@/utils';
 import { UiEditor } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiEditor> = {
   component: UiEditor,
   args: {
     modelValue: MODEL_VALUE,
@@ -17,7 +17,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiEditor>;
+};
 
 const argTypes = {};
 

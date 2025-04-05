@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest';
 import { QueryCache, QueryClient } from '@tanstack/vue-query';
 
-import { logout } from '../composables/useAuth';
-import { handleError, deleteAuthHeader } from './api';
+import { logout } from '../composables/useAuth.js';
+import { handleError, deleteAuthHeader } from './api.js';
 
-import { queryClient, vueQueryOptions } from '.';
+import { queryClient, vueQueryOptions } from './index.js';
 
 describe('query', () => {
   test('exports queryClient', async () => {

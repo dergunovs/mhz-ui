@@ -5,7 +5,7 @@ import { FIRST_SLOT, SECOND_SLOT } from './constants';
 import { html } from '@/utils';
 import { UiFlex } from '@/components';
 
-const meta = {
+const meta: Meta<typeof UiFlex> = {
   component: UiFlex,
   args: {},
   parameters: {
@@ -15,7 +15,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof UiFlex>;
+};
 
 const argTypes = {
   align: {
