@@ -2,13 +2,16 @@ export function addZero(value: number): string {
   return value.toString().length > 1 ? `${value}` : `0${value}`;
 }
 
-export function formatDuration(duration?: number): string {
+export function formatDuration(duration?: number, lang?: 'ru' | 'en'): string {
   if (!duration) return '-';
 
   const minutes = Math.floor(duration / 60);
   const seconds = duration - minutes * 60;
 
-  return `${minutes ? `${minutes} мин. ` : ``}${addZero(seconds)} сек.`;
+  const min = lang === 'ru' ? 'мин' : 'min';
+  const sec = lang === 'ru' ? 'сек' : 'sec';
+
+  return `${minutes ? `${minutes} ${min}. ` : ``}${addZero(seconds)} ${sec}.`;
 }
 
 export function formatDate(dateRaw?: string | Date | null, lang?: 'ru' | 'en'): string {
