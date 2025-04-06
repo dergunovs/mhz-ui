@@ -63,7 +63,7 @@ interface IProps {
   headers: IHeader[];
   modelValue?: IModelValue;
   isLoading?: boolean;
-  lang?: 'ru' | 'en';
+  lang?: string;
 }
 
 const props = defineProps<IProps>();

@@ -31,7 +31,7 @@ export function useValidator<T>(formData: Ref<T>, rules: Partial<{ [fieldName in
   };
 }
 
-export function required(lang?: 'ru' | 'en'): RuleItem {
+export function required(lang?: string): RuleItem {
   return {
     required: true,
     whitespace: true,
@@ -39,14 +39,14 @@ export function required(lang?: 'ru' | 'en'): RuleItem {
   };
 }
 
-export function email(lang?: 'ru' | 'en'): RuleItem {
+export function email(lang?: string): RuleItem {
   return {
     type: 'email',
     message: lang === 'en' ? 'This is not correct email' : 'Введите корретную почту',
   };
 }
 
-export function letters(lang?: 'ru' | 'en'): RuleItem {
+export function letters(lang?: string): RuleItem {
   return {
     validator: (rule: object, value: string) =>
       /^[a-zA-zа-яА-ЯёЁ-]+([\s][a-zA-Zа-яА-ЯёЁ-]+)*$/.test(value) || !value.length,
@@ -55,14 +55,14 @@ export function letters(lang?: 'ru' | 'en'): RuleItem {
   };
 }
 
-export function min(value: number, lang?: 'ru' | 'en'): RuleItem {
+export function min(value: number, lang?: string): RuleItem {
   return {
     min: value,
     message: lang === 'en' ? `Minimum symbols: ${value}` : `Минимальное количество символов: ${value}`,
   };
 }
 
-export function max(value: number, lang?: 'ru' | 'en'): RuleItem {
+export function max(value: number, lang?: string): RuleItem {
   return {
     min: value,
     message: lang === 'en' ? `Maximum symbols: ${value}` : `Максимальное количество символов: ${value}`,

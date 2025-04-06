@@ -50,7 +50,7 @@
 interface IProps {
   page: number;
   total?: number;
-  lang?: 'ru' | 'en';
+  lang?: string;
 }
 
 const props = defineProps<IProps>();

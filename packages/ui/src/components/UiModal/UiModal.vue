@@ -30,7 +30,7 @@ interface IProps {
   modelValue: boolean;
   isConfirm?: boolean;
   width?: string;
-  lang?: 'ru' | 'en';
+  lang?: string;
 }
 
 const props = defineProps<IProps>();

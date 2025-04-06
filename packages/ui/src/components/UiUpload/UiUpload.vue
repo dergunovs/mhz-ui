@@ -87,7 +87,7 @@ interface IProps {
   isDisabled?: boolean;
   isRequired?: boolean;
   isSingle?: boolean;
-  lang?: 'ru' | 'en';
+  lang?: string;
 }
 
 const props = withDefaults(defineProps<IProps>(), {

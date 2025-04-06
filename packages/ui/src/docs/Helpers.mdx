@@ -34,11 +34,11 @@ npm i mhz-helpers
 
 `addZero(value: number): string` добавление нуля к цифре меньше 10
 
-`formatDuration(duration?: number): string` преобразование времени в секундах в формат '1 мин. 09 сек.'
+`formatDuration(duration?: number, lang?: string): string` преобразование времени в секундах в формат '1 мин. 09 сек.'
 
-`formatDate(dateRaw?: string | Date | null, lang?: 'ru' | 'en'): string` преобразование даты в формат '7 февр. 2025 г.' с учётом локали
+`formatDate(dateRaw?: string | Date | null, lang?: string): string` преобразование даты в формат '7 февр. 2025 г.' с учётом локали
 
-`formatDateTime(dateRaw?: string | Date | null, lang?: 'ru' | 'en'): string` преобразование даты с временем в формат '7 февр. 2025 г. 14:41' с учётом локали
+`formatDateTime(dateRaw?: string | Date | null, lang?: string): string` преобразование даты с временем в формат '7 февр. 2025 г. 14:41' с учётом локали
 
 `subtractDates(dateBig?: string | Date | null, dateSmall?: string | Date | null, isRawResult?: boolean): string | number` подсчёт промежутка между датами с преобразованием в формат '1 мин. 09 сек.' или секунды (isRawResult)
 

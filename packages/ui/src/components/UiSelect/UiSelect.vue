@@ -87,7 +87,7 @@ interface IProps {
   options?: string[] | number[] | IOption[];
   isFilter?: boolean;
   isDisabled?: boolean;
-  lang?: 'ru' | 'en';
+  lang?: string;
   isClearable?: boolean;
 }
 

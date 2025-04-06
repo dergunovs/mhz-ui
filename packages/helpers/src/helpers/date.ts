@@ -2,7 +2,7 @@ export function addZero(value: number): string {
   return value.toString().length > 1 ? `${value}` : `0${value}`;
 }
 
-export function formatDuration(duration?: number, lang?: 'ru' | 'en'): string {
+export function formatDuration(duration?: number, lang?: string): string {
   if (!duration) return '-';
 
   const minutes = Math.floor(duration / 60);
@@ -14,7 +14,7 @@ export function formatDuration(duration?: number, lang?: 'ru' | 'en'): string {
   return `${minutes ? `${minutes} ${min}. ` : ``}${addZero(seconds)} ${sec}.`;
 }
 
-export function formatDate(dateRaw?: string | Date | null, lang?: 'ru' | 'en'): string {
+export function formatDate(dateRaw?: string | Date | null, lang?: string): string {
   if (!dateRaw) return '-';
 
   return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {
@@ -24,7 +24,7 @@ export function formatDate(dateRaw?: string | Date | null, lang?: 'ru' | 'en'): 
   }).format(new Date(dateRaw));
 }
 
-export function formatDateTime(dateRaw?: string | Date | null, lang?: 'ru' | 'en'): string {
+export function formatDateTime(dateRaw?: string | Date | null, lang?: string): string {
   if (!dateRaw) return '-';
 
   return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {

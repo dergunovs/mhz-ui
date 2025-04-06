@@ -83,7 +83,7 @@ interface IProps {
   searchScheme: ISearchScheme[];
   results?: { [key: string]: { _id: string }[] };
   isSuccess: boolean;
-  lang?: 'ru' | 'en';
+  lang?: string;
 }
 
 const props = defineProps<IProps>();
