@@ -53,7 +53,7 @@ describe('date', () => {
 
     expect(subtractDates(DATE_BIG, DATE_SMALL)).toStrictEqual(`12 min. 00 sec.`);
     expect(subtractDates(DATE_BIG_STRING, DATE_SMALL_STRING)).toStrictEqual(`12 min. 00 sec.`);
-    expect(subtractDates(DATE_BIG, DATE_SMALL, true)).toStrictEqual(720);
+    expect(subtractDates(DATE_BIG, DATE_SMALL, 'en', true)).toStrictEqual(720);
     expect(subtractDates()).toStrictEqual(`-`);
   });
 

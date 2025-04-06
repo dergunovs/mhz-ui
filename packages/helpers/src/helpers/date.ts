@@ -37,18 +37,19 @@ export function formatDateTime(dateRaw?: string | Date | null, lang?: string): s
 }
 
 export function subtractDates(
-  dateBig?: string | Date | null,
-  dateSmall?: string | Date | null,
+  dateFuture?: string | Date | null,
+  datePast?: string | Date | null,
+  lang?: string,
   isRawResult?: boolean
 ): string | number {
-  if (!dateBig || !dateSmall) return '-';
+  if (!dateFuture || !datePast) return '-';
 
-  const date1 = new Date(dateBig);
-  const date2 = new Date(dateSmall);
+  const date1 = new Date(dateFuture);
+  const date2 = new Date(datePast);
 
   const duration = Math.floor(((date1 as unknown as number) - (date2 as unknown as number)) / 1000);
 
-  return isRawResult ? duration : formatDuration(duration);
+  return isRawResult ? duration : formatDuration(duration, lang);
 }
 
 export interface IDatesGap {

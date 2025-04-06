@@ -40,7 +40,7 @@ npm i mhz-helpers
 
 `formatDateTime(dateRaw?: string | Date | null, lang?: string): string` преобразование даты с временем в формат '7 февр. 2025 г. 14:41' с учётом локали
 
-`subtractDates(dateBig?: string | Date | null, dateSmall?: string | Date | null, isRawResult?: boolean): string | number` подсчёт промежутка между датами с преобразованием в формат '1 мин. 09 сек.' или секунды (isRawResult)
+`subtractDates(dateFuture?: string | Date | null, datePast?: string | Date | null, lang?: string, isRawResult?: boolean): string | number` подсчёт промежутка между датами с преобразованием в формат '1 мин. 09 сек.' или секунды (isRawResult)
 
 `getDatesByDayGap(gap: number): IDatesGap` воврат промежутков дат с заданным диапазоном от текущей даты в сутках, например, для сравнения предыдущего месяца(gap:30) или недели(gap:7) с текущими
 
