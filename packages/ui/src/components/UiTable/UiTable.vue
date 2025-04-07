@@ -5,7 +5,12 @@
     <table :class="$style.table" cellpadding="8" cellspacing="0" :border="0" ref="table">
       <thead>
         <tr>
-          <th v-for="header in props.headers" :key="header.value" :class="$style.th" data-test="ui-table-header">
+          <th
+            v-for="header in props.headers"
+            :key="`${header.value}${header.title}`"
+            :class="$style.th"
+            data-test="ui-table-header"
+          >
             <label :class="$style.label" :data-loading="props.isLoading">
               <span data-test="ui-table-header-title">{{ header.title }}</span>
 
