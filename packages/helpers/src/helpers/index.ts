@@ -8,3 +8,4 @@ export * from './query';
 export * from './password';
 export * from './test';
 export * from './scroll';
+export * from './locale';
