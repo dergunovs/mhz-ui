@@ -9,7 +9,7 @@
       :transitions="false"
       :events="props.events"
       :minDate="props.minDate"
-      locale="ru"
+      :locale="props.lang"
       @ready="(event: ICalendarUpdate) => emit('ready', event)"
       @viewChange="(event: ICalendarUpdate) => emit('update', event)"
       @eventClick="(event: ICalendarEvent<unknown>) => emit('eventClick', event)"
@@ -37,6 +37,7 @@ interface IProps {
   height?: string;
   minDate?: Date;
   events?: ICalendarEvent<unknown>[];
+  lang?: string;
 }
 
 const props = defineProps<IProps>();
