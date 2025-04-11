@@ -80,6 +80,7 @@ import IconOpened from './icons/opened.svg?component';
 interface IOption {
   _id?: string;
   title: string;
+  title_en?: string;
 }
 
 interface IProps {
@@ -88,6 +89,7 @@ interface IProps {
   isFilter?: boolean;
   isDisabled?: boolean;
   lang?: string;
+  isLocaleField?: boolean;
   isClearable?: boolean;
 }
 
@@ -108,7 +110,11 @@ const isObject = computed(() => typeof props.options?.[0] === 'object');
 const optionsComputed = computed(() => {
   if (!props.options) return [];
 
-  let optionsObject = props.options as IOption[];
+  let optionsObject = props.isLocaleField
+    ? (props.options as IOption[]).map((option) => {
+        return { _id: option._id, title: option.title_en } as IOption;
+      })
+    : ([...props.options] as IOption[]);
 
   if (!isObject.value) {
     optionsObject = (props.options as IOption[]).map((option) => {

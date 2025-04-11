@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 import { useArgs } from '@storybook/preview-api';
 
-import { MODEL_VALUE, OPTIONS, IS_FILTER } from './constants';
+import { MODEL_VALUE, IS_FILTER, OPTIONS_OBJECTS } from './constants';
 
 import { html } from '@/utils';
 import { UiSelect } from '@/components';
@@ -10,7 +10,7 @@ const meta: Meta<typeof UiSelect> = {
   component: UiSelect,
   args: {
     modelValue: MODEL_VALUE,
-    options: OPTIONS,
+    options: OPTIONS_OBJECTS,
     isFilter: IS_FILTER,
   },
   parameters: {
