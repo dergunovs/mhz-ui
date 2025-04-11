@@ -59,7 +59,7 @@
           "
           data-test="ui-select-option"
         >
-          {{ option.title }}
+          {{ props.isLocaleField ? option.title_en : option.title }}
         </div>
       </div>
 
@@ -112,11 +112,7 @@ const isObject = computed(() => typeof props.options?.[0] === 'object');
 const optionsComputed = computed(() => {
   if (!props.options) return [];
 
-  let optionsObject = props.isLocaleField
-    ? (props.options as IOption[]).map((option) => {
-        return { _id: option._id, title: option.title_en } as IOption;
-      })
-    : ([...props.options] as IOption[]);
+  let optionsObject = [...props.options] as IOption[];
 
   if (!isObject.value) {
     optionsObject = (props.options as IOption[]).map((option) => {

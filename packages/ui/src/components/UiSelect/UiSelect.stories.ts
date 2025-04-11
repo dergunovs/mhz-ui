@@ -33,7 +33,7 @@ export default meta;
 
 export const Primary: Story = {
   args: {
-    modelValue: '1',
+    modelValue: MODEL_VALUE,
   },
 
   render: (args, { updateArgs }) => ({

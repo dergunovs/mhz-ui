@@ -1,4 +1,4 @@
-export const MODEL_VALUE = '';
+export const MODEL_VALUE = { _id: '1', title: 'Один', title_en: 'One' };
 
 export const IS_FILTER = false;
 
