@@ -5,7 +5,9 @@
         :modelValue="
           typeof props.modelValue === 'string' || typeof props.modelValue === 'number'
             ? props.modelValue
-            : props.modelValue?.title
+            : props.isLocaleField
+              ? props.modelValue?.title_en
+              : props.modelValue?.title
         "
         :disabled="props.isDisabled"
         @toggle="isShowOptions ? hideOptions() : showOptions()"
