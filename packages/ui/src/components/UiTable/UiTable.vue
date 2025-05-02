@@ -86,7 +86,7 @@ function checkTableSize() {
     const tableBlockSize = Number(getComputedStyle(tableBlock.value).width.slice(0, -2));
     const tableSize = Number(getComputedStyle(table.value).width.slice(0, -2));
 
-    isScrollable.value = tableSize > tableBlockSize;
+    isScrollable.value = tableSize - 2 > tableBlockSize;
   }
 }
 
