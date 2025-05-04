@@ -3,6 +3,11 @@ import { QueryCache, QueryClient, type VueQueryPluginOptions } from '@tanstack/v
 import { logout } from '../composables/useAuth';
 import { handleError, deleteAuthHeader } from './api';
 
+interface IError {
+  code: string;
+  response: { status: number };
+}
+
 export const queryClient: QueryClient = new QueryClient();
 
 export function vueQueryOptions(
@@ -14,11 +19,14 @@ export function vueQueryOptions(
     queryClientConfig: {
       queryCache: new QueryCache({
         onError: (error: unknown) => {
-          if ((error as { response: { status: number } }).response?.status === 403) {
-            logout(logoutUrl, deleteAuthHeader, tokenName);
-          }
+          const isNetworkError = (error as IError).code === 'ERR_NETWORK';
+          const isAuthError = (error as IError).response?.status === 403;
 
-          toast.error(handleError(error));
+          if (isNetworkError) {
+            toast.error('Ошибка подключения к сети');
+          } else if (isAuthError) {
+            logout(logoutUrl, deleteAuthHeader, tokenName);
+          } else toast.error(handleError(error));
         },
       }),
       defaultOptions: {
