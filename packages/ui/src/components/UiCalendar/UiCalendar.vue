@@ -8,7 +8,7 @@
       :time="false"
       :events="props.events"
       :minDate="props.minDate"
-      :locale="props.lang"
+      :locale="props.lang === 'en' ? 'en-us' : 'ru'"
       :todayButton="false"
       @ready="
         (dates: ICalendarReady) =>
