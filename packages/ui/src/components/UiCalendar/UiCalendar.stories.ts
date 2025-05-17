@@ -43,7 +43,7 @@ export const Primary: Story = {
 
     methods: {
       handleEvent(event: ICalendarEvent<object>) {
-        eventContent.value = event.id;
+        eventContent.value = event.content;
         toggleModal();
       },
     },

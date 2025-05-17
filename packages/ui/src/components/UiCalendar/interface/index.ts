@@ -7,7 +7,27 @@ export interface ICalendarEvent<T> {
   color?: string;
 }
 
+export interface ICalendarReady {
+  view: {
+    firstCellDate: string;
+    lastCellDate: string;
+  };
+}
+
 export interface ICalendarUpdate {
-  firstCellDate: string;
-  lastCellDate: string;
+  extendedStart: string;
+  extendedEnd: string;
+}
+
+export interface ICalendarDates {
+  dateFrom: string;
+  dateTo: string;
+}
+
+export interface ICalendarEventClick {
+  event: ICalendarEvent<unknown>;
+}
+
+export interface ICalendarCellClick {
+  cell: { start: Date };
 }

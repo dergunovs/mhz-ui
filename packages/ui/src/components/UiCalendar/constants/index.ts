@@ -5,16 +5,18 @@ export const EVENTS: ICalendarEvent<object>[] = [
     id: 'id of event',
     start: new Date(),
     end: new Date(),
-    title: '+',
+    title: '24',
     content: [{ id: 1, text: 'Text' }],
-    color: 'linear-gradient(135deg, rgb(168, 60, 255) 36%, rgb(235, 0, 123) 69%, rgb(251, 185, 0) 100%)',
+    color:
+      'linear-gradient(135deg, rgb(196, 30, 58) 35%, rgb(218, 112, 214) 35%, rgb(218, 112, 214) 68%, rgb(255, 140, 0) 68%, rgb(255, 140, 0) 100%)',
   },
   {
     id: 'id of event',
     start: new Date(),
     end: new Date(),
-    title: '+',
+    title: '32',
     content: [{ id: 2, text: 'Text 2' }],
-    color: 'linear-gradient(135deg, rgb(168, 60, 255) 41%, rgb(235, 0, 123) 71%, rgb(0, 134, 255) 100%)',
+    color:
+      'linear-gradient(135deg, rgb(255, 140, 0) 37%, rgb(196, 30, 58) 37%, rgb(196, 30, 58) 71%, rgb(50, 205, 50) 71%, rgb(50, 205, 50) 100%)',
   },
 ];

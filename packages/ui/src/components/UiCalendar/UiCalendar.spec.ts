@@ -9,8 +9,6 @@ import { EVENTS } from './constants';
 import { ICalendarEvent } from './interface';
 import { wrapperFactory } from '@/test';
 
-const event = { firstCellDate: '01-01-2025', lastCellDate: '01-02-2025' };
-
 const calendar = dataTest('ui-calendar');
 
 let wrapper: VueWrapper<InstanceType<typeof UiCalendar>>;
@@ -39,19 +37,33 @@ describe('UiCalendar', async () => {
   });
 
   it('emits calendar events', async () => {
-    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('ready', event);
-    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('viewChange', event);
-    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('eventClick', event);
+    const date = new Date();
+    const date2 = new Date();
+
+    const formattedDates = { dateFrom: date, dateTo: date2 };
+
+    const readyEvent = { view: { firstCellDate: date, lastCellDate: date2 } };
+    const updateEvent = { extendedStart: date, extendedEnd: date2 };
+    const clickEvent = { event: EVENTS[0] };
+    const cellEvent = { cell: { start: date } };
+
+    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('ready', readyEvent);
+    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('viewChange', updateEvent);
+    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('event:click', clickEvent);
+    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('cell:click', cellEvent);
 
     await nextTick();
 
     expect(wrapper.emitted('ready')).toHaveLength(1);
-    expect(wrapper.emitted()['ready'][0]).toEqual([event]);
+    expect(wrapper.emitted()['ready'][0]).toEqual([formattedDates]);
 
     expect(wrapper.emitted('update')).toHaveLength(1);
-    expect(wrapper.emitted()['update'][0]).toEqual([event]);
+    expect(wrapper.emitted()['update'][0]).toEqual([formattedDates]);
 
     expect(wrapper.emitted('eventClick')).toHaveLength(1);
-    expect(wrapper.emitted()['eventClick'][0]).toEqual([event]);
+    expect(wrapper.emitted()['eventClick'][0]).toEqual([EVENTS[0]]);
+
+    expect(wrapper.emitted('chooseDate')).toHaveLength(1);
+    expect(wrapper.emitted()['chooseDate'][0]).toEqual([date]);
   });
 });

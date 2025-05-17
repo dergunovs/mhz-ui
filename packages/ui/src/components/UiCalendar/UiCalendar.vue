@@ -1,19 +1,24 @@
 <template>
   <div :class="$style.container">
     <VueCal
-      hideViewSelector
-      eventsOnMonthView="short"
-      activeView="month"
-      :disableViews="['years', 'year', 'day', 'week']"
+      eventsOnMonthView
+      view="month"
+      :views="['month']"
+      :viewsBar="false"
       :time="false"
-      :transitions="false"
       :events="props.events"
       :minDate="props.minDate"
       :locale="props.lang"
-      @ready="(event: ICalendarUpdate) => emit('ready', event)"
-      @viewChange="(event: ICalendarUpdate) => emit('update', event)"
-      @eventClick="(event: ICalendarEvent<unknown>) => emit('eventClick', event)"
-      @cellClick="(date: Date) => emit('chooseDate', date)"
+      :todayButton="false"
+      @ready="
+        (dates: ICalendarReady) =>
+          emit('ready', { dateFrom: dates?.view?.firstCellDate, dateTo: dates?.view?.lastCellDate })
+      "
+      @viewChange="
+        (dates: ICalendarUpdate) => emit('update', { dateFrom: dates?.extendedStart, dateTo: dates?.extendedEnd })
+      "
+      @event:click="(event: ICalendarEventClick) => emit('eventClick', event?.event)"
+      @cell:click="(event: ICalendarCellClick) => emit('chooseDate', event?.cell?.start)"
       data-test="ui-calendar"
     >
       <template #event="{ event }">
@@ -26,15 +31,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { VueCal } from 'vue-cal';
+// eslint-disable-next-line import-x/no-unassigned-import
+import 'vue-cal/style';
 
-import VueCal from 'vue-cal';
-
-import 'vue-cal/dist/vuecal.css';
-import { ICalendarEvent, ICalendarUpdate } from './interface';
+import {
+  ICalendarEvent,
+  ICalendarDates,
+  ICalendarReady,
+  ICalendarUpdate,
+  ICalendarEventClick,
+  ICalendarCellClick,
+} from './interface';
 
 interface IProps {
-  height?: string;
   minDate?: Date;
   events?: ICalendarEvent<unknown>[];
   lang?: string;
@@ -42,85 +52,109 @@ interface IProps {
 
 const props = defineProps<IProps>();
 const emit = defineEmits<{
-  ready: [dates: ICalendarUpdate];
-  update: [dates: ICalendarUpdate];
+  ready: [dates: ICalendarDates];
+  update: [dates: ICalendarDates];
   eventClick: [event: ICalendarEvent<unknown>];
   chooseDate: [date: Date];
 }>();
-
-const heightComputed = computed(() => (props.height ? `${props.height}px` : '500px'));
 </script>
 
 <style module lang="scss">
 .container {
   width: 100%;
-  height: v-bind(heightComputed);
-}
 
-.title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  font-size: 1.125rem;
-  color: var(--color-gray-light);
-}
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1.125rem;
+    color: var(--color-gray-light);
+  }
 
-:global(.vuecal) {
-  border-radius: 8px;
-}
+  :global(.vuecal) {
+    --vuecal-primary-color: var(--color-gray-light);
+    --vuecal-secondary-color: var(--color-white);
+    --vuecal-base-color: var(--color-black);
+    --vuecal-contrast-color: var(--color-black);
+    --vuecal-border-color: var(--color-gray);
+    --vuecal-header-color: var(--color-black);
+    --vuecal-event-color: var(--color-white);
+    --vuecal-border-radius: 8px;
+    --vuecal-height: auto;
+    --vuecal-transition-duration: 0;
+  }
 
-:global(.vuecal__body) {
-  border-radius: 8px;
-}
+  :global(.vuecal__header) {
+    border: 1px solid var(--color-gray);
+  }
 
-:global(.vuecal__cell-events) {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  justify-content: center;
-}
+  :global(.vuecal__title-bar) {
+    padding-top: 7px;
+    padding-bottom: 6px;
+    background-color: var(--color-gray-light-extra);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
 
-:global(.vuecal__event) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  cursor: pointer;
-  border-radius: 12px;
-}
+  :global(.vuecal__headings) {
+    height: 37px;
+    padding-top: 5px;
+  }
 
-:global(.vuecal__event--focus) {
-  box-shadow: none;
-}
+  :global(.vuecal--default-theme .vuecal__weekday) {
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
 
-:global(.vuecal__title-bar) {
-  min-height: 41px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-black);
-  background-color: var(--color-gray-light-extra);
-  border: 1px solid var(--color-gray);
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
+  :global(.vuecal--default-theme .vuecal__weekday-day) {
+    opacity: 1;
+  }
 
-:global(.vuecal__arrow) {
-  color: var(--color-black);
-}
+  :global(.vuecal__body) {
+    grid-template-rows: auto;
+  }
 
-:global(.vuecal__title span:nth-child(2)) {
-  display: none;
-}
+  :global(.vuecal--default-theme .vuecal__scrollable--month-view .vuecal__cell) {
+    align-items: center;
+    min-height: 64px;
+  }
 
-:global(.vuecal__cell--out-of-scope) {
-  color: var(--color-gray-dark);
-}
+  :global(
+    .vuecal--default-theme.vuecal--light:is(.vuecal--sm, .vuecal--lg)
+      .vuecal__scrollable--month-view
+      .vuecal__cell--today
+      .vuecal__cell-date
+  ) {
+    background-color: var(--color-gray-light);
+  }
 
-:global(.vuecal__cell--selected),
-:global(.vuecal__cell--today) {
-  background-color: var(--color-gray-light-extra);
+  :global(.vuecal--default-theme:is(.vuecal--sm, .vuecal--lg) .vuecal__scrollable--month-view .vuecal__cell-date) {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  :global(.vuecal--default-theme.vuecal--timeless .vuecal__cell-events) {
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+    padding-bottom: 8px;
+  }
+
+  :global(.vuecal__scrollable--month-view .vuecal__event) {
+    width: 36px;
+    height: 36px;
+    padding-top: 0;
+    padding-bottom: 0;
+    cursor: pointer;
+    border: 0;
+    border-radius: 12px;
+  }
+
+  :global(.vuecal--default-theme .vuecal__event-details) {
+    padding: 0;
+    border-radius: 12px;
+  }
 }
 </style>
