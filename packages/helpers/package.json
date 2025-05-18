@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "Mhz helpers and composables",
-  "version": "1.1.31",
+  "version": "1.1.32",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",

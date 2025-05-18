@@ -20,7 +20,7 @@ export function vueQueryOptions(
       queryCache: new QueryCache({
         onError: (error: unknown) => {
           const isNetworkError = (error as IError).code === 'ERR_NETWORK';
-          const isAuthError = (error as IError).response?.status === 403;
+          const isAuthError = [403, 401].includes((error as IError).response?.status);
 
           if (isNetworkError) {
             toast.error('Ошибка подключения к сети');
