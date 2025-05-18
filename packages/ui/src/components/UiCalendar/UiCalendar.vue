@@ -86,14 +86,12 @@ const emit = defineEmits<{
     --vuecal-transition-duration: 0;
   }
 
-  :global(
-    .vuecal-event-delete-leave-active,
-    .vuecal-event-delete-leave-to,
-    .vuecal-shrink-enter-active,
-    .vuecal-shrink-leave-active
-  ) {
-    transform: translateY(0);
+  :global(.vuecal-event-delete-leave-active) {
     transition: 0ms;
+  }
+
+  :global(.vuecal-event-delete-leave-to) {
+    transform: none;
   }
 
   :global(.vuecal__header) {
