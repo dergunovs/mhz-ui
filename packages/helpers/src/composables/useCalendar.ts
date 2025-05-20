@@ -5,7 +5,7 @@ export interface ICalendarDates {
   dateTo: string;
 }
 
-export function useActivityCalendar() {
+export function useCalendar() {
   const dateFrom = ref('');
   const dateTo = ref('');
 

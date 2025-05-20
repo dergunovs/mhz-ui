@@ -27,6 +27,27 @@ useAuth(): {
 
 Функции авторизации и редиректа на указанный url при авторизации.
 
+## useCalendar
+
+```
+useCalendar(): {
+    dateFrom: Ref<string, string>;
+    dateTo: Ref<string, string>;
+    isDatesReady: Ref<boolean, boolean>;
+    updateDates: (dates: ICalendarDates) => void;
+}
+```
+
+Композабл для календаря, предоставляющий первую и последнюю дату, готовность календаря и событие смены месяца.
+
+## usePageLock
+
+```
+usePageLock() => void
+```
+
+Композабл, позволяющий запретить блокировку экрана на мобильном устройстве на конкретной странице приложения.
+
 ## useInfiniteScroll
 
 ```
