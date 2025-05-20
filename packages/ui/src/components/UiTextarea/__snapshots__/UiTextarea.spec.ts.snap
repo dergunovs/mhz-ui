@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiTextarea > matches snapshot 1`] = `"<textarea class="_textarea_116ac4" rows="5" data-test="ui-textarea" aria-label="textarea" value="Text example"></textarea>"`;
