@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { useArgs } from '@storybook/preview-api';
+import { useArgs } from 'storybook/preview-api';
 
 import { TITLE, MODEL_VALUE } from './constants';
 

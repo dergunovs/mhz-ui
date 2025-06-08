@@ -7,7 +7,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-declaration-merging */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/member-ordering */
-/* eslint-disable no-use-before-define */
 /* eslint-disable @typescript-eslint/method-signature-style */
 declare module 'vue-cal' {
   import Vue from 'vue';

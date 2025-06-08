@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`UiSearch > matches snapshot 1`] = `
-"<div class="_container_f7e15d">
+"<div class="_container_cf61dc">
   <ui-input-stub modelvalue="" type="text" isdisabled="false" mode="default" appendicon="[object Object]" isfocus="false" iscenter="false" iscopy="false" ispassword="false" placeholder="Search" data-test="ui-search"></ui-input-stub>
   <!--v-if-->
 </div>"

@@ -1,12 +1,12 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`UiCheckbox > matches snapshot 1`] = `
-"<label data-disabled="false" class="_checkbox_62cdb4" data-test="ui-checkbox">
+"<label data-disabled="false" class="_checkbox_654eec" data-test="ui-checkbox">
   <!--v-if-->
-  <!--v-if--><input type="checkbox" class="_input_62cdb4" tabindex="-1" data-test="ui-checkbox-input" value="false">
-  <div data-switcher="false" data-disabled="false" data-error="false" class="_fake_62cdb4" tabindex="0" data-test="ui-checkbox-fake">
-    <div class="_line_62cdb4 _leftLine_62cdb4" data-test="ui-checkbox-line"></div>
-    <div class="_line_62cdb4 _rightLine_62cdb4" data-test="ui-checkbox-line"></div>
+  <!--v-if--><input type="checkbox" class="_input_654eec" tabindex="-1" data-test="ui-checkbox-input" value="false">
+  <div data-switcher="false" data-disabled="false" data-error="false" class="_fake_654eec" tabindex="0" data-test="ui-checkbox-fake">
+    <div class="_line_654eec _leftLine_654eec" data-test="ui-checkbox-line"></div>
+    <div class="_line_654eec _rightLine_654eec" data-test="ui-checkbox-line"></div>
   </div>
   <!--v-if-->
 </label>"

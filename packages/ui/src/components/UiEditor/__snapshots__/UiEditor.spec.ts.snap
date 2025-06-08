@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`UiEditor > matches snapshot 1`] = `
-"<div class="_container_43e6b8">
-  <div class="_actions_43e6b8"><button class="_action_43e6b8" type="button" data-test="ui-editor-button">b</button><button class="_action_43e6b8" type="button" data-test="ui-editor-button">i</button><button class="_action_43e6b8" type="button" data-test="ui-editor-button">h2</button><button class="_action_43e6b8" type="button" data-test="ui-editor-button">h3</button></div>
-  <editor-content-stub class="_editor_43e6b8" data-test="ui-editor" editor="[object Object]"></editor-content-stub>
+"<div class="_container_19ed11">
+  <div class="_actions_19ed11"><button class="_action_19ed11" type="button" data-test="ui-editor-button">b</button><button class="_action_19ed11" type="button" data-test="ui-editor-button">i</button><button class="_action_19ed11" type="button" data-test="ui-editor-button">h2</button><button class="_action_19ed11" type="button" data-test="ui-editor-button">h3</button></div>
+  <editor-content-stub class="_editor_19ed11" data-test="ui-editor" editor="[object Object]"></editor-content-stub>
 </div>"
 `;

@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`UiChart > matches snapshot 1`] = `
-"<div class="_chart_02ec6f">
-  <div class="_title_02ec6f" data-test="ui-chart-title">Chart title</div>
+"<div class="_chart_b9fa13">
+  <div class="_title_b9fa13" data-test="ui-chart-title">Chart title</div>
   <anonymous-stub data="[object Object]" options="[object Object]" plugins="" datasetidkey="label" data-type="Bar" data-test="ui-chart"></anonymous-stub>
 </div>"
 `;

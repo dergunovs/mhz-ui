@@ -1,11 +1,11 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`UiSpoiler > matches snapshot 1`] = `
-"<div class="_container_e5cda4"><button class="_titleBlock_e5cda4" type="button" data-test="ui-spoiler-button">
-    <div class="_title_e5cda4">
-      <anonymous-stub data-expanded="false" class="_icon_e5cda4" width="16" height="16"></anonymous-stub><span class="_titleText_e5cda4" data-test="ui-spoiler-button-title">Spoiler title</span>
+"<div class="_container_017d2d"><button class="_titleBlock_017d2d" type="button" data-test="ui-spoiler-button">
+    <div class="_title_017d2d">
+      <anonymous-stub data-expanded="false" class="_icon_017d2d" width="16" height="16"></anonymous-stub><span class="_titleText_017d2d" data-test="ui-spoiler-button-title">Spoiler title</span>
     </div>
   </button>
-  <div class="_spoiler_e5cda4" data-test="ui-spoiler" style="display: none;"></div>
+  <div class="_spoiler_017d2d" data-test="ui-spoiler" style="display: none;"></div>
 </div>"
 `;
