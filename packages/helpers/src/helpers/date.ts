@@ -3,7 +3,7 @@ export function addZero(value: number): string {
 }
 
 export function formatDuration(duration?: number, lang?: string): string {
-  if (!duration) return '-';
+  if (!duration) return '0';
 
   const minutes = Math.floor(duration / 60);
   const seconds = duration - minutes * 60;
@@ -15,7 +15,7 @@ export function formatDuration(duration?: number, lang?: string): string {
 }
 
 export function formatDate(dateRaw?: string | Date | null, lang?: string): string {
-  if (!dateRaw) return '-';
+  if (!dateRaw) return '0';
 
   return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {
     year: 'numeric',
@@ -25,7 +25,7 @@ export function formatDate(dateRaw?: string | Date | null, lang?: string): strin
 }
 
 export function formatDateTime(dateRaw?: string | Date | null, lang?: string): string {
-  if (!dateRaw) return '-';
+  if (!dateRaw) return '0';
 
   return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {
     year: 'numeric',
@@ -42,7 +42,7 @@ export function subtractDates(
   lang?: string,
   isRawResult?: boolean
 ): string | number {
-  if (!dateFuture || !datePast) return '-';
+  if (!dateFuture || !datePast) return '0';
 
   const date1 = new Date(dateFuture);
   const date2 = new Date(datePast);
