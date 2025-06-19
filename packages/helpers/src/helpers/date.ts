@@ -77,27 +77,31 @@ export interface IWeekDays {
   label: string;
 }
 
-export function getFirstAndLastWeekDays(weeksCount: number): IWeekDays[] {
-  const days: IWeekDays[] = [];
+export function getFirstAndLastDays(count: number, isMonth: boolean): IWeekDays[] {
+  const dates: IWeekDays[] = [];
 
-  for (let i = 0; i < weeksCount; i++) {
+  for (let i = 0; i < count; i++) {
     const today = new Date();
 
     const firstDay = new Date(
-      today.setDate(today.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1) - i * 7)
+      today.setDate(isMonth ? 1 : today.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1) - i * 7)
     );
 
-    const lastDay = new Date(today.setDate(today.getDate() - today.getDay() + 7));
+    if (isMonth) firstDay.setMonth(today.getMonth() - i);
+
+    const lastDay = isMonth
+      ? new Date(today.getFullYear(), today.getMonth() + 1 - i, 0)
+      : new Date(today.setDate(today.getDate() - today.getDay() + 7));
 
     firstDay.setHours(0, 0, 0, 0);
     lastDay.setHours(23, 59, 59);
 
-    days.push({
+    dates.push({
       dateFrom: firstDay,
       dateTo: lastDay,
       label: `${firstDay.toLocaleDateString('ru').slice(0, -5)} - ${lastDay.toLocaleDateString('ru').slice(0, -5)}`,
     });
   }
 
-  return days.reverse();
+  return dates.reverse();
 }

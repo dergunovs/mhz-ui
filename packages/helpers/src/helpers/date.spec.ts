@@ -7,7 +7,7 @@ import {
   formatDateTime,
   subtractDates,
   getDatesByDayGap,
-  getFirstAndLastWeekDays,
+  getFirstAndLastDays,
 } from '.';
 
 describe('date', () => {
@@ -75,7 +75,7 @@ describe('date', () => {
   });
 
   test('first and last week days', async () => {
-    const WEEK_COUNT = 3;
+    const COUNT = 3;
 
     const date = new Date(2025, 0, 9, 12, 0, 0);
 
@@ -99,6 +99,34 @@ describe('date', () => {
       },
     ];
 
-    expect(getFirstAndLastWeekDays(WEEK_COUNT)).toStrictEqual(WEEK_DAYS);
+    expect(getFirstAndLastDays(COUNT, false)).toStrictEqual(WEEK_DAYS);
+  });
+
+  test('first and last month days', async () => {
+    const COUNT = 3;
+
+    const date = new Date(2025, 0, 9, 12, 0, 0);
+
+    vi.setSystemTime(date);
+
+    const MONTH_DAYS = [
+      {
+        dateFrom: new Date('2024-11-01T00:00:00.000Z'),
+        dateTo: new Date('2024-11-30T23:59:59.000Z'),
+        label: '01.11 - 30.11',
+      },
+      {
+        dateFrom: new Date('2024-12-01T00:00:00.000Z'),
+        dateTo: new Date('2024-12-31T23:59:59.000Z'),
+        label: '01.12 - 31.12',
+      },
+      {
+        dateFrom: new Date('2025-01-01T00:00:00.000Z'),
+        dateTo: new Date('2025-01-31T23:59:59.000Z'),
+        label: '01.01 - 31.01',
+      },
+    ];
+
+    expect(getFirstAndLastDays(COUNT, true)).toStrictEqual(MONTH_DAYS);
   });
 });
