@@ -78,8 +78,8 @@ const props = withDefaults(defineProps<IProps>(), {
   }
 
   &[data-tall='true'] {
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 28px;
+    padding-bottom: 28px;
   }
 
   &[data-wrap='true'] {
