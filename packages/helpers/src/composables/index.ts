@@ -7,3 +7,4 @@ export * from './useRouteId';
 export * from './useValidate';
 export * from './useCalendar';
 export * from './usePageLock';
+export * from './useTimer';
