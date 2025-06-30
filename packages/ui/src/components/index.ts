@@ -17,6 +17,7 @@ export { default as UiSelect } from './UiSelect/UiSelect.vue';
 export { default as UiSpoiler } from './UiSpoiler/UiSpoiler.vue';
 export { default as UiSlider } from './UiSlider/UiSlider.vue';
 export { default as UiTable } from './UiTable/UiTable.vue';
+export { default as UiTabs } from './UiTabs/UiTabs.vue';
 export { default as UiTextarea } from './UiTextarea/UiTextarea.vue';
 export { default as UiUpload } from './UiUpload/UiUpload.vue';
 export { default as toast } from './toast/toast';
