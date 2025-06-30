@@ -37,8 +37,8 @@ const emit = defineEmits<{ 'update:modelValue': [value: string] }>();
 }
 
 .tab {
-  padding: 10px 6px;
-  font-size: 0.75rem;
+  padding: 10px 8px;
+  font-size: 0.875rem;
   cursor: pointer;
   background-color: var(--color-gray-light);
   border: 0;
@@ -50,6 +50,12 @@ const emit = defineEmits<{ 'update:modelValue': [value: string] }>();
   &[data-active='true'] {
     color: var(--color-white);
     background-color: var(--color-primary);
+  }
+}
+
+@media (max-width: $mobile) {
+  .tab {
+    padding: 10px 5px;
   }
 }
 </style>
