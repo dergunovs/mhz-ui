@@ -3,5 +3,5 @@ export const TABS = [
   { title: 'Подходы', value: 'sets' },
   { title: 'Повторы', value: 'repeats' },
   { title: 'Мышцы', value: 'muscles' },
-  { title: 'Длительность', value: 'duration' },
+  { title: 'Время', value: 'duration' },
 ];
