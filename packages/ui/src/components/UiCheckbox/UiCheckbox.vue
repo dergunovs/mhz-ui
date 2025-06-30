@@ -1,5 +1,11 @@
 <template>
-  <label @click.stop :data-disabled="props.isDisabled" :class="$style.checkbox" data-test="ui-checkbox">
+  <label
+    @click.stop
+    :data-disabled="props.isDisabled"
+    :class="$style.checkbox"
+    :data-switcher="props.isSwitcher"
+    data-test="ui-checkbox"
+  >
     <span v-if="props.error" :class="$style.required" data-test="ui-checkbox-error">{{ props.error }}</span>
 
     <span v-if="props.label">
@@ -163,7 +169,7 @@ function handleChange() {
     }
 
     &[data-switcher='true']::before {
-      transform: translateX(20px);
+      transform: translateX(10px);
     }
   }
 }
@@ -187,7 +193,7 @@ function handleChange() {
 
   &[data-switcher='true'] {
     position: relative;
-    width: 40px;
+    width: 30px;
     height: 20px;
     background-color: var(--color-gray);
     border: none;
@@ -237,5 +243,13 @@ function handleChange() {
 
 .required {
   color: var(--color-error);
+}
+
+@media (max-width: $mobile) {
+  .checkbox {
+    &[data-switcher='true']::before {
+      gap: 6px;
+    }
+  }
 }
 </style>
