@@ -102,6 +102,10 @@ function handleChange() {
   cursor: pointer;
   user-select: none;
 
+  &[data-switcher='true'] {
+    gap: 6px;
+  }
+
   &:hover {
     .fake {
       border-color: var(--color-primary);
@@ -169,7 +173,7 @@ function handleChange() {
     }
 
     &[data-switcher='true']::before {
-      transform: translateX(10px);
+      transform: translateX(12px);
     }
   }
 }
@@ -193,7 +197,7 @@ function handleChange() {
 
   &[data-switcher='true'] {
     position: relative;
-    width: 30px;
+    width: 32px;
     height: 20px;
     background-color: var(--color-gray);
     border: none;
@@ -243,13 +247,5 @@ function handleChange() {
 
 .required {
   color: var(--color-error);
-}
-
-@media (max-width: $mobile) {
-  .checkbox {
-    &[data-switcher='true']::before {
-      gap: 6px;
-    }
-  }
 }
 </style>
