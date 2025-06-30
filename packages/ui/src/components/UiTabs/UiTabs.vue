@@ -54,6 +54,10 @@ const emit = defineEmits<{ 'update:modelValue': [value: string] }>();
 }
 
 @media (max-width: $mobile) {
+  .tabs {
+    width: 100%;
+  }
+
   .tab {
     flex-grow: 1;
     padding: 10px 5px;
