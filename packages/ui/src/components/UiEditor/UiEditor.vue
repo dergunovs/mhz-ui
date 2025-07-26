@@ -56,7 +56,7 @@ watch(
       return;
     }
 
-    editor.value?.commands.setContent(value || '', false);
+    editor.value?.commands.setContent(value || '');
   }
 );
 
