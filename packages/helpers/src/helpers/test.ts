@@ -3,8 +3,19 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const template = '<template><div></div></template>';
 
+interface NodeWithProps {
+  type: number;
+  props: { type: number; name: string }[];
+}
+
 export function dataTest(value: string): string {
   return `[data-test="${value}"]`;
+}
+
+export function removeDataTest(node: NodeWithProps) {
+  if (node.type === 1 /* NodeTypes.ELEMENT */) {
+    node.props = node.props.filter((prop) => (prop.type === 6 ? prop.name !== 'data-test' : true));
+  }
 }
 
 export async function wait(time?: number): Promise<void> {

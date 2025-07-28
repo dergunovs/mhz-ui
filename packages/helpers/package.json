@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "Mhz helpers and composables",
-  "version": "1.1.43",
+  "version": "1.1.44",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -25,8 +25,8 @@
   },
   "dependencies": {
     "@tanstack/vue-query": "5.83.0",
-    "@vueuse/core": "13.5.0",
-    "@vueuse/integrations": "13.5.0",
+    "@vueuse/core": "13.6.0",
+    "@vueuse/integrations": "13.6.0",
     "async-validator": "4.2.5",
     "axios": "1.11.0",
     "vue": "3.5.18",
@@ -35,7 +35,7 @@
   "devDependencies": {
     "@eslint/js": "9.32.0",
     "@types/node": "24.1.0",
-    "@vitejs/plugin-vue": "6.0.0",
+    "@vitejs/plugin-vue": "6.0.1",
     "@vitest/coverage-istanbul": "3.2.4",
     "eslint": "9.32.0",
     "eslint-config-prettier": "10.1.8",
