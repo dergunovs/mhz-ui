@@ -48,16 +48,6 @@ export default defineConfig({
     },
   },
 
-  test: {
-    alias: { '@': path.resolve(__dirname, './src') },
-    cache: false,
-    clearMocks: true,
-    environment: 'happy-dom',
-    include: ['**/*.spec.ts'],
-    coverage: { provider: 'istanbul', reporter: ['text'], include: ['src/**/Ui*.vue'], all: true },
-    css: false,
-  },
-
   plugins: [
     vue({
       template: {
@@ -111,4 +101,19 @@ export default defineConfig({
       },
     },
   ],
+
+  test: {
+    clearMocks: true,
+    environment: 'happy-dom',
+    include: ['**/*.spec.ts'],
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['text'],
+      include: ['src/**/Ui*.vue'],
+      all: true,
+    },
+    css: false,
+    deps: { inline: true },
+    env: { TZ: 'UTC' },
+  },
 });

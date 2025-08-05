@@ -1,3 +1,5 @@
+/// <reference types="vitest/config" />
+
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import vue from '@vitejs/plugin-vue';
@@ -18,4 +20,17 @@ export default defineConfig({
   },
 
   plugins: [vue(), dts({ entryRoot: './src' })],
+
+  test: {
+    clearMocks: true,
+    environment: 'happy-dom',
+    include: ['**/*.spec.ts'],
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['text'],
+      all: true,
+    },
+    deps: { inline: true },
+    env: { TZ: 'UTC' },
+  },
 });

@@ -48,7 +48,7 @@ export function email(lang?: string): RuleItem {
 
 export function letters(lang?: string): RuleItem {
   return {
-    validator: (rule: object, value: string) =>
+    validator: (_rule: object, value: string) =>
       /^[a-zA-zа-яА-ЯёЁ-]+([\s][a-zA-Zа-яА-ЯёЁ-]+)*$/.test(value) || !value.length,
     type: 'string',
     message: lang === 'en' ? 'Only letters' : 'Допустимы только буквы',

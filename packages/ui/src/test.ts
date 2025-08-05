@@ -1,5 +1,5 @@
 import { Component, ComponentPublicInstance } from 'vue';
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, VueWrapper } from '@vue/test-utils';
 import { debounce } from 'perfect-debounce';
 
 export function wrapperFactory<T>(
@@ -17,5 +17,5 @@ export function wrapperFactory<T>(
     slots: slots as undefined,
     mocks: { debounce },
     attachTo: document.getElementById('app') as HTMLElement,
-  });
+  }) as VueWrapper<ComponentPublicInstance<T>>;
 }
