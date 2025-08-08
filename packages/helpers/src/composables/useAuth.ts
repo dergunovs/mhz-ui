@@ -16,6 +16,8 @@ export function logout(url: string, deleteAuthHeader: () => void, tokenName: str
 }
 
 export function getCookieToken(tokenName: string): string | undefined {
+  if (!document.cookie) return;
+
   const { [tokenName]: token } = Object.fromEntries(document.cookie.split('; ').map((v) => v.split('=')));
 
   return token;

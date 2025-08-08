@@ -6,7 +6,8 @@ export function usePagination<T>(dataRaw: Ref<{ data: T[]; total: number } | und
 
   function setPaginationPage(pageToSet: number, page: number): number {
     if (!total.value) return page;
-    if (pageToSet === 0 || pageToSet === total.value + 1) return page;
+
+    if (pageToSet < 1 || pageToSet > total.value) return page;
 
     return pageToSet;
   }

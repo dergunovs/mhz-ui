@@ -23,15 +23,19 @@ export interface IPageSortParams extends IPageParams {
 }
 
 export function convertParams(params: Ref<IPageQuery | number>, initiator?: string): IPageSortParams | IPageParams {
-  return typeof params.value === 'number'
-    ? { page: params.value }
-    : {
-        page: params.value.page || 1,
-        dir: params.value.sort.isAsc === false ? 'desc' : 'asc',
-        sort: params.value.sort.value,
-        initiator,
-        ...params.value.filter,
-      };
+  if (typeof params.value === 'number') {
+    return { page: params.value };
+  }
+
+  const { page, sort, filter } = params.value;
+
+  return {
+    page: page || 1,
+    dir: sort.isAsc === false ? 'desc' : 'asc',
+    sort: sort.value,
+    initiator,
+    ...filter,
+  };
 }
 
 export function usePage(filter?: object) {
@@ -45,10 +49,19 @@ export function usePage(filter?: object) {
   });
 
   function resetQuery(sortValue: string | ISortOption) {
-    query.value =
-      typeof sortValue === 'string'
-        ? Object.assign(query.value, { page: 1, sort: { value: sortValue, isAsc: true }, filter: {} })
-        : { ...query.value, page: 1, sort: sortValue };
+    if (typeof sortValue === 'string') {
+      query.value = {
+        page: 1,
+        sort: { value: sortValue, isAsc: true },
+        filter: {},
+      };
+    } else {
+      query.value = {
+        ...query.value,
+        page: 1,
+        sort: sortValue,
+      };
+    }
   }
 
   function setQueryPage(pageToSet: number) {
