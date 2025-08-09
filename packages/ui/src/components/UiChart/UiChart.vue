@@ -79,6 +79,7 @@ const chartData = {
 };
 
 const chartOptions = {
+  animation: false,
   responsive: true,
   aspectRatio: 5 / 3,
   ticks: { precision: 0 },
