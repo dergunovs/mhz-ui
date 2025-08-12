@@ -9,7 +9,7 @@ export function useTimer() {
   const timer = computed(() => `${addZero(minutesRaw.value)}:${addZero(secondsRaw.value)}`);
   const duration = computed(() => minutesRaw.value * 60 + secondsRaw.value);
 
-  let interval: NodeJS.Timeout;
+  let interval: NodeJS.Timeout | null = null;
 
   function updateTime() {
     secondsRaw.value++;
@@ -21,11 +21,14 @@ export function useTimer() {
   }
 
   function startTimer() {
-    interval = setInterval(updateTime, 1000);
+    if (!interval) interval = setInterval(updateTime, 1000);
   }
 
   function stopTimer() {
-    clearInterval(interval);
+    if (interval) {
+      clearInterval(interval);
+      interval = null;
+    }
   }
 
   return { timer, duration, startTimer, stopTimer };

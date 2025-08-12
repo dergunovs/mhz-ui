@@ -8,7 +8,7 @@ npm i mhz-helpers
 
 `api` единый инстанс axios
 
-`setBaseUrl(url: string) ` установка базового url
+`setBaseURL(url: string) ` установка базового url
 
 `setAuthHeader(token: string)` установка заголовка авторизации
 
@@ -44,17 +44,21 @@ npm i mhz-helpers
 
 `getDatesByDayGap(gap: number): IDatesGap` воврат промежутков дат с заданным диапазоном от текущей даты в сутках, например, для сравнения предыдущего месяца(gap:30) или недели(gap:7) с текущими
 
-`getFirstAndLastWeekDays(weeksCount: number): IWeekDays[]` получение первых и последних дней недель с датами и заголовками, выбор количества недель через weeksCount
+`getFirstAndLastDays(count: number, isMonth: boolean): IWeekDays[]` получение первых и последних дней недель с датами и заголовками, выбор количества недель через weeksCount
 
 ## id
 
 `createTempId(): string` - создание временного id с префиксом temp
 
-`deleteTempId<T extends { _id?: string }>(array: T[], , isDeleteAll?: boolean): T[]` удаление у объектов внутри массива поля \_id, если внутри него хранится временный id с префиксом temp или всех полей \_id(isDeleteAll)
+`deleteTempId<T extends { _id?: string }>(array: T[], isDeleteAll?: boolean): T[]` удаление у объектов внутри массива поля \_id, если внутри него хранится временный id с префиксом temp или всех полей \_id(isDeleteAll)
 
 ## link
 
 `isLinkActive(currentUrl: string, linkUrl: string): boolean` проверка, активна ли текущая страница с учётом главной страницы "/"
+
+## locale
+
+`localeField<T>(name: string, locale: string)` возвращает поле с локалью (например, name или name_en)
 
 ## numbers
 
@@ -66,8 +70,16 @@ npm i mhz-helpers
 
 `generatePassword(): string` генерация случайного 9 символьного пароля из букв и цифр
 
+## scroll
+
+`scrollToTop(element: string)` прокрутка элемента вверх
+
 ## test
 
 `dataTest(value: string): string` возврат элемента с указанным data-test аттрибутом со скобками и кавычками
 
+`removeDataTest(node: NodeWithProps)` убрать аттрибуты data-test при билде в продакшен
+
 `wait(time?: number): Promise<void>` подождать указанное количество милисекунд внутри теста для проверки setTimeout
+
+`withSetup<T>(composable: () => T)` функция для настройки тестов с использованием Vue композаблов

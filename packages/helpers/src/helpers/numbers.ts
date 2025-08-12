@@ -1,7 +1,11 @@
 export function formatPercent(percent: number | null): string {
-  return percent === null ? '' : `${percent > 0 ? `+` : ``}${percent}%`;
+  if (percent === null || isNaN(percent)) return '';
+
+  return `${percent > 0 ? '+' : ''}${percent}%`;
 }
 
 export function getPercentDiff(cur: number, prev: number): number {
-  return Math.round(((cur - prev) / prev) * 100) || 0;
+  if (prev === 0 || isNaN(prev) || isNaN(cur)) return 0;
+
+  return Math.round(((cur - prev) / prev) * 100);
 }

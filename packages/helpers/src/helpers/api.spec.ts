@@ -38,7 +38,7 @@ describe('api', () => {
     expect(api.defaults.headers.common['Authorization']).toStrictEqual(undefined);
   });
 
-  test('handles error', async () => {
+  test('handles error with axios error', async () => {
     const ERROR_TEXT = 'Текст ошибки';
 
     const ERROR = new api.AxiosError(
@@ -58,5 +58,19 @@ describe('api', () => {
     const handledError = handleError(ERROR);
 
     expect(handledError).toStrictEqual(ERROR_TEXT);
+  });
+
+  test('handles error with non-axios error', async () => {
+    const ERROR = new Error('Текст ошибки');
+
+    const handledError = handleError(ERROR);
+
+    expect(handledError).toStrictEqual('Error');
+  });
+
+  test('handles error with undefined error', async () => {
+    const handledError = handleError(undefined);
+
+    expect(handledError).toStrictEqual('Error');
   });
 });

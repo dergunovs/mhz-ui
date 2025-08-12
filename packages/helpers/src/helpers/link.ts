@@ -1,3 +1,5 @@
 export function isLinkActive(currentUrl: string, linkUrl: string): boolean {
-  return currentUrl === '/' ? currentUrl === linkUrl : currentUrl.includes(linkUrl) && linkUrl !== '/';
+  if (currentUrl === '/') return currentUrl === linkUrl;
+
+  return currentUrl.includes(linkUrl) && linkUrl !== '/';
 }

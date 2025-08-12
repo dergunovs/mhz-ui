@@ -35,4 +35,26 @@ describe('clone', () => {
 
     expect(clonedObject).toStrictEqual(rawData);
   });
+
+  test('clones primitive values', async () => {
+    const stringVal = 'test';
+    const numberVal = 42;
+    const booleanVal = true;
+    const nullVal = null;
+    const undefinedVal = undefined;
+
+    expect(clone(stringVal)).toStrictEqual(stringVal);
+    expect(clone(numberVal)).toStrictEqual(numberVal);
+    expect(clone(booleanVal)).toStrictEqual(booleanVal);
+    expect(clone(nullVal)).toStrictEqual(nullVal);
+    expect(clone(undefinedVal)).toStrictEqual(undefinedVal);
+  });
+
+  test('clones array', async () => {
+    const arr = [1, 2, 3, { id: 1, name: 'test' }];
+    const clonedArr = clone(arr);
+
+    expect(clonedArr).toStrictEqual(arr);
+    expect(clonedArr).not.toBe(arr);
+  });
 });

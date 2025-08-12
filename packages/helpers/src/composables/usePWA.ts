@@ -10,12 +10,14 @@ export function usePWA() {
   const installPWAPrompt = ref<IPromptEvent | undefined>();
 
   async function installPWA(): Promise<void> {
-    await installPWAPrompt.value?.prompt();
+    if (installPWAPrompt.value) {
+      await installPWAPrompt.value.prompt();
 
-    setTimeout(() => {
-      isShowInstallPWA.value = false;
-      installPWAPrompt.value = undefined;
-    }, 100);
+      setTimeout(() => {
+        isShowInstallPWA.value = false;
+        installPWAPrompt.value = undefined;
+      }, 100);
+    }
   }
 
   function isInstallPromptEvent(e: Event): e is IPromptEvent {
@@ -41,5 +43,6 @@ export function usePWA() {
   return {
     installPWA,
     isShowInstallPWA,
+    isPWACanBeInstalled,
   };
 }

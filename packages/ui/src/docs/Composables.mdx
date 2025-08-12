@@ -31,9 +31,9 @@ useAuth(): {
 
 ```
 useCalendar(): {
-    dateFrom: Ref<string, string>;
-    dateTo: Ref<string, string>;
-    isDatesReady: Ref<boolean, boolean>;
+    dateFrom: Ref<string>;
+    dateTo: Ref<string>;
+    isDatesReady: Ref<boolean>;
     updateDates: (dates: ICalendarDates) => void;
 }
 ```
@@ -89,7 +89,7 @@ usePageNumber(): {
 ## usePagination
 
 ```
-usePagination<T>(dataRaw: Ref<{ data: T[]; total: number; } | undefined>): {
+usePagination<T>(dataRaw: Ref<{ data: T[]; total: number } | undefined>): {
   data: ComputedRef<T[] | undefined>;
   total: ComputedRef<number | undefined>;
   setPaginationPage: (pageToSet: number, page: number) => number;
@@ -104,6 +104,7 @@ usePagination<T>(dataRaw: Ref<{ data: T[]; total: number; } | undefined>): {
 usePWA(): {
     installPWA: () => Promise<void>;
     isShowInstallPWA: Ref<boolean>;
+    isPWACanBeInstalled: Ref<boolean>;
 }
 ```
 
@@ -120,3 +121,34 @@ useValidator<T>(formData: Ref<T>, rules: Partial<{ [fieldName in keyof T]: RuleI
 ```
 
 Валидация полей реактивного объекта по правилам `required, email, letters, min(value: number), max(value: number)`.
+
+## useRouteId
+
+```
+useRouteId(title: string, isQuery?: boolean): {
+  id: ComputedRef<string>;
+}
+```
+
+Получение ID из маршрута (параметр или query).
+
+## useTimer
+
+```
+useTimer(): {
+  timer: ComputedRef<string>;
+  duration: ComputedRef<number>;
+  startTimer: () => void;
+  stopTimer: () => void;
+}
+```
+
+Таймер с отсчётом времени.
+
+## usePageLock
+
+```
+usePageLock() => void
+```
+
+Композабл, позволяющий запретить блокировку экрана на мобильном устройстве на конкретной странице приложения.

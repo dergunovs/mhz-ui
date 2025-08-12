@@ -26,6 +26,14 @@ describe('date', () => {
     expect(formatDuration(DURATION_SECONDS)).toStrictEqual(`09 sec.`);
     expect(formatDuration(DURATION_MINUTES)).toStrictEqual(`1 min. 09 sec.`);
     expect(formatDuration()).toStrictEqual(`0`);
+    expect(formatDuration(-5)).toStrictEqual(`0`);
+  });
+
+  test('formats duration with different languages', async () => {
+    const DURATION = 69;
+
+    expect(formatDuration(DURATION, 'en')).toStrictEqual(`1 min. 09 sec.`);
+    expect(formatDuration(DURATION, 'ru')).toStrictEqual(`1 мин. 09 сек.`);
   });
 
   test('formats date', async () => {
@@ -34,6 +42,8 @@ describe('date', () => {
     expect(formatDate(DATE, 'ru')).toStrictEqual(`9 февр. 2025 г.`);
     expect(formatDate(DATE, 'en')).toStrictEqual(`Feb 9, 2025`);
     expect(formatDate()).toStrictEqual(`0`);
+    expect(formatDate(null)).toStrictEqual(`0`);
+    expect(formatDate(undefined)).toStrictEqual(`0`);
   });
 
   test('formats date and time', async () => {
@@ -42,6 +52,15 @@ describe('date', () => {
     expect(formatDateTime(DATE, 'ru')).toStrictEqual(`9 февр. 2025 г., 17:13`);
     expect(formatDateTime(DATE, 'en')).toStrictEqual(`Feb 9, 2025, 5:13 PM`);
     expect(formatDateTime()).toStrictEqual(`0`);
+    expect(formatDateTime(null)).toStrictEqual(`0`);
+    expect(formatDateTime(undefined)).toStrictEqual(`0`);
+  });
+
+  test('formats date and time with invalid date', async () => {
+    const INVALID_DATE = 'invalid-date';
+
+    expect(formatDate(INVALID_DATE)).toStrictEqual(`0`);
+    expect(formatDateTime(INVALID_DATE)).toStrictEqual(`0`);
   });
 
   test('subtracts dates', async () => {
@@ -55,6 +74,14 @@ describe('date', () => {
     expect(subtractDates(DATE_BIG_STRING, DATE_SMALL_STRING)).toStrictEqual(`12 min. 00 sec.`);
     expect(subtractDates(DATE_BIG, DATE_SMALL, 'en', true)).toStrictEqual(720);
     expect(subtractDates()).toStrictEqual(`0`);
+    expect(subtractDates(null, DATE_SMALL)).toStrictEqual(`0`);
+    expect(subtractDates(DATE_BIG, null)).toStrictEqual(`0`);
+  });
+
+  test('subtracts dates with invalid dates', async () => {
+    const INVALID_DATE = 'invalid-date';
+
+    expect(subtractDates(INVALID_DATE, INVALID_DATE)).toStrictEqual(`0`);
   });
 
   test('gets dates by gap', async () => {

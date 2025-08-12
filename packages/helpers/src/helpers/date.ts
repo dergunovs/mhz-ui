@@ -1,12 +1,12 @@
 export function addZero(value: number): string {
-  return value.toString().length > 1 ? `${value}` : `0${value}`;
+  return value < 10 ? `0${value}` : `${value}`;
 }
 
 export function formatDuration(duration?: number, lang?: string): string {
-  if (!duration) return '0';
+  if (!duration || duration < 0) return '0';
 
   const minutes = Math.floor(duration / 60);
-  const seconds = duration - minutes * 60;
+  const seconds = duration % 60;
 
   const min = lang === 'ru' ? 'мин' : 'min';
   const sec = lang === 'ru' ? 'сек' : 'sec';
@@ -15,17 +15,19 @@ export function formatDuration(duration?: number, lang?: string): string {
 }
 
 export function formatDate(dateRaw?: string | Date | null, lang?: string): string {
-  if (!dateRaw) return '0';
+  if (!dateRaw || isNaN(new Date(dateRaw).getTime())) return '0';
 
-  return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  }).format(new Date(dateRaw));
+  return (
+    new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(new Date(dateRaw)) || '0'
+  );
 }
 
 export function formatDateTime(dateRaw?: string | Date | null, lang?: string): string {
-  if (!dateRaw) return '0';
+  if (!dateRaw || isNaN(new Date(dateRaw).getTime())) return '0';
 
   return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {
     year: 'numeric',
@@ -47,7 +49,9 @@ export function subtractDates(
   const date1 = new Date(dateFuture);
   const date2 = new Date(datePast);
 
-  const duration = Math.floor(((date1 as unknown as number) - (date2 as unknown as number)) / 1000);
+  if (isNaN(date1.getTime()) || isNaN(date2.getTime())) return '0';
+
+  const duration = Math.floor((date1.getTime() - date2.getTime()) / 1000);
 
   return isRawResult ? duration : formatDuration(duration, lang);
 }
