@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <div :class="$style.breadcrumbs" :aria-label="props.ariaLabel" itemscope itemtype="https://schema.org/BreadcrumbList">
     <div
       v-for="(link, index) in props.links"
       :key="`${link.title}${link.url}`"
@@ -41,7 +41,7 @@
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 
-import { DEFAULT_COLOR } from './constants';
+import { DEFAULT_ARIA_LABEL, DEFAULT_COLOR } from './constants';
 
 interface ILink {
   url: string;
@@ -51,10 +51,12 @@ interface ILink {
 interface IProps {
   links: ILink[];
   color?: 'white' | 'default';
+  ariaLabel?: string;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
   color: DEFAULT_COLOR,
+  ariaLabel: DEFAULT_ARIA_LABEL,
 });
 
 declare const window: Window & typeof globalThis & { IS_STORYBOOK: boolean };

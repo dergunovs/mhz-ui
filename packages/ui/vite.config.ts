@@ -35,7 +35,7 @@ export default defineConfig({
       output: {
         entryFileNames: `[name]/[name].js`,
         assetFileNames: `[name]/[name].[ext]`,
-        globals: { vue: 'Vue' },
+        globals: { vue: 'Vue', 'vue-router': 'VueRouter' },
       },
     },
   },
@@ -102,6 +102,10 @@ export default defineConfig({
     },
   ],
 
+  optimizeDeps: {
+    include: ['vue', 'vue-router'],
+  },
+
   test: {
     clearMocks: true,
     environment: 'happy-dom',
@@ -109,7 +113,7 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul',
       reporter: ['text'],
-      include: ['src/**/Ui*.vue'],
+      include: ['src/**/Ui*.vue', 'src/toast/toast.ts'],
       all: true,
     },
     css: false,

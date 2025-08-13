@@ -5,3 +5,4 @@ export const LINKS = [
 ];
 
 export const DEFAULT_COLOR = 'default';
+export const DEFAULT_ARIA_LABEL = 'Breadcrumb';

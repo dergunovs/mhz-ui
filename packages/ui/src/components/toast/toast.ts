@@ -46,21 +46,56 @@ function show(type: string, message: string) {
   const messageBlock = document.createElement('div');
 
   messageBlock.innerHTML = message;
+  messageBlock.classList.add('uiToastMessage');
 
   toast.appendChild(icon);
   toast.appendChild(messageBlock);
 
-  document.querySelector('.uiToastBlock')?.append(toast);
+  const closeBtn = document.createElement('button');
 
-  setTimeout(() => toast.classList.add('uiToastVisible'), 200);
-  setTimeout(() => toast.classList.remove('uiToastVisible'), 3800);
+  closeBtn.classList.add('uiToastClose');
 
-  setTimeout(() => {
+  closeBtn.addEventListener('click', () => {
     toast.remove();
+
     if (body && !body.contains(document.querySelector('.uiToast'))) {
       document.querySelector('.uiToastBlock')?.remove();
     }
-  }, 4000);
+  });
+
+  toast.appendChild(closeBtn);
+
+  document.querySelector('.uiToastBlock')?.append(toast);
+
+  setTimeout(() => toast.classList.add('uiToastVisible'), 200);
+
+  setTimeout(() => {
+    toast.classList.remove('uiToastVisible');
+
+    setTimeout(() => {
+      toast.remove();
+      const remainingToasts = document.querySelectorAll('.uiToast');
+
+      if (body && remainingToasts.length === 0) {
+        document.querySelector('.uiToastBlock')?.remove();
+      }
+    }, 200);
+  }, 3800);
+
+  toast.addEventListener('click', (e) => {
+    if (!(e.target as HTMLElement).classList.contains('uiToastClose')) {
+      toast.classList.remove('uiToastVisible');
+
+      setTimeout(() => {
+        toast.remove();
+        const remainingToasts = document.querySelectorAll('.uiToast');
+
+        if (body && remainingToasts.length === 0) {
+          document.querySelector('.uiToastBlock')?.remove();
+        }
+      }, 200);
+    }
+  });
 }
 
 const toast = { success, error, info };

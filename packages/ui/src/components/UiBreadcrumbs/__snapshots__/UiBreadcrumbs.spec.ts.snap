@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`UiBreadcrumbs > matches snapshot 1`] = `
-"<div class="_breadcrumbs_9e0c71" itemscope="" itemtype="https://schema.org/BreadcrumbList">
+"<div class="_breadcrumbs_9e0c71" aria-label="Breadcrumb" itemscope="" itemtype="https://schema.org/BreadcrumbList">
   <div class="_links_9e0c71" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" data-test="ui-breadcrumb"><a to="/" class="_link_9e0c71" data-link="true" data-color="default" itemid="/" itemtype="https://schema.org/Thing" itemscope="" itemprop="item" data-test="ui-breadcrumb-link"><span itemprop="name" data-test="ui-breadcrumb-title">Main</span></a><span class="_slash_9e0c71" data-color="default" data-test="ui-breadcrumb-slash">/</span>
     <meta itemprop="position" content="1" data-test="ui-breadcrumb-position">
   </div>

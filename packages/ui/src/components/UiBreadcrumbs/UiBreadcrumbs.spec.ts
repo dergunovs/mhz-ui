@@ -4,7 +4,7 @@ import { dataTest } from 'mhz-helpers';
 
 import UiBreadcrumbs from './UiBreadcrumbs.vue';
 
-import { DEFAULT_COLOR, LINKS } from './constants';
+import { DEFAULT_ARIA_LABEL, DEFAULT_COLOR, LINKS } from './constants';
 
 import { wrapperFactory } from '@/test';
 
@@ -66,5 +66,31 @@ describe('UiBreadcrumbs', async () => {
 
     expect(wrapper.findAll(breadcrumbLink)[0].attributes('data-color')).toBe(newColor);
     expect(wrapper.findAll(breadcrumbSlash)[0].attributes('data-color')).toBe(newColor);
+  });
+
+  it('handles empty links array', async () => {
+    await wrapper.setProps({ links: [] });
+
+    expect(wrapper.findAll(breadcrumb).length).toBe(0);
+    expect(wrapper.findAll(breadcrumbLink).length).toBe(0);
+    expect(wrapper.findAll(breadcrumbSlash).length).toBe(0);
+  });
+
+  it('handles single link', async () => {
+    await wrapper.setProps({ links: [LINKS[0]] });
+
+    expect(wrapper.findAll(breadcrumb).length).toBe(1);
+    expect(wrapper.findAll(breadcrumbLink).length).toBe(1);
+    expect(wrapper.findAll(breadcrumbSlash).length).toBe(0);
+  });
+
+  it('sets aria-label for accessibility', async () => {
+    expect(wrapper.attributes('aria-label')).toBe(DEFAULT_ARIA_LABEL);
+
+    const newAriaLabel = 'Breadcrumb navigation';
+
+    await wrapper.setProps({ ariaLabel: newAriaLabel });
+
+    expect(wrapper.attributes('aria-label')).toBe(newAriaLabel);
   });
 });

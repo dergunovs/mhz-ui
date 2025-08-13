@@ -7,6 +7,8 @@
     :data-wrap="props.isWrap"
     :disabled="props.isDisabled"
     :type="props.type"
+    :aria-label="props.ariaLabel"
+    :aria-disabled="props.isDisabled ? 'true' : undefined"
     data-test="ui-button"
   >
     <component v-if="props.icon" :is="props.icon" data-test="ui-button-icon" />
@@ -18,7 +20,7 @@
 <script setup lang="ts">
 import { FunctionalComponent } from 'vue';
 
-import { DEFAULT_LAYOUT, DEFAULT_TYPE, DEFAULT_ICON } from './constants';
+import { DEFAULT_LAYOUT, DEFAULT_TYPE, DEFAULT_ICON, DEFAULT_ARIA_LABEL } from './constants';
 
 interface IProps {
   layout?: 'primary' | 'secondary' | 'plain' | 'accent' | 'gradient';
@@ -28,12 +30,14 @@ interface IProps {
   isTall?: boolean;
   isWrap?: boolean;
   icon?: FunctionalComponent;
+  ariaLabel?: string;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
   layout: DEFAULT_LAYOUT,
   type: DEFAULT_TYPE,
   icon: DEFAULT_ICON,
+  ariaLabel: DEFAULT_ARIA_LABEL,
 });
 </script>
 
