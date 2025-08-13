@@ -1,6 +1,8 @@
 import { readonly, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
+import { getOneYearFromNow } from '../helpers';
+
 const isAuthLocal = ref(false);
 
 export const isAuth = readonly(isAuthLocal);
@@ -24,7 +26,7 @@ export function getCookieToken(tokenName: string): string | undefined {
 }
 
 export function setCookieToken(token: string, tokenName: string) {
-  document.cookie = `${tokenName}=${token};Secure;samesite=strict;`;
+  document.cookie = `${tokenName}=${token};Secure;SameSite=strict;expires=${getOneYearFromNow()}`;
 }
 
 export function deleteCookieToken(tokenName: string) {

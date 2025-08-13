@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createApp, defineComponent } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const template = '<template><div></div></template>';
@@ -33,13 +33,20 @@ export function withSetup<T>(composable: () => T) {
     ],
   });
 
-  const app = createApp({
+  const component = defineComponent({
     template,
     setup() {
       composable();
     },
   });
 
+  const app = createApp(component);
+
   app.use(router);
-  app.mount(document.createElement('div'));
+
+  const wrapper = document.createElement('div');
+
+  document.body.appendChild(wrapper);
+
+  app.mount(wrapper);
 }

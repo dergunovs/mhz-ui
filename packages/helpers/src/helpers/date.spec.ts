@@ -8,6 +8,7 @@ import {
   subtractDates,
   getDatesByDayGap,
   getFirstAndLastDays,
+  getOneYearFromNow,
 } from '.';
 
 describe('date', () => {
@@ -155,5 +156,17 @@ describe('date', () => {
     ];
 
     expect(getFirstAndLastDays(COUNT, true)).toStrictEqual(MONTH_DAYS);
+  });
+
+  test('gets date one year from now', async () => {
+    const date = new Date(2025, 0, 9, 12, 0, 0);
+
+    vi.setSystemTime(date);
+
+    const expectedDate = new Date(date);
+
+    expectedDate.setFullYear(expectedDate.getFullYear() + 1);
+
+    expect(getOneYearFromNow()).toStrictEqual(expectedDate.toUTCString());
   });
 });

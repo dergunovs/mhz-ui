@@ -109,3 +109,11 @@ export function getFirstAndLastDays(count: number, isMonth: boolean): IWeekDays[
 
   return dates.reverse();
 }
+
+export function getOneYearFromNow() {
+  const date = new Date();
+
+  date.setFullYear(date.getFullYear() + 1);
+
+  return date.toUTCString();
+}

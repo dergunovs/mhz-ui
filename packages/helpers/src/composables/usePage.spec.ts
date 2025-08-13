@@ -8,12 +8,16 @@ const newPage = 2;
 const newFilter = { _id: '123' };
 
 describe('usePage', () => {
-  test('converts params', async () => {
+  test('converts params for number input', async () => {
     withSetup(() => {
       const page = ref(1);
 
       expect(convertParams(page)).toStrictEqual({ page: page.value });
+    });
+  });
 
+  test('converts params for object input', async () => {
+    withSetup(() => {
       const filter = ref({ page: newPage, sort: { value: 'title', isAsc: true }, filter: {} });
       const initiator = 'catalog';
 
