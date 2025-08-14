@@ -35,11 +35,13 @@ describe('UiChart', async () => {
     expect(wrapper.find(chartTitle).text()).toBe(TITLE);
   });
 
-  it('changes chart type by props', async () => {
+  it('renders different chart types correctly', async () => {
     expect(wrapper.find(chart).attributes('data-type')).toBe('Bar');
 
     await wrapper.setProps({ type: 'Pie' });
-
     expect(wrapper.find(chart).attributes('data-type')).toBe('Pie');
+
+    await wrapper.setProps({ type: 'Line' });
+    expect(wrapper.find(chart).attributes('data-type')).toBe('Line');
   });
 });

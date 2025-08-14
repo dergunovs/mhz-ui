@@ -64,6 +64,33 @@ describe('UiCheckbox', async () => {
     expect(wrapper.find(checkboxInput).attributes('value')).toBe(newInitialValue);
   });
 
+  it('handles boolean model value correctly', async () => {
+    expect(wrapper.vm.$props.modelValue).toBe(DEFAULT_MODEL_VALUE);
+
+    await wrapper.setProps({ modelValue: true });
+    expect(wrapper.vm.$props.modelValue).toBe(true);
+
+    await wrapper.setProps({ modelValue: false });
+    expect(wrapper.vm.$props.modelValue).toBe(false);
+  });
+
+  it('handles string model value correctly', async () => {
+    const stringValue = 'test-string';
+
+    await wrapper.setProps({ modelValue: stringValue });
+    expect(wrapper.vm.$props.modelValue).toBe(stringValue);
+    expect(wrapper.find(checkboxInput).attributes('value')).toBe(DEFAULT_MODEL_VALUE.toString());
+  });
+
+  it('handles numeric model value correctly', async () => {
+    const numericValue = 42;
+
+    await wrapper.setProps({ modelValue: numericValue });
+    expect(wrapper.vm.$props.modelValue).toBe(numericValue);
+
+    expect(wrapper.find(checkboxInput).attributes('value')).toBe(DEFAULT_MODEL_VALUE.toString());
+  });
+
   it('disables checkbox by props', async () => {
     expect(wrapper.find(checkbox).attributes('data-disabled')).toBe('false');
     expect(wrapper.find(checkboxInput).attributes('disabled')).toBe(undefined);

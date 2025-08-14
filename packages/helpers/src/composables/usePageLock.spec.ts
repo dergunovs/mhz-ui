@@ -13,7 +13,7 @@ describe('usePageLock', () => {
     withSetup(async () => {
       usePageLock();
 
-      await wait(100);
+      await wait(50);
 
       expect(() => usePageLock()).not.toThrow();
       expect(mockRequest).toHaveBeenCalledTimes(1);

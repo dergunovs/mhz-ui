@@ -36,7 +36,7 @@ describe('useValidator', () => {
       await wait(100);
 
       expect(isValid()).toBe(false);
-      expect(error('email')).toBe('Введите корретную почту');
+      expect(error('email')).toBe('Введите корректную почту');
 
       formData.value = { email: 'john@example.com' };
 
@@ -50,7 +50,7 @@ describe('useValidator', () => {
       await nextTick();
 
       expect(isValid()).toBe(false);
-      expect(error('email')).toBe('Введите корретную почту');
+      expect(error('email')).toBe('Введите корректную почту');
     });
   });
 

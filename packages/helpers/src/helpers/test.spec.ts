@@ -64,18 +64,18 @@ describe('test', () => {
     function timeoutedFunction() {
       setTimeout(() => {
         fn();
-      }, 500);
+      }, 100);
     }
 
     timeoutedFunction();
 
     expect(fn).toHaveBeenCalledTimes(0);
 
-    await wait(100);
+    await wait(50);
 
     expect(fn).toHaveBeenCalledTimes(0);
 
-    await wait(500);
+    await wait(100);
 
     expect(fn).toHaveBeenCalledTimes(1);
   });

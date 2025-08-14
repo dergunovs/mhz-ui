@@ -42,7 +42,7 @@ export function required(lang?: string): RuleItem {
 export function email(lang?: string): RuleItem {
   return {
     type: 'email',
-    message: lang === 'en' ? 'This is not correct email' : 'Введите корретную почту',
+    message: lang === 'en' ? 'This is not correct email' : 'Введите корректную почту',
   };
 }
 

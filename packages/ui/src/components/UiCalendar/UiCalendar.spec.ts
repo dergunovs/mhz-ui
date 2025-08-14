@@ -66,4 +66,55 @@ describe('UiCalendar', async () => {
     expect(wrapper.emitted('chooseDate')).toHaveLength(1);
     expect(wrapper.emitted()['chooseDate'][0]).toEqual([date]);
   });
+
+  it('emits ready event with correct date format', async () => {
+    const date = new Date();
+    const date2 = new Date();
+
+    const readyEvent = { view: { firstCellDate: date, lastCellDate: date2 } };
+
+    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('ready', readyEvent);
+
+    await nextTick();
+
+    expect(wrapper.emitted('ready')).toHaveLength(1);
+    expect(wrapper.emitted()['ready'][0]).toEqual([{ dateFrom: date, dateTo: date2 }]);
+  });
+
+  it('emits update event with correct date format', async () => {
+    const date = new Date();
+    const date2 = new Date();
+
+    const updateEvent = { extendedStart: date, extendedEnd: date2 };
+
+    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('viewChange', updateEvent);
+
+    await nextTick();
+
+    expect(wrapper.emitted('update')).toHaveLength(1);
+    expect(wrapper.emitted()['update'][0]).toEqual([{ dateFrom: date, dateTo: date2 }]);
+  });
+
+  it('emits eventClick with correct event data', async () => {
+    const clickEvent = { event: EVENTS[0] };
+
+    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('event:click', clickEvent);
+
+    await nextTick();
+
+    expect(wrapper.emitted('eventClick')).toHaveLength(1);
+    expect(wrapper.emitted()['eventClick'][0]).toEqual([EVENTS[0]]);
+  });
+
+  it('emits chooseDate with correct date', async () => {
+    const date = new Date();
+    const cellEvent = { cell: { start: date } };
+
+    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('cell:click', cellEvent);
+
+    await nextTick();
+
+    expect(wrapper.emitted('chooseDate')).toHaveLength(1);
+    expect(wrapper.emitted()['chooseDate'][0]).toEqual([date]);
+  });
 });
