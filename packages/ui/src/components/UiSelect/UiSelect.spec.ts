@@ -1,4 +1,4 @@
-import { nextTick } from 'vue';
+import { DefineComponent, nextTick } from 'vue';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest } from 'mhz-helpers';
@@ -13,6 +13,7 @@ const selectInputFilter = dataTest('ui-select-input-filter');
 const selectOptions = dataTest('ui-select-options');
 const selectOption = dataTest('ui-select-option');
 const selectNoResults = dataTest('ui-select-no-results');
+const selectClearButton = dataTest('ui-select-clear');
 
 let wrapper: VueWrapper<InstanceType<typeof UiSelect>>;
 
@@ -32,17 +33,15 @@ describe('UiSelect', async () => {
   });
 
   it('toggles options on input click', async () => {
-    const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
-
     expect(wrapper.find(selectOptions).exists()).toBe(false);
 
-    inputComponent.vm.$emit('toggle');
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
 
     await nextTick();
 
     expect(wrapper.find(selectOptions).exists()).toBe(true);
 
-    inputComponent.vm.$emit('toggle');
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
 
     await nextTick();
 
@@ -50,9 +49,7 @@ describe('UiSelect', async () => {
   });
 
   it('shows options', async () => {
-    const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
-
-    inputComponent.vm.$emit('toggle');
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
 
     await nextTick();
 
@@ -61,9 +58,7 @@ describe('UiSelect', async () => {
   });
 
   it('sets options', async () => {
-    const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
-
-    inputComponent.vm.$emit('toggle');
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
 
     await nextTick();
 
@@ -76,9 +71,7 @@ describe('UiSelect', async () => {
   it('shows object options title', async () => {
     await wrapper.setProps({ options: OPTIONS_OBJECTS });
 
-    const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
-
-    inputComponent.vm.$emit('toggle');
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
 
     await nextTick();
 
@@ -88,9 +81,7 @@ describe('UiSelect', async () => {
   it('sets object options', async () => {
     await wrapper.setProps({ options: OPTIONS_OBJECTS });
 
-    const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
-
-    inputComponent.vm.$emit('toggle');
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
 
     await nextTick();
 
@@ -103,11 +94,9 @@ describe('UiSelect', async () => {
   it('shows filter input in filter mode', async () => {
     await wrapper.setProps({ isFilter: true });
 
-    const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
-
     expect(wrapper.find(selectInputFilter).exists()).toBe(false);
 
-    inputComponent.vm.$emit('toggle');
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
 
     await nextTick();
 
@@ -117,17 +106,13 @@ describe('UiSelect', async () => {
   it('shows computed results in filter mode', async () => {
     await wrapper.setProps({ isFilter: true });
 
-    const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
-
-    inputComponent.vm.$emit('toggle');
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
 
     await nextTick();
 
-    const inputFilterComponent = wrapper.findComponent(selectInputFilter) as VueWrapper;
-
     expect(wrapper.findAll(selectOption).length).toBe(OPTIONS.length);
 
-    inputFilterComponent.vm.$emit('update:modelValue', OPTIONS[1]);
+    wrapper.findComponent<DefineComponent>(selectInputFilter).vm.$emit('update:modelValue', OPTIONS[1]);
 
     await nextTick();
 
@@ -139,17 +124,13 @@ describe('UiSelect', async () => {
   it('shows no results in filter mode', async () => {
     await wrapper.setProps({ isFilter: true });
 
-    const inputComponent = wrapper.findComponent(selectInput) as VueWrapper;
-
-    inputComponent.vm.$emit('toggle');
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
 
     await nextTick();
 
-    const inputFilterComponent = wrapper.findComponent(selectInputFilter) as VueWrapper;
-
     expect(wrapper.find(selectNoResults).exists()).toBe(false);
 
-    inputFilterComponent.vm.$emit('update:modelValue', '100% not in options');
+    wrapper.findComponent<DefineComponent>(selectInputFilter).vm.$emit('update:modelValue', '100% not in options');
 
     await nextTick();
 
@@ -159,5 +140,78 @@ describe('UiSelect', async () => {
     await wrapper.find(selectNoResults).trigger('click');
 
     expect(wrapper.find(selectOptions).exists()).toBe(false);
+  });
+
+  it('clears value when clear button is clicked', async () => {
+    expect(wrapper.find(selectClearButton).exists()).toBe(false);
+
+    await wrapper.setProps({ isClearable: true });
+
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
+
+    await nextTick();
+
+    expect(wrapper.find(selectClearButton).exists()).toBe(true);
+
+    await wrapper.find(selectClearButton).trigger('click');
+
+    expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([undefined]);
+  });
+
+  it('disables component when isDisabled prop is true', async () => {
+    expect(wrapper.find(selectOptions).exists()).toBe(false);
+
+    await wrapper.setProps({ isDisabled: true });
+
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
+
+    await nextTick();
+
+    expect(wrapper.find(selectOptions).exists()).toBe(false);
+  });
+
+  it('shows placeholder text in different languages', async () => {
+    await wrapper.setProps({ lang: 'en' });
+
+    expect(wrapper.findComponent<DefineComponent>(selectInput).attributes('placeholder')).toBe('Choose variant');
+
+    await wrapper.setProps({ lang: 'ru' });
+
+    expect(wrapper.findComponent<DefineComponent>(selectInput).attributes('placeholder')).toBe('Выбрать');
+  });
+
+  it('shows filter placeholder text in different languages', async () => {
+    await wrapper.setProps({ isFilter: true, lang: 'en' });
+
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
+
+    await nextTick();
+
+    const filterComponent = wrapper.findComponent(selectInputFilter) as VueWrapper;
+
+    expect(filterComponent.attributes('placeholder')).toBe('Filter Variants');
+  });
+
+  it('shows no results text in different languages', async () => {
+    await wrapper.setProps({ isFilter: true, lang: 'en' });
+
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
+
+    await nextTick();
+
+    wrapper.findComponent<DefineComponent>(selectInputFilter).vm.$emit('update:modelValue', 'nonexistent');
+
+    await nextTick();
+
+    expect(wrapper.find(selectNoResults).text()).toBe('No results');
+  });
+
+  it('handles keyboard navigation in options', async () => {
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
+
+    await nextTick();
+
+    expect(wrapper.findAll(selectOption)[0].attributes('tabindex')).toBe('0');
   });
 });

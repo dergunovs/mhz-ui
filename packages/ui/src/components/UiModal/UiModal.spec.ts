@@ -92,6 +92,22 @@ describe('UiModal', async () => {
     expect(wrapper.find(modalCancel).exists()).toBe(true);
   });
 
+  it('sets lang for buttons', async () => {
+    await wrapper.setProps({ modelValue: true, isConfirm: true });
+
+    await wait(100);
+
+    expect(wrapper.findComponent(modalConfirm).text()).toBe('Подтвердить');
+    expect(wrapper.findComponent(modalCancel).text()).toBe('Отмена');
+
+    await wrapper.setProps({ lang: 'en' });
+
+    await wait(100);
+
+    expect(wrapper.findComponent(modalConfirm).text()).toBe('Confirm');
+    expect(wrapper.findComponent(modalCancel).text()).toBe('Cancel');
+  });
+
   it('hides by cancel button click in confirm mode', async () => {
     await wrapper.setProps({ modelValue: true, isConfirm: true });
 
@@ -114,5 +130,19 @@ describe('UiModal', async () => {
     expect(wrapper.emitted('confirm')).toHaveLength(1);
     expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([false]);
+  });
+
+  it('handles body overflow correctly', async () => {
+    const originalOverflow = document.body.style.overflow;
+
+    await wrapper.setProps({ modelValue: true });
+
+    expect(document.body.style.overflow).toBe('hidden');
+
+    await wrapper.setProps({ modelValue: false });
+
+    expect(document.body.style.overflow).toBe('auto');
+
+    document.body.style.overflow = originalOverflow;
   });
 });

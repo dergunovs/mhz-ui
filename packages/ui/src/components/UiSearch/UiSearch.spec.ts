@@ -1,7 +1,7 @@
-import { nextTick } from 'vue';
+import { DefineComponent, nextTick } from 'vue';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
-import { dataTest } from 'mhz-helpers';
+import { dataTest, wait } from 'mhz-helpers';
 
 import UiSearch from './UiSearch.vue';
 import {
@@ -13,6 +13,7 @@ import {
   LOADING,
   NO_RESULTS,
   DEBOUNCE_TIME,
+  ENTER_MORE_SYMBOLS_EN,
 } from './constants';
 
 import { wrapperFactory } from '@/test';
@@ -71,17 +72,14 @@ describe('UiSearch', async () => {
     await wrapper.find(search).trigger('click');
 
     const newValue = 'test';
-    const inputComponent = wrapper.findComponent(search) as VueWrapper;
 
-    inputComponent.vm.$emit('update:modelValue', newValue);
+    wrapper.findComponent<DefineComponent>(search).vm.$emit('update:modelValue', newValue);
 
     await nextTick();
 
     expect(wrapper.emitted()).not.toHaveProperty('update:modelValue');
 
-    await new Promise((r) => {
-      setTimeout(r, DEBOUNCE_TIME + 10);
-    });
+    await wait(DEBOUNCE_TIME + 10);
 
     expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([newValue]);
@@ -144,5 +142,21 @@ describe('UiSearch', async () => {
     expect(wrapper.find(searchResults).exists()).toBe(false);
     expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['']);
+  });
+
+  it('shows different language messages when lang prop is set to en', async () => {
+    await wrapper.setProps({ modelValue: '11', lang: 'en' });
+    await wrapper.find(search).trigger('click');
+
+    expect(wrapper.find(searchResults).text()).toBe(ENTER_MORE_SYMBOLS_EN);
+  });
+
+  it('correctly handles search with special characters', async () => {
+    const specialCharsValue = 'test&special*chars';
+
+    await wrapper.setProps({ modelValue: specialCharsValue });
+    await wrapper.find(search).trigger('click');
+
+    expect(wrapper.find(search).attributes('modelvalue')).toBe(specialCharsValue);
   });
 });

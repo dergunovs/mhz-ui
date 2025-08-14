@@ -100,4 +100,22 @@ describe('UiUpload', async () => {
 
     expect(wrapper.emitted('upload')).toHaveLength(1);
   });
+
+  it('shows file size limit in text', async () => {
+    await wrapper.setProps({ extensions: ['jpg', 'png'] });
+
+    const text = wrapper.find(uploadText);
+
+    expect(text.text()).toContain('Size up to');
+    expect(text.text()).toContain('Mb');
+    expect(text.text()).toContain('jpg, png');
+  });
+
+  it('handles language change', async () => {
+    await wrapper.setProps({ lang: 'en' });
+    expect(wrapper.find(uploadFileRemoveSingle).text()).toContain('Remove');
+
+    await wrapper.setProps({ lang: 'ru' });
+    expect(wrapper.find(uploadFileRemoveSingle).text()).toContain('Убрать');
+  });
 });

@@ -32,6 +32,7 @@
         @click="emit('update:modelValue', undefined)"
         type="button"
         :class="$style.clear"
+        data-test="ui-select-clear"
       >
         ×
       </button>

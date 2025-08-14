@@ -11,7 +11,7 @@
             :class="$style.th"
             data-test="ui-table-header"
           >
-            <label :class="$style.label" :data-loading="props.isLoading">
+            <label :class="$style.label" :data-loading="props.isLoading" data-test="ui-table-header-label">
               <span data-test="ui-table-header-title">{{ header.title }}</span>
 
               <button

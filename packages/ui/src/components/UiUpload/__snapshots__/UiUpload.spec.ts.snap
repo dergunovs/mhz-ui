@@ -6,18 +6,16 @@ exports[`UiUpload > matches snapshot 1`] = `
     <div><span data-test="ui-upload-label">Field label</span>
       <!--v-if-->
     </div>
-    <div class="_addButton_7eea80">
-      <ui-button-stub layout="secondary" type="button" isdisabled="true" isnarrow="false" istall="false" iswrap="false" icon="[object Object]" arialabel="Button" data-test="ui-upload-add"></ui-button-stub>
+    <div class="_addButton_7eea80"><button layout="secondary" isdisabled="true" icon="[object Object]" data-test="ui-upload-add"> Add file
+        <!--v-if-->
+      </button>
       <div class="_text_7eea80" data-error="false" data-test="ui-upload-text"> Size up to 10 Mb, jpg, png. </div>
     </div><input type="file" class="_input_7eea80" accept=".jpg,.png" data-test="ui-upload-input">
     <!--v-if-->
     <div class="_file_7eea80" data-test="ui-upload-file-single">
-      <div class="_name_7eea80" data-test="ui-upload-file-name-single">file1.png</div>
-      <ui-button-stub layout="plain" type="button" isdisabled="false" isnarrow="false" istall="false" iswrap="false" arialabel="Button" data-test="ui-upload-file-remove-single"></ui-button-stub>
+      <div class="_name_7eea80" data-test="ui-upload-file-name-single">file1.png</div><button layout="plain" data-test="ui-upload-file-remove-single">Убрать</button>
     </div>
   </div>
-  <div class="_uploadButton_7eea80" data-label="true">
-    <ui-button-stub layout="primary" type="button" isdisabled="false" isnarrow="false" istall="false" iswrap="false" arialabel="Button" data-test="ui-upload"></ui-button-stub>
-  </div>
+  <div class="_uploadButton_7eea80" data-label="true"><button data-test="ui-upload">Загрузить</button></div>
 </div>"
 `;

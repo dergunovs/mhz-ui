@@ -1,3 +1,4 @@
+import { DefineComponent, nextTick } from 'vue';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest } from 'mhz-helpers';
@@ -30,5 +31,16 @@ describe('UiRange', async () => {
     expect(wrapper.find(range).attributes('modelvalue')).toBe(MODEL_VALUE.join(','));
     expect(wrapper.find(range).attributes('min')).toBe(MIN.toString());
     expect(wrapper.find(range).attributes('max')).toBe(MAX.toString());
+  });
+
+  it('emits update:modelValue event when slider value changes', async () => {
+    const newValue: [number, number] = [200, 700];
+
+    wrapper.findComponent<DefineComponent>(range).vm.$emit('update:modelValue', newValue);
+
+    await nextTick();
+
+    expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([newValue]);
   });
 });

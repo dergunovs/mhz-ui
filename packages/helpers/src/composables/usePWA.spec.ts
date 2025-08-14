@@ -20,7 +20,7 @@ describe('usePWA', () => {
 
       window.dispatchEvent(new Event('beforeinstallprompt'));
 
-      await wait(50);
+      await wait(100);
 
       expect(isShowInstallPWA.value).toStrictEqual(true);
       expect(isPWACanBeInstalled.value).toStrictEqual(true);

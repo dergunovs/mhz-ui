@@ -8,6 +8,7 @@ import { HEADERS, MODEL_VALUE, DEFAULT_SLOT } from './constants';
 import { wrapperFactory } from '@/test';
 
 const tableHeader = dataTest('ui-table-header');
+const tableHeaderLabel = dataTest('ui-table-header-label');
 const tableHeaderTitle = dataTest('ui-table-header-title');
 const tableHeaderSort = dataTest('ui-table-header-sort');
 const tableHeaderSortAsc = dataTest('ui-table-header-sort-asc');
@@ -63,5 +64,30 @@ describe('UiTable', async () => {
 
     expect(wrapper.emitted('reset')).toHaveLength(1);
     expect(wrapper.emitted('reset')?.[0]).toEqual([HEADERS[otherItemIndex].value]);
+  });
+
+  it('handles sorting with undefined modelValue', async () => {
+    await wrapper.setProps({ modelValue: undefined });
+
+    const firstHeaderIndex = HEADERS.findIndex((header) => header.value);
+
+    if (firstHeaderIndex !== -1) {
+      await wrapper.findAll(tableHeaderSort)[firstHeaderIndex].trigger('click');
+
+      expect(wrapper.emitted('reset')).toHaveLength(1);
+      expect(wrapper.emitted('reset')?.[0]).toEqual([HEADERS[firstHeaderIndex].value]);
+    }
+  });
+
+  it('handles loading state', async () => {
+    expect(wrapper.find(tableHeaderLabel).attributes('data-loading')).toBe('false');
+    expect(wrapper.find(tableHeaderSortAsc).attributes('data-loading')).toBe('false');
+    expect(wrapper.find(tableHeaderSortDesc).attributes('data-loading')).toBe('false');
+
+    await wrapper.setProps({ isLoading: true });
+
+    expect(wrapper.find(tableHeaderLabel).attributes('data-loading')).toBe('true');
+    expect(wrapper.find(tableHeaderSortAsc).attributes('data-loading')).toBe('true');
+    expect(wrapper.find(tableHeaderSortDesc).attributes('data-loading')).toBe('true');
   });
 });

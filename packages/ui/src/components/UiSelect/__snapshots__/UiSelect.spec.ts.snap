@@ -2,8 +2,7 @@
 
 exports[`UiSelect > matches snapshot 1`] = `
 "<div class="_container_ad17a9">
-  <div class="_input_ad17a9">
-    <ui-input-stub modelvalue="Один" type="text" isdisabled="false" mode="select" appendicon="[object Object]" isfocus="false" iscenter="false" iscopy="false" ispassword="false" disabled="false" placeholder="Выбрать" data-test="ui-select-input"></ui-input-stub>
+  <div class="_input_ad17a9"><input type="text" modelvalue="Один" mode="select" placeholder="Выбрать" appendicon="[object Object]" data-test="ui-select-input">
     <!--v-if-->
     <!--v-if-->
   </div>

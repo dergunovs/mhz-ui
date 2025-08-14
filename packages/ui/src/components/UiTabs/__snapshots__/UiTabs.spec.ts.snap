@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiTabs > matches snapshot 1`] = `"<div class="_tabs_24df60" data-test="ui-tabs"><button class="_tab_24df60" type="button" data-active="true" data-test="ui-tab">Занятия</button><button class="_tab_24df60" type="button" data-active="false" data-test="ui-tab">Подходы</button><button class="_tab_24df60" type="button" data-active="false" data-test="ui-tab">Повторы</button><button class="_tab_24df60" type="button" data-active="false" data-test="ui-tab">Мышцы</button><button class="_tab_24df60" type="button" data-active="false" data-test="ui-tab">Время</button></div>"`;

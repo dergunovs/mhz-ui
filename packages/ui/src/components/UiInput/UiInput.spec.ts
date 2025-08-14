@@ -94,4 +94,35 @@ describe('UiInput', async () => {
 
     expect(wrapper.find(input).attributes('disabled')).toBe('');
   });
+
+  it('renders with different input types', async () => {
+    await wrapper.setProps({ type: 'password' });
+    expect(wrapper.find(input).attributes('type')).toBe('password');
+
+    await wrapper.setProps({ type: 'email' });
+    expect(wrapper.find(input).attributes('type')).toBe('email');
+
+    await wrapper.setProps({ type: 'number' });
+    expect(wrapper.find(input).attributes('type')).toBe('number');
+  });
+
+  it('toggles password visibility', async () => {
+    await wrapper.setProps({ isPassword: true });
+
+    expect(wrapper.find(input).attributes('type')).toBe('password');
+
+    await wrapper.find(inputIcon).trigger('click');
+
+    expect(wrapper.find(input).attributes('type')).toBe('text');
+
+    await wrapper.find(inputIcon).trigger('click');
+
+    expect(wrapper.find(input).attributes('type')).toBe('password');
+  });
+
+  it('renders with center alignment', async () => {
+    await wrapper.setProps({ isCenter: true });
+
+    expect(wrapper.find(input).attributes('data-center')).toBe('true');
+  });
 });
