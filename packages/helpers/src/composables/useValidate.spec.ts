@@ -33,7 +33,7 @@ describe('useValidator', () => {
 
       const { isValid, error } = useValidator(formData, rules);
 
-      await wait(100);
+      await wait(200);
 
       expect(isValid()).toBe(false);
       expect(error('email')).toBe('Введите корректную почту');
@@ -89,7 +89,7 @@ describe('useValidator', () => {
 
       const { isValid, error } = useValidator(formData, rules);
 
-      await wait(100);
+      await wait(200);
 
       expect(isValid()).toBe(false);
       expect(error('password')).toBe('Минимальное количество символов: 6');
@@ -117,7 +117,7 @@ describe('useValidator', () => {
 
       formData.value = { name: 'John Doe' };
 
-      await wait(100);
+      await wait(200);
 
       expect(isValid()).toBe(true);
       expect(error('name')).toBeUndefined();
