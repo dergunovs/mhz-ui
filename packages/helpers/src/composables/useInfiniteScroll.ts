@@ -9,7 +9,7 @@ export function useInfiniteScroll<T>() {
   }
 
   function handleScroll(isLoading: boolean, pageToSet: number) {
-    if (!isLoading) page.value = pageToSet;
+    if (!isLoading) page.value = pageToSet > 0 ? pageToSet : 1;
   }
 
   return { page, allData, addData, handleScroll };

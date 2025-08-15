@@ -30,4 +30,21 @@ describe('useCalendar', () => {
       expect(isDatesReady.value).toStrictEqual(true);
     });
   });
+
+  test('handles empty dates object', async () => {
+    withSetup(() => {
+      const { dateFrom, dateTo, isDatesReady, updateDates } = useCalendar();
+
+      const dates = {
+        dateFrom: '',
+        dateTo: '',
+      };
+
+      updateDates(dates);
+
+      expect(dateFrom.value).toStrictEqual(dates.dateFrom);
+      expect(dateTo.value).toStrictEqual(dates.dateTo);
+      expect(isDatesReady.value).toStrictEqual(true);
+    });
+  });
 });

@@ -20,4 +20,13 @@ describe('localeField', () => {
 
     expect(resultEn).toStrictEqual('title_en');
   });
+
+  test('handles numeric field names', async () => {
+    const fieldName = '123';
+    const locale = 'en';
+
+    const result = localeField(fieldName, locale);
+
+    expect(result).toStrictEqual('123_en');
+  });
 });

@@ -43,4 +43,34 @@ describe('scrollToTop', () => {
     expect(mockQuerySelector).toHaveBeenCalledWith(element);
     expect(mockScrollTo).toHaveBeenCalledWith(0, 0);
   });
+
+  test('handles empty string selector', async () => {
+    setupMocks();
+    const element = '';
+
+    scrollToTop(element);
+
+    expect(mockQuerySelector).toHaveBeenCalledWith(element);
+    expect(mockScrollTo).not.toHaveBeenCalledTimes(0);
+  });
+
+  test('handles null selector', async () => {
+    setupMocks();
+    const element = null as unknown as string;
+
+    scrollToTop(element);
+
+    expect(mockQuerySelector).toHaveBeenCalledWith(element);
+    expect(mockScrollTo).not.toHaveBeenCalledTimes(0);
+  });
+
+  test('handles invalid selector', async () => {
+    setupMocks();
+    const element = 'invalid-selector[';
+
+    scrollToTop(element);
+
+    expect(mockQuerySelector).toHaveBeenCalledWith(element);
+    expect(mockScrollTo).not.toHaveBeenCalledTimes(0);
+  });
 });

@@ -30,7 +30,7 @@ export function convertParams(params: Ref<IPageQuery | number>, initiator?: stri
   const { page, sort, filter } = params.value;
 
   return {
-    page: page || 1,
+    page: page > 0 ? page : 1,
     dir: sort.isAsc === false ? 'desc' : 'asc',
     sort: sort.value,
     initiator,
@@ -43,7 +43,7 @@ export function usePage(filter?: object) {
   const route = useRoute();
 
   const query: Ref<IPageQuery> = ref({
-    page: Number(route.query.page || 1),
+    page: route.query.page && Number((route.query.page as unknown as number) > 0) ? Number(route.query.page) : 1,
     sort: { value: route.query.sort?.toString(), isAsc: route.query.dir !== 'desc' },
     filter: { ...filter },
   });
@@ -65,7 +65,7 @@ export function usePage(filter?: object) {
   }
 
   function setQueryPage(pageToSet: number) {
-    query.value.page = pageToSet;
+    query.value.page = pageToSet > 0 ? pageToSet : 1;
   }
 
   function setQueryFilter(filterToSet?: object) {

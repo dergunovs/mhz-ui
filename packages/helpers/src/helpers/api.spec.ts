@@ -20,12 +20,24 @@ describe('api', () => {
     expect(api.defaults.baseURL).toStrictEqual(BASE_URL);
   });
 
+  test('sets base url with empty string', async () => {
+    setBaseURL('');
+
+    expect(api.defaults.baseURL).toStrictEqual('');
+  });
+
   test('sets auth header', async () => {
     expect(api.defaults.headers.common['Authorization']).toStrictEqual(undefined);
 
     setAuthHeader(TOKEN);
 
     expect(api.defaults.headers.common['Authorization']).toStrictEqual(`Bearer ${TOKEN}`);
+  });
+
+  test('sets auth header with empty token', async () => {
+    setAuthHeader('');
+
+    expect(api.defaults.headers.common['Authorization']).toStrictEqual(`Bearer `);
   });
 
   test('deletes auth header', async () => {
@@ -70,6 +82,12 @@ describe('api', () => {
 
   test('handles error with undefined error', async () => {
     const handledError = handleError(undefined);
+
+    expect(handledError).toStrictEqual('Error');
+  });
+
+  test('handles error with null error', async () => {
+    const handledError = handleError(null);
 
     expect(handledError).toStrictEqual('Error');
   });

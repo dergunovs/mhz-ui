@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui",
   "description": "Mhz ui kit",
-  "version": "1.1.66",
+  "version": "1.2.0",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -25,9 +25,9 @@
     "test:cov": "vitest run --coverage"
   },
   "dependencies": {
-    "@tiptap/pm": "3.1.0",
-    "@tiptap/starter-kit": "3.1.0",
-    "@tiptap/vue-3": "3.1.0",
+    "@tiptap/pm": "3.2.0",
+    "@tiptap/starter-kit": "3.2.0",
+    "@tiptap/vue-3": "3.2.0",
     "@vueform/slider": "2.1.10",
     "@vueuse/core": "13.6.0",
     "@vueuse/integrations": "13.6.0",
@@ -44,7 +44,7 @@
     "@storybook/addon-docs": "9.1.2",
     "@storybook/vue3": "9.1.2",
     "@storybook/vue3-vite": "9.1.2",
-    "@types/node": "24.2.1",
+    "@types/node": "24.3.0",
     "@vitejs/plugin-vue": "6.0.1",
     "@vitest/coverage-istanbul": "3.2.4",
     "@vue/test-utils": "2.4.6",
@@ -83,7 +83,7 @@
     "vue-router": "4.5.1"
   },
   "engines": {
-    "npm": ">=11.3.0",
-    "node": ">=24.2.0"
+    "npm": ">=11.5.1",
+    "node": ">=24.6.0"
   }
 }

@@ -20,6 +20,12 @@ describe('date', () => {
     expect(addZero(BIG_NUMBER)).toStrictEqual(`${BIG_NUMBER}`);
   });
 
+  test('adds zero to number - edge cases', async () => {
+    expect(addZero(0)).toStrictEqual(`00`);
+    expect(addZero(10)).toStrictEqual(`10`);
+    expect(addZero(99)).toStrictEqual(`99`);
+  });
+
   test('formats duration', async () => {
     const DURATION_SECONDS = 9;
     const DURATION_MINUTES = 69;
@@ -79,6 +85,20 @@ describe('date', () => {
     expect(subtractDates(DATE_BIG, null)).toStrictEqual(`0`);
   });
 
+  test('subtracts dates - edge cases', async () => {
+    const DATE_BIG = new Date('2025-02-09T17:13:17.427Z');
+    const DATE_SMALL = new Date('2025-02-09T17:01:17.427Z');
+
+    expect(subtractDates(DATE_BIG, DATE_SMALL, 'ru')).toStrictEqual(`12 мин. 00 сек.`);
+    expect(subtractDates(DATE_BIG, DATE_SMALL, undefined, true)).toStrictEqual(720);
+    expect(subtractDates(DATE_BIG, DATE_BIG)).toStrictEqual(`0`);
+
+    const FUTURE_DATE = new Date('2025-02-09T18:00:00.000Z');
+
+    expect(subtractDates(FUTURE_DATE, DATE_SMALL, 'en')).toStrictEqual(`58 min. 42 sec.`);
+    expect(subtractDates(DATE_BIG, DATE_BIG, 'en', true)).toStrictEqual(0);
+  });
+
   test('subtracts dates with invalid dates', async () => {
     const INVALID_DATE = 'invalid-date';
 
@@ -130,6 +150,16 @@ describe('date', () => {
     expect(getFirstAndLastDays(COUNT, false)).toStrictEqual(WEEK_DAYS);
   });
 
+  test('first and last week days - edge cases', async () => {
+    const date = new Date(2025, 0, 9, 12, 0, 0);
+
+    vi.setSystemTime(date);
+
+    expect(getFirstAndLastDays(0, false)).toStrictEqual([]);
+    expect(getFirstAndLastDays(-1, false)).toStrictEqual([]);
+    expect(getFirstAndLastDays(10, false)).toHaveLength(10);
+  });
+
   test('first and last month days', async () => {
     const COUNT = 3;
 
@@ -158,12 +188,34 @@ describe('date', () => {
     expect(getFirstAndLastDays(COUNT, true)).toStrictEqual(MONTH_DAYS);
   });
 
+  test('first and last month days - edge cases', async () => {
+    const date = new Date(2025, 0, 9, 12, 0, 0);
+
+    vi.setSystemTime(date);
+
+    expect(getFirstAndLastDays(0, true)).toStrictEqual([]);
+    expect(getFirstAndLastDays(-1, true)).toStrictEqual([]);
+    expect(getFirstAndLastDays(10, true)).toHaveLength(10);
+  });
+
   test('gets date one year from now', async () => {
     const date = new Date(2025, 0, 9, 12, 0, 0);
 
     vi.setSystemTime(date);
 
     const expectedDate = new Date(date);
+
+    expectedDate.setFullYear(expectedDate.getFullYear() + 1);
+
+    expect(getOneYearFromNow()).toStrictEqual(expectedDate.toUTCString());
+  });
+
+  test('gets date one year from now - edge cases', async () => {
+    const leapYearDate = new Date(2024, 1, 29); // Feb 29, 2024
+
+    vi.setSystemTime(leapYearDate);
+
+    const expectedDate = new Date(leapYearDate);
 
     expectedDate.setFullYear(expectedDate.getFullYear() + 1);
 

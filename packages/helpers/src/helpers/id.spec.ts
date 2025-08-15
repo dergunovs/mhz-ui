@@ -51,4 +51,20 @@ describe('id', () => {
 
     expect(result).toStrictEqual([]);
   });
+
+  test('handles mixed objects with and without _id', async () => {
+    const objects = [{ _id: 'temp-123', title: 'title1' }, { title: 'title2' }, { _id: '456', title: 'title3' }];
+
+    const result = deleteTempId(objects);
+
+    expect(result).toStrictEqual([{ title: 'title1' }, { title: 'title2' }, { _id: '456', title: 'title3' }]);
+  });
+
+  test('handles empty string _id', async () => {
+    const objectWithEmptyId = { _id: '', title: 'title' };
+
+    const result = deleteTempId([objectWithEmptyId]);
+
+    expect(result[0]).toStrictEqual(objectWithEmptyId);
+  });
 });

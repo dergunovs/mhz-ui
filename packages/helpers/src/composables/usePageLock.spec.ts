@@ -19,4 +19,23 @@ describe('usePageLock', () => {
       expect(mockRequest).toHaveBeenCalledTimes(1);
     });
   });
+
+  test('handles visibility change to visible', async () => {
+    vi.stubGlobal('navigator', mockNavigator);
+
+    const mockRelease = vi.fn();
+
+    mockRequest.mockResolvedValue({ release: mockRelease });
+
+    withSetup(async () => {
+      usePageLock();
+
+      await wait(100);
+
+      document.dispatchEvent(new Event('visibilitychange'));
+      document.dispatchEvent(new Event('visibilitychange'));
+
+      expect(mockRequest).toHaveBeenCalledTimes(2);
+    });
+  });
 });

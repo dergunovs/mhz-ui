@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui-helpers",
   "description": "Fake PC hardware store monorepo",
-  "version": "1.1.8",
+  "version": "1.2.0",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "homepage": "https://ui.9000mhz.ru",
@@ -28,13 +28,13 @@
     "prettier": "3.6.2",
     "turbo": "2.5.5"
   },
-  "packageManager": "npm@11.3.0",
+  "packageManager": "npm@11.5.1",
   "workspaces": [
     "packages/*"
   ],
   "engines": {
-    "npm": ">=11.3.0",
-    "node": ">=24.2.0"
+    "npm": ">=11.5.1",
+    "node": ">=24.6.0"
   },
   "keywords": [
     "monorepo",

@@ -40,4 +40,24 @@ describe('link', () => {
 
     expect(isLinkActive(mainUrl, otherUrl)).toBe(false);
   });
+
+  test('checks is link active - empty strings', async () => {
+    expect(isLinkActive('', '')).toBe(true);
+    expect(isLinkActive('/', '')).toBe(false);
+    expect(isLinkActive('', '/')).toBe(false);
+  });
+
+  test('checks is link active - complex nested paths', async () => {
+    const productUrl = '/product/123/details';
+    const catalogUrl = '/product';
+
+    expect(isLinkActive(productUrl, catalogUrl)).toBe(true);
+  });
+
+  test('checks is link active - non-root paths with same prefix', async () => {
+    const path1 = '/admin/users';
+    const path2 = '/admin';
+
+    expect(isLinkActive(path1, path2)).toBe(true);
+  });
 });

@@ -66,4 +66,40 @@ describe('useInfiniteScroll', () => {
       expect(page.value).toStrictEqual(1);
     });
   });
+
+  test('handles empty data array', async () => {
+    withSetup(() => {
+      const { allData, addData } = useInfiniteScroll<IData>();
+
+      expect(allData.value).toStrictEqual([]);
+
+      addData([]);
+
+      expect(allData.value).toStrictEqual([]);
+    });
+  });
+
+  test('handles negative page number', async () => {
+    withSetup(() => {
+      const { page, handleScroll } = useInfiniteScroll<IData>();
+
+      expect(page.value).toStrictEqual(1);
+
+      handleScroll(false, -1);
+
+      expect(page.value).toStrictEqual(1);
+    });
+  });
+
+  test('handles zero page number', async () => {
+    withSetup(() => {
+      const { page, handleScroll } = useInfiniteScroll<IData>();
+
+      expect(page.value).toStrictEqual(1);
+
+      handleScroll(false, 0);
+
+      expect(page.value).toStrictEqual(1);
+    });
+  });
 });

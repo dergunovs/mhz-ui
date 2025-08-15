@@ -21,4 +21,12 @@ describe('password', () => {
 
     expect(password1).not.toBe(password2);
   });
+
+  test('generates password with specific character set', async () => {
+    const password = generatePassword();
+
+    const allowedChars = /^[a-zA-Z0-9]+$/;
+
+    expect(allowedChars.test(password)).toBe(true);
+  });
 });

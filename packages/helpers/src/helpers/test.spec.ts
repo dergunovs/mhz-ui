@@ -15,6 +15,10 @@ describe('test', () => {
     expect(dataTest('modal')).toStrictEqual(`[data-test="modal"]`);
   });
 
+  test('handles empty string in dataTest', async () => {
+    expect(dataTest('')).toStrictEqual(`[data-test=""]`);
+  });
+
   test('removes data test attribute - element with data-test', async () => {
     const node = {
       type: 1, // NodeTypes.ELEMENT
@@ -56,6 +60,36 @@ describe('test', () => {
 
     expect(node.props).toHaveLength(1);
     expect(node.props[0].name).toBe('data-test');
+  });
+
+  test('removes data test attribute - element with multiple props including data-test', async () => {
+    const node = {
+      type: 1, // NodeTypes.ELEMENT
+      props: [
+        { type: 6, name: 'data-test', value: 'test-value' },
+        { type: 7, name: 'class', value: 'some-class' },
+        { type: 6, name: 'data-test2', value: 'another-value' },
+        { type: 8, name: 'id', value: 'test-id' },
+      ],
+    };
+
+    removeDataTest(node);
+
+    expect(node.props).toHaveLength(3);
+    expect(node.props[0].name).toBe('class');
+    expect(node.props[1].name).toBe('data-test2');
+    expect(node.props[2].name).toBe('id');
+  });
+
+  test('removes data test attribute - element with only data-test prop', async () => {
+    const node = {
+      type: 1, // NodeTypes.ELEMENT
+      props: [{ type: 6, name: 'data-test', value: 'test-value' }],
+    };
+
+    removeDataTest(node);
+
+    expect(node.props).toHaveLength(0);
   });
 
   test('waits for timeout', async () => {

@@ -90,4 +90,48 @@ describe('usePage', () => {
       expect(page.value).toStrictEqual(1);
     });
   });
+
+  test('handles undefined filter in usePage', async () => {
+    withSetup(() => {
+      const { query, setQueryFilter } = usePage(undefined);
+
+      expect(query.value).toStrictEqual({ filter: {}, page: 1, sort: { isAsc: true, value: undefined } });
+
+      setQueryFilter(undefined);
+
+      expect(query.value).toStrictEqual({ filter: {}, page: 1, sort: { isAsc: true, value: undefined } });
+    });
+  });
+
+  test('handles empty object filter in usePage', async () => {
+    withSetup(() => {
+      const { query, setQueryFilter } = usePage({});
+
+      expect(query.value).toStrictEqual({ filter: {}, page: 1, sort: { isAsc: true, value: undefined } });
+
+      setQueryFilter({});
+
+      expect(query.value).toStrictEqual({ filter: {}, page: 1, sort: { isAsc: true, value: undefined } });
+    });
+  });
+
+  test('handles negative page number', async () => {
+    withSetup(() => {
+      const { query, setQueryPage } = usePage();
+
+      setQueryPage(-1);
+
+      expect(query.value).toStrictEqual({ filter: {}, page: 1, sort: { isAsc: true, value: undefined } });
+    });
+  });
+
+  test('handles zero page number', async () => {
+    withSetup(() => {
+      const { query, setQueryPage } = usePage();
+
+      setQueryPage(0);
+
+      expect(query.value).toStrictEqual({ filter: {}, page: 1, sort: { isAsc: true, value: undefined } });
+    });
+  });
 });

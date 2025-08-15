@@ -57,4 +57,40 @@ describe('clone', () => {
     expect(clonedArr).toStrictEqual(arr);
     expect(clonedArr).not.toBe(arr);
   });
+
+  test('clones empty object', async () => {
+    const emptyObj = {};
+    const clonedEmptyObj = clone(emptyObj);
+
+    expect(clonedEmptyObj).toStrictEqual(emptyObj);
+    expect(clonedEmptyObj).not.toBe(emptyObj);
+  });
+
+  test('clones empty array', async () => {
+    const emptyArr: never[] = [];
+    const clonedEmptyArr = clone(emptyArr);
+
+    expect(clonedEmptyArr).toStrictEqual(emptyArr);
+    expect(clonedEmptyArr).not.toBe(emptyArr);
+  });
+
+  test('clones date object', async () => {
+    const date = new Date('2025-01-01');
+    const clonedDate = clone(date);
+
+    expect(clonedDate).toStrictEqual(date);
+    expect(clonedDate).not.toBe(date);
+  });
+
+  test('handles null input', async () => {
+    const clonedNull = clone(null);
+
+    expect(clonedNull).toBeNull();
+  });
+
+  test('handles undefined input', async () => {
+    const clonedUndefined = clone(undefined);
+
+    expect(clonedUndefined).toBeUndefined();
+  });
 });
