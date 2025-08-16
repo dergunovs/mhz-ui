@@ -2,4 +2,6 @@
 
 Библиотека UI компонентов и набор хелперов для Vue.
 
-**Документация:** https://ui.9000mhz.ru
+**Storybook:** https://ui.9000mhz.ru
+
+**Полный обзор** https://deepwiki.com/dergunovs/mhz-ui или https://zread.ai/dergunovs/mhz-ui
