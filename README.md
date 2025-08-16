@@ -1,6 +1,6 @@
 # mhz-ui + mhz-helpers
 
-Библиотека UI компонентов (mhz-ui) и набор хелперов (mhz-helpers) для Vue. Для работы с приложениями на Vue 3 и Vue Router. Поддерживается русский и английский язык.
+Библиотека UI компонентов (mhz-ui) и набор хелперов (mhz-helpers) для Vue. Для работы с приложениями на Vue 3 и Vue Router. Поддерживается русский и английский язык. Линтинг, проверка типов и юнит-тесты в комплекте.
 
 **Storybook:** https://ui.9000mhz.ru
 
@@ -13,8 +13,8 @@
 Если нужны только хелперы, например, для бэкенда, то mhz-ui можно не устанавливать.
 
 1. `npm install mhz-ui mhz-helpers` - установите пакеты
-2. `import { UiButton } from 'mhz-ui` - пример импорта ui компонента
-3. `import { removeDataTest } from 'mhz-helpers` - пример импорта хелпера
+2. `import { UiButton } from 'mhz-ui'` - пример импорта ui компонента
+3. `import { removeDataTest } from 'mhz-helpers'` - пример импорта хелпера
 
 ## Установка для разработки
 
