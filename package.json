@@ -20,13 +20,13 @@
     "pub": "turbo run build && changeset version && changeset publish"
   },
   "dependencies": {
-    "@changesets/cli": "2.29.5",
+    "@changesets/cli": "2.29.6",
     "ajv": "8.17.1"
   },
   "devDependencies": {
-    "@turbo/gen": "2.5.5",
+    "@turbo/gen": "2.5.6",
     "prettier": "3.6.2",
-    "turbo": "2.5.5"
+    "turbo": "2.5.6"
   },
   "packageManager": "npm@11.5.1",
   "workspaces": [

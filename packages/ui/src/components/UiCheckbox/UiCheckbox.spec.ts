@@ -65,20 +65,20 @@ describe('UiCheckbox', async () => {
   });
 
   it('handles boolean model value correctly', async () => {
-    expect(wrapper.vm.$props.modelValue).toBe(DEFAULT_MODEL_VALUE);
+    expect(wrapper.props('modelValue')).toBe(DEFAULT_MODEL_VALUE);
 
     await wrapper.setProps({ modelValue: true });
-    expect(wrapper.vm.$props.modelValue).toBe(true);
+    expect(wrapper.props('modelValue')).toBe(true);
 
     await wrapper.setProps({ modelValue: false });
-    expect(wrapper.vm.$props.modelValue).toBe(false);
+    expect(wrapper.props('modelValue')).toBe(false);
   });
 
   it('handles string model value correctly', async () => {
     const stringValue = 'test-string';
 
     await wrapper.setProps({ modelValue: stringValue });
-    expect(wrapper.vm.$props.modelValue).toBe(stringValue);
+    expect(wrapper.props('modelValue')).toBe(stringValue);
     expect(wrapper.find(checkboxInput).attributes('value')).toBe(DEFAULT_MODEL_VALUE.toString());
   });
 
@@ -86,7 +86,7 @@ describe('UiCheckbox', async () => {
     const numericValue = 42;
 
     await wrapper.setProps({ modelValue: numericValue });
-    expect(wrapper.vm.$props.modelValue).toBe(numericValue);
+    expect(wrapper.props('modelValue')).toBe(numericValue);
 
     expect(wrapper.find(checkboxInput).attributes('value')).toBe(DEFAULT_MODEL_VALUE.toString());
   });

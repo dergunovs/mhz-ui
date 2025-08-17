@@ -32,7 +32,7 @@ describe('UiCalendar', async () => {
 
   it('sets events to calendar', async () => {
     expect(
-      wrapper.findComponent<DefineComponent<{ events: ICalendarEvent<unknown>[] }>>(calendar).vm.$props.events
+      wrapper.findComponent<DefineComponent<{ events: ICalendarEvent<unknown>[] }>>(calendar).props('events')
     ).toStrictEqual(EVENTS);
   });
 
