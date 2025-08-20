@@ -24,7 +24,7 @@ export async function wait(time?: number): Promise<void> {
   });
 }
 
-export function withSetup<T>(composable: () => T) {
+export async function withSetup<T>(composable: () => Promise<T>) {
   const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -33,10 +33,12 @@ export function withSetup<T>(composable: () => T) {
     ],
   });
 
+  let composableResult: Promise<T> | undefined;
+
   const component = defineComponent({
     template,
     setup() {
-      composable();
+      composableResult = composable();
     },
   });
 
@@ -47,6 +49,7 @@ export function withSetup<T>(composable: () => T) {
   const wrapper = document.createElement('div');
 
   document.body.appendChild(wrapper);
-
   app.mount(wrapper);
+
+  await composableResult;
 }

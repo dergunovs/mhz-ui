@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest';
 import { nextTick, ref } from 'vue';
 
-import { wait, withSetup } from '..';
+import { withSetup } from '..';
 import { useValidator, required, email, letters, min, max } from '.';
 
 describe('useValidator', () => {
   test('validates required field correctly', async () => {
-    withSetup(async () => {
+    await withSetup(async () => {
       const formData = ref({ name: '' });
       const rules = { name: [required()] };
 
@@ -27,13 +27,15 @@ describe('useValidator', () => {
   });
 
   test('validates email field correctly', async () => {
-    withSetup(async () => {
+    await withSetup(async () => {
       const formData = ref({ email: '' });
       const rules = { email: [email()] };
 
+      formData.value = { email: '123123' };
+
       const { isValid, error } = useValidator(formData, rules);
 
-      await wait(200);
+      await nextTick();
 
       expect(isValid()).toBe(false);
       expect(error('email')).toBe('Введите корректную почту');
@@ -55,7 +57,7 @@ describe('useValidator', () => {
   });
 
   test('validates letters only field correctly', async () => {
-    withSetup(async () => {
+    await withSetup(async () => {
       const formData = ref({ name: '' });
       const rules = { name: [letters()] };
 
@@ -83,13 +85,15 @@ describe('useValidator', () => {
   });
 
   test('validates minimum length correctly', async () => {
-    withSetup(async () => {
+    await withSetup(async () => {
       const formData = ref({ password: '' });
       const rules = { password: [min(6)] };
 
+      formData.value = { password: '1' };
+
       const { isValid, error } = useValidator(formData, rules);
 
-      await wait(200);
+      await nextTick();
 
       expect(isValid()).toBe(false);
       expect(error('password')).toBe('Минимальное количество символов: 6');
@@ -104,9 +108,11 @@ describe('useValidator', () => {
   });
 
   test('validates maximum length correctly', async () => {
-    withSetup(async () => {
+    await withSetup(async () => {
       const formData = ref({ name: '' });
       const rules = { name: [max(10)] };
+
+      formData.value = { name: 'name' };
 
       const { isValid, error } = useValidator(formData, rules);
 
@@ -115,14 +121,7 @@ describe('useValidator', () => {
       expect(isValid()).toBe(true);
       expect(error('name')).toBeUndefined();
 
-      formData.value = { name: 'John Doe' };
-
-      await wait(200);
-
-      expect(isValid()).toBe(true);
-      expect(error('name')).toBeUndefined();
-
-      formData.value = { name: 'This is too long' };
+      formData.value = { name: 'Very long name' };
 
       await nextTick();
 
@@ -132,7 +131,7 @@ describe('useValidator', () => {
   });
 
   test('validates multiple fields correctly', async () => {
-    withSetup(async () => {
+    await withSetup(async () => {
       const formData = ref({ name: '', email: '' });
       const rules = {
         name: [required()],
@@ -158,7 +157,7 @@ describe('useValidator', () => {
   });
 
   test('handles English error messages correctly', async () => {
-    withSetup(async () => {
+    await withSetup(async () => {
       const formData = ref({ name: '' });
       const rules = { name: [required('en')] };
 
@@ -172,7 +171,7 @@ describe('useValidator', () => {
   });
 
   test('handles error object correctly', async () => {
-    withSetup(async () => {
+    await withSetup(async () => {
       const formData = ref({ name: '' });
       const rules = { name: [required()] };
 

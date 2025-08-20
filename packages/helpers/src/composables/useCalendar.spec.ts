@@ -5,7 +5,7 @@ import { useCalendar } from '.';
 
 describe('useCalendar', () => {
   test('initializes with empty dates and isDatesReady as false', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { dateFrom, dateTo, isDatesReady } = useCalendar();
 
       expect(dateFrom.value).toStrictEqual('');
@@ -15,7 +15,7 @@ describe('useCalendar', () => {
   });
 
   test('updates dates correctly', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { dateFrom, dateTo, isDatesReady, updateDates } = useCalendar();
 
       const dates = {
@@ -32,7 +32,7 @@ describe('useCalendar', () => {
   });
 
   test('handles empty dates object', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { dateFrom, dateTo, isDatesReady, updateDates } = useCalendar();
 
       const dates = {

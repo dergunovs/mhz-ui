@@ -11,7 +11,7 @@ Object.defineProperty(global, 'clearTimeout', { writable: true, value: mockClear
 
 describe('useTimer', () => {
   test('initializes timer values correctly', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { timer, duration } = useTimer();
 
       expect(timer.value).toStrictEqual('00:00');
@@ -22,7 +22,7 @@ describe('useTimer', () => {
   test('updates time correctly', async () => {
     vi.useFakeTimers();
 
-    withSetup(() => {
+    await withSetup(async () => {
       const { timer, duration, startTimer, stopTimer } = useTimer();
 
       startTimer();
@@ -46,7 +46,7 @@ describe('useTimer', () => {
   test('handles timer overflow correctly', async () => {
     vi.useFakeTimers();
 
-    withSetup(() => {
+    await withSetup(async () => {
       const { timer, duration, startTimer, stopTimer } = useTimer();
 
       startTimer();
@@ -65,7 +65,7 @@ describe('useTimer', () => {
   test('handles multiple start/stop cycles', async () => {
     vi.useFakeTimers();
 
-    withSetup(() => {
+    await withSetup(async () => {
       const { timer, duration, startTimer, stopTimer } = useTimer();
 
       startTimer();

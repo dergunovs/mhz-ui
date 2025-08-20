@@ -15,7 +15,7 @@ const data: IData[] = [
 
 describe('useInfiniteScroll', () => {
   test('initializes with page 1 and empty allData', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { page, allData } = useInfiniteScroll<IData>();
 
       expect(page.value).toStrictEqual(1);
@@ -24,7 +24,7 @@ describe('useInfiniteScroll', () => {
   });
 
   test('adds data', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { allData, addData } = useInfiniteScroll<IData>();
 
       expect(allData.value).toStrictEqual([]);
@@ -40,7 +40,7 @@ describe('useInfiniteScroll', () => {
   });
 
   test('handles scroll', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { page, handleScroll } = useInfiniteScroll<IData>();
 
       expect(page.value).toStrictEqual(1);
@@ -54,7 +54,7 @@ describe('useInfiniteScroll', () => {
   });
 
   test('does not change page when loading', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { page, handleScroll } = useInfiniteScroll<IData>();
 
       expect(page.value).toStrictEqual(1);
@@ -68,7 +68,7 @@ describe('useInfiniteScroll', () => {
   });
 
   test('handles empty data array', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { allData, addData } = useInfiniteScroll<IData>();
 
       expect(allData.value).toStrictEqual([]);
@@ -80,7 +80,7 @@ describe('useInfiniteScroll', () => {
   });
 
   test('handles negative page number', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { page, handleScroll } = useInfiniteScroll<IData>();
 
       expect(page.value).toStrictEqual(1);
@@ -92,7 +92,7 @@ describe('useInfiniteScroll', () => {
   });
 
   test('handles zero page number', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { page, handleScroll } = useInfiniteScroll<IData>();
 
       expect(page.value).toStrictEqual(1);

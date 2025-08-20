@@ -9,7 +9,7 @@ const newFilter = { _id: '123' };
 
 describe('usePage', () => {
   test('converts params for number input', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const page = ref(1);
 
       expect(convertParams(page)).toStrictEqual({ page: page.value });
@@ -17,7 +17,7 @@ describe('usePage', () => {
   });
 
   test('converts params for object input', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const filter = ref({ page: newPage, sort: { value: 'title', isAsc: true }, filter: {} });
       const initiator = 'catalog';
 
@@ -46,7 +46,7 @@ describe('usePage', () => {
   });
 
   test('handles usePage', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { query, resetQuery, setQueryPage, setQueryFilter } = usePage();
 
       expect(query.value).toStrictEqual({ filter: {}, page: 1, sort: { isAsc: true, value: undefined } });
@@ -77,7 +77,7 @@ describe('usePage', () => {
   });
 
   test('handles usePageNumber', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { page, resetPage, setPage } = usePageNumber();
 
       expect(page.value).toStrictEqual(1);
@@ -92,7 +92,7 @@ describe('usePage', () => {
   });
 
   test('handles undefined filter in usePage', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { query, setQueryFilter } = usePage(undefined);
 
       expect(query.value).toStrictEqual({ filter: {}, page: 1, sort: { isAsc: true, value: undefined } });
@@ -104,7 +104,7 @@ describe('usePage', () => {
   });
 
   test('handles empty object filter in usePage', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { query, setQueryFilter } = usePage({});
 
       expect(query.value).toStrictEqual({ filter: {}, page: 1, sort: { isAsc: true, value: undefined } });
@@ -116,7 +116,7 @@ describe('usePage', () => {
   });
 
   test('handles negative page number', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { query, setQueryPage } = usePage();
 
       setQueryPage(-1);
@@ -126,7 +126,7 @@ describe('usePage', () => {
   });
 
   test('handles zero page number', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const { query, setQueryPage } = usePage();
 
       setQueryPage(0);

@@ -71,7 +71,7 @@ describe('useAuth', () => {
   test('handles auth', async () => {
     const spySetAuthHeader = vi.fn();
 
-    withSetup(() => {
+    await withSetup(async () => {
       const { auth } = useAuth();
 
       expect(getCookieToken(tokenName)).toStrictEqual('');

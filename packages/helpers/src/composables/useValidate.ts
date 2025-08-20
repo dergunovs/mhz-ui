@@ -64,7 +64,7 @@ export function min(value: number, lang?: string): RuleItem {
 
 export function max(value: number, lang?: string): RuleItem {
   return {
-    min: value,
+    max: value,
     message: lang === 'en' ? `Maximum symbols: ${value}` : `Максимальное количество символов: ${value}`,
   };
 }

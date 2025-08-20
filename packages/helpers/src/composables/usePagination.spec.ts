@@ -6,7 +6,7 @@ import { usePagination } from '.';
 
 describe('usePagination', () => {
   test('initializes with undefined data and total', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const dataRaw = ref<{ data: string[]; total: number } | undefined>(undefined);
       const { data, total, setPaginationPage } = usePagination(dataRaw);
 
@@ -17,7 +17,7 @@ describe('usePagination', () => {
   });
 
   test('sets pagination page correctly', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const dataRaw = ref<{ data: string[]; total: number } | undefined>({
         data: ['item1', 'item2'],
         total: 5,
@@ -32,7 +32,7 @@ describe('usePagination', () => {
   });
 
   test('handles data and total correctly', async () => {
-    withSetup(() => {
+    await withSetup(async () => {
       const dataRaw = ref<{ data: string[]; total: number } | undefined>({
         data: ['item1', 'item2'],
         total: 5,

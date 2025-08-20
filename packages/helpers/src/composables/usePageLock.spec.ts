@@ -1,19 +1,26 @@
-import { describe, expect, test, vi } from 'vitest';
+import { nextTick } from 'vue';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { wait, withSetup } from '..';
+import { withSetup } from '..';
 import { usePageLock } from '.';
 
 const mockRequest = vi.fn().mockResolvedValue({ release: vi.fn() });
-const mockNavigator = { wakeLock: { request: mockRequest } } as unknown as Navigator & typeof globalThis;
 
 describe('usePageLock', () => {
-  test('locks page correctly', async () => {
-    vi.stubGlobal('navigator', mockNavigator);
+  beforeEach(() => {
+    mockRequest.mockClear();
+    vi.stubGlobal('navigator', { wakeLock: { request: mockRequest } } as unknown as Navigator & typeof globalThis);
+  });
 
-    withSetup(async () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  test('locks page correctly', async () => {
+    await withSetup(async () => {
       usePageLock();
 
-      await wait(100);
+      await nextTick();
 
       expect(() => usePageLock()).not.toThrow();
       expect(mockRequest).toHaveBeenCalledTimes(1);
@@ -21,16 +28,16 @@ describe('usePageLock', () => {
   });
 
   test('handles visibility change to visible', async () => {
-    vi.stubGlobal('navigator', mockNavigator);
-
     const mockRelease = vi.fn();
 
     mockRequest.mockResolvedValue({ release: mockRelease });
 
-    withSetup(async () => {
+    await withSetup(async () => {
       usePageLock();
 
-      await wait(100);
+      await nextTick();
+
+      mockRequest.mockClear();
 
       document.dispatchEvent(new Event('visibilitychange'));
       document.dispatchEvent(new Event('visibilitychange'));
