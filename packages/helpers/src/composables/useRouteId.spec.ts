@@ -6,7 +6,7 @@ import { useRouteId } from '.';
 
 const template = { template: '<template><div></div></template>' };
 
-async function setupTest(route: string, paramName: string, isQuery: boolean = false) {
+async function setupTest(route: string, paramName: string, isQuery = false) {
   const router = createRouter({
     history: createWebHistory(),
     routes: [
