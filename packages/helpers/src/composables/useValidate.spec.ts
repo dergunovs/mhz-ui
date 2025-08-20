@@ -8,7 +8,7 @@ describe('useValidator', () => {
   test('validates required field correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ name: '' });
-      const rules = { name: [required()] };
+      const rules = { name: [required] };
 
       const { isValid, error } = useValidator(formData, rules);
 
@@ -29,7 +29,7 @@ describe('useValidator', () => {
   test('validates email field correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ email: '' });
-      const rules = { email: [email()] };
+      const rules = { email: [email] };
 
       formData.value = { email: '123123' };
 
@@ -59,7 +59,7 @@ describe('useValidator', () => {
   test('validates letters only field correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ name: '' });
-      const rules = { name: [letters()] };
+      const rules = { name: [letters] };
 
       const { isValid, error } = useValidator(formData, rules);
 
@@ -134,8 +134,8 @@ describe('useValidator', () => {
     await withSetup(async () => {
       const formData = ref({ name: '', email: '' });
       const rules = {
-        name: [required()],
-        email: [required(), email()],
+        name: [required],
+        email: [required, email],
       };
 
       const { isValid, error } = useValidator(formData, rules);
@@ -159,9 +159,9 @@ describe('useValidator', () => {
   test('handles English error messages correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ name: '' });
-      const rules = { name: [required('en')] };
+      const rules = { name: [required] };
 
-      const { isValid, error } = useValidator(formData, rules);
+      const { isValid, error } = useValidator(formData, rules, 'en');
 
       await nextTick();
 
@@ -173,7 +173,7 @@ describe('useValidator', () => {
   test('handles error object correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ name: '' });
-      const rules = { name: [required()] };
+      const rules = { name: [required] };
 
       const { errors, isValid } = useValidator(formData, rules);
 
