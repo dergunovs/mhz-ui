@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`UiButton > matches snapshot 1`] = `
-"<button class="_button_a3de67" data-layout="primary" data-narrow="false" data-tall="false" data-wrap="false" type="button" aria-label="Button" data-test="ui-button">
+"<button class="_button_a3de67" data-layout="primary" data-large-font="false" data-narrow="false" data-tall="false" data-wrap="false" type="button" aria-label="Button" data-test="ui-button">
   <!--v-if-->Button label
 </button>"
 `;
