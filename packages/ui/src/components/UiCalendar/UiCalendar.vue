@@ -127,7 +127,7 @@ const emit = defineEmits<{
 
   :global(.vuecal--default-theme .vuecal__scrollable--month-view .vuecal__cell) {
     align-items: center;
-    min-height: 70px;
+    min-height: 72px;
   }
 
   :global(.vuecal--default-theme:is(.vuecal--sm, .vuecal--lg) .vuecal__scrollable--month-view .vuecal__cell-date) {
@@ -144,12 +144,7 @@ const emit = defineEmits<{
       .vuecal__scrollable--month-view
       .vuecal__cell--today
       .vuecal__cell-date
-  ) {
-    font-weight: 700;
-    text-shadow: 1px 1px var(--color-gray);
-    background-color: unset;
-  }
-
+  ),
   :global(
     .vuecal--default-theme.vuecal--light:is(.vuecal--sm, .vuecal--lg)
       .vuecal__scrollable--month-view
@@ -157,7 +152,6 @@ const emit = defineEmits<{
       .vuecal__cell-date
   ) {
     font-weight: 700;
-    text-decoration: underline;
     text-shadow: 1px 1px var(--color-gray);
     background-color: unset;
   }
