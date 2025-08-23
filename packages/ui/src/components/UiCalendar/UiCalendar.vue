@@ -109,6 +109,7 @@ const emit = defineEmits<{
   :global(.vuecal__headings) {
     height: 36px;
     padding-top: 4px;
+    border-bottom: 1px solid var(--color-gray-light);
   }
 
   :global(.vuecal--default-theme .vuecal__weekday) {
@@ -126,7 +127,16 @@ const emit = defineEmits<{
 
   :global(.vuecal--default-theme .vuecal__scrollable--month-view .vuecal__cell) {
     align-items: center;
-    min-height: 64px;
+    min-height: 70px;
+  }
+
+  :global(.vuecal--default-theme:is(.vuecal--sm, .vuecal--lg) .vuecal__scrollable--month-view .vuecal__cell-date) {
+    aspect-ratio: 6/5;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0;
   }
 
   :global(
@@ -135,23 +145,32 @@ const emit = defineEmits<{
       .vuecal__cell--today
       .vuecal__cell-date
   ) {
-    background-color: var(--color-gray);
+    font-weight: 700;
+    text-shadow: 1px 1px var(--color-gray);
+    background-color: unset;
+  }
+
+  :global(
+    .vuecal--default-theme.vuecal--light:is(.vuecal--sm, .vuecal--lg)
+      .vuecal__scrollable--month-view
+      .vuecal__cell--selected
+      .vuecal__cell-date
+  ) {
+    font-weight: 700;
+    text-decoration: underline;
+    text-shadow: 1px 1px var(--color-gray);
+    background-color: unset;
   }
 
   :global(.vuecal--default-theme .vuecal__cell) {
     box-shadow: 0 0 0 0.2px var(--color-gray) inset;
   }
 
-  :global(.vuecal--default-theme:is(.vuecal--sm, .vuecal--lg) .vuecal__scrollable--month-view .vuecal__cell-date) {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
   :global(.vuecal--default-theme.vuecal--timeless .vuecal__cell-events) {
     align-items: center;
     justify-content: center;
     padding-top: 0;
-    padding-bottom: 8px;
+    padding-bottom: 7px;
   }
 
   :global(.vuecal__scrollable--month-view .vuecal__event) {
