@@ -2,6 +2,7 @@
   <button
     :class="$style.button"
     :data-layout="props.layout"
+    :data-large-font="props.isLargeFont"
     :data-narrow="props.isNarrow"
     :data-tall="props.isTall"
     :data-wrap="props.isWrap"
@@ -25,6 +26,7 @@ import { DEFAULT_LAYOUT, DEFAULT_TYPE, DEFAULT_ICON, DEFAULT_ARIA_LABEL } from '
 interface IProps {
   layout?: 'primary' | 'secondary' | 'plain' | 'accent' | 'gradient';
   type?: 'submit' | 'button';
+  isLargeFont?: boolean;
   isDisabled?: boolean;
   isNarrow?: boolean;
   isTall?: boolean;
@@ -74,6 +76,10 @@ const props = withDefaults(defineProps<IProps>(), {
     color: var(--color-gray-dark-extra);
     cursor: default;
     background: var(--color-gray-light-extra);
+  }
+
+  &[data-large-font='true'] {
+    font-size: 1.125rem;
   }
 
   &[data-narrow='true'] {
@@ -138,7 +144,6 @@ const props = withDefaults(defineProps<IProps>(), {
     padding: 0;
     font-size: 1rem;
     color: var(--color-primary);
-    text-decoration: underline;
     background: none;
     border: none;
     border-radius: 0;

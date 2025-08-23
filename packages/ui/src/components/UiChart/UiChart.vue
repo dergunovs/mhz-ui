@@ -73,6 +73,8 @@ Chart.register(
   Legend
 );
 
+Chart.defaults.font.family = 'base';
+
 const chartData = {
   labels: [...props.labels],
   datasets: [...props.datasets],
