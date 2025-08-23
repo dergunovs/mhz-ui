@@ -132,7 +132,7 @@ const emit = defineEmits<{
 
   :global(.vuecal--default-theme:is(.vuecal--sm, .vuecal--lg) .vuecal__scrollable--month-view .vuecal__cell-date) {
     aspect-ratio: 6/5;
-    padding: 0;
+    padding: 2px 0 0;
     margin: 0;
     font-size: 1rem;
     font-weight: 400;
@@ -152,7 +152,6 @@ const emit = defineEmits<{
       .vuecal__cell-date
   ) {
     font-weight: 700;
-    text-shadow: 1px 1px var(--color-gray);
     background-color: unset;
   }
 

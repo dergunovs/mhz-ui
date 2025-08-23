@@ -74,6 +74,10 @@ Chart.register(
 );
 
 Chart.defaults.font.family = 'base';
+Chart.defaults.elements.point.radius = 4;
+Chart.defaults.elements.point.hoverRadius = 5;
+Chart.defaults.elements.line.borderWidth = 3.2;
+Chart.defaults.elements.line.tension = 0.3;
 
 const chartData = {
   labels: [...props.labels],
@@ -86,7 +90,7 @@ const chartOptions = {
   aspectRatio: 5 / 3,
   ticks: { precision: 0 },
   scales: {
-    x: { ticks: { maxRotation: 0, minRotation: 0, align: tickAlign.value } },
+    x: { ticks: { maxRotation: 0, minRotation: 0, align: tickAlign.value, autoSkipPadding: 30 } },
     y: { beginAtZero: true },
   },
   plugins: {
