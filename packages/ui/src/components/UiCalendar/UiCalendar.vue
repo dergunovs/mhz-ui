@@ -70,6 +70,7 @@ const emit = defineEmits<{
     width: 100%;
     height: 100%;
     font-size: 1.125rem;
+    font-weight: 700;
     color: var(--color-gray-light);
   }
 
@@ -115,10 +116,6 @@ const emit = defineEmits<{
   :global(.vuecal--default-theme .vuecal__weekday) {
     font-size: 1rem;
     letter-spacing: 0;
-  }
-
-  :global(.vuecal--default-theme .vuecal__weekday-day) {
-    opacity: 1;
   }
 
   :global(.vuecal__body) {
@@ -172,21 +169,22 @@ const emit = defineEmits<{
     padding-top: 0;
     padding-bottom: 0;
     cursor: pointer;
-    border: 0;
-    border-radius: 12px;
   }
 
+  :global(.vuecal__scrollable--month-view .vuecal__event),
   :global(.vuecal--default-theme .vuecal__event-details) {
     padding: 0;
     border-radius: 12px;
   }
 
+  :global(.vuecal--default-theme .vuecal__cell--disabled .vuecal__cell-date),
   :global(.vuecal__cell--out-of-range) {
+    color: var(--color-gray-dark);
     opacity: 1;
   }
 
-  :global(.vuecal__cell--out-of-range .vuecal__cell-date) {
-    color: var(--color-gray-dark);
+  :global(.vuecal--default-theme .vuecal__weekday-day) {
+    opacity: 1;
   }
 }
 </style>
