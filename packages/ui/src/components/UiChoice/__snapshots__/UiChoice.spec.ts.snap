@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiChoice > matches snapshot 1`] = `
+"<div class="_container_bde654"><label data-test="ui-choice-title">Заголовок</label>
+  <div class="_options_bde654" data-tall="true" data-test="ui-choice-buttons"><button type="button" class="_button_bde654" data-current="false" data-fill="false" data-test="ui-choice-button">1</button><button type="button" class="_button_bde654" data-current="false" data-fill="false" data-test="ui-choice-button">2</button><button type="button" class="_button_bde654" data-current="true" data-fill="false" data-test="ui-choice-button">3</button><button type="button" class="_button_bde654" data-current="false" data-fill="false" data-test="ui-choice-button">4</button><button type="button" class="_button_bde654" data-current="false" data-fill="false" data-test="ui-choice-button">5</button><input type="number" class="_input_bde654" step="1" min="1" max="60" data-test="ui-choice-input" value="3"></div>
+</div>"
+`;

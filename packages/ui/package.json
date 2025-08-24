@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui",
   "description": "Mhz ui kit",
-  "version": "1.2.11",
+  "version": "1.2.12",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -25,9 +25,9 @@
     "test:cov": "vitest run --coverage"
   },
   "dependencies": {
-    "@tiptap/pm": "3.2.2",
-    "@tiptap/starter-kit": "3.2.2",
-    "@tiptap/vue-3": "3.2.2",
+    "@tiptap/pm": "3.3.0",
+    "@tiptap/starter-kit": "3.3.0",
+    "@tiptap/vue-3": "3.3.0",
     "@vueform/slider": "2.1.10",
     "@vueuse/core": "13.7.0",
     "@vueuse/integrations": "13.7.0",

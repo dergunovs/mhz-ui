@@ -9,4 +9,5 @@ export const uiStubs = {
   UiSpoiler: { template: '<div><slot></slot></div>' },
   UiFlex: { template: '<div><slot></slot></div>' },
   UiChip: { template: '<div><slot></slot></div>' },
+  UiChoice: { template: '<div><input type="number"></div>' },
 };
