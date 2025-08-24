@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 interface IProps {
-  modelValue: number;
+  modelValue?: number;
   options: number[];
   title: string;
   isTall?: boolean;
