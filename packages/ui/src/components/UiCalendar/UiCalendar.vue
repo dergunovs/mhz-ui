@@ -169,6 +169,7 @@ const emit = defineEmits<{
     padding-top: 0;
     padding-bottom: 0;
     cursor: pointer;
+    border: none;
   }
 
   :global(.vuecal__scrollable--month-view .vuecal__event),
