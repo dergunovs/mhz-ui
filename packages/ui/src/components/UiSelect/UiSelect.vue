@@ -39,7 +39,7 @@
     </div>
 
     <div v-if="isShowOptions" :class="$style.options" ref="optionsElement" data-test="ui-select-options">
-      <div v-if="optionsComputed.length" ref="optionsInnerElement">
+      <div v-if="optionsComputed.length > 0" ref="optionsInnerElement">
         <div
           v-for="(option, index) in optionsComputed"
           :key="`${option}-${index}`"

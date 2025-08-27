@@ -48,8 +48,8 @@ function show(type: string, message: string) {
   messageBlock.innerHTML = message;
   messageBlock.classList.add('uiToastMessage');
 
-  toast.appendChild(icon);
-  toast.appendChild(messageBlock);
+  toast.append(icon);
+  toast.append(messageBlock);
 
   const closeBtn = document.createElement('button');
 
@@ -63,7 +63,7 @@ function show(type: string, message: string) {
     }
   });
 
-  toast.appendChild(closeBtn);
+  toast.append(closeBtn);
 
   document.querySelector('.uiToastBlock')?.append(toast);
 

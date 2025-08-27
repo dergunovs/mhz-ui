@@ -1,6 +1,8 @@
+// eslint-disable-next-line unicorn/prefer-node-protocol
 import path from 'path';
 import type { StorybookConfig } from '@storybook/vue3-vite';
 
+// eslint-disable-next-line unicorn/prefer-module
 const requirePath = typeof require === 'undefined' ? import.meta : require;
 
 function getAbsolutePath(packageName: string) {

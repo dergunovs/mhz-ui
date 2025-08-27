@@ -18,6 +18,6 @@ export function wrapperFactory<T>(
     props: props as ComponentPublicInstance<T>['$props'],
     slots: slots as undefined,
     mocks: { debounce },
-    attachTo: document.getElementById('app') as HTMLElement,
+    attachTo: document.querySelector('#app') as HTMLElement,
   }) as VueWrapper<ComponentPublicInstance<T>>;
 }

@@ -79,13 +79,7 @@ const checkbox = ref<HTMLInputElement>();
 
 function handleChange() {
   if (checkbox.value) {
-    let value;
-
-    if (checkbox.value.checked) {
-      value = props.initialValue ? props.initialValue : true;
-    } else {
-      value = false;
-    }
+    const value = checkbox.value.checked ? props.initialValue || true : false;
 
     emit('update:modelValue', value);
   }

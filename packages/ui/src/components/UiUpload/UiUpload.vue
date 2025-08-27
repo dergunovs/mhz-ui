@@ -11,7 +11,7 @@
           @click="emulateFileClickInput"
           layout="secondary"
           :isDisabled="
-            props.isDisabled || (props.isSingle && props.files.length >= 1) || (props.isSingle && !!props.file)
+            props.isDisabled || (props.isSingle && props.files.length > 0) || (props.isSingle && !!props.file)
           "
           :icon="IconUpload"
           data-test="ui-upload-add"
@@ -60,7 +60,7 @@
     </div>
 
     <div
-      v-show="(props.isSingle && props.file) || !!props.files.length"
+      v-show="(props.isSingle && props.file) || props.files.length > 0"
       :class="$style.uploadButton"
       :data-label="!!props.label"
     >
@@ -104,7 +104,7 @@ const emit = defineEmits<{ add: [file: File]; remove: [file: File]; upload: [] }
 const input = ref<HTMLElement>();
 const inputKey = ref(0);
 
-const accept = computed(() => props.extensions.map((extension) => `.${extension}`).join());
+const accept = computed(() => props.extensions.map((extension) => `.${extension}`).join(','));
 
 function emulateFileClickInput() {
   input?.value?.click?.();
@@ -127,8 +127,8 @@ function handleFileChange(target: EventTarget | null) {
 
     if (files === null) return;
 
-    for (let index = 0; index < files.length; index++) {
-      if (files[index].size && files[index].size < FILE_SIZE_LIMIT) emit('add', files[index]);
+    for (const file of files) {
+      if (file.size > 0 && file.size < FILE_SIZE_LIMIT) emit('add', file);
     }
   }
 }

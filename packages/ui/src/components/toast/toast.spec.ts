@@ -8,7 +8,7 @@ describe('toast', () => {
   beforeEach(() => {
     body = document.body;
 
-    while (body.firstChild) body.removeChild(body.firstChild);
+    while (body.firstChild) body.firstChild.remove();
 
     vi.useFakeTimers();
   });

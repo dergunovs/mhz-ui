@@ -10,7 +10,7 @@
       data-test="ui-search"
     />
 
-    <div v-if="isShowResults && props.modelValue.length" :class="$style.results" data-test="ui-search-results">
+    <div v-if="isShowResults && props.modelValue.length > 0" :class="$style.results" data-test="ui-search-results">
       <template v-if="props.modelValue.length < 3">
         {{ props.lang === 'en' ? ENTER_MORE_SYMBOLS_EN : ENTER_MORE_SYMBOLS }}
       </template>
