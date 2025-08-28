@@ -78,12 +78,14 @@ interface ISearchScheme {
   url: string;
 }
 
+type TLocale = 'ru' | 'en';
+
 interface IProps {
   modelValue: string;
   searchScheme: ISearchScheme[];
   results?: { [key: string]: { _id: string }[] };
   isSuccess: boolean;
-  lang?: string;
+  lang?: TLocale;
 }
 
 const props = defineProps<IProps>();

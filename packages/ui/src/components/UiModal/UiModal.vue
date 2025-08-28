@@ -26,11 +26,13 @@ import { ref, watch, computed } from 'vue';
 import UiButton from '../UiButton/UiButton.vue';
 import UiClose from '../UiClose/UiClose.vue';
 
+type TLocale = 'ru' | 'en';
+
 interface IProps {
   modelValue: boolean;
   isConfirm?: boolean;
   width?: string;
-  lang?: string;
+  lang?: TLocale;
 }
 
 const props = defineProps<IProps>();

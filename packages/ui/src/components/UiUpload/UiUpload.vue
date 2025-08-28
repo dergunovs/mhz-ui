@@ -78,6 +78,8 @@ import UiButton from '../UiButton/UiButton.vue';
 import { FILE_SIZE_LIMIT } from './constants';
 import IconUpload from './icons/upload.svg?component';
 
+type TLocale = 'ru' | 'en';
+
 interface IProps {
   label?: string;
   file?: File;
@@ -87,7 +89,7 @@ interface IProps {
   isDisabled?: boolean;
   isRequired?: boolean;
   isSingle?: boolean;
-  lang?: string;
+  lang?: TLocale;
 }
 
 const props = withDefaults(defineProps<IProps>(), {

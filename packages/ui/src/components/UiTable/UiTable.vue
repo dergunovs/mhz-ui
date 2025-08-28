@@ -64,11 +64,13 @@ interface IModelValue {
   isAsc: boolean;
 }
 
+type TLocale = 'ru' | 'en';
+
 interface IProps {
   headers: IHeader[];
   modelValue?: IModelValue;
   isLoading?: boolean;
-  lang?: string;
+  lang?: TLocale;
 }
 
 const props = defineProps<IProps>();

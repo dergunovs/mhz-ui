@@ -47,10 +47,12 @@
 </template>
 
 <script setup lang="ts">
+type TLocale = 'ru' | 'en';
+
 interface IProps {
   page: number;
   total?: number;
-  lang?: string;
+  lang?: TLocale;
 }
 
 const props = defineProps<IProps>();

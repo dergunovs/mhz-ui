@@ -42,12 +42,13 @@ import {
   ICalendarUpdate,
   ICalendarEventClick,
   ICalendarCellClick,
+  TLocale,
 } from './interface';
 
 interface IProps {
   minDate?: Date;
   events?: ICalendarEvent<unknown>[];
-  lang?: string;
+  lang?: TLocale;
 }
 
 const props = defineProps<IProps>();

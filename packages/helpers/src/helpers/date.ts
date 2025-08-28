@@ -1,8 +1,10 @@
+type TLocale = 'ru' | 'en';
+
 export function addZero(value: number): string {
   return value < 10 ? `0${value}` : `${value}`;
 }
 
-export function formatDuration(duration?: number, lang?: string): string {
+export function formatDuration(duration?: number, lang?: TLocale): string {
   if (!duration || duration < 0) return '0';
 
   const minutes = Math.floor(duration / 60);
@@ -14,7 +16,7 @@ export function formatDuration(duration?: number, lang?: string): string {
   return `${minutes ? `${minutes} ${min}. ` : ``}${addZero(seconds)} ${sec}.`;
 }
 
-export function formatDate(dateRaw?: string | Date | null, lang?: string): string {
+export function formatDate(dateRaw?: string | Date | null, lang?: TLocale): string {
   if (!dateRaw || isNaN(new Date(dateRaw).getTime())) return '0';
 
   return (
@@ -26,7 +28,7 @@ export function formatDate(dateRaw?: string | Date | null, lang?: string): strin
   );
 }
 
-export function formatDateTime(dateRaw?: string | Date | null, lang?: string): string {
+export function formatDateTime(dateRaw?: string | Date | null, lang?: TLocale): string {
   if (!dateRaw || isNaN(new Date(dateRaw).getTime())) return '0';
 
   return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {
@@ -41,7 +43,7 @@ export function formatDateTime(dateRaw?: string | Date | null, lang?: string): s
 export function subtractDates(
   dateFuture?: string | Date | null,
   datePast?: string | Date | null,
-  lang?: string,
+  lang?: TLocale,
   isRawResult?: boolean
 ): string | number {
   if (!dateFuture || !datePast) return '0';

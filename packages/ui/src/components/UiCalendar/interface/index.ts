@@ -31,3 +31,5 @@ export interface ICalendarEventClick {
 export interface ICalendarCellClick {
   cell: { start: Date };
 }
+
+export type TLocale = 'ru' | 'en';
