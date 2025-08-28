@@ -2,7 +2,7 @@ export * from './useAuth';
 export * from './useInfiniteScroll';
 export * from './usePage';
 export * from './usePagination';
-export * from './usePWA';
+export * from './usePwa';
 export * from './useRouteId';
 export * from './useValidate';
 export * from './useCalendar';

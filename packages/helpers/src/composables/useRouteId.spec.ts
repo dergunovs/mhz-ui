@@ -37,7 +37,7 @@ async function setupTest(route: string, paramName: string, isQuery = false) {
 
   const wrapper = document.createElement('div');
 
-  document.body.appendChild(wrapper);
+  document.body.append(wrapper);
   app.mount(wrapper);
 
   return { capturedId };

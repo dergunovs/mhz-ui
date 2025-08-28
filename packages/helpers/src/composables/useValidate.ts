@@ -20,11 +20,9 @@ export function useValidator<T>(
 ) {
   const computedRules = computed(() => {
     return Object.entries(rules).reduce((acc, [key, ruleArray]) => {
-      if (Array.isArray(ruleArray)) {
-        acc[key] = ruleArray.map((rule) => (typeof rule === 'function' ? rule(locale) : rule));
-      } else {
-        acc[key] = [];
-      }
+      acc[key] = Array.isArray(ruleArray)
+        ? ruleArray.map((rule) => (typeof rule === 'function' ? rule(locale) : rule))
+        : [];
 
       return acc;
     }, {} as Rules);
@@ -68,7 +66,7 @@ export function email(locale: TLocale = 'ru'): RuleItem {
 
 export function letters(locale: TLocale = 'ru'): RuleItem {
   return {
-    validator: (_rule: object, value: string) => /^[a-zA-Zа-яА-ЯёЁ\s-]+$/.test(value) || !value.length,
+    validator: (_rule: object, value: string) => /^[a-zA-Zа-яА-ЯёЁ\s-]+$/.test(value) || value.length === 0,
     type: 'string',
     message: messages.letters[locale],
   };

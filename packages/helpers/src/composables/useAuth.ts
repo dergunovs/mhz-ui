@@ -14,7 +14,7 @@ export function setAuth(auth: boolean) {
 export function logout(url: string, deleteAuthHeader: () => void, tokenName: string) {
   deleteCookieToken(tokenName);
   deleteAuthHeader();
-  window.location.href = url;
+  globalThis.location.href = url;
 }
 
 export function getCookieToken(tokenName: string): string | undefined {

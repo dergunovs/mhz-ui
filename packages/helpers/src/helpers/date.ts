@@ -1,4 +1,5 @@
 type TLocale = 'ru' | 'en';
+type TDate = string | Date | null;
 
 export function addZero(value: number): string {
   return value < 10 ? `0${value}` : `${value}`;
@@ -13,11 +14,13 @@ export function formatDuration(duration?: number, lang?: TLocale): string {
   const min = lang === 'ru' ? 'мин' : 'min';
   const sec = lang === 'ru' ? 'сек' : 'sec';
 
-  return `${minutes ? `${minutes} ${min}. ` : ``}${addZero(seconds)} ${sec}.`;
+  const minutesFormatted = minutes ? `${minutes} ${min}. ` : ``;
+
+  return `${minutesFormatted}${addZero(seconds)} ${sec}.`;
 }
 
-export function formatDate(dateRaw?: string | Date | null, lang?: TLocale): string {
-  if (!dateRaw || isNaN(new Date(dateRaw).getTime())) return '0';
+export function formatDate(dateRaw?: TDate, lang?: TLocale): string {
+  if (!dateRaw || Number.isNaN(new Date(dateRaw).getTime())) return '0';
 
   return (
     new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {
@@ -28,8 +31,8 @@ export function formatDate(dateRaw?: string | Date | null, lang?: TLocale): stri
   );
 }
 
-export function formatDateTime(dateRaw?: string | Date | null, lang?: TLocale): string {
-  if (!dateRaw || isNaN(new Date(dateRaw).getTime())) return '0';
+export function formatDateTime(dateRaw?: TDate, lang?: TLocale): string {
+  if (!dateRaw || Number.isNaN(new Date(dateRaw).getTime())) return '0';
 
   return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-EN', {
     year: 'numeric',
@@ -41,8 +44,8 @@ export function formatDateTime(dateRaw?: string | Date | null, lang?: TLocale): 
 }
 
 export function subtractDates(
-  dateFuture?: string | Date | null,
-  datePast?: string | Date | null,
+  dateFuture?: TDate,
+  datePast?: TDate,
   lang?: TLocale,
   isRawResult?: boolean
 ): string | number {
@@ -51,7 +54,7 @@ export function subtractDates(
   const date1 = new Date(dateFuture);
   const date2 = new Date(datePast);
 
-  if (isNaN(date1.getTime()) || isNaN(date2.getTime())) return '0';
+  if (Number.isNaN(date1.getTime()) || Number.isNaN(date2.getTime())) return '0';
 
   const duration = Math.floor((date1.getTime() - date2.getTime()) / 1000);
 
@@ -88,10 +91,8 @@ export function getFirstAndLastDays(count: number, isMonth: boolean): IWeekDays[
 
   for (let i = 0; i < count; i++) {
     const today = new Date();
-
-    const firstDay = new Date(
-      today.setDate(isMonth ? 1 : today.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1) - i * 7)
-    );
+    const currentDay = today.getDay() === 0 ? -6 : 1;
+    const firstDay = new Date(today.setDate(isMonth ? 1 : today.getDate() - today.getDay() + currentDay - i * 7));
 
     if (isMonth) firstDay.setMonth(today.getMonth() - i);
 

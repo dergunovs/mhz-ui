@@ -49,19 +49,10 @@ export function usePage(filter?: object) {
   });
 
   function resetQuery(sortValue: string | ISortOption) {
-    if (typeof sortValue === 'string') {
-      query.value = {
-        page: 1,
-        sort: { value: sortValue, isAsc: true },
-        filter: {},
-      };
-    } else {
-      query.value = {
-        ...query.value,
-        page: 1,
-        sort: sortValue,
-      };
-    }
+    query.value =
+      typeof sortValue === 'string'
+        ? { page: 1, sort: { value: sortValue, isAsc: true }, filter: {} }
+        : { ...query.value, page: 1, sort: sortValue };
   }
 
   function setQueryPage(pageToSet: number) {

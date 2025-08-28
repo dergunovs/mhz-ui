@@ -48,7 +48,7 @@ export async function withSetup<T>(composable: () => Promise<T>) {
 
   const wrapper = document.createElement('div');
 
-  document.body.appendChild(wrapper);
+  document.body.append(wrapper);
   app.mount(wrapper);
 
   await composableResult;

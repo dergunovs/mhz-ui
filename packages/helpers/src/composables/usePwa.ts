@@ -4,7 +4,7 @@ export interface IPromptEvent extends Event {
   prompt: () => Promise<void>;
 }
 
-export function usePWA() {
+export function usePwa() {
   const isShowInstallPWA = ref(false);
   const isPWACanBeInstalled = ref(false);
   const installPWAPrompt = ref<IPromptEvent | undefined>();
@@ -33,11 +33,11 @@ export function usePWA() {
   }
 
   onMounted(() => {
-    window.addEventListener('beforeinstallprompt', installHandler);
+    globalThis.addEventListener('beforeinstallprompt', installHandler);
   });
 
   onBeforeUnmount(() => {
-    window.removeEventListener('beforeinstallprompt', installHandler);
+    globalThis.removeEventListener('beforeinstallprompt', installHandler);
   });
 
   return {

@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest';
 
 import { withSetup } from '..';
-import { usePWA } from '.';
+import { usePwa } from '.';
 
-describe('usePWA', () => {
+describe('usePwa', () => {
   test('initializes with default values', async () => {
     await withSetup(async () => {
-      const { isShowInstallPWA, isPWACanBeInstalled, installPWA } = usePWA();
+      const { isShowInstallPWA, isPWACanBeInstalled, installPWA } = usePwa();
 
       expect(isShowInstallPWA.value).toStrictEqual(false);
       expect(isPWACanBeInstalled.value).toStrictEqual(false);

@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "Mhz helpers and composables",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "build": "vite build",
-    "lint": "eslint src/index.ts",
+    "lint": "eslint **/*.{js,ts}",
     "ts": "vue-tsc --noEmit",
     "test": "vitest run",
     "test:cov": "vitest run --coverage"
@@ -61,7 +61,7 @@
     "vite-plugin-dts": "4.5.4",
     "vitest": "3.2.4",
     "vue-eslint-parser": "10.2.0",
-    "vue-linters-config": "0.4.1",
+    "vue-linters-config": "0.4.2",
     "vue-tsc": "3.0.6"
   },
   "peerDependencies": {

@@ -9,7 +9,7 @@ describe('scrollToTop', () => {
   const setupMocks = () => {
     vi.clearAllMocks();
     mockQuerySelector.mockReturnValue({ scrollTo: mockScrollTo });
-    global.document.querySelector = mockQuerySelector;
+    globalThis.document.querySelector = mockQuerySelector;
   };
 
   test('scrolls to top of element', async () => {

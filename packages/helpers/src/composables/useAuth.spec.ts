@@ -37,15 +37,15 @@ describe('useAuth', () => {
     const SITE = 'https://site.ru';
     const URL = 'login';
 
-    window.location.href = SITE;
+    globalThis.location.href = SITE;
 
     expect(getCookieToken(tokenName)).toStrictEqual(tokenValue);
-    expect(window.location.href).toStrictEqual(`${SITE}/`);
+    expect(globalThis.location.href).toStrictEqual(`${SITE}/`);
 
     logout(URL, spyDeleteAuthHeader, tokenName);
 
     expect(spyDeleteAuthHeader).toBeCalledTimes(1);
-    expect(window.location.href).toStrictEqual(`${SITE}/${URL}`);
+    expect(globalThis.location.href).toStrictEqual(`${SITE}/${URL}`);
   });
 
   test('gets cookie token', async () => {

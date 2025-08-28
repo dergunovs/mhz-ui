@@ -6,8 +6,8 @@ import { useTimer } from '.';
 const mockSetTimeout = vi.fn();
 const mockClearTimeout = vi.fn();
 
-Object.defineProperty(global, 'setTimeout', { writable: true, value: mockSetTimeout });
-Object.defineProperty(global, 'clearTimeout', { writable: true, value: mockClearTimeout });
+Object.defineProperty(globalThis, 'setTimeout', { writable: true, value: mockSetTimeout });
+Object.defineProperty(globalThis, 'clearTimeout', { writable: true, value: mockClearTimeout });
 
 describe('useTimer', () => {
   test('initializes timer values correctly', async () => {
