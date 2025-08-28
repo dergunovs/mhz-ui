@@ -1,9 +1,10 @@
 import { ref } from 'vue';
 import { Meta, StoryObj } from '@storybook/vue3';
+import { html } from 'mhz-helpers';
 
 import { EVENTS } from './constants';
 import { ICalendarEvent } from './interface';
-import { html } from '@/utils';
+
 import { UiCalendar, UiModal } from '@/components';
 
 const meta: Meta<typeof UiCalendar> = {
@@ -11,43 +12,31 @@ const meta: Meta<typeof UiCalendar> = {
   args: {
     events: EVENTS,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
+  argTypes: {
+    lang: {
+      options: ['en', 'ru'],
     },
   },
 };
 
-const isShowModal = ref(false);
-const eventContent = ref();
-
-function toggleModal() {
-  isShowModal.value = !isShowModal.value;
-}
-
-const argTypes = {};
-
-type Story = StoryObj<typeof UiCalendar>;
-
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiCalendar> = {
   render: (args) => ({
     components: { UiCalendar, UiModal },
-    setup: () => ({ args, argTypes, isShowModal, toggleModal, eventContent }),
+    setup: () => {
+      const isShowModal = ref(false);
+      const eventContent = ref();
 
-    template: html` <UiCalendar v-bind="args" @eventClick="handleEvent" />
-      <UiModal v-model="isShowModal">{{eventContent}}</UiModal>`,
-
-    methods: {
-      handleEvent(event: ICalendarEvent<object>) {
+      function handleEventClick(event: ICalendarEvent<object>) {
         eventContent.value = event.content;
-        toggleModal();
-      },
-    },
-  }),
+        isShowModal.value = !isShowModal.value;
+      }
 
-  argTypes,
+      return { args, isShowModal, handleEventClick, eventContent };
+    },
+
+    template: html` <UiCalendar v-bind="args" @eventClick="handleEventClick" />
+      <UiModal v-model="isShowModal">{{eventContent}}</UiModal>`,
+  }),
 };

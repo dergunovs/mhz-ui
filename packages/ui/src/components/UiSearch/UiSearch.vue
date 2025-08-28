@@ -57,7 +57,6 @@
 import { ref, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { onClickOutside } from '@vueuse/core';
-
 import { debounce } from 'perfect-debounce';
 
 import UiInput from '../UiInput/UiInput.vue';
@@ -72,13 +71,13 @@ import {
   NO_RESULTS_EN,
 } from './constants';
 
+import { TLocale } from '@/components/locales/types';
+
 interface ISearchScheme {
   type: string;
   labels: string[];
   url: string;
 }
-
-type TLocale = 'ru' | 'en';
 
 interface IProps {
   modelValue: string;

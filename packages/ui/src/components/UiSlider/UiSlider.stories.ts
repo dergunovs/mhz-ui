@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { html } from '@/utils';
+import { html } from 'mhz-helpers';
 
 import { UiSlider } from '@/components';
 
@@ -17,27 +17,16 @@ const meta: Meta<typeof UiSlider> = {
     slides: [slide1, slide2, slide3],
     thumbs: [thumb1, thumb2, thumb3],
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {};
-
-type Story = StoryObj<typeof UiSlider>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiSlider> = {
   render: (args) => ({
     components: { UiSlider },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args }),
 
     template: html` <UiSlider v-bind="args" />`,
   }),
-  argTypes,
 };

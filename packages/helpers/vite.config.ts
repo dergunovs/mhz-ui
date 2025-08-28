@@ -1,5 +1,6 @@
 /// <reference types="vitest/config" />
 
+import path from 'node:path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import vue from '@vitejs/plugin-vue';
@@ -19,6 +20,8 @@ export default defineConfig({
     },
   },
 
+  resolve: { alias: { '@': path.resolve(import.meta.dirname, './src') } },
+
   plugins: [vue(), dts({ entryRoot: './src' })],
 
   test: {
@@ -30,6 +33,7 @@ export default defineConfig({
       reporter: ['text'],
       all: true,
     },
+    css: false,
     deps: { inline: true },
     env: { TZ: 'UTC' },
   },

@@ -1,32 +1,21 @@
 import { Meta, StoryObj } from '@storybook/vue3';
+import { html } from 'mhz-helpers';
 
-import { html } from '@/utils';
 import { UiClose } from '@/components';
 
 const meta: Meta<typeof UiClose> = {
   component: UiClose,
   args: {},
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {};
-
-type Story = StoryObj<typeof UiClose>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiClose> = {
   render: (args) => ({
     components: { UiClose },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args }),
 
     template: html` <UiClose v-bind="args">{{DEFAULT_SLOT}}</UiClose>`,
   }),
-  argTypes,
 };

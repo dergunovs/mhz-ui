@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
+import { html } from 'mhz-helpers';
 
 import { PAGE, TOTAL } from './constants';
 
-import { html } from '@/utils';
 import { UiPagination } from '@/components';
 
 const meta: Meta<typeof UiPagination> = {
@@ -11,27 +11,16 @@ const meta: Meta<typeof UiPagination> = {
     page: PAGE,
     total: TOTAL,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {};
-
-type Story = StoryObj<typeof UiPagination>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiPagination> = {
   render: (args) => ({
     components: { UiPagination },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args }),
 
     template: html` <UiPagination v-bind="args" />`,
   }),
-  argTypes,
 };

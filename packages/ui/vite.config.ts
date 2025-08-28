@@ -55,7 +55,11 @@ export default defineConfig({
       },
     }),
     svgLoader(),
-    dts({ cleanVueFileName: true, entryRoot: './src/components' }),
+    dts({
+      cleanVueFileName: true,
+      entryRoot: './src/components',
+      exclude: ['**/*.spec.ts', '**/*.stories.ts', '**/*.css', '**/constants/**'],
+    }),
     viteStaticCopy({
       targets: [
         {
@@ -98,6 +102,65 @@ export default defineConfig({
 
           fs.writeFileSync(filePath, `${cssImport}\n${data}`);
         }
+      },
+    },
+    {
+      name: 'remove-vue-cal-locales',
+      apply: 'build',
+      closeBundle() {
+        const distPath = path.resolve('dist');
+        const distFiles = fs.readdirSync(distPath);
+
+        const isProtectedFile = (file: string) => {
+          const protectedPatterns = [
+            /^index[-.][a-zA-Z0-9]+\.js$/,
+            /^index\.js$/,
+            /^_plugin-vue_export-helper-[a-zA-Z0-9]+\.js$/,
+          ];
+
+          return protectedPatterns.some((pattern) => pattern.test(file));
+        };
+
+        const isAllowedLocale = (file: string) => {
+          const baseName = file.slice(0, -3);
+
+          return baseName.startsWith('ru-') || baseName.startsWith('en-');
+        };
+
+        distFiles.forEach((file) => {
+          if (!file.endsWith('.js')) return;
+          if (isProtectedFile(file)) return;
+          if (isAllowedLocale(file)) return;
+
+          const filePath = path.join(distPath, file);
+
+          if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+        });
+      },
+    },
+    {
+      name: 'patch-vue-cal-locales',
+      apply: 'build',
+      closeBundle() {
+        const targetFilePath = path.resolve('dist/UiCalendar/UiCalendar.js');
+
+        if (!fs.existsSync(targetFilePath)) return;
+        let content = fs.readFileSync(targetFilePath, 'utf8');
+
+        const localeObjectMatch = content.match(
+          /(let\s+S\s*=\s*\/\*\s*@__PURE__\s*\*\/\s*Object\.assign\(\s*\{[^}]*"\.\.\/i18n\/ar\.json"[\s\S]*?\}\)\s*;)/
+        );
+
+        if (!localeObjectMatch) return;
+        const oldFullExpression = localeObjectMatch[1];
+
+        const newFullExpression = `let S = /* @__PURE__ */ Object.assign({
+  "../i18n/ru.json": () => import("../ru-Dw5InYRk.js").then((r) => r.default),
+  "../i18n/en-gb.json": () => import("../en-gb-BvrSs5DI.js").then((r) => r.default)
+});`;
+
+        content = content.replace(oldFullExpression, newFullExpression);
+        fs.writeFileSync(targetFilePath, content, 'utf8');
       },
     },
   ],

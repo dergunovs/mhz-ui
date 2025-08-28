@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
+import { html } from 'mhz-helpers';
 
 import { LINKS } from './constants';
 
-import { html } from '@/utils';
 import { UiBreadcrumbs } from '@/components';
 
 const meta: Meta<typeof UiBreadcrumbs> = {
@@ -10,34 +10,20 @@ const meta: Meta<typeof UiBreadcrumbs> = {
   args: {
     links: LINKS,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
+  argTypes: {
+    color: {
+      options: ['default', 'white'],
     },
   },
 };
 
-const argTypes = {
-  links: {
-    description: '{ url: string; title: string }[]',
-  },
-  color: {
-    options: ['default', 'white'],
-  },
-};
-
-type Story = StoryObj<typeof UiBreadcrumbs>;
-
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiBreadcrumbs> = {
   render: (args) => ({
     components: { UiBreadcrumbs },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args }),
 
     template: html` <UiBreadcrumbs v-bind="args" />`,
   }),
-  argTypes,
 };

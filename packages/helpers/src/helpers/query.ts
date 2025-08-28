@@ -30,11 +30,7 @@ export function vueQueryOptions(
         },
       }),
       defaultOptions: {
-        queries: {
-          refetchOnMount: false,
-          refetchOnWindowFocus: false,
-          retry: false,
-        },
+        queries: { refetchOnMount: false, refetchOnWindowFocus: false, retry: false },
         mutations: {
           onError: (error: unknown) => {
             toast.error(handleError(error));

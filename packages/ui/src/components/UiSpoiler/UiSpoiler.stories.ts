@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { useArgs } from 'storybook/preview-api';
+import { html } from 'mhz-helpers';
 
 import { TITLE, MODEL_VALUE } from './constants';
 
-import { html } from '@/utils';
 import { UiSpoiler } from '@/components';
 
 const meta: Meta<typeof UiSpoiler> = {
@@ -12,25 +11,15 @@ const meta: Meta<typeof UiSpoiler> = {
     title: TITLE,
     modelValue: MODEL_VALUE,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {};
-
-type Story = StoryObj<typeof UiSpoiler>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiSpoiler> = {
   render: (args, { updateArgs }) => ({
     components: { UiSpoiler },
-    setup: () => ({ args, argTypes, updateArgs }),
+    setup: () => ({ args, updateArgs }),
 
     template: html` <UiSpoiler v-bind="args" @update:modelValue="update">Inner Content</UiSpoiler>`,
 
@@ -40,14 +29,4 @@ export const Primary: Story = {
       },
     },
   }),
-
-  decorators: [
-    (story, context) => {
-      const [args, updateArgs] = useArgs();
-
-      return story({ ...context, updateArgs, args });
-    },
-  ],
-
-  argTypes,
 };

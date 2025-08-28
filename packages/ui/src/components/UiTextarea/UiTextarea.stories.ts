@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
+import { html } from 'mhz-helpers';
 
 import { MODEL_VALUE } from './constants';
 
-import { html } from '@/utils';
 import { UiTextarea } from '@/components';
 
 const meta: Meta<typeof UiTextarea> = {
@@ -10,27 +10,16 @@ const meta: Meta<typeof UiTextarea> = {
   args: {
     modelValue: MODEL_VALUE,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {};
-
-type Story = StoryObj<typeof UiTextarea>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiTextarea> = {
   render: (args) => ({
     components: { UiTextarea },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args }),
 
     template: html` <UiTextarea v-bind="args" />`,
   }),
-  argTypes,
 };

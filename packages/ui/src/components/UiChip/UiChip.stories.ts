@@ -1,38 +1,27 @@
 import { Meta, StoryObj } from '@storybook/vue3';
+import { html } from 'mhz-helpers';
 
 import { DEFAULT_SLOT } from './constants';
 
-import { html } from '@/utils';
 import { UiChip } from '@/components';
 
 const meta: Meta<typeof UiChip> = {
   component: UiChip,
   args: {},
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
+  argTypes: {
+    type: {
+      options: ['default', 'success', 'error'],
     },
   },
 };
 
-const argTypes = {
-  type: {
-    options: ['default', 'success', 'error'],
-  },
-};
-
-type Story = StoryObj<typeof UiChip>;
-
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiChip> = {
   render: (args) => ({
     components: { UiChip },
-    setup: () => ({ args, argTypes, DEFAULT_SLOT }),
+    setup: () => ({ args, DEFAULT_SLOT }),
 
-    template: html` <UiChip v-bind="args">{{DEFAULT_SLOT}}</UiChip>`,
+    template: html` <div style="display:flex"><UiChip v-bind="args">{{DEFAULT_SLOT}}</UiChip></div>`,
   }),
-  argTypes,
 };

@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { useArgs } from 'storybook/preview-api';
+import { html } from 'mhz-helpers';
 
 import { MODEL_VALUE, MIN, MAX } from './constants';
 
-import { html } from '@/utils';
 import { UiRange } from '@/components';
 
 const meta: Meta<typeof UiRange> = {
@@ -13,25 +12,15 @@ const meta: Meta<typeof UiRange> = {
     min: MIN,
     max: MAX,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {};
-
-type Story = StoryObj<typeof UiRange>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiRange> = {
   render: (args, { updateArgs }) => ({
     components: { UiRange },
-    setup: () => ({ args, argTypes, updateArgs }),
+    setup: () => ({ args, updateArgs }),
 
     template: html` <UiRange v-bind="args" @update:modelValue="update" /> `,
 
@@ -41,14 +30,4 @@ export const Primary: Story = {
       },
     },
   }),
-
-  decorators: [
-    (story, context) => {
-      const [args, updateArgs] = useArgs();
-
-      return story({ ...context, updateArgs, args });
-    },
-  ],
-
-  argTypes,
 };

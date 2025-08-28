@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { useArgs } from 'storybook/preview-api';
+import { html } from 'mhz-helpers';
 
 import { HEADERS, MODEL_VALUE, DEFAULT_SLOT } from './constants';
 
-import { html } from '@/utils';
 import { UiTable } from '@/components';
 
 const meta: Meta<typeof UiTable> = {
@@ -12,27 +11,15 @@ const meta: Meta<typeof UiTable> = {
     headers: HEADERS,
     modelValue: MODEL_VALUE,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {
-  headers: { description: '{ value: string; title: string }[]' },
-};
-
-type Story = StoryObj<typeof UiTable>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiTable> = {
   render: (args, { updateArgs }) => ({
     components: { UiTable },
-    setup: () => ({ args, argTypes, updateArgs, DEFAULT_SLOT }),
+    setup: () => ({ args, updateArgs, DEFAULT_SLOT }),
 
     template: html` <UiTable v-bind="args" @update:modelValue="update">
       <tr>
@@ -53,14 +40,4 @@ export const Primary: Story = {
       },
     },
   }),
-
-  decorators: [
-    (story, context) => {
-      const [args, updateArgs] = useArgs();
-
-      return story({ ...context, updateArgs, args });
-    },
-  ],
-
-  argTypes,
 };

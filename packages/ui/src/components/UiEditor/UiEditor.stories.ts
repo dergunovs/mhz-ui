@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
+import { html } from 'mhz-helpers';
 
 import { MODEL_VALUE } from './constants';
 
-import { html } from '@/utils';
 import { UiEditor } from '@/components';
 
 const meta: Meta<typeof UiEditor> = {
@@ -10,27 +10,16 @@ const meta: Meta<typeof UiEditor> = {
   args: {
     modelValue: MODEL_VALUE,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {};
-
-type Story = StoryObj<typeof UiEditor>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiEditor> = {
   render: (args) => ({
     components: { UiEditor },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args }),
 
     template: html` <UiEditor v-bind="args" />`,
   }),
-  argTypes,
 };

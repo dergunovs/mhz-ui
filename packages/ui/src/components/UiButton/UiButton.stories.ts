@@ -1,52 +1,40 @@
 import { Meta, StoryObj } from '@storybook/vue3';
+import { html } from 'mhz-helpers';
 
 import { DEFAULT_SLOT } from './constants';
 import IconTest from './icons/test.svg?component';
 
-import { html } from '@/utils';
 import { UiButton } from '@/components';
 
 const meta: Meta<typeof UiButton> = {
   component: UiButton,
   args: {},
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
+  argTypes: {
+    layout: {
+      options: ['primary', 'secondary', 'plain', 'accent', 'gradient'],
+    },
+    type: {
+      options: ['submit', 'button'],
     },
   },
 };
 
-const argTypes = {
-  layout: {
-    options: ['primary', 'secondary', 'plain', 'accent', 'gradient'],
-  },
-  type: {
-    options: ['submit', 'button'],
-  },
-};
-
-type Story = StoryObj<typeof UiButton>;
-
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiButton> = {
   render: (args) => ({
     components: { UiButton },
-    setup: () => ({ args, argTypes, DEFAULT_SLOT }),
+    setup: () => ({ args, DEFAULT_SLOT }),
 
     template: html` <UiButton v-bind="args">{{DEFAULT_SLOT}}</UiButton>`,
   }),
-  argTypes,
 };
 
-export const Icon: Story = {
+export const Icon: StoryObj<typeof UiButton> = {
   render: (args) => ({
     components: { UiButton },
-    setup: () => ({ args, argTypes, DEFAULT_SLOT, IconTest }),
+    setup: () => ({ args, DEFAULT_SLOT, IconTest }),
 
     template: html` <UiButton v-bind="args" :icon="IconTest">{{DEFAULT_SLOT}}</UiButton>`,
   }),
-  argTypes,
 };

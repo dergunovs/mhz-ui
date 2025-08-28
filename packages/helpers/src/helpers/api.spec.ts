@@ -77,18 +77,18 @@ describe('api', () => {
 
     const handledError = handleError(ERROR);
 
-    expect(handledError).toStrictEqual('Error');
+    expect(handledError).toStrictEqual('Ошибка');
   });
 
   test('handles error with undefined error', async () => {
     const handledError = handleError(undefined);
 
-    expect(handledError).toStrictEqual('Error');
+    expect(handledError).toStrictEqual('Ошибка');
   });
 
   test('handles error with null error', async () => {
     const handledError = handleError(null);
 
-    expect(handledError).toStrictEqual('Error');
+    expect(handledError).toStrictEqual('Ошибка');
   });
 });

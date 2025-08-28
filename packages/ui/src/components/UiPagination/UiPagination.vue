@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-type TLocale = 'ru' | 'en';
+import { TLocale } from '@/components/locales/types';
 
 interface IProps {
   page: number;

@@ -3,15 +3,8 @@ import { ref, computed, Ref } from 'vue';
 import { useAsyncValidator } from '@vueuse/integrations/useAsyncValidator';
 import { RuleItem, Rules } from 'async-validator';
 
-type TLocale = 'ru' | 'en';
-
-const messages = {
-  required: { en: 'This field is required', ru: 'Это поле обязательное' },
-  email: { en: 'This is not correct email', ru: 'Введите корректную почту' },
-  letters: { en: 'Only letters', ru: 'Допустимы только буквы' },
-  min: { en: 'Minimum symbols', ru: 'Минимальное количество символов' },
-  max: { en: 'Maximum symbols', ru: 'Максимальное количество символов' },
-};
+import { TLocale } from '@/locales/types';
+import { MESSAGES } from '@/locales';
 
 export function useValidator<T>(
   formData: Ref<T>,
@@ -53,14 +46,14 @@ export function required(locale: TLocale = 'ru'): RuleItem {
   return {
     required: true,
     whitespace: true,
-    message: messages.required[locale],
+    message: MESSAGES[locale].fieldIsRequired,
   };
 }
 
 export function email(locale: TLocale = 'ru'): RuleItem {
   return {
     type: 'email',
-    message: messages.email[locale],
+    message: MESSAGES[locale].enterCorrectEmail,
   };
 }
 
@@ -68,20 +61,20 @@ export function letters(locale: TLocale = 'ru'): RuleItem {
   return {
     validator: (_rule: object, value: string) => /^[a-zA-Zа-яА-ЯёЁ\s-]+$/.test(value) || value.length === 0,
     type: 'string',
-    message: messages.letters[locale],
+    message: MESSAGES[locale].onlyLetters,
   };
 }
 
 export function min(value: number, locale: TLocale = 'ru'): RuleItem {
   return {
     min: value,
-    message: `${messages.min[locale]}: ${value}`,
+    message: `${MESSAGES[locale].minSymbols}: ${value}`,
   };
 }
 
 export function max(value: number, locale: TLocale = 'ru'): RuleItem {
   return {
     max: value,
-    message: `${messages.max[locale]}: ${value}`,
+    message: `${MESSAGES[locale].maxSymbols}: ${value}`,
   };
 }

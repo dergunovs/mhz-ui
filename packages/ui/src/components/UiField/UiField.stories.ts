@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
+import { html } from 'mhz-helpers';
 
 import { ERROR, LABEL } from './constants';
 
-import { html } from '@/utils';
 import { UiField, UiInput } from '@/components';
 
 const meta: Meta<typeof UiField> = {
@@ -12,29 +12,18 @@ const meta: Meta<typeof UiField> = {
     error: ERROR,
     isRequired: true,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {};
-
-type Story = StoryObj<typeof UiField>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiField> = {
   render: (args) => ({
     components: { UiField, UiInput },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args }),
 
     template: html` <UiField v-bind="args">
       <UiInput modelValue="Text" />
     </UiField>`,
   }),
-  argTypes,
 };

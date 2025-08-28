@@ -15,5 +15,5 @@ export function deleteAuthHeader() {
 }
 
 export function handleError(error: unknown): string {
-  return api.isAxiosError(error) ? error.response?.data.message : 'Error';
+  return api.isAxiosError(error) ? error.response?.data.message : 'Ошибка';
 }

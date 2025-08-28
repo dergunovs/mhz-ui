@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
+import { html } from 'mhz-helpers';
 
 import { LABELS, DATASETS, TITLE, TYPE } from './constants';
 
-import { html } from '@/utils';
 import { UiChart } from '@/components';
 
 const meta: Meta<typeof UiChart> = {
@@ -13,27 +13,20 @@ const meta: Meta<typeof UiChart> = {
     title: TITLE,
     type: TYPE,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
+  argTypes: {
+    type: {
+      options: ['Bar', 'Pie', 'Line'],
     },
   },
 };
 
-const argTypes = {};
-
-type Story = StoryObj<typeof UiChart>;
-
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiChart> = {
   render: (args) => ({
     components: { UiChart },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args }),
 
     template: html` <UiChart v-bind="args" />`,
   }),
-  argTypes,
 };

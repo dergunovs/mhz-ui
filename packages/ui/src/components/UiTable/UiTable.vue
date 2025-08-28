@@ -54,6 +54,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 
+import { TLocale } from '@/components/locales/types';
+
 interface IHeader {
   value?: string;
   title: string;
@@ -63,8 +65,6 @@ interface IModelValue {
   value?: string;
   isAsc: boolean;
 }
-
-type TLocale = 'ru' | 'en';
 
 interface IProps {
   headers: IHeader[];

@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { useArgs } from 'storybook/preview-api';
+import { html } from 'mhz-helpers';
 
 import { MODEL_VALUE, IS_SUCCESS, RESULTS, SEARCH_SCHEME } from './constants';
 
-import { html } from '@/utils';
 import { UiSearch } from '@/components';
 
 const meta: Meta<typeof UiSearch> = {
@@ -14,27 +13,15 @@ const meta: Meta<typeof UiSearch> = {
     results: RESULTS,
     searchScheme: SEARCH_SCHEME,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {
-  searchScheme: { description: '{ type: string; labels: string[]; url: string }[]' },
-};
-
-type Story = StoryObj<typeof UiSearch>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiSearch> = {
   render: (args, { updateArgs }) => ({
     components: { UiSearch },
-    setup: () => ({ args, argTypes, updateArgs }),
+    setup: () => ({ args, updateArgs }),
 
     template: html` <UiSearch v-bind="args" @update:modelValue="update" />`,
 
@@ -44,14 +31,4 @@ export const Primary: Story = {
       },
     },
   }),
-
-  decorators: [
-    (story, context) => {
-      const [args, updateArgs] = useArgs();
-
-      return story({ ...context, updateArgs, args });
-    },
-  ],
-
-  argTypes,
 };

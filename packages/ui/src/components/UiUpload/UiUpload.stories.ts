@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { useArgs } from 'storybook/preview-api';
+import { html } from 'mhz-helpers';
 
 import { LABEL } from './constants';
 
-import { html } from '@/utils';
 import { UiUpload } from '@/components';
 
 let files: File[] = [];
@@ -16,30 +15,15 @@ const meta: Meta<typeof UiUpload> = {
     files,
     file,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {
-  layout: {
-    options: ['primary', 'secondary'],
-  },
-  files: { description: 'File[]' },
-};
-
-type Story = StoryObj<typeof UiUpload>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiUpload> = {
   render: (args, { updateArgs }) => ({
     components: { UiUpload },
-    setup: () => ({ args, argTypes, updateArgs }),
+    setup: () => ({ args, updateArgs }),
 
     template: html` <UiUpload v-bind="args" @remove="remove($event)" @add="add($event)" /> `,
 
@@ -57,22 +41,12 @@ export const Primary: Story = {
       },
     },
   }),
-
-  decorators: [
-    (story, context) => {
-      const [args, updateArgs] = useArgs();
-
-      return story({ ...context, updateArgs, args });
-    },
-  ],
-
-  argTypes,
 };
 
-export const SingleFile: Story = {
+export const SingleFile: StoryObj<typeof UiUpload> = {
   render: (args, { updateArgs }) => ({
     components: { UiUpload },
-    setup: () => ({ args, argTypes, updateArgs }),
+    setup: () => ({ args, updateArgs }),
 
     template: html` <UiUpload v-bind="args" isSingle @remove="remove($event)" @add="add($event)" /> `,
 
@@ -88,14 +62,4 @@ export const SingleFile: Story = {
       },
     },
   }),
-
-  decorators: [
-    (story, context) => {
-      const [args, updateArgs] = useArgs();
-
-      return story({ ...context, updateArgs, args });
-    },
-  ],
-
-  argTypes,
 };

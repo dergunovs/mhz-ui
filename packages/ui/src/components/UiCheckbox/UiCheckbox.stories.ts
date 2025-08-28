@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { html } from '@/utils';
+import { html } from 'mhz-helpers';
 
 import { UiCheckbox } from '@/components';
 
@@ -9,34 +9,16 @@ const meta: Meta<typeof UiCheckbox> = {
     modelValue: true,
     label: 'Label',
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {
-  modelValue: {
-    description: 'boolean | string | number',
-  },
-  initialValue: {
-    description: 'boolean | string | number',
-  },
-};
-
-type Story = StoryObj<typeof UiCheckbox>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiCheckbox> = {
   render: (args) => ({
     components: { UiCheckbox },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args }),
 
     template: html` <UiCheckbox v-bind="args" /> `,
   }),
-  argTypes,
 };

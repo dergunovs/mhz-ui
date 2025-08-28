@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { useArgs } from 'storybook/preview-api';
+import { html } from 'mhz-helpers';
 
 import { MODEL_VALUE, IS_FILTER, OPTIONS_OBJECTS } from './constants';
 
-import { html } from '@/utils';
 import { UiSelect } from '@/components';
 
 const meta: Meta<typeof UiSelect> = {
@@ -13,32 +12,15 @@ const meta: Meta<typeof UiSelect> = {
     options: OPTIONS_OBJECTS,
     isFilter: IS_FILTER,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {
-  modelValue: { description: 'string | { _id?: string; title: string }' },
-  options: { description: 'string[] | { _id?: string; title: string }[]' },
-};
-
-type Story = StoryObj<typeof UiSelect>;
 
 export default meta;
 
-export const Primary: Story = {
-  args: {
-    modelValue: MODEL_VALUE,
-  },
-
+export const Primary: StoryObj<typeof UiSelect> = {
   render: (args, { updateArgs }) => ({
     components: { UiSelect },
-    setup: () => ({ args, argTypes, updateArgs }),
+    setup: () => ({ args, updateArgs }),
 
     template: html` <UiSelect v-bind="args" @update:modelValue="update" />`,
 
@@ -48,22 +30,12 @@ export const Primary: Story = {
       },
     },
   }),
-
-  decorators: [
-    (story, context) => {
-      const [args, updateArgs] = useArgs();
-
-      return story({ ...context, updateArgs, args });
-    },
-  ],
-
-  argTypes,
 };
 
-export const Filter: Story = {
+export const Filter: StoryObj<typeof UiSelect> = {
   render: (args, { updateArgs }) => ({
     components: { UiSelect },
-    setup: () => ({ args, argTypes, updateArgs }),
+    setup: () => ({ args, updateArgs }),
 
     template: html` <UiSelect v-bind="args" @update:modelValue="update" isFilter />`,
 
@@ -73,14 +45,4 @@ export const Filter: Story = {
       },
     },
   }),
-
-  decorators: [
-    (story, context) => {
-      const [args, updateArgs] = useArgs();
-
-      return story({ ...context, updateArgs, args });
-    },
-  ],
-
-  argTypes,
 };

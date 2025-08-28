@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
+import { html } from 'mhz-helpers';
 
 import { MODEL_VALUE } from './constants';
 
-import { html } from '@/utils';
 import { UiInput } from '@/components';
 
 const meta: Meta<typeof UiInput> = {
@@ -10,27 +10,16 @@ const meta: Meta<typeof UiInput> = {
   args: {
     modelValue: MODEL_VALUE,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {};
-
-type Story = StoryObj<typeof UiInput>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiInput> = {
   render: (args) => ({
     components: { UiInput },
-    setup: () => ({ args, argTypes }),
+    setup: () => ({ args }),
 
     template: html` <UiInput v-bind="args" />`,
   }),
-  argTypes,
 };

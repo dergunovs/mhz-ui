@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { useArgs } from 'storybook/preview-api';
+import { html } from 'mhz-helpers';
 
 import { isTall, modelValue, options, title, isInput } from './constants';
 
-import { html } from '@/utils';
 import { UiChoice } from '@/components';
 
 const meta: Meta<typeof UiChoice> = {
@@ -15,25 +14,15 @@ const meta: Meta<typeof UiChoice> = {
     title,
     isInput,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {};
-
-type Story = StoryObj<typeof UiChoice>;
 
 export default meta;
 
-export const Primary: Story = {
+export const Primary: StoryObj<typeof UiChoice> = {
   render: (args, { updateArgs }) => ({
     components: { UiChoice },
-    setup: () => ({ args, argTypes, updateArgs }),
+    setup: () => ({ args, updateArgs }),
 
     template: html` <UiChoice v-bind="args" @update:modelValue="update" />`,
 
@@ -43,14 +32,4 @@ export const Primary: Story = {
       },
     },
   }),
-
-  decorators: [
-    (story, context) => {
-      const [args, updateArgs] = useArgs();
-
-      return story({ ...context, updateArgs, args });
-    },
-  ],
-
-  argTypes,
 };

@@ -30,8 +30,8 @@ describe('date', () => {
     const DURATION_SECONDS = 9;
     const DURATION_MINUTES = 69;
 
-    expect(formatDuration(DURATION_SECONDS)).toStrictEqual(`09 sec.`);
-    expect(formatDuration(DURATION_MINUTES)).toStrictEqual(`1 min. 09 sec.`);
+    expect(formatDuration(DURATION_SECONDS)).toStrictEqual(`09 сек.`);
+    expect(formatDuration(DURATION_MINUTES)).toStrictEqual(`1 мин. 09 сек.`);
     expect(formatDuration()).toStrictEqual(`0`);
     expect(formatDuration(-5)).toStrictEqual(`0`);
   });
@@ -77,8 +77,8 @@ describe('date', () => {
     const DATE_BIG_STRING = '2025-02-09T17:13:17.427Z';
     const DATE_SMALL_STRING = '2025-02-09T17:01:17.427Z';
 
-    expect(subtractDates(DATE_BIG, DATE_SMALL)).toStrictEqual(`12 min. 00 sec.`);
-    expect(subtractDates(DATE_BIG_STRING, DATE_SMALL_STRING)).toStrictEqual(`12 min. 00 sec.`);
+    expect(subtractDates(DATE_BIG, DATE_SMALL)).toStrictEqual(`12 мин. 00 сек.`);
+    expect(subtractDates(DATE_BIG_STRING, DATE_SMALL_STRING)).toStrictEqual(`12 мин. 00 сек.`);
     expect(subtractDates(DATE_BIG, DATE_SMALL, 'en', true)).toStrictEqual(720);
     expect(subtractDates()).toStrictEqual(`0`);
     expect(subtractDates(null, DATE_SMALL)).toStrictEqual(`0`);

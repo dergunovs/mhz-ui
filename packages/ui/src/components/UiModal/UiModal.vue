@@ -26,7 +26,7 @@ import { ref, watch, computed } from 'vue';
 import UiButton from '../UiButton/UiButton.vue';
 import UiClose from '../UiClose/UiClose.vue';
 
-type TLocale = 'ru' | 'en';
+import { TLocale } from '@/components/locales/types';
 
 interface IProps {
   modelValue: boolean;

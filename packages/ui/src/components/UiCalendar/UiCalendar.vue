@@ -8,7 +8,7 @@
       :time="false"
       :events="props.events"
       :minDate="props.minDate"
-      :locale="props.lang === 'en' ? 'en-us' : 'ru'"
+      :locale="props.lang === 'en' ? 'en-gb' : props.lang"
       :todayButton="false"
       @ready="
         (dates: ICalendarReady) =>
@@ -42,8 +42,9 @@ import {
   ICalendarUpdate,
   ICalendarEventClick,
   ICalendarCellClick,
-  TLocale,
 } from './interface';
+
+import { TLocale } from '@/components/locales/types';
 
 interface IProps {
   minDate?: Date;

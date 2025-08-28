@@ -1,9 +1,8 @@
 import { Meta, StoryObj } from '@storybook/vue3';
-import { useArgs } from 'storybook/preview-api';
+import { html } from 'mhz-helpers';
 
 import { TABS } from './constants';
 
-import { html } from '@/utils';
 import { UiTabs } from '@/components';
 
 const meta: Meta<typeof UiTabs> = {
@@ -11,16 +10,8 @@ const meta: Meta<typeof UiTabs> = {
   args: {
     tabs: TABS,
   },
-  parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
-  },
+  argTypes: {},
 };
-
-const argTypes = {};
 
 type Story = StoryObj<typeof UiTabs>;
 
@@ -29,7 +20,7 @@ export default meta;
 export const Primary: Story = {
   render: (args, { updateArgs }) => ({
     components: { UiTabs },
-    setup: () => ({ args, argTypes, updateArgs }),
+    setup: () => ({ args, updateArgs }),
 
     template: html` <UiTabs v-bind="args" @update:modelValue="update" />`,
 
@@ -39,14 +30,4 @@ export const Primary: Story = {
       },
     },
   }),
-
-  decorators: [
-    (story, context) => {
-      const [args, updateArgs] = useArgs();
-
-      return story({ ...context, updateArgs, args });
-    },
-  ],
-
-  argTypes,
 };

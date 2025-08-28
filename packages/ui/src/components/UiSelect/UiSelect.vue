@@ -75,7 +75,7 @@ import UiInput from '../UiInput/UiInput.vue';
 import IconClosed from './icons/closed.svg?component';
 import IconOpened from './icons/opened.svg?component';
 
-type TLocale = 'ru' | 'en';
+import { TLocale } from '@/components/locales/types';
 
 interface IOption {
   _id?: string;
@@ -154,8 +154,6 @@ const displayValue = computed(() => {
   return props.isLocaleField ? (option.title_en ?? '') : (option.title ?? '');
 });
 
-const maxOptionsHeight = computed(() => Math.min(200, window.innerHeight * 0.4));
-
 const getOptionKey = (option: IOption, index: number) => `${option._id || option.title}-${index}`;
 
 const getOptionTitle = (option: IOption) => (props.isLocaleField ? option.title_en : option.title);
@@ -185,11 +183,13 @@ const toggleOptions = () => {
 const checkOpenDirection = () => {
   if (!containerElement.value) return false;
 
+  const BOTTOM_SCREEN_MARGIN = 232;
+
   const containerRect = containerElement.value.getBoundingClientRect();
   const spaceBelow = window.innerHeight - containerRect.bottom;
   const spaceAbove = containerRect.top;
 
-  return spaceBelow < Math.max(200, maxOptionsHeight.value) && spaceAbove > spaceBelow;
+  return spaceBelow < BOTTOM_SCREEN_MARGIN && spaceAbove > spaceBelow;
 };
 
 function hideOptions() {

@@ -75,10 +75,10 @@
 import { ref, computed } from 'vue';
 
 import UiButton from '../UiButton/UiButton.vue';
-import { FILE_SIZE_LIMIT } from './constants';
 import IconUpload from './icons/upload.svg?component';
+import { FILE_SIZE_LIMIT } from './constants';
 
-type TLocale = 'ru' | 'en';
+import { TLocale } from '@/components/locales/types';
 
 interface IProps {
   label?: string;
