@@ -2,26 +2,20 @@
   <div :class="$style.container" ref="containerElement">
     <div :class="$style.input">
       <UiInput
-        :modelValue="
-          typeof props.modelValue === 'string' || typeof props.modelValue === 'number'
-            ? props.modelValue
-            : props.isLocaleField
-              ? props.modelValue?.title_en
-              : props.modelValue?.title
-        "
+        :modelValue="displayValue"
         :disabled="props.isDisabled"
-        @toggle="isShowOptions ? hideOptions() : showOptions()"
+        @toggle="toggleOptions"
         mode="select"
-        :placeholder="placeholderText"
+        :placeholder="messages.placeholder"
         :appendIcon="isShowOptions ? IconOpened : IconClosed"
         data-test="ui-select-input"
       />
 
-      <div v-if="props.isFilter && isShowOptions" :class="$style.filter">
+      <div v-if="props.isFilter && isShowOptions">
         <UiInput
           v-model="filterQuery"
           :disabled="props.isDisabled"
-          :placeholder="filterText"
+          :placeholder="messages.filter"
           isFocus
           data-test="ui-select-input-filter"
         />
@@ -29,7 +23,7 @@
 
       <button
         v-if="props.isClearable && props.modelValue"
-        @click="emit('update:modelValue', undefined)"
+        @click="clearValue"
         type="button"
         :class="$style.clear"
         data-test="ui-select-clear"
@@ -38,34 +32,35 @@
       </button>
     </div>
 
-    <div v-if="isShowOptions" :class="$style.options" ref="optionsElement" data-test="ui-select-options">
+    <div
+      v-if="isShowOptions"
+      :class="[$style.options, { [$style.optionsUp]: isOpenUp }]"
+      ref="optionsElement"
+      data-test="ui-select-options"
+    >
       <div v-if="optionsComputed.length > 0" ref="optionsInnerElement">
         <div
           v-for="(option, index) in optionsComputed"
-          :key="`${option}-${index}`"
-          @click="setOption(option)"
-          @keydown.enter="setOption(option)"
-          @keydown.space="setOption(option)"
-          @mouseenter="setFocusedOptionIndex(index)"
-          @keydown.up="setFocusedOptionIndex(index - 1)"
-          @keydown.down="setFocusedOptionIndex(index + 1)"
-          @keydown.esc="isShowOptions ? hideOptions() : showOptions()"
+          :key="getOptionKey(option, index)"
+          @click="() => setOption(option)"
+          @keydown.enter="() => setOption(option)"
+          @keydown.space="() => setOption(option)"
+          @mouseenter="() => setFocusedOptionIndex(index)"
+          @keydown.up.prevent="() => setFocusedOptionIndex(index - 1)"
+          @keydown.down.prevent="() => setFocusedOptionIndex(index + 1)"
+          @keydown.esc="toggleOptions"
           :class="$style.option"
           tabindex="0"
           ref="optionElement"
-          :data-current="
-            typeof props.modelValue === 'string' || typeof props.modelValue === 'number'
-              ? props.modelValue === option._id
-              : props.modelValue?._id === option._id
-          "
+          :data-current="isCurrentOption(option)"
           data-test="ui-select-option"
         >
-          {{ props.isLocaleField ? option.title_en : option.title }}
+          {{ getOptionTitle(option) }}
         </div>
       </div>
 
       <div v-else @click="hideOptions" :class="$style.option" tabindex="0" data-test="ui-select-no-results">
-        {{ noResultsText }}
+        {{ messages.noResults }}
       </div>
     </div>
   </div>
@@ -80,6 +75,8 @@ import UiInput from '../UiInput/UiInput.vue';
 import IconClosed from './icons/closed.svg?component';
 import IconOpened from './icons/opened.svg?component';
 
+type TLocale = 'ru' | 'en';
+
 interface IOption {
   _id?: string;
   title: string;
@@ -91,7 +88,7 @@ interface IProps {
   options?: string[] | number[] | IOption[];
   isFilter?: boolean;
   isDisabled?: boolean;
-  lang?: string;
+  lang?: TLocale;
   isLocaleField?: boolean;
   isClearable?: boolean;
 }
@@ -102,66 +99,125 @@ const emit = defineEmits<{
   reachedBottom: [];
 }>();
 
+const MESSAGES_LOCALE = {
+  en: {
+    placeholder: 'Choose variant',
+    filter: 'Filter Variants',
+    noResults: 'No results',
+  },
+  ru: {
+    placeholder: 'Выбрать',
+    filter: 'Фильтровать',
+    noResults: 'Нет результатов',
+  },
+};
+
 const filterQuery = ref('');
-
-const placeholderText = computed(() => (props.lang === 'en' ? 'Choose variant' : 'Выбрать'));
-const filterText = computed(() => (props.lang === 'en' ? 'Filter Variants' : 'Фильтровать'));
-const noResultsText = computed(() => (props.lang === 'en' ? 'No results' : 'Нет результатов'));
-
-const isObject = computed(() => typeof props.options?.[0] === 'object');
-
-const optionsComputed = computed(() => {
-  if (!props.options) return [];
-
-  let optionsObject = [...props.options] as IOption[];
-
-  if (!isObject.value) {
-    optionsObject = (props.options as IOption[]).map((option) => {
-      return { _id: option as unknown as string, title: option as unknown as string };
-    });
-  }
-
-  return props.isFilter
-    ? optionsObject.filter((option) => option.title.toLowerCase().includes(filterQuery.value.toLowerCase()))
-    : optionsObject;
-});
-
 const isShowOptions = ref(false);
+const isOpenUp = ref(false);
 
+const containerElement = ref<HTMLElement>();
 const optionsElement = ref<HTMLElement>();
 const optionsInnerElement = ref<HTMLElement>();
 const optionElement = ref<HTMLElement[]>([]);
 
-function setFocusedOptionIndex(index: number) {
-  if (index < 0 || index === optionsComputed.value.length || props.isFilter) return;
+const messages = computed(() => MESSAGES_LOCALE[props.lang || 'ru']);
+
+const isObject = computed(() => {
+  const firstOption = props.options?.[0];
+
+  return firstOption !== undefined && typeof firstOption === 'object';
+});
+
+const isPrimitiveValue = (value: unknown): value is string | number => {
+  return value !== null && (typeof value === 'string' || typeof value === 'number');
+};
+
+const optionsComputed = computed(() => {
+  if (!props.options?.length) return [];
+
+  const optionsArray: IOption[] = isObject.value
+    ? [...(props.options as IOption[])]
+    : (props.options as (string | number)[]).map((item) => ({ _id: String(item), title: String(item) }));
+
+  return props.isFilter
+    ? optionsArray.filter((option) => option.title.toLowerCase().includes(filterQuery.value.toLowerCase()))
+    : optionsArray;
+});
+
+const displayValue = computed(() => {
+  if (isPrimitiveValue(props.modelValue)) return props.modelValue;
+  if (!props.modelValue) return '';
+
+  const option = props.modelValue as IOption;
+
+  return props.isLocaleField ? (option.title_en ?? '') : (option.title ?? '');
+});
+
+const maxOptionsHeight = computed(() => Math.min(200, window.innerHeight * 0.4));
+
+const getOptionKey = (option: IOption, index: number) => `${option._id || option.title}-${index}`;
+
+const getOptionTitle = (option: IOption) => (props.isLocaleField ? option.title_en : option.title);
+
+const isCurrentOption = (option: IOption) => {
+  if (isPrimitiveValue(props.modelValue)) return props.modelValue === (option._id || option.title);
+  if (props.modelValue) return props.modelValue._id === option._id;
+
+  return false;
+};
+
+const setFocusedOptionIndex = (index: number) => {
+  if (index < 0 || index >= optionsComputed.value.length || props.isFilter) return;
   optionElement.value[index]?.focus();
-}
+};
+
+const clearValue = () => emit('update:modelValue', undefined);
+
+const toggleOptions = () => {
+  if (isShowOptions.value) {
+    hideOptions();
+  } else {
+    showOptions();
+  }
+};
+
+const checkOpenDirection = () => {
+  if (!containerElement.value) return false;
+
+  const containerRect = containerElement.value.getBoundingClientRect();
+  const spaceBelow = window.innerHeight - containerRect.bottom;
+  const spaceAbove = containerRect.top;
+
+  return spaceBelow < Math.max(200, maxOptionsHeight.value) && spaceAbove > spaceBelow;
+};
 
 function hideOptions() {
   optionsElement.value?.removeEventListener('scroll', checkScroll, true);
-
   filterQuery.value = '';
   isShowOptions.value = false;
+  isOpenUp.value = false;
 }
 
 function showOptions() {
   if (props.isDisabled) return;
 
+  isOpenUp.value = checkOpenDirection();
   isShowOptions.value = true;
 
   if (!props.isFilter) {
     setTimeout(() => {
       optionsElement.value?.scrollTo(0, 0);
       setFocusedOptionIndex(0);
-
       optionsElement.value?.addEventListener('scroll', checkScroll, true);
     }, 100);
   }
 }
 
 function setOption(option: IOption) {
-  emit('update:modelValue', isObject.value ? option : option._id);
+  const value = isObject.value ? option : option._id || option.title;
 
+  emit('update:modelValue', value);
   hideOptions();
 }
 
@@ -177,11 +233,7 @@ function checkScroll() {
   if (scrollPosition > -100) emit('reachedBottom');
 }
 
-const containerElement = ref<HTMLElement>();
-
-onClickOutside(containerElement, () => {
-  hideOptions();
-});
+onClickOutside(containerElement, hideOptions);
 </script>
 
 <style module lang="scss">
@@ -217,10 +269,6 @@ onClickOutside(containerElement, () => {
   }
 }
 
-.filter {
-  margin-top: 8px;
-}
-
 .options {
   position: absolute;
   z-index: 2;
@@ -233,6 +281,12 @@ onClickOutside(containerElement, () => {
   background-color: var(--color-white);
   border: 1px solid var(--color-gray);
   border-radius: 16px;
+
+  &.optionsUp {
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
 }
 
 .option {
