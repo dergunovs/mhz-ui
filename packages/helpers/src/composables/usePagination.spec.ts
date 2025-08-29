@@ -10,8 +10,8 @@ describe('usePagination', () => {
       const dataRaw = ref<{ data: string[]; total: number } | undefined>(undefined);
       const { data, total, setPaginationPage } = usePagination(dataRaw);
 
-      expect(data.value).toBeUndefined();
-      expect(total.value).toBeUndefined();
+      expect(data.value).toStrictEqual([]);
+      expect(total.value).toBe(0);
       expect(setPaginationPage(1, 1)).toStrictEqual(1);
     });
   });

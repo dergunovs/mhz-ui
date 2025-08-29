@@ -54,6 +54,11 @@ interface IProps {
   isPassword?: boolean;
 }
 
+interface IEmit {
+  'update:modelValue': [value: string | number];
+  toggle: [];
+}
+
 const props = withDefaults(defineProps<IProps>(), {
   modelValue: '',
   type: 'text',
@@ -61,7 +66,7 @@ const props = withDefaults(defineProps<IProps>(), {
   appendIcon: undefined,
 });
 
-const emit = defineEmits<{ 'update:modelValue': [value: string | number]; toggle: [] }>();
+const emit = defineEmits<IEmit>();
 
 const input = ref<HTMLElement>();
 

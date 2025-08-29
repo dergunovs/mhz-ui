@@ -3,18 +3,9 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest, wait } from 'mhz-helpers';
 
+import { MESSAGES } from '../locales';
 import UiSearch from './UiSearch.vue';
-import {
-  MODEL_VALUE,
-  IS_SUCCESS,
-  RESULTS,
-  SEARCH_SCHEME,
-  ENTER_MORE_SYMBOLS,
-  LOADING,
-  NO_RESULTS,
-  DEBOUNCE_TIME,
-  ENTER_MORE_SYMBOLS_EN,
-} from './constants';
+import { MODEL_VALUE, IS_SUCCESS, RESULTS, SEARCH_SCHEME, DEBOUNCE_TIME, LANG } from './constants';
 
 import { wrapperFactory } from '@/test';
 
@@ -30,6 +21,7 @@ let wrapper: VueWrapper<InstanceType<typeof UiSearch>>;
 beforeEach(() => {
   wrapper = wrapperFactory(UiSearch, {
     modelValue: MODEL_VALUE,
+    lang: LANG,
     isSuccess: IS_SUCCESS,
     results: RESULTS,
     searchScheme: SEARCH_SCHEME,
@@ -89,15 +81,15 @@ describe('UiSearch', async () => {
     await wrapper.setProps({ modelValue: '1' });
     await wrapper.find(search).trigger('click');
 
-    expect(wrapper.find(searchResults).text()).toBe(ENTER_MORE_SYMBOLS);
+    expect(wrapper.find(searchResults).text()).toBe(MESSAGES[LANG].enterMoreSymbols);
 
     await wrapper.setProps({ modelValue: '111', isSuccess: false });
 
-    expect(wrapper.find(searchResults).text()).toBe(LOADING);
+    expect(wrapper.find(searchResults).text()).toBe(MESSAGES[LANG].loading);
 
     await wrapper.setProps({ isSuccess: true, results: {} });
 
-    expect(wrapper.find(searchResults).text()).toBe(NO_RESULTS);
+    expect(wrapper.find(searchResults).text()).toBe(MESSAGES[LANG].noResults);
   });
 
   it('shows results', async () => {
@@ -142,13 +134,6 @@ describe('UiSearch', async () => {
     expect(wrapper.find(searchResults).exists()).toBe(false);
     expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['']);
-  });
-
-  it('shows different language messages when lang prop is set to en', async () => {
-    await wrapper.setProps({ modelValue: '11', lang: 'en' });
-    await wrapper.find(search).trigger('click');
-
-    expect(wrapper.find(searchResults).text()).toBe(ENTER_MORE_SYMBOLS_EN);
   });
 
   it('correctly handles search with special characters', async () => {

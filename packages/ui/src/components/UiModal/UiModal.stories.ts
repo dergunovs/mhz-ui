@@ -11,7 +11,11 @@ const meta: Meta<typeof UiModal> = {
     modelValue: MODEL_VALUE,
     isConfirm: IS_CONFIRM,
   },
-  argTypes: {},
+  argTypes: {
+    lang: {
+      options: ['en', 'ru'],
+    },
+  },
 };
 
 export default meta;

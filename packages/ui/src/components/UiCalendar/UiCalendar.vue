@@ -52,13 +52,20 @@ interface IProps {
   lang?: TLocale;
 }
 
-const props = defineProps<IProps>();
-const emit = defineEmits<{
+interface IEmit {
   ready: [dates: ICalendarDates];
   update: [dates: ICalendarDates];
   eventClick: [event: ICalendarEvent<unknown>];
   chooseDate: [date: Date];
-}>();
+}
+
+const props = withDefaults(defineProps<IProps>(), {
+  minDate: undefined,
+  events: () => [],
+  lang: 'ru',
+});
+
+const emit = defineEmits<IEmit>();
 </script>
 
 <style module lang="scss">

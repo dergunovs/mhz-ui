@@ -20,8 +20,12 @@ interface IProps {
   max: number;
 }
 
+interface IEmit {
+  'update:modelValue': [value: [number, number]];
+}
+
 const props = defineProps<IProps>();
-const emit = defineEmits<{ 'update:modelValue': [value: [number, number]] }>();
+const emit = defineEmits<IEmit>();
 </script>
 
 <style src="@vueform/slider/themes/default.css"></style>

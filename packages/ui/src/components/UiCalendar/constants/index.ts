@@ -1,5 +1,7 @@
 import { ICalendarEvent } from '../interface';
 
+export const LANG = 'ru';
+
 export const EVENTS: ICalendarEvent<object>[] = [
   {
     id: 'id of event',

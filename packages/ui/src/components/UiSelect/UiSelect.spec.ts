@@ -174,7 +174,7 @@ describe('UiSelect', async () => {
   it('shows placeholder text in different languages', async () => {
     await wrapper.setProps({ lang: 'en' });
 
-    expect(wrapper.findComponent<DefineComponent>(selectInput).attributes('placeholder')).toBe('Choose variant');
+    expect(wrapper.findComponent<DefineComponent>(selectInput).attributes('placeholder')).toBe('Choose');
 
     await wrapper.setProps({ lang: 'ru' });
 
@@ -190,7 +190,7 @@ describe('UiSelect', async () => {
 
     const filterComponent = wrapper.findComponent(selectInputFilter) as VueWrapper;
 
-    expect(filterComponent.attributes('placeholder')).toBe('Filter Variants');
+    expect(filterComponent.attributes('placeholder')).toBe('Filter');
   });
 
   it('shows no results text in different languages', async () => {

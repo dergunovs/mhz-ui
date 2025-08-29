@@ -20,9 +20,7 @@
       &lt;
     </button>
 
-    <div :class="$style.text" data-test="ui-pagination">
-      {{ page }} {{ props.lang === 'en' ? 'of' : 'из' }} {{ total }}
-    </div>
+    <div :class="$style.text" data-test="ui-pagination">{{ page }} {{ MESSAGES[props.lang].of }} {{ total }}</div>
 
     <button
       @click="handleUpdate(props.page + 1)"
@@ -48,19 +46,24 @@
 
 <script setup lang="ts">
 import { TLocale } from '@/components/locales/types';
+import { MESSAGES } from '@/components/locales';
 
 interface IProps {
   page: number;
-  total?: number;
+  total: number;
   lang?: TLocale;
 }
 
-const props = defineProps<IProps>();
-const emit = defineEmits<{ update: [value: number] }>();
+interface IEmit {
+  update: [value: number];
+}
 
-function handleUpdate(value?: number) {
-  if (!value) return;
+const props = withDefaults(defineProps<IProps>(), {
+  lang: 'ru',
+});
+const emit = defineEmits<IEmit>();
 
+function handleUpdate(value: number) {
   emit('update', value);
   document.querySelector('main')?.scrollTo(0, 0);
 }

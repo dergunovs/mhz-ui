@@ -5,7 +5,7 @@ import { dataTest } from 'mhz-helpers';
 
 import UiCalendar from './UiCalendar.vue';
 
-import { EVENTS } from './constants';
+import { EVENTS, LANG } from './constants';
 import { ICalendarEvent } from './interface';
 import { wrapperFactory } from '@/test';
 
@@ -16,6 +16,7 @@ let wrapper: VueWrapper<InstanceType<typeof UiCalendar>>;
 beforeEach(() => {
   wrapper = wrapperFactory(UiCalendar, {
     events: EVENTS,
+    lang: LANG,
   });
 });
 

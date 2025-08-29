@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.tableBlock" ref="tableBlock">
-    <div v-if="isScrollable" :class="$style.scrollMessage">{{ scrollableText }}</div>
+    <div v-if="isScrollable" :class="$style.scrollMessage">{{ MESSAGES[props.lang].tableIsScrollable }}</div>
 
     <table :class="$style.table" cellpadding="8" cellspacing="0" :border="0" ref="table">
       <thead>
@@ -52,9 +52,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 import { TLocale } from '@/components/locales/types';
+import { MESSAGES } from '@/components/locales';
 
 interface IHeader {
   value?: string;
@@ -73,15 +74,21 @@ interface IProps {
   lang?: TLocale;
 }
 
-const props = defineProps<IProps>();
-const emit = defineEmits<{ 'update:modelValue': [value: IModelValue]; reset: [value: string] }>();
+interface IEmit {
+  'update:modelValue': [value: IModelValue];
+  reset: [value: string];
+}
+
+const props = withDefaults(defineProps<IProps>(), {
+  modelValue: undefined,
+  lang: 'ru',
+});
+const emit = defineEmits<IEmit>();
 
 const tableBlock = ref<HTMLElement>();
 const table = ref<HTMLElement>();
 
 const isScrollable = ref(false);
-
-const scrollableText = computed(() => (props.lang === 'en' ? 'Table is scrollable →' : 'Таблицу можно скроллить →'));
 
 function checkTableSize() {
   if (tableBlock.value && table.value) {

@@ -1,0 +1,28 @@
+export const MESSAGES = {
+  en: {
+    cancel: 'Cancel',
+    confirm: 'Confirm',
+    of: 'of',
+    enterMoreSymbols: 'Enter 3 or more symbols',
+    loading: 'Loading',
+    noResults: 'No results',
+    choose: 'Choose',
+    filter: 'Filter',
+    remove: 'Remove',
+    upload: 'Upload',
+    tableIsScrollable: 'Table is scrollable →',
+  },
+  ru: {
+    cancel: 'Отмена',
+    confirm: 'Подтвердить',
+    of: 'из',
+    enterMoreSymbols: 'Введите хотя бы 3 символа',
+    loading: 'Загрузка',
+    noResults: 'Нет результатов',
+    choose: 'Выбрать',
+    filter: 'Фильтровать',
+    remove: 'Убрать',
+    upload: 'Загрузить',
+    tableIsScrollable: 'Таблицу можно скроллить →',
+  },
+} as const;

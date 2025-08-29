@@ -105,11 +105,30 @@ export default defineConfig({
       },
     },
     {
-      name: 'remove-vue-cal-locales',
+      name: 'manage-vue-cal-locales',
       apply: 'build',
       closeBundle() {
         const distPath = path.resolve('dist');
+        const uiCalendarDir = path.join(distPath, 'UiCalendar');
         const distFiles = fs.readdirSync(distPath);
+
+        const ruSourceFile = distFiles.find((file) => file.startsWith('ru-') && file.endsWith('.js'));
+        const enGbSourceFile = distFiles.find((file) => file.startsWith('en-gb-') && file.endsWith('.js'));
+
+        if (ruSourceFile && enGbSourceFile) {
+          const ruSourcePath = path.join(distPath, ruSourceFile);
+          const enGbSourcePath = path.join(distPath, enGbSourceFile);
+          const ruDestPath = path.join(uiCalendarDir, 'ru.js');
+          const enGbDestPath = path.join(uiCalendarDir, 'en.js');
+
+          fs.copyFileSync(ruSourcePath, ruDestPath);
+          fs.copyFileSync(enGbSourcePath, enGbDestPath);
+
+          fs.unlinkSync(ruSourcePath);
+          fs.unlinkSync(enGbSourcePath);
+        }
+
+        const updatedDistFiles = fs.readdirSync(distPath);
 
         const isProtectedFile = (file: string) => {
           const protectedPatterns = [
@@ -121,30 +140,20 @@ export default defineConfig({
           return protectedPatterns.some((pattern) => pattern.test(file));
         };
 
-        const isAllowedLocale = (file: string) => {
-          const baseName = file.slice(0, -3);
-
-          return baseName.startsWith('ru-') || baseName.startsWith('en-');
-        };
-
-        distFiles.forEach((file) => {
+        updatedDistFiles.forEach((file) => {
           if (!file.endsWith('.js')) return;
           if (isProtectedFile(file)) return;
-          if (isAllowedLocale(file)) return;
 
-          const filePath = path.join(distPath, file);
+          const isLocaleFile = /^[a-z]{2}(-[a-z0-9]+)?\.[a-zA-Z0-9]+\.js$/;
 
-          if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+          if (isLocaleFile) {
+            const filePath = path.join(distPath, file);
+
+            if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+          }
         });
-      },
-    },
-    {
-      name: 'patch-vue-cal-locales',
-      apply: 'build',
-      closeBundle() {
-        const targetFilePath = path.resolve('dist/UiCalendar/UiCalendar.js');
 
-        if (!fs.existsSync(targetFilePath)) return;
+        const targetFilePath = path.resolve('dist/UiCalendar/UiCalendar.js');
         let content = fs.readFileSync(targetFilePath, 'utf8');
 
         const localeObjectMatch = content.match(
@@ -153,11 +162,7 @@ export default defineConfig({
 
         if (!localeObjectMatch) return;
         const oldFullExpression = localeObjectMatch[1];
-
-        const newFullExpression = `let S = /* @__PURE__ */ Object.assign({
-  "../i18n/ru.json": () => import("../ru-Dw5InYRk.js").then((r) => r.default),
-  "../i18n/en-gb.json": () => import("../en-gb-BvrSs5DI.js").then((r) => r.default)
-});`;
+        const newFullExpression = `let S = /* @__PURE__ */ Object.assign({"../i18n/ru.json": () => import("./ru.js").then((r) => r.default),"../i18n/en-gb.json": () => import("./en.js").then((r) => r.default)});`;
 
         content = content.replace(oldFullExpression, newFullExpression);
         fs.writeFileSync(targetFilePath, content, 'utf8');

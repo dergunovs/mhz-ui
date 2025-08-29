@@ -11,7 +11,11 @@ const meta: Meta<typeof UiTable> = {
     headers: HEADERS,
     modelValue: MODEL_VALUE,
   },
-  argTypes: {},
+  argTypes: {
+    lang: {
+      options: ['en', 'ru'],
+    },
+  },
 };
 
 export default meta;

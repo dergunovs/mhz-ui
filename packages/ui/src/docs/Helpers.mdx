@@ -14,7 +14,7 @@ npm i mhz-helpers
 
 `deleteAuthHeader()` удаление заголовка авторизации
 
-`handleError(error: unknown): string` возврат ошибки из error.response.data.message
+`handleError(error: unknown): string` возврат ошибки из error.response.data.message или "Ошибка" по умолчанию
 
 ## query
 
@@ -34,25 +34,21 @@ npm i mhz-helpers
 
 `addZero(value: number): string` добавление нуля к цифре меньше 10
 
-`formatDuration(duration?: number, lang?: string): string` преобразование времени в секундах в формат '1 мин. 09 сек.'
+`formatDuration(duration?: number, lang?: TLocale): string` преобразование времени в секундах в формат '1 мин. 09 сек.'
 
-`formatDate(dateRaw?: string | Date | null, lang?: string): string` преобразование даты в формат '7 февр. 2025 г.' с учётом локали
-
-`formatDateTime(dateRaw?: string | Date | null, lang?: string): string` преобразование даты с временем в формат '7 февр. 2025 г. 14:41' с учётом локали
-
-`subtractDates(dateFuture?: string | Date | null, datePast?: string | Date | null, lang?: string, isRawResult?: boolean): string | number` подсчёт промежутка между датами с преобразованием в формат '1 мин. 09 сек.' или секунды (isRawResult)
-
+`formatDate(dateRaw?: string | Date | null, lang?: TLocale): string` преобразование даты в формат '7 февр. 2025 г.' с учётом локали или '0' при ошибке
+`formatDateTime(dateRaw?: string | Date | null, lang?: TLocale): string` преобразование даты с временем в формат '7 февр. 2025 г. 14:41' с учётом локали или '0' при ошибке
+`subtractDates(dateFuture?: string | Date | null, datePast?: string | Date | null, lang?: TLocale, isRawResult?: boolean): string | number` подсчёт промежутка между датами с преобразованием в формат '1 мин. 09 сек.' или секунды (isRawResult) или '0' при ошибке
 `getDatesByDayGap(gap: number): IDatesGap` воврат промежутков дат с заданным диапазоном от текущей даты в сутках, например, для сравнения предыдущего месяца(gap:30) или недели(gap:7) с текущими
 
-`getFirstAndLastDays(count: number, isMonth: boolean): IWeekDays[]` получение первых и последних дней недель с датами и заголовками, выбор количества недель через weeksCount
-
+`getFirstAndLastDays(count: number, isMonth: boolean): IWeekDays[]` получение первых и последних дней недель с датами и заголовками, выбор количества недель через count, возвращает массив объектов с полями dateFrom, dateTo и label
 `getOneYearFromNow(): string` возвращает в формате UTC string дату, на 1 год больше текущей
 
 ## id
 
 `createTempId(): string` - создание временного id с префиксом temp
 
-`deleteTempId<T extends { _id?: string }>(array: T[], isDeleteAll?: boolean): T[]` удаление у объектов внутри массива поля \_id, если внутри него хранится временный id с префиксом temp или всех полей \_id(isDeleteAll)
+`deleteTempId<T extends { _id?: string }>(array: T[], isDeleteAll?: boolean): T[]` удаление у объектов внутри массива поля \_id, если внутри него хранится временный id с префиксом temp или всех полей \_id(isDeleteAll), возвращает пустой массив при ошибке
 
 ## link
 
@@ -60,7 +56,7 @@ npm i mhz-helpers
 
 ## locale
 
-`localeField<T>(name: string, locale: string)` возвращает поле с локалью (например, name или name_en)
+`localeField<T>(name: string, locale: TLocale)` возвращает поле с локалью (например, name или name_en)
 
 ## numbers
 
@@ -75,6 +71,10 @@ npm i mhz-helpers
 ## scroll
 
 `scrollToTop(element: string)` прокрутка элемента вверх
+
+## string
+
+`html(strings: TemplateStringsArray, ...expressions: unknown[])` хелпер для форматирования строк внутри шаблонов Storybook
 
 ## test
 

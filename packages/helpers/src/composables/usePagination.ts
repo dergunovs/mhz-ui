@@ -1,8 +1,8 @@
 import { computed, Ref } from 'vue';
 
 export function usePagination<T>(dataRaw: Ref<{ data: T[]; total: number } | undefined>) {
-  const data = computed(() => dataRaw.value?.data);
-  const total = computed(() => dataRaw.value?.total);
+  const data = computed(() => dataRaw.value?.data || []);
+  const total = computed(() => dataRaw.value?.total || 0);
 
   function setPaginationPage(pageToSet: number, page: number): number {
     if (!total.value) return page;

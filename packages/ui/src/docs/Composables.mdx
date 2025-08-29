@@ -105,7 +105,7 @@ usePwa(): {
 ## useValidate
 
 ```
-useValidator<T>(formData: Ref<T>, rules: Partial<{ [fieldName in keyof T]: RuleItem[] | false; }>): {
+useValidator<T>(formData: Ref<T>, rules: Partial<{ [fieldName in keyof T]: (RuleItem | ((locale: TLocale) => RuleItem))[] }>, locale?: TLocale): {
     error: (field: string) => string | undefined;
     errors: ComputedRef<Record<string, ValidateError[]> | undefined>;
     isValid: () => boolean;

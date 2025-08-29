@@ -45,7 +45,7 @@
           <div :class="$style.name" data-test="ui-upload-file-name">{{ fileToUpload.name }}</div>
 
           <UiButton @click="remove(fileToUpload)" layout="plain" data-test="ui-upload-file-remove">
-            {{ props.lang === 'en' ? 'Remove' : 'Убрать' }}
+            {{ MESSAGES[props.lang].remove }}
           </UiButton>
         </div>
       </template>
@@ -54,7 +54,7 @@
         <div :class="$style.name" data-test="ui-upload-file-name-single">{{ props.file.name }}</div>
 
         <UiButton @click="remove(props.file)" layout="plain" data-test="ui-upload-file-remove-single">
-          {{ props.lang === 'en' ? 'Remove' : 'Убрать' }}
+          {{ MESSAGES[props.lang].remove }}
         </UiButton>
       </div>
     </div>
@@ -65,7 +65,7 @@
       :data-label="!!props.label"
     >
       <UiButton @click="emit('upload')" data-test="ui-upload">
-        {{ props.lang === 'en' ? 'Upload' : 'Загрузить' }}
+        {{ MESSAGES[props.lang].upload }}
       </UiButton>
     </div>
   </div>
@@ -79,6 +79,7 @@ import IconUpload from './icons/upload.svg?component';
 import { FILE_SIZE_LIMIT } from './constants';
 
 import { TLocale } from '@/components/locales/types';
+import { MESSAGES } from '@/components/locales';
 
 interface IProps {
   label?: string;
@@ -92,6 +93,12 @@ interface IProps {
   lang?: TLocale;
 }
 
+interface IEmit {
+  add: [file: File];
+  remove: [file: File];
+  upload: [];
+}
+
 const props = withDefaults(defineProps<IProps>(), {
   label: undefined,
   error: undefined,
@@ -101,7 +108,7 @@ const props = withDefaults(defineProps<IProps>(), {
   lang: 'ru',
 });
 
-const emit = defineEmits<{ add: [file: File]; remove: [file: File]; upload: [] }>();
+const emit = defineEmits<IEmit>();
 
 const input = ref<HTMLElement>();
 const inputKey = ref(0);

@@ -12,7 +12,11 @@ const meta: Meta<typeof UiSelect> = {
     options: OPTIONS_OBJECTS,
     isFilter: IS_FILTER,
   },
-  argTypes: {},
+  argTypes: {
+    lang: {
+      options: ['en', 'ru'],
+    },
+  },
 };
 
 export default meta;

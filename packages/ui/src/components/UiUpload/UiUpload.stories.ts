@@ -15,7 +15,11 @@ const meta: Meta<typeof UiUpload> = {
     files,
     file,
   },
-  argTypes: {},
+  argTypes: {
+    lang: {
+      options: ['en', 'ru'],
+    },
+  },
 };
 
 export default meta;

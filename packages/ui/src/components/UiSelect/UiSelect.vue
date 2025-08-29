@@ -6,7 +6,7 @@
         :disabled="props.isDisabled"
         @toggle="toggleOptions"
         mode="select"
-        :placeholder="messages.placeholder"
+        :placeholder="MESSAGES[props.lang].choose"
         :appendIcon="isShowOptions ? IconOpened : IconClosed"
         data-test="ui-select-input"
       />
@@ -15,7 +15,7 @@
         <UiInput
           v-model="filterQuery"
           :disabled="props.isDisabled"
-          :placeholder="messages.filter"
+          :placeholder="MESSAGES[props.lang].filter"
           isFocus
           data-test="ui-select-input-filter"
         />
@@ -60,7 +60,7 @@
       </div>
 
       <div v-else @click="hideOptions" :class="$style.option" tabindex="0" data-test="ui-select-no-results">
-        {{ messages.noResults }}
+        {{ MESSAGES[props.lang].noResults }}
       </div>
     </div>
   </div>
@@ -76,6 +76,7 @@ import IconClosed from './icons/closed.svg?component';
 import IconOpened from './icons/opened.svg?component';
 
 import { TLocale } from '@/components/locales/types';
+import { MESSAGES } from '@/components/locales';
 
 interface IOption {
   _id?: string;
@@ -93,24 +94,17 @@ interface IProps {
   isClearable?: boolean;
 }
 
-const props = defineProps<IProps>();
-const emit = defineEmits<{
+interface IEmit {
   'update:modelValue': [value: string | number | IOption | undefined];
   reachedBottom: [];
-}>();
+}
 
-const MESSAGES_LOCALE = {
-  en: {
-    placeholder: 'Choose variant',
-    filter: 'Filter Variants',
-    noResults: 'No results',
-  },
-  ru: {
-    placeholder: 'Выбрать',
-    filter: 'Фильтровать',
-    noResults: 'Нет результатов',
-  },
-};
+const props = withDefaults(defineProps<IProps>(), {
+  modelValue: undefined,
+  options: () => [],
+  lang: 'ru',
+});
+const emit = defineEmits<IEmit>();
 
 const filterQuery = ref('');
 const isShowOptions = ref(false);
@@ -120,8 +114,6 @@ const containerElement = ref<HTMLElement>();
 const optionsElement = ref<HTMLElement>();
 const optionsInnerElement = ref<HTMLElement>();
 const optionElement = ref<HTMLElement[]>([]);
-
-const messages = computed(() => MESSAGES_LOCALE[props.lang || 'ru']);
 
 const isObject = computed(() => {
   const firstOption = props.options?.[0];

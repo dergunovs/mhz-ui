@@ -26,8 +26,12 @@ interface IProps {
   title: string;
 }
 
+interface IEmit {
+  'update:modelValue': [value: boolean];
+}
+
 const props = defineProps<IProps>();
-const emit = defineEmits<{ 'update:modelValue': [value: boolean] }>();
+const emit = defineEmits<IEmit>();
 </script>
 
 <style module lang="scss">

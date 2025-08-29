@@ -16,8 +16,12 @@ interface IProps {
   isDisabled?: boolean;
 }
 
+interface IEmit {
+  'update:modelValue': [value: string];
+}
+
 const props = defineProps<IProps>();
-const emit = defineEmits<{ 'update:modelValue': [value: string] }>();
+const emit = defineEmits<IEmit>();
 
 function handleInput(target: EventTarget | null) {
   emit('update:modelValue', (target as HTMLInputElement).value);

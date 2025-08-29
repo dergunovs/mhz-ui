@@ -11,7 +11,11 @@ const meta: Meta<typeof UiPagination> = {
     page: PAGE,
     total: TOTAL,
   },
-  argTypes: {},
+  argTypes: {
+    lang: {
+      options: ['en', 'ru'],
+    },
+  },
 };
 
 export default meta;

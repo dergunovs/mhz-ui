@@ -10,10 +10,10 @@
       </div>
 
       <div v-if="props.isConfirm" :class="$style.buttons">
-        <UiButton @click="handleConfirm" data-test="ui-modal-confirm">{{ confirmText }}</UiButton>
+        <UiButton @click="handleConfirm" data-test="ui-modal-confirm">{{ MESSAGES[props.lang].confirm }}</UiButton>
 
         <UiButton layout="secondary" @click="debouncedHide" data-test="ui-modal-cancel">
-          {{ cancelText }}
+          {{ MESSAGES[props.lang].cancel }}
         </UiButton>
       </div>
     </div>
@@ -27,6 +27,7 @@ import UiButton from '../UiButton/UiButton.vue';
 import UiClose from '../UiClose/UiClose.vue';
 
 import { TLocale } from '@/components/locales/types';
+import { MESSAGES } from '@/components/locales';
 
 interface IProps {
   modelValue: boolean;
@@ -35,15 +36,19 @@ interface IProps {
   lang?: TLocale;
 }
 
-const props = defineProps<IProps>();
+interface IEmit {
+  'update:modelValue': [value: boolean];
+  confirm: [];
+}
 
-const emit = defineEmits<{ 'update:modelValue': [value: boolean]; confirm: [] }>();
+const props = withDefaults(defineProps<IProps>(), {
+  width: '360',
+  lang: 'ru',
+});
 
-const cancelText = computed(() => (props.lang === 'en' ? 'Cancel' : 'Отмена'));
-const confirmText = computed(() => (props.lang === 'en' ? 'Confirm' : 'Подтвердить'));
+const emit = defineEmits<IEmit>();
 
-const widthComputed = computed(() => (props.width ? `${props.width}px` : 'auto'));
-const minWidthComputed = computed(() => (props.width ? `${props.width}px` : '50%'));
+const widthComputed = computed(() => `${props.width}px`);
 
 const body = document.querySelector('body');
 
@@ -97,7 +102,6 @@ function debouncedHide() {
   flex-direction: column;
   gap: 12px;
   width: v-bind(widthComputed);
-  min-width: v-bind(minWidthComputed);
   max-width: calc(100% - 32px);
   height: auto;
   padding: 24px;

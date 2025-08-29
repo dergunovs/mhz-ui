@@ -13,7 +13,11 @@ const meta: Meta<typeof UiSearch> = {
     results: RESULTS,
     searchScheme: SEARCH_SCHEME,
   },
-  argTypes: {},
+  argTypes: {
+    lang: {
+      options: ['en', 'ru'],
+    },
+  },
 };
 
 export default meta;

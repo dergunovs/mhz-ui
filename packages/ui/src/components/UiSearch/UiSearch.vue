@@ -12,15 +12,15 @@
 
     <div v-if="isShowResults && props.modelValue.length > 0" :class="$style.results" data-test="ui-search-results">
       <template v-if="props.modelValue.length < 3">
-        {{ props.lang === 'en' ? ENTER_MORE_SYMBOLS_EN : ENTER_MORE_SYMBOLS }}
+        {{ MESSAGES[props.lang].enterMoreSymbols }}
       </template>
 
       <template v-if="props.modelValue.length > 2 && !props.isSuccess">
-        {{ props.lang === 'en' ? LOADING_EN : LOADING }}
+        {{ MESSAGES[props.lang].loading }}
       </template>
 
       <template v-if="props.modelValue.length > 2 && !isResults && props.isSuccess">
-        {{ props.lang === 'en' ? NO_RESULTS_EN : NO_RESULTS }}
+        {{ MESSAGES[props.lang].noResults }}
       </template>
 
       <template v-if="props.modelValue.length > 2 && isResults && props.isSuccess">
@@ -61,17 +61,10 @@ import { debounce } from 'perfect-debounce';
 
 import UiInput from '../UiInput/UiInput.vue';
 import IconSearch from './icons/search.svg?component';
-import {
-  DEBOUNCE_TIME,
-  ENTER_MORE_SYMBOLS,
-  LOADING,
-  NO_RESULTS,
-  ENTER_MORE_SYMBOLS_EN,
-  LOADING_EN,
-  NO_RESULTS_EN,
-} from './constants';
+import { DEBOUNCE_TIME } from './constants';
 
 import { TLocale } from '@/components/locales/types';
+import { MESSAGES } from '@/components/locales';
 
 interface ISearchScheme {
   type: string;
@@ -87,8 +80,15 @@ interface IProps {
   lang?: TLocale;
 }
 
-const props = defineProps<IProps>();
-const emit = defineEmits<{ 'update:modelValue': [value: string] }>();
+interface IEmit {
+  'update:modelValue': [value: string];
+}
+
+const props = withDefaults(defineProps<IProps>(), {
+  results: undefined,
+  lang: 'ru',
+});
+const emit = defineEmits<IEmit>();
 
 const isShowResults = ref(false);
 

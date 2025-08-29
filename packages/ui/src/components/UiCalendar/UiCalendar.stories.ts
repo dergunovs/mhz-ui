@@ -2,7 +2,7 @@ import { ref } from 'vue';
 import { Meta, StoryObj } from '@storybook/vue3';
 import { html } from 'mhz-helpers';
 
-import { EVENTS } from './constants';
+import { EVENTS, LANG } from './constants';
 import { ICalendarEvent } from './interface';
 
 import { UiCalendar, UiModal } from '@/components';
@@ -11,6 +11,7 @@ const meta: Meta<typeof UiCalendar> = {
   component: UiCalendar,
   args: {
     events: EVENTS,
+    lang: LANG,
   },
   argTypes: {
     lang: {

@@ -64,6 +64,10 @@ interface IProps {
   isSwitcher?: boolean;
 }
 
+interface IEmit {
+  'update:modelValue': [value: TInitialValue];
+}
+
 const props = withDefaults(defineProps<IProps>(), {
   modelValue: DEFAULT_MODEL_VALUE,
   initialValue: DEFAULT_MODEL_VALUE,
@@ -73,7 +77,7 @@ const props = withDefaults(defineProps<IProps>(), {
   error: false,
 });
 
-const emit = defineEmits<{ 'update:modelValue': [value: TInitialValue] }>();
+const emit = defineEmits<IEmit>();
 
 const checkbox = ref<HTMLInputElement>();
 
