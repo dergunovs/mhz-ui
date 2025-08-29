@@ -102,7 +102,7 @@ function debouncedHide() {
   flex-direction: column;
   gap: 12px;
   width: v-bind(widthComputed);
-  max-width: calc(100% - 32px);
+  max-width: 100%;
   height: auto;
   padding: 24px;
   outline: none;
