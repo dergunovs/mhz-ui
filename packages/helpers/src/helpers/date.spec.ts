@@ -50,7 +50,7 @@ describe('date', () => {
     expect(formatDate(DATE, 'en')).toStrictEqual(`Feb 9, 2025`);
     expect(formatDate()).toStrictEqual(`0`);
     expect(formatDate(null)).toStrictEqual(`0`);
-    expect(formatDate(undefined)).toStrictEqual(`0`);
+    expect(formatDate()).toStrictEqual(`0`);
   });
 
   test('formats date and time', async () => {
@@ -60,7 +60,7 @@ describe('date', () => {
     expect(formatDateTime(DATE, 'en')).toStrictEqual(`Feb 9, 2025, 5:13 PM`);
     expect(formatDateTime()).toStrictEqual(`0`);
     expect(formatDateTime(null)).toStrictEqual(`0`);
-    expect(formatDateTime(undefined)).toStrictEqual(`0`);
+    expect(formatDateTime()).toStrictEqual(`0`);
   });
 
   test('formats date and time with invalid date', async () => {

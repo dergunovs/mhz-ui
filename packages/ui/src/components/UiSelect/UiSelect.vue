@@ -118,7 +118,7 @@ const optionElement = ref<HTMLElement[]>([]);
 const isObject = computed(() => {
   const firstOption = props.options?.[0];
 
-  return firstOption !== undefined && typeof firstOption === 'object';
+  return firstOption != undefined && typeof firstOption === 'object';
 });
 
 const isPrimitiveValue = (value: unknown): value is string | number => {

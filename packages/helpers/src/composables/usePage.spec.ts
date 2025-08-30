@@ -93,11 +93,11 @@ describe('usePage', () => {
 
   test('handles undefined filter in usePage', async () => {
     await withSetup(async () => {
-      const { query, setQueryFilter } = usePage(undefined);
+      const { query, setQueryFilter } = usePage();
 
       expect(query.value).toStrictEqual({ filter: {}, page: 1, sort: { isAsc: true, value: undefined } });
 
-      setQueryFilter(undefined);
+      setQueryFilter();
 
       expect(query.value).toStrictEqual({ filter: {}, page: 1, sort: { isAsc: true, value: undefined } });
     });
