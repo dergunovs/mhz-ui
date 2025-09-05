@@ -1,6 +1,6 @@
 <template>
   <div v-if="props.modelValue" @mousedown="debouncedHide" :class="$style.container" data-test="ui-modal-container">
-    <div @mousedown.stop :class="$style.modal" data-test="ui-modal">
+    <div @mousedown.stop :class="$style.modal" :data-scrollable="props.isScrollable" data-test="ui-modal">
       <div :class="$style.header">
         <UiClose @click="debouncedHide" data-test="ui-modal-close" />
       </div>
@@ -31,6 +31,7 @@ import { MESSAGES } from '@/components/locales';
 
 interface IProps {
   modelValue: boolean;
+  isScrollable?: boolean;
   isConfirm?: boolean;
   width?: string;
   lang?: TLocale;
@@ -109,6 +110,11 @@ function debouncedHide() {
   background-color: var(--color-white);
   border-radius: 16px;
   box-shadow: 0 0 16px 0 var(--color-gray-transparent);
+
+  &[data-scrollable='true'] {
+    max-height: 64dvh;
+    overflow-y: auto;
+  }
 }
 
 .header {
