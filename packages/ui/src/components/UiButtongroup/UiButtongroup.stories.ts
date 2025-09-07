@@ -3,10 +3,10 @@ import { html } from 'mhz-helpers';
 
 import { isTall, modelValue, options, title, isInput } from './constants';
 
-import { UiChoice } from '@/components';
+import { UiButtongroup } from '@/components';
 
-const meta: Meta<typeof UiChoice> = {
-  component: UiChoice,
+const meta: Meta<typeof UiButtongroup> = {
+  component: UiButtongroup,
   args: {
     isTall,
     modelValue,
@@ -19,12 +19,12 @@ const meta: Meta<typeof UiChoice> = {
 
 export default meta;
 
-export const Primary: StoryObj<typeof UiChoice> = {
+export const Primary: StoryObj<typeof UiButtongroup> = {
   render: (args, { updateArgs }) => ({
-    components: { UiChoice },
+    components: { UiButtongroup },
     setup: () => ({ args, updateArgs }),
 
-    template: html` <UiChoice v-bind="args" @update:modelValue="update" />`,
+    template: html` <UiButtongroup v-bind="args" @update:modelValue="update" />`,
 
     methods: {
       update(value: number) {

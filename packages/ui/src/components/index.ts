@@ -1,11 +1,11 @@
 export { default as UiBreadcrumbs } from './UiBreadcrumbs/UiBreadcrumbs.vue';
 export { default as UiButton } from './UiButton/UiButton.vue';
+export { default as UiButtongroup } from './UiButtongroup/UiButtongroup.vue';
 export { default as UiCalendar } from './UiCalendar/UiCalendar.vue';
 export { default as UiChart } from './UiChart/UiChart.vue';
 export { default as UiCheckbox } from './UiCheckbox/UiCheckbox.vue';
 export { default as UiChip } from './UiChip/UiChip.vue';
 export { default as UiClose } from './UiClose/UiClose.vue';
-export { default as UiChoice } from './UiChoice/UiChoice.vue';
 export { default as UiEditor } from './UiEditor/UiEditor.vue';
 export { default as UiField } from './UiField/UiField.vue';
 export { default as UiFlex } from './UiFlex/UiFlex.vue';

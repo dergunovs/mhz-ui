@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest } from 'mhz-helpers';
 
-import UiChoice from './UiChoice.vue';
+import UiButtongroup from './UiButtongroup.vue';
 
 import { isTall, modelValue, options, title, isInput } from './constants';
 import { wrapperFactory } from '@/test';
@@ -12,17 +12,17 @@ const buttons = dataTest('ui-choice-buttons');
 const button = dataTest('ui-choice-button');
 const input = dataTest('ui-choice-input');
 
-let wrapper: VueWrapper<InstanceType<typeof UiChoice>>;
+let wrapper: VueWrapper<InstanceType<typeof UiButtongroup>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiChoice, { options, modelValue, title, isTall, isInput });
+  wrapper = wrapperFactory(UiButtongroup, { options, modelValue, title, isTall, isInput });
 });
 
 enableAutoUnmount(afterEach);
 
-describe('UiChoice', async () => {
+describe('UiButtongroup', async () => {
   it('exists', async () => {
-    expect(wrapper.findComponent(UiChoice)).toBeTruthy();
+    expect(wrapper.findComponent(UiButtongroup)).toBeTruthy();
   });
 
   it('matches snapshot', async () => {
