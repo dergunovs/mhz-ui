@@ -184,7 +184,12 @@ const emit = defineEmits<IEmit>();
   :global(.vuecal__scrollable--month-view .vuecal__event),
   :global(.vuecal--default-theme .vuecal__event-details) {
     padding: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    background: none;
     border-radius: 12px;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
   }
 
   :global(.vuecal--default-theme .vuecal__cell--disabled .vuecal__cell-date),

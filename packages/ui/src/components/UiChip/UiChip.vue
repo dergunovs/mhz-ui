@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<IProps>(), {
   flex-wrap: wrap;
   gap: 4px;
   align-items: center;
-  padding: 2px 8px 1px;
+  padding: 4px 8px 3px;
   font-size: 0.875rem;
   background-color: var(--color-gray-light);
   border-bottom: 1px solid var(--color-gray-dark);

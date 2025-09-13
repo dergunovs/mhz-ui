@@ -9,6 +9,7 @@ const meta: Meta<typeof UiTabs> = {
   component: UiTabs,
   args: {
     tabs: TABS,
+    modelValue: TABS[0].value,
   },
   argTypes: {},
 };
