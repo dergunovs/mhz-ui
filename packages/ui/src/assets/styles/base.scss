@@ -78,3 +78,19 @@ img {
   height: auto;
   pointer-events: none;
 }
+
+.dark {
+  h1,
+  h2,
+  h3 {
+    color: var(--color-white);
+  }
+
+  a {
+    color: var(--color-gray);
+
+    &:hover {
+      color: var(--color-gray-dark);
+    }
+  }
+}

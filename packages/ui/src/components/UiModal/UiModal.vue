@@ -5,7 +5,7 @@
         <UiClose @click="debouncedHide" data-test="ui-modal-close" />
       </div>
 
-      <div data-test="ui-modal-slot">
+      <div :class="$style.slot" data-test="ui-modal-slot">
         <slot></slot>
       </div>
 
@@ -130,6 +130,11 @@ function debouncedHide() {
 :global(.dark) {
   .modal {
     background-color: var(--color-black);
+    box-shadow: 0 0 16px 0 var(--color-black-transparent);
+  }
+
+  .slot {
+    color: var(--color-white);
   }
 }
 </style>

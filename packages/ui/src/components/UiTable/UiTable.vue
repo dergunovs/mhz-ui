@@ -155,11 +155,11 @@ onBeforeUnmount(() => {
   background-color: var(--color-gray-light-extra);
 
   &:first-child {
-    border-top-left-radius: 8px;
+    border-top-left-radius: 6px;
   }
 
   &:last-child {
-    border-top-right-radius: 8px;
+    border-top-right-radius: 6px;
   }
 }
 

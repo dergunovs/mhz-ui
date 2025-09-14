@@ -74,4 +74,10 @@ const widthComputed = computed(() => (props.grow ? '100%' : 'auto'));
   justify-content: v-bind(justifyContentComputed);
   width: v-bind(widthComputed);
 }
+
+:global(.dark) {
+  .flex {
+    color: var(--color-white);
+  }
+}
 </style>

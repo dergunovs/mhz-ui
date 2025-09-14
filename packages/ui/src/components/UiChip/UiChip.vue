@@ -24,6 +24,7 @@ const props = withDefaults(defineProps<IProps>(), {
   align-items: center;
   padding: 4px 8px 3px;
   font-size: 0.875rem;
+  color: var(--color-black);
   background-color: var(--color-gray-light);
   border-bottom: 1px solid var(--color-gray-dark);
   border-radius: 8px;

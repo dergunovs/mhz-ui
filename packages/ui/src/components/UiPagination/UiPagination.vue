@@ -107,7 +107,7 @@ function handleUpdate(value: number) {
 
 :global(.dark) {
   .button {
-    background-color: var(--color-gray);
+    background-color: var(--color-gray-dark);
   }
 
   .text {
