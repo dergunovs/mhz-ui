@@ -37,4 +37,11 @@ const props = withDefaults(defineProps<IProps>(), {
     color: var(--color-error-dark);
   }
 }
+
+:global(.dark) {
+  .chip {
+    background-color: var(--color-gray-dark);
+    border-bottom: 1px solid var(--color-gray-dark-extra);
+  }
+}
 </style>

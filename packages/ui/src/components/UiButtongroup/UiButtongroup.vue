@@ -113,6 +113,15 @@ function updateValue(value: number | Event) {
 }
 
 :global(.dark) {
+  .button {
+    background-color: var(--color-gray-dark);
+
+    &[data-current='true'] {
+      color: var(--color-white);
+      background-color: var(--color-accent-dark);
+    }
+  }
+
   .title {
     color: var(--color-white);
   }
