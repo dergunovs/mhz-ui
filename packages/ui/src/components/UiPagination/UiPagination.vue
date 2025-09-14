@@ -104,4 +104,14 @@ function handleUpdate(value: number) {
 .text {
   padding: 0 8px;
 }
+
+:global(.dark) {
+  .button {
+    background-color: var(--color-gray);
+  }
+
+  .text {
+    color: var(--color-white);
+  }
+}
 </style>

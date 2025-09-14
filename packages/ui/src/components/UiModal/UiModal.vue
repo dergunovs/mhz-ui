@@ -126,4 +126,10 @@ function debouncedHide() {
   display: flex;
   gap: 16px;
 }
+
+:global(.dark) {
+  .modal {
+    background-color: var(--color-black);
+  }
+}
 </style>

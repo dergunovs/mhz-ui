@@ -64,7 +64,6 @@ const emit = defineEmits<IEmit>();
   height: 40px;
   padding: 0 12px;
   font-size: 1rem;
-  color: var(--color-text);
   text-align: left;
   cursor: pointer;
   background: none;
@@ -92,5 +91,11 @@ const emit = defineEmits<IEmit>();
 
 .spoiler {
   padding: 8px 0;
+}
+
+:global(.dark) {
+  .titleBlock {
+    background-color: var(--color-gray);
+  }
 }
 </style>

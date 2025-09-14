@@ -12,7 +12,7 @@ function getAbsolutePath(packageName: string) {
 const config: StorybookConfig = {
   framework: { name: getAbsolutePath('@storybook/vue3-vite'), options: {} },
   stories: ['../src/docs/*.mdx', '../src/**/*.stories.ts'],
-  addons: ['@storybook/addon-docs'],
+  addons: ['@storybook/addon-docs', '@storybook/addon-themes'],
   core: { disableTelemetry: true, disableWhatsNewNotifications: true },
 };
 

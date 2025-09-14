@@ -8,7 +8,7 @@
   >
     <span v-if="props.error" :class="$style.required" data-test="ui-checkbox-error">{{ props.error }}</span>
 
-    <span v-if="props.label">
+    <span v-if="props.label" :class="$style.label">
       <span data-test="ui-checkbox-label">{{ props.label }}</span>
       <span v-if="props.labelSub" :class="$style.labelSub" data-test="ui-checkbox-label-sub">{{ props.labelSub }}</span>
       <span v-if="props.isRequired" :class="$style.required" data-test="ui-checkbox-required">*</span>
@@ -39,7 +39,7 @@
       <div v-if="!props.isSwitcher" :class="[$style.line, $style.rightLine]" data-test="ui-checkbox-line"></div>
     </div>
 
-    <span v-if="props.labelSwitcher">
+    <span v-if="props.labelSwitcher" :class="$style.label">
       <span data-test="ui-checkbox-label-switcher">{{ props.labelSwitcher }}</span>
       <span v-if="props.isRequired" :class="$style.required" data-test="ui-checkbox-required-switcher">*</span>
     </span>
@@ -245,5 +245,15 @@ function handleChange() {
 
 .required {
   color: var(--color-error);
+}
+
+:global(.dark) {
+  .label {
+    color: var(--color-white);
+  }
+
+  .labelSub {
+    color: var(--color-gray);
+  }
 }
 </style>

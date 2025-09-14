@@ -18,8 +18,8 @@ export const DATASETS = [
   {
     data: [4, 6, 0, 2, 2, 0, 6],
     label: 'Ноги',
-    borderColor: '#000080',
-    backgroundColor: '#000080',
+    borderColor: '#0000ff',
+    backgroundColor: '#0000ff',
   },
   {
     data: [22, 18, 8, 10, 25, 18, 16],

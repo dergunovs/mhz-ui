@@ -167,4 +167,10 @@ onMounted(async () => {
     height: 24px;
   }
 }
+
+:global(.dark) {
+  .input {
+    background-color: var(--color-gray);
+  }
+}
 </style>

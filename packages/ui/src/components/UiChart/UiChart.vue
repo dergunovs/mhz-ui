@@ -74,6 +74,8 @@ Chart.register(
 );
 
 Chart.defaults.font.family = 'base';
+Chart.defaults.borderColor = '#ddd';
+Chart.defaults.color = '#aaa';
 Chart.defaults.elements.point.radius = 4;
 Chart.defaults.elements.point.hoverRadius = 5;
 Chart.defaults.elements.line.borderWidth = 3.2;
@@ -109,5 +111,11 @@ const chartOptions = {
 
 .title {
   font-size: 1.5rem;
+}
+
+:global(.dark) {
+  .title {
+    color: var(--color-white);
+  }
 }
 </style>

@@ -157,4 +157,26 @@ const props = withDefaults(defineProps<IProps>(), {
     }
   }
 }
+
+:global(.dark) {
+  .button {
+    &[data-layout='secondary'] {
+      color: var(--color-white);
+      border-color: var(--color-white);
+
+      &:hover {
+        color: var(--color-gray);
+        border-color: var(--color-gray);
+      }
+    }
+
+    &[data-layout='plain'] {
+      color: var(--color-white);
+
+      &:hover {
+        color: var(--color-gray);
+      }
+    }
+  }
+}
 </style>

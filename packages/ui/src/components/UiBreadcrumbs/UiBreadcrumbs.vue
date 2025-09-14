@@ -105,4 +105,14 @@ const linkComponent = computed(() => (window['IS_STORYBOOK'] ? 'a' : RouterLink)
     color: var(--color-white);
   }
 }
+
+:global(.dark) {
+  .link {
+    color: var(--color-white);
+
+    &:hover {
+      color: var(--color-gray);
+    }
+  }
+}
 </style>

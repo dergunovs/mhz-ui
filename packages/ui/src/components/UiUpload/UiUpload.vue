@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.upload">
-      <div v-if="props.label">
+      <div :class="$style.label" v-if="props.label">
         <span data-test="ui-upload-label">{{ props.label }}</span>
         <span v-if="props.isRequired" :class="$style.error" data-test="ui-upload-required">*</span>
       </div>
@@ -195,6 +195,20 @@ function handleFileChange(target: EventTarget | null) {
 .uploadButton {
   &[data-label='true'] {
     margin-top: 28px;
+  }
+}
+
+:global(.dark) {
+  .label {
+    color: var(--color-white);
+  }
+
+  .text {
+    color: var(--color-white);
+  }
+
+  .name {
+    color: var(--color-white);
   }
 }
 </style>

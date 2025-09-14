@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.field">
     <label>
-      <span data-test="ui-field-label">{{ props.label }}</span>
+      <span :class="$style.label" data-test="ui-field-label">{{ props.label }}</span>
       <span v-if="props.isRequired" :class="$style.error" data-test="ui-field-required">*</span>
     </label>
 
@@ -34,5 +34,11 @@ const props = defineProps<IProps>();
 
 .error {
   color: var(--color-error);
+}
+
+:global(.dark) {
+  .label {
+    color: var(--color-white);
+  }
 }
 </style>

@@ -306,4 +306,15 @@ onClickOutside(containerElement, hideOptions);
     }
   }
 }
+
+:global(.dark) {
+  .options {
+    background-color: var(--color-gray);
+    border: 1px solid var(--color-gray-dark-extra);
+
+    [data-current='true'] {
+      background-color: var(--color-gray-dark);
+    }
+  }
+}
 </style>

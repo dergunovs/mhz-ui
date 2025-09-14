@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.container">
-    <label data-test="ui-choice-title">{{ props.title }}</label>
+    <label :class="$style.title" data-test="ui-choice-title">{{ props.title }}</label>
 
     <div :class="$style.options" :data-tall="props.isTall" data-test="ui-choice-buttons">
       <button
@@ -110,5 +110,11 @@ function updateValue(value: number | Event) {
   border: none;
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
+}
+
+:global(.dark) {
+  .title {
+    color: var(--color-white);
+  }
 }
 </style>

@@ -3,7 +3,7 @@
 exports[`UiUpload > matches snapshot 1`] = `
 "<div class="_container_7eea80">
   <div class="_upload_7eea80">
-    <div><span data-test="ui-upload-label">Field label</span>
+    <div class="_label_7eea80"><span data-test="ui-upload-label">Field label</span>
       <!--v-if-->
     </div>
     <div class="_addButton_7eea80"><button layout="secondary" isdisabled="true" icon="[object Object]" data-test="ui-upload-add"> Add file

@@ -199,4 +199,22 @@ onBeforeUnmount(() => {
     color: var(--color-primary);
   }
 }
+
+:global(.dark) {
+  .table {
+    border: 1px solid var(--color-gray-dark-extra);
+
+    td {
+      border: 1px solid var(--color-gray-dark-extra);
+    }
+  }
+
+  .th {
+    background-color: var(--color-gray-dark-extra);
+  }
+
+  .label {
+    color: var(--color-white);
+  }
+}
 </style>

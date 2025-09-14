@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui",
   "description": "Mhz ui kit",
-  "version": "1.2.27",
+  "version": "1.2.28",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -42,6 +42,7 @@
   "devDependencies": {
     "@eslint/js": "9.35.0",
     "@storybook/addon-docs": "9.1.5",
+    "@storybook/addon-themes": "9.1.5",
     "@storybook/vue3": "9.1.5",
     "@storybook/vue3-vite": "9.1.5",
     "@types/node": "24.3.3",

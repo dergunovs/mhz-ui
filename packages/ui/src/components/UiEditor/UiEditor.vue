@@ -123,4 +123,10 @@ onBeforeUnmount(() => {
     outline: none;
   }
 }
+
+:global(.dark) {
+  .container {
+    background-color: var(--color-gray-dark);
+  }
+}
 </style>

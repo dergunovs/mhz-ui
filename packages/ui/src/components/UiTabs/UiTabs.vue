@@ -67,4 +67,22 @@ const emit = defineEmits<IEmit>();
     padding: 12px 5px;
   }
 }
+
+:global(.dark) {
+  .tabs {
+    border-bottom: 2px solid var(--color-primary-dark);
+  }
+
+  .tab {
+    background-color: var(--color-gray-dark);
+
+    &:hover {
+      background-color: var(--color-gray);
+    }
+
+    &[data-active='true'] {
+      background-color: var(--color-primary-dark);
+    }
+  }
+}
 </style>

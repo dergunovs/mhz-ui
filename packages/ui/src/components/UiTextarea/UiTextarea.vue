@@ -56,4 +56,10 @@ function handleInput(target: EventTarget | null) {
     color: var(--color-gray-dark-extra);
   }
 }
+
+:global(.dark) {
+  .textarea {
+    background-color: var(--color-gray);
+  }
+}
 </style>

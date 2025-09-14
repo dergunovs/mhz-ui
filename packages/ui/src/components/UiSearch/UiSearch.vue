@@ -178,4 +178,10 @@ const linkComponent = computed(() => (window['IS_STORYBOOK'] ? 'a' : RouterLink)
     width: 100%;
   }
 }
+
+:global(.dark) {
+  .results {
+    background-color: var(--color-gray);
+  }
+}
 </style>

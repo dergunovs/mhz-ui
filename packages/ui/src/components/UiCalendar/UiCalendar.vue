@@ -105,6 +105,7 @@ const emit = defineEmits<IEmit>();
   }
 
   :global(.vuecal__header) {
+    background-color: var(--color-gray-light-extra);
     border: 1px solid var(--color-gray);
   }
 
@@ -143,6 +144,7 @@ const emit = defineEmits<IEmit>();
     font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0;
+    background-color: var(--color-transparent);
   }
 
   :global(
@@ -200,6 +202,38 @@ const emit = defineEmits<IEmit>();
 
   :global(.vuecal--default-theme .vuecal__weekday-day) {
     opacity: 1;
+  }
+}
+
+:global(.dark) {
+  .container {
+    :global(.vuecal--default-theme .vuecal__scrollable-wrap) {
+      border: 1px solid var(--color-gray-dark-extra);
+    }
+
+    :global(.vuecal__header) {
+      color: var(--color-white);
+      background-color: var(--color-gray-dark-extra);
+      border: 1px solid var(--color-gray-dark-extra);
+    }
+
+    :global(.vuecal__title-bar) {
+      background-color: var(--color-gray-dark-extra);
+    }
+
+    :global(.vuecal__headings) {
+      color: var(--color-white);
+      background-color: var(--color-black);
+      border-bottom: none;
+    }
+
+    :global(.vuecal--default-theme .vuecal__weekday) {
+      background-color: var(--color-black);
+    }
+
+    :global(.vuecal--default-theme:is(.vuecal--sm, .vuecal--lg) .vuecal__scrollable--month-view .vuecal__cell-date) {
+      color: var(--color-white);
+    }
   }
 }
 </style>
