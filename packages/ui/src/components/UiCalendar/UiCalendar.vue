@@ -209,16 +209,18 @@ const emit = defineEmits<IEmit>();
   .container {
     :global(.vuecal--default-theme .vuecal__scrollable-wrap) {
       border: 1px solid var(--color-gray-dark-extra);
+      border-top: none;
     }
 
     :global(.vuecal__header) {
       color: var(--color-white);
-      background-color: var(--color-gray-dark-extra);
+      background-color: var(--color-primary-dark);
       border: 1px solid var(--color-gray-dark-extra);
+      border-bottom: none;
     }
 
     :global(.vuecal__title-bar) {
-      background-color: var(--color-gray-dark-extra);
+      background-color: var(--color-primary-dark);
     }
 
     :global(.vuecal__headings) {

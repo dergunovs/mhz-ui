@@ -168,6 +168,11 @@ const props = withDefaults(defineProps<IProps>(), {
         color: var(--color-gray);
         border-color: var(--color-gray);
       }
+
+      &:disabled {
+        color: var(--color-gray-dark-extra);
+        border-color: var(--color-gray-dark-extra);
+      }
     }
 
     &[data-layout='plain'] {
@@ -175,6 +180,10 @@ const props = withDefaults(defineProps<IProps>(), {
 
       &:hover {
         color: var(--color-gray);
+      }
+
+      &:disabled {
+        color: var(--color-gray-dark);
       }
     }
   }

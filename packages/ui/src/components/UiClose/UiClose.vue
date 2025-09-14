@@ -69,4 +69,14 @@ const props = defineProps<IProps>();
     background-color: var(--color-gray-dark-extra);
   }
 }
+
+:global(.dark) {
+  .close {
+    background-color: var(--color-gray-dark-extra);
+
+    &[data-delete='true'] {
+      background-color: var(--color-error-dark);
+    }
+  }
+}
 </style>

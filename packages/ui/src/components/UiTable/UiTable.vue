@@ -155,11 +155,11 @@ onBeforeUnmount(() => {
   background-color: var(--color-gray-light-extra);
 
   &:first-child {
-    border-top-left-radius: 6px;
+    border-top-left-radius: 8px;
   }
 
   &:last-child {
-    border-top-right-radius: 6px;
+    border-top-right-radius: 8px;
   }
 }
 
@@ -205,12 +205,12 @@ onBeforeUnmount(() => {
     border: 1px solid var(--color-gray-dark-extra);
 
     td {
-      border: 1px solid var(--color-gray-dark-extra);
+      border-top: 1px solid var(--color-gray-dark-extra);
     }
   }
 
   .th {
-    background-color: var(--color-gray-dark-extra);
+    background-color: var(--color-primary-dark);
   }
 
   .label {
