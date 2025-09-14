@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { withSetup } from '..';
 import { useTimer } from '.';
@@ -10,7 +10,7 @@ Object.defineProperty(globalThis, 'setTimeout', { writable: true, value: mockSet
 Object.defineProperty(globalThis, 'clearTimeout', { writable: true, value: mockClearTimeout });
 
 describe('useTimer', () => {
-  test('initializes timer values correctly', async () => {
+  it('initializes timer values correctly', async () => {
     await withSetup(async () => {
       const { timer, duration } = useTimer();
 
@@ -19,7 +19,7 @@ describe('useTimer', () => {
     });
   });
 
-  test('updates time correctly', async () => {
+  it('updates time correctly', async () => {
     vi.useFakeTimers();
 
     await withSetup(async () => {
@@ -43,7 +43,7 @@ describe('useTimer', () => {
     vi.useRealTimers();
   });
 
-  test('handles timer overflow correctly', async () => {
+  it('handles timer overflow correctly', async () => {
     vi.useFakeTimers();
 
     await withSetup(async () => {
@@ -62,7 +62,7 @@ describe('useTimer', () => {
     vi.useRealTimers();
   });
 
-  test('handles multiple start/stop cycles', async () => {
+  it('handles multiple start/stop cycles', async () => {
     vi.useFakeTimers();
 
     await withSetup(async () => {

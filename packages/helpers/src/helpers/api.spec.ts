@@ -1,16 +1,16 @@
 import axios from 'axios';
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { api, setBaseURL, setAuthHeader, deleteAuthHeader, handleError } from '.';
 
 const TOKEN = '123123123';
 
 describe('api', () => {
-  test('exports axios', async () => {
+  it('exports axios', async () => {
     expect(axios).toStrictEqual(api);
   });
 
-  test('sets base url', async () => {
+  it('sets base url', async () => {
     expect(axios.defaults.baseURL).toStrictEqual(undefined);
 
     const BASE_URL = 'site.ru';
@@ -20,13 +20,13 @@ describe('api', () => {
     expect(api.defaults.baseURL).toStrictEqual(BASE_URL);
   });
 
-  test('sets base url with empty string', async () => {
+  it('sets base url with empty string', async () => {
     setBaseURL('');
 
     expect(api.defaults.baseURL).toStrictEqual('');
   });
 
-  test('sets auth header', async () => {
+  it('sets auth header', async () => {
     expect(api.defaults.headers.common['Authorization']).toStrictEqual(undefined);
 
     setAuthHeader(TOKEN);
@@ -34,13 +34,13 @@ describe('api', () => {
     expect(api.defaults.headers.common['Authorization']).toStrictEqual(`Bearer ${TOKEN}`);
   });
 
-  test('sets auth header with empty token', async () => {
+  it('sets auth header with empty token', async () => {
     setAuthHeader('');
 
     expect(api.defaults.headers.common['Authorization']).toStrictEqual(`Bearer `);
   });
 
-  test('deletes auth header', async () => {
+  it('deletes auth header', async () => {
     setAuthHeader(TOKEN);
 
     expect(api.defaults.headers.common['Authorization']).toStrictEqual(`Bearer ${TOKEN}`);
@@ -50,7 +50,7 @@ describe('api', () => {
     expect(api.defaults.headers.common['Authorization']).toStrictEqual(undefined);
   });
 
-  test('handles error with axios error', async () => {
+  it('handles error with axios error', async () => {
     const ERROR_TEXT = 'Текст ошибки';
 
     const ERROR = new api.AxiosError(
@@ -72,7 +72,7 @@ describe('api', () => {
     expect(handledError).toStrictEqual(ERROR_TEXT);
   });
 
-  test('handles error with non-axios error', async () => {
+  it('handles error with non-axios error', async () => {
     const ERROR = new Error('Текст ошибки');
 
     const handledError = handleError(ERROR);
@@ -80,13 +80,13 @@ describe('api', () => {
     expect(handledError).toStrictEqual('Ошибка');
   });
 
-  test('handles error with undefined error', async () => {
+  it('handles error with undefined error', async () => {
     const handledError = handleError(undefined);
 
     expect(handledError).toStrictEqual('Ошибка');
   });
 
-  test('handles error with null error', async () => {
+  it('handles error with null error', async () => {
     const handledError = handleError(null);
 
     expect(handledError).toStrictEqual('Ошибка');

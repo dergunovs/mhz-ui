@@ -1,5 +1,5 @@
 import { nextTick } from 'vue';
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { withSetup } from '..';
 import { usePageLock } from '.';
@@ -16,7 +16,7 @@ describe('usePageLock', () => {
     vi.clearAllMocks();
   });
 
-  test('locks page correctly', async () => {
+  it('locks page correctly', async () => {
     await withSetup(async () => {
       usePageLock();
 
@@ -27,7 +27,7 @@ describe('usePageLock', () => {
     });
   });
 
-  test('handles visibility change to visible', async () => {
+  it('handles visibility change to visible', async () => {
     const mockRelease = vi.fn();
 
     mockRequest.mockResolvedValue({ release: mockRelease });

@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { withSetup } from '..';
 import { convertParams, usePage, usePageNumber } from '.';
@@ -8,7 +8,7 @@ const newPage = 2;
 const newFilter = { _id: '123' };
 
 describe('usePage', () => {
-  test('converts params for number input', async () => {
+  it('converts params for number input', async () => {
     await withSetup(async () => {
       const page = ref(1);
 
@@ -16,7 +16,7 @@ describe('usePage', () => {
     });
   });
 
-  test('converts params for object input', async () => {
+  it('converts params for object input', async () => {
     await withSetup(async () => {
       const filter = ref({ page: newPage, sort: { value: 'title', isAsc: true }, filter: {} });
       const initiator = 'catalog';
@@ -45,7 +45,7 @@ describe('usePage', () => {
     });
   });
 
-  test('handles usePage', async () => {
+  it('handles usePage', async () => {
     await withSetup(async () => {
       const { query, resetQuery, setQueryPage, setQueryFilter } = usePage();
 
@@ -76,7 +76,7 @@ describe('usePage', () => {
     });
   });
 
-  test('handles usePageNumber', async () => {
+  it('handles usePageNumber', async () => {
     await withSetup(async () => {
       const { page, resetPage, setPage } = usePageNumber();
 
@@ -91,7 +91,7 @@ describe('usePage', () => {
     });
   });
 
-  test('handles undefined filter in usePage', async () => {
+  it('handles undefined filter in usePage', async () => {
     await withSetup(async () => {
       const { query, setQueryFilter } = usePage();
 
@@ -103,7 +103,7 @@ describe('usePage', () => {
     });
   });
 
-  test('handles empty object filter in usePage', async () => {
+  it('handles empty object filter in usePage', async () => {
     await withSetup(async () => {
       const { query, setQueryFilter } = usePage({});
 
@@ -115,7 +115,7 @@ describe('usePage', () => {
     });
   });
 
-  test('handles negative page number', async () => {
+  it('handles negative page number', async () => {
     await withSetup(async () => {
       const { query, setQueryPage } = usePage();
 
@@ -125,7 +125,7 @@ describe('usePage', () => {
     });
   });
 
-  test('handles zero page number', async () => {
+  it('handles zero page number', async () => {
     await withSetup(async () => {
       const { query, setQueryPage } = usePage();
 

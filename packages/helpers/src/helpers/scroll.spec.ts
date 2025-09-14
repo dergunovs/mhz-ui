@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { scrollToTop } from '.';
 
@@ -12,7 +12,7 @@ describe('scrollToTop', () => {
     globalThis.document.querySelector = mockQuerySelector;
   };
 
-  test('scrolls to top of element', async () => {
+  it('scrolls to top of element', async () => {
     setupMocks();
     const element = '#test-element';
 
@@ -22,7 +22,7 @@ describe('scrollToTop', () => {
     expect(mockScrollTo).toHaveBeenCalledWith(0, 0);
   });
 
-  test('handles case when element is not found', async () => {
+  it('handles case when element is not found', async () => {
     setupMocks();
     const element = '#non-existent-element';
 
@@ -34,7 +34,7 @@ describe('scrollToTop', () => {
     expect(mockScrollTo).not.toHaveBeenCalled();
   });
 
-  test('scrolls to top with different element selector', async () => {
+  it('scrolls to top with different element selector', async () => {
     setupMocks();
     const element = '.container';
 
@@ -44,7 +44,7 @@ describe('scrollToTop', () => {
     expect(mockScrollTo).toHaveBeenCalledWith(0, 0);
   });
 
-  test('handles empty string selector', async () => {
+  it('handles empty string selector', async () => {
     setupMocks();
     const element = '';
 
@@ -54,7 +54,7 @@ describe('scrollToTop', () => {
     expect(mockScrollTo).not.toHaveBeenCalledTimes(0);
   });
 
-  test('handles null selector', async () => {
+  it('handles null selector', async () => {
     setupMocks();
     const element = null as unknown as string;
 
@@ -64,7 +64,7 @@ describe('scrollToTop', () => {
     expect(mockScrollTo).not.toHaveBeenCalledTimes(0);
   });
 
-  test('handles invalid selector', async () => {
+  it('handles invalid selector', async () => {
     setupMocks();
     const element = 'invalid-selector[';
 

@@ -1,4 +1,4 @@
-import { vi, describe, expect, test } from 'vitest';
+import { vi, describe, expect, it } from 'vitest';
 
 import { withSetup } from '..';
 import { isAuth, setAuth, logout, getCookieToken, setCookieToken, deleteCookieToken, useAuth } from '.';
@@ -15,11 +15,11 @@ vi.spyOn(document, 'cookie', 'set').mockImplementation((value: string) => {
 vi.spyOn(document, 'cookie', 'get').mockImplementation(() => `${tokenName}=${tokenValue}`);
 
 describe('useAuth', () => {
-  test('exports is user auth', async () => {
+  it('exports is user auth', async () => {
     expect(isAuth.value).toStrictEqual(false);
   });
 
-  test('sets auth', async () => {
+  it('sets auth', async () => {
     expect(isAuth.value).toStrictEqual(false);
 
     setAuth(true);
@@ -31,7 +31,7 @@ describe('useAuth', () => {
     expect(isAuth.value).toStrictEqual(false);
   });
 
-  test('handles logout', async () => {
+  it('handles logout', async () => {
     const spyDeleteAuthHeader = vi.fn();
 
     const SITE = 'https://site.ru';
@@ -48,19 +48,19 @@ describe('useAuth', () => {
     expect(globalThis.location.href).toStrictEqual(`${SITE}/${URL}`);
   });
 
-  test('gets cookie token', async () => {
+  it('gets cookie token', async () => {
     tokenValue = '';
 
     expect(getCookieToken(tokenName)).toStrictEqual(tokenValue);
   });
 
-  test('sets cookie token', async () => {
+  it('sets cookie token', async () => {
     setCookieToken(newTokenValue, tokenName);
 
     expect(getCookieToken(tokenName)).toStrictEqual(newTokenValue);
   });
 
-  test('deletes cookie token', async () => {
+  it('deletes cookie token', async () => {
     expect(getCookieToken(tokenName)).toStrictEqual(newTokenValue);
 
     deleteCookieToken(tokenName);
@@ -68,7 +68,7 @@ describe('useAuth', () => {
     expect(getCookieToken(tokenName)).toStrictEqual('');
   });
 
-  test('handles auth', async () => {
+  it('handles auth', async () => {
     const spySetAuthHeader = vi.fn();
 
     await withSetup(async () => {

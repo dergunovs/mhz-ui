@@ -1,11 +1,11 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { ref } from 'vue';
 
 import { withSetup } from '..';
 import { usePagination } from '.';
 
 describe('usePagination', () => {
-  test('initializes with undefined data and total', async () => {
+  it('initializes with undefined data and total', async () => {
     await withSetup(async () => {
       const dataRaw = ref<{ data: string[]; total: number } | undefined>(undefined);
       const { data, total, setPaginationPage } = usePagination(dataRaw);
@@ -16,7 +16,7 @@ describe('usePagination', () => {
     });
   });
 
-  test('sets pagination page correctly', async () => {
+  it('sets pagination page correctly', async () => {
     await withSetup(async () => {
       const dataRaw = ref<{ data: string[]; total: number } | undefined>({
         data: ['item1', 'item2'],
@@ -31,7 +31,7 @@ describe('usePagination', () => {
     });
   });
 
-  test('handles data and total correctly', async () => {
+  it('handles data and total correctly', async () => {
     await withSetup(async () => {
       const dataRaw = ref<{ data: string[]; total: number } | undefined>({
         data: ['item1', 'item2'],

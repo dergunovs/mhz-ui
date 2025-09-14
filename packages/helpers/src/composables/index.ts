@@ -8,3 +8,4 @@ export * from './useValidate';
 export * from './useCalendar';
 export * from './usePageLock';
 export * from './useTimer';
+export * from './useDarkMode';

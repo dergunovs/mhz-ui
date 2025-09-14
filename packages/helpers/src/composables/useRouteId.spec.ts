@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { createApp, defineComponent, Ref } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -6,7 +6,7 @@ import { useRouteId } from '.';
 
 const template = { template: '<template><div></div></template>' };
 
-async function setupTest(route: string, paramName: string, isQuery = false) {
+async function setupit(route: string, paramName: string, isQuery = false) {
   const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -44,20 +44,20 @@ async function setupTest(route: string, paramName: string, isQuery = false) {
 }
 
 describe('useRouteId', () => {
-  test('returns route param id', async () => {
-    const { capturedId } = await setupTest('/user/123', 'id');
+  it('returns route param id', async () => {
+    const { capturedId } = await setupit('/user/123', 'id');
 
     expect(capturedId?.value).toBe('123');
   });
 
-  test('returns route query id', async () => {
-    const { capturedId } = await setupTest('/?id=456', 'id', true);
+  it('returns route query id', async () => {
+    const { capturedId } = await setupit('/?id=456', 'id', true);
 
     expect(capturedId?.value).toBe('456');
   });
 
-  test('returns empty string when id is not found', async () => {
-    const { capturedId } = await setupTest('/user/123', 'nonexistent');
+  it('returns empty string when id is not found', async () => {
+    const { capturedId } = await setupit('/user/123', 'nonexistent');
 
     expect(capturedId?.value).toBe('');
   });

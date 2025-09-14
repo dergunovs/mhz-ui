@@ -1,10 +1,10 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { withSetup } from '..';
 import { useCalendar } from '.';
 
 describe('useCalendar', () => {
-  test('initializes with empty dates and isDatesReady as false', async () => {
+  it('initializes with empty dates and isDatesReady as false', async () => {
     await withSetup(async () => {
       const { dateFrom, dateTo, isDatesReady } = useCalendar();
 
@@ -14,7 +14,7 @@ describe('useCalendar', () => {
     });
   });
 
-  test('updates dates correctly', async () => {
+  it('updates dates correctly', async () => {
     await withSetup(async () => {
       const { dateFrom, dateTo, isDatesReady, updateDates } = useCalendar();
 
@@ -31,7 +31,7 @@ describe('useCalendar', () => {
     });
   });
 
-  test('handles empty dates object', async () => {
+  it('handles empty dates object', async () => {
     await withSetup(async () => {
       const { dateFrom, dateTo, isDatesReady, updateDates } = useCalendar();
 

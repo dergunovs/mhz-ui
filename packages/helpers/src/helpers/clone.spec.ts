@@ -1,10 +1,10 @@
 import { ref } from 'vue';
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { clone } from '.';
 
 describe('clone', () => {
-  test('clones object', async () => {
+  it('clones object', async () => {
     const obj = {
       value: {
         inner: [
@@ -19,7 +19,7 @@ describe('clone', () => {
     expect(clonedObject).toStrictEqual(obj);
   });
 
-  test('clones ref object', async () => {
+  it('clones ref object', async () => {
     const obj = ref({
       value: {
         inner: [
@@ -36,7 +36,7 @@ describe('clone', () => {
     expect(clonedObject).toStrictEqual(rawData);
   });
 
-  test('clones primitive values', async () => {
+  it('clones primitive values', async () => {
     const stringVal = 'test';
     const numberVal = 42;
     const booleanVal = true;
@@ -50,7 +50,7 @@ describe('clone', () => {
     expect(clone(undefinedVal)).toStrictEqual(undefinedVal);
   });
 
-  test('clones array', async () => {
+  it('clones array', async () => {
     const arr = [1, 2, 3, { id: 1, name: 'test' }];
     const clonedArr = clone(arr);
 
@@ -58,7 +58,7 @@ describe('clone', () => {
     expect(clonedArr).not.toBe(arr);
   });
 
-  test('clones empty object', async () => {
+  it('clones empty object', async () => {
     const emptyObj = {};
     const clonedEmptyObj = clone(emptyObj);
 
@@ -66,7 +66,7 @@ describe('clone', () => {
     expect(clonedEmptyObj).not.toBe(emptyObj);
   });
 
-  test('clones empty array', async () => {
+  it('clones empty array', async () => {
     const emptyArr: never[] = [];
     const clonedEmptyArr = clone(emptyArr);
 
@@ -74,7 +74,7 @@ describe('clone', () => {
     expect(clonedEmptyArr).not.toBe(emptyArr);
   });
 
-  test('clones date object', async () => {
+  it('clones date object', async () => {
     const date = new Date('2025-01-01');
     const clonedDate = clone(date);
 
@@ -82,13 +82,13 @@ describe('clone', () => {
     expect(clonedDate).not.toBe(date);
   });
 
-  test('handles null input', async () => {
+  it('handles null input', async () => {
     const clonedNull = clone(null);
 
     expect(clonedNull).toBeNull();
   });
 
-  test('handles undefined input', async () => {
+  it('handles undefined input', async () => {
     const clonedUndefined = clone(undefined);
 
     expect(clonedUndefined).toBeUndefined();

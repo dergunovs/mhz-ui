@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { QueryCache, QueryClient } from '@tanstack/vue-query';
 
 import { logout } from '../composables/useAuth';
@@ -7,13 +7,13 @@ import { handleError, deleteAuthHeader } from './api';
 import { queryClient, vueQueryOptions } from '.';
 
 describe('query', () => {
-  test('exports queryClient', async () => {
+  it('exports queryClient', async () => {
     const queryClientInstance = new QueryClient();
 
     expect(queryClientInstance).toStrictEqual(queryClient);
   });
 
-  test('exports query options', async () => {
+  it('exports query options', async () => {
     const toast = { error: (text: string) => alert(text) };
     const logoutUrl = '/';
     const tokenName = 'token';

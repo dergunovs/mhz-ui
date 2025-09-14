@@ -1,11 +1,11 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { nextTick, ref } from 'vue';
 
 import { withSetup } from '..';
 import { useValidator, required, email, letters, min, max } from '.';
 
 describe('useValidator', () => {
-  test('validates required field correctly', async () => {
+  it('validates required field correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ name: '' });
       const rules = { name: [required] };
@@ -26,7 +26,7 @@ describe('useValidator', () => {
     });
   });
 
-  test('validates email field correctly', async () => {
+  it('validates email field correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ email: '' });
       const rules = { email: [email] };
@@ -56,7 +56,7 @@ describe('useValidator', () => {
     });
   });
 
-  test('validates letters only field correctly', async () => {
+  it('validates letters only field correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ name: '' });
       const rules = { name: [letters] };
@@ -84,7 +84,7 @@ describe('useValidator', () => {
     });
   });
 
-  test('validates minimum length correctly', async () => {
+  it('validates minimum length correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ password: '' });
       const rules = { password: [min(6)] };
@@ -107,7 +107,7 @@ describe('useValidator', () => {
     });
   });
 
-  test('validates maximum length correctly', async () => {
+  it('validates maximum length correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ name: '' });
       const rules = { name: [max(10)] };
@@ -130,7 +130,7 @@ describe('useValidator', () => {
     });
   });
 
-  test('validates multiple fields correctly', async () => {
+  it('validates multiple fields correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ name: '', email: '' });
       const rules = {
@@ -156,7 +156,7 @@ describe('useValidator', () => {
     });
   });
 
-  test('handles English error messages correctly', async () => {
+  it('handles English error messages correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ name: '' });
       const rules = { name: [required] };
@@ -170,7 +170,7 @@ describe('useValidator', () => {
     });
   });
 
-  test('handles error object correctly', async () => {
+  it('handles error object correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ name: '' });
       const rules = { name: [required] };

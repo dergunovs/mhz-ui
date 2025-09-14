@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { withSetup } from '..';
 import { useInfiniteScroll } from '.';
@@ -14,7 +14,7 @@ const data: IData[] = [
 ];
 
 describe('useInfiniteScroll', () => {
-  test('initializes with page 1 and empty allData', async () => {
+  it('initializes with page 1 and empty allData', async () => {
     await withSetup(async () => {
       const { page, allData } = useInfiniteScroll<IData>();
 
@@ -23,7 +23,7 @@ describe('useInfiniteScroll', () => {
     });
   });
 
-  test('adds data', async () => {
+  it('adds data', async () => {
     await withSetup(async () => {
       const { allData, addData } = useInfiniteScroll<IData>();
 
@@ -39,7 +39,7 @@ describe('useInfiniteScroll', () => {
     });
   });
 
-  test('handles scroll', async () => {
+  it('handles scroll', async () => {
     await withSetup(async () => {
       const { page, handleScroll } = useInfiniteScroll<IData>();
 
@@ -53,7 +53,7 @@ describe('useInfiniteScroll', () => {
     });
   });
 
-  test('does not change page when loading', async () => {
+  it('does not change page when loading', async () => {
     await withSetup(async () => {
       const { page, handleScroll } = useInfiniteScroll<IData>();
 
@@ -67,7 +67,7 @@ describe('useInfiniteScroll', () => {
     });
   });
 
-  test('handles empty data array', async () => {
+  it('handles empty data array', async () => {
     await withSetup(async () => {
       const { allData, addData } = useInfiniteScroll<IData>();
 
@@ -79,7 +79,7 @@ describe('useInfiniteScroll', () => {
     });
   });
 
-  test('handles negative page number', async () => {
+  it('handles negative page number', async () => {
     await withSetup(async () => {
       const { page, handleScroll } = useInfiniteScroll<IData>();
 
@@ -91,7 +91,7 @@ describe('useInfiniteScroll', () => {
     });
   });
 
-  test('handles zero page number', async () => {
+  it('handles zero page number', async () => {
     await withSetup(async () => {
       const { page, handleScroll } = useInfiniteScroll<IData>();
 
