@@ -113,6 +113,10 @@ function updateValue(value: number | Event) {
 }
 
 :global(.dark) {
+  .options {
+    border: none;
+  }
+
   .button {
     background-color: var(--color-gray-dark);
 

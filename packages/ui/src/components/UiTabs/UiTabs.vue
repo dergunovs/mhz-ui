@@ -76,10 +76,6 @@ const emit = defineEmits<IEmit>();
   .tab {
     background-color: var(--color-gray-dark);
 
-    &:hover {
-      background-color: var(--color-gray-dark-extra);
-    }
-
     &[data-active='true'] {
       background-color: var(--color-primary-dark);
     }

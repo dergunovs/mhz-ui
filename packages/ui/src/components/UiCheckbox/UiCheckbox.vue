@@ -255,5 +255,17 @@ function handleChange() {
   .labelSub {
     color: var(--color-gray);
   }
+
+  .input {
+    &:checked + .fake {
+      background-color: var(--color-primary);
+    }
+  }
+
+  .fake {
+    &[data-switcher='true'] {
+      background-color: var(--color-gray-dark);
+    }
+  }
 }
 </style>
