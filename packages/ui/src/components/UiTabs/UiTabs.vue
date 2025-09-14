@@ -77,7 +77,7 @@ const emit = defineEmits<IEmit>();
     background-color: var(--color-gray-dark);
 
     &:hover {
-      background-color: var(--color-gray);
+      background-color: var(--color-gray-dark-extra);
     }
 
     &[data-active='true'] {

@@ -95,7 +95,7 @@ const emit = defineEmits<IEmit>();
 
 :global(.dark) {
   .titleBlock {
-    background-color: var(--color-gray);
+    background-color: var(--color-gray-dark);
   }
 }
 </style>

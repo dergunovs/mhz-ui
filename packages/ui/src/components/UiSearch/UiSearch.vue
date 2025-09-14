@@ -165,6 +165,7 @@ const linkComponent = computed(() => (window['IS_STORYBOOK'] ? 'a' : RouterLink)
   display: flex;
   gap: 4px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 @media (max-width: $tablet) {
@@ -181,7 +182,15 @@ const linkComponent = computed(() => (window['IS_STORYBOOK'] ? 'a' : RouterLink)
 
 :global(.dark) {
   .results {
-    background-color: var(--color-gray);
+    background-color: var(--color-gray-dark);
+  }
+
+  .link {
+    color: var(--color-black);
+
+    &:hover {
+      color: var(--color-gray-dark-extra);
+    }
   }
 }
 </style>

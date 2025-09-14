@@ -170,7 +170,8 @@ onMounted(async () => {
 
 :global(.dark) {
   .input {
-    background-color: var(--color-gray);
+    background-color: var(--color-gray-dark);
+    border: 1px solid var(--color-gray-dark-extra);
   }
 }
 </style>

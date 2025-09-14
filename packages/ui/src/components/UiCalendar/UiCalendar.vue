@@ -216,7 +216,6 @@ const emit = defineEmits<IEmit>();
       color: var(--color-white);
       background-color: var(--color-primary-dark);
       border: 1px solid var(--color-gray-dark-extra);
-      border-bottom: none;
     }
 
     :global(.vuecal__title-bar) {

@@ -59,7 +59,7 @@ function handleInput(target: EventTarget | null) {
 
 :global(.dark) {
   .textarea {
-    background-color: var(--color-gray);
+    background-color: var(--color-gray-dark);
   }
 }
 </style>

@@ -108,6 +108,7 @@ function handleUpdate(value: number) {
 :global(.dark) {
   .button {
     background-color: var(--color-gray-dark);
+    border: 1px solid var(--color-gray-dark-extra);
   }
 
   .text {

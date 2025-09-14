@@ -287,6 +287,7 @@ onClickOutside(containerElement, hideOptions);
   align-items: center;
   height: 40px;
   padding: 0 16px;
+  color: var(--color-black);
   cursor: pointer;
   outline: none;
 
@@ -309,11 +310,11 @@ onClickOutside(containerElement, hideOptions);
 
 :global(.dark) {
   .options {
-    background-color: var(--color-gray);
+    background-color: var(--color-gray-dark);
     border: 1px solid var(--color-gray-dark-extra);
 
     [data-current='true'] {
-      background-color: var(--color-gray-dark);
+      background-color: var(--color-gray-dark-extra);
     }
   }
 }

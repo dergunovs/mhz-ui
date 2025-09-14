@@ -160,6 +160,11 @@ const props = withDefaults(defineProps<IProps>(), {
 
 :global(.dark) {
   .button {
+    &:disabled {
+      color: var(--color-gray);
+      background: var(--color-gray-dark-extra);
+    }
+
     &[data-layout='secondary'] {
       color: var(--color-white);
       border-color: var(--color-white);
@@ -171,6 +176,7 @@ const props = withDefaults(defineProps<IProps>(), {
 
       &:disabled {
         color: var(--color-gray-dark-extra);
+        background: none;
         border-color: var(--color-gray-dark-extra);
       }
     }
@@ -183,7 +189,8 @@ const props = withDefaults(defineProps<IProps>(), {
       }
 
       &:disabled {
-        color: var(--color-gray-dark);
+        color: var(--color-gray-dark-extra);
+        background: none;
       }
     }
   }
