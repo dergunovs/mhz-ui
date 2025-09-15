@@ -78,6 +78,7 @@ function updateValue(value: number | Event) {
   align-items: center;
   justify-content: center;
   font-size: 1rem;
+  color: var(--color-black);
   cursor: pointer;
   background-color: var(--color-gray-light);
   border: none;

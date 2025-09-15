@@ -159,6 +159,7 @@ onMounted(async () => {
   position: absolute;
   top: calc(50% - 8px);
   right: 12px;
+  color: var(--color-gray-dark);
   cursor: pointer;
 
   &[data-password='true'] {
@@ -172,6 +173,10 @@ onMounted(async () => {
   .input {
     background-color: var(--color-gray-dark);
     border: 1px solid var(--color-gray-dark-extra);
+  }
+
+  .icon {
+    color: var(--color-gray-dark-extra);
   }
 }
 </style>

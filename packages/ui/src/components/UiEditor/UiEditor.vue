@@ -127,6 +127,11 @@ onBeforeUnmount(() => {
 :global(.dark) {
   .container {
     background-color: var(--color-gray-dark);
+    border: 1px solid var(--color-gray-dark-extra);
+  }
+
+  .editor {
+    color: var(--color-black);
   }
 }
 </style>

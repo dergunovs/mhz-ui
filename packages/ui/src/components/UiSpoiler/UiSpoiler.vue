@@ -12,8 +12,12 @@
       </div>
     </button>
 
-    <div v-show="props.modelValue" :class="$style.spoiler" data-test="ui-spoiler">
-      <slot></slot>
+    <div :class="$style.spoilerWrapper" :data-expanded="props.modelValue" data-test="ui-spoiler">
+      <div :class="$style.spoilerContent">
+        <div :class="$style.spoilerInner">
+          <slot></slot>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,6 +52,7 @@ const emit = defineEmits<IEmit>();
   padding: 0;
   background-color: var(--color-gray-light-extra);
   border: 0;
+  border-radius: 4px;
 
   &:hover {
     background-color: var(--color-gray-light);
@@ -74,7 +79,9 @@ const emit = defineEmits<IEmit>();
   display: -webkit-box;
   overflow: hidden;
   -webkit-line-clamp: 2;
+  font-size: 0.875rem;
   line-height: 1.2;
+  color: var(--color-black);
   -webkit-box-orient: vertical;
 }
 
@@ -83,19 +90,43 @@ const emit = defineEmits<IEmit>();
   flex-shrink: 0;
   align-items: center;
   transform: rotate(-90deg);
+  transition: transform 300ms ease;
 
   &[data-expanded='true'] {
     transform: rotate(0deg);
   }
 }
 
-.spoiler {
+.spoilerWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms ease;
+
+  &[data-expanded='true'] {
+    grid-template-rows: 1fr;
+  }
+}
+
+.spoilerContent {
+  overflow: hidden;
+}
+
+.spoilerInner {
   padding: 8px 0;
 }
 
 :global(.dark) {
   .titleBlock {
-    background-color: var(--color-gray-dark);
+    color: var(--color-white);
+    background-color: var(--color-gray-dark-extra);
+  }
+
+  .titleText {
+    color: var(--color-white);
+  }
+
+  .spoilerInner {
+    color: var(--color-white);
   }
 }
 </style>

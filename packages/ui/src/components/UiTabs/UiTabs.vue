@@ -43,6 +43,7 @@ const emit = defineEmits<IEmit>();
 .tab {
   padding: 12px 8px;
   font-size: 0.875rem;
+  color: var(--color-black);
   cursor: pointer;
   background-color: var(--color-gray-light);
   border: 0;

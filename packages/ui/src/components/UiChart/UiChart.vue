@@ -75,7 +75,7 @@ Chart.register(
 
 Chart.defaults.font.family = 'base';
 Chart.defaults.borderColor = '#ddd';
-Chart.defaults.color = '#aaa';
+Chart.defaults.color = '#888';
 Chart.defaults.elements.point.radius = 4;
 Chart.defaults.elements.point.hoverRadius = 5;
 Chart.defaults.elements.line.borderWidth = 3.2;
