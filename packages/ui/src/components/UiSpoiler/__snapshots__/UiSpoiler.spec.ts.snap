@@ -6,6 +6,10 @@ exports[`UiSpoiler > matches snapshot 1`] = `
       <anonymous-stub data-expanded="false" class="_icon_017d2d" width="16" height="16"></anonymous-stub><span class="_titleText_017d2d" data-test="ui-spoiler-button-title">Spoiler title</span>
     </div>
   </button>
-  <div class="_spoiler_017d2d" data-test="ui-spoiler" style="display: none;"></div>
+  <div class="_spoilerWrapper_017d2d" data-expanded="false" data-test="ui-spoiler">
+    <div class="_spoilerContent_017d2d">
+      <div class="_spoilerInner_017d2d"></div>
+    </div>
+  </div>
 </div>"
 `;

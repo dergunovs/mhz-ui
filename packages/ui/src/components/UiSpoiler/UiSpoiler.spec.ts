@@ -33,11 +33,11 @@ describe('UiSpoiler', async () => {
   });
 
   it('shows spoiler content by v-model', async () => {
-    expect(wrapper.find(spoiler).isVisible()).toBe(false);
+    expect(wrapper.find(spoiler).attributes('data-expanded')).toBe('false');
 
     await wrapper.setProps({ modelValue: true });
 
-    expect(wrapper.find(spoiler).isVisible()).toBe(true);
+    expect(wrapper.find(spoiler).attributes('data-expanded')).toBe('true');
   });
 
   it('updates v-model by spoiler button click', async () => {

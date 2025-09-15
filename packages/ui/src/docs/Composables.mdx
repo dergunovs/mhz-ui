@@ -137,6 +137,17 @@ useTimer(): {
 
 Таймер с отсчётом времени.
 
+## useDarkMode
+
+```
+useDarkMode(): {
+  isDarkMode: Readonly<Ref<boolean>>;
+  toggleDarkMode: () => void;
+}
+```
+
+Композабл для работы с темной темой. Возвращает реактивное состояние `isDarkMode` и функцию переключения темы `toggleDarkMode`. Тема сохраняется в localStorage.
+
 ## usePageLock
 
 ```
