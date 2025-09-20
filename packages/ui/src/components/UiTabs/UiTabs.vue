@@ -41,7 +41,7 @@ const emit = defineEmits<IEmit>();
 }
 
 .tab {
-  padding: 12px 8px;
+  padding: 14px 8px;
   font-size: 0.875rem;
   color: var(--color-black);
   cursor: pointer;
@@ -50,6 +50,14 @@ const emit = defineEmits<IEmit>();
 
   &:hover {
     background-color: var(--color-gray);
+  }
+
+  &:first-child {
+    border-top-left-radius: 8px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 8px;
   }
 
   &[data-active='true'] {
@@ -65,7 +73,7 @@ const emit = defineEmits<IEmit>();
 
   .tab {
     flex-grow: 1;
-    padding: 12px 5px;
+    padding: 14px 5px;
   }
 }
 

@@ -41,7 +41,7 @@ const emit = defineEmits<IEmit>();
   flex-wrap: wrap;
   gap: 4px;
   align-items: center;
-  height: 30px;
+  min-height: 30px;
   padding: 4px 8px 3px;
   font-size: 0.875rem;
   color: var(--color-black);
