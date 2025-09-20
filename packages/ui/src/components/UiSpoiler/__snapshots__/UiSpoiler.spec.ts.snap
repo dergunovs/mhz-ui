@@ -7,7 +7,7 @@ exports[`UiSpoiler > matches snapshot 1`] = `
     </div>
   </button>
   <div class="_spoilerWrapper_017d2d" data-expanded="false" data-test="ui-spoiler">
-    <div class="_spoilerContent_017d2d">
+    <div class="_spoilerContent_017d2d" data-expanded="false">
       <div class="_spoilerInner_017d2d"></div>
     </div>
   </div>
