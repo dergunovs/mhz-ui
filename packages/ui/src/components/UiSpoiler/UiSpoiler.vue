@@ -13,7 +13,7 @@
     </button>
 
     <div :class="$style.spoilerWrapper" :data-expanded="props.modelValue" data-test="ui-spoiler">
-      <div :class="$style.spoilerContent">
+      <div :class="$style.spoilerContent" :data-expanded="props.modelValue">
         <div :class="$style.spoilerInner">
           <slot></slot>
         </div>
@@ -109,6 +109,10 @@ const emit = defineEmits<IEmit>();
 
 .spoilerContent {
   overflow: hidden;
+
+  &[data-expanded='true'] {
+    overflow: visible;
+  }
 }
 
 .spoilerInner {
