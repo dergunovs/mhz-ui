@@ -225,7 +225,9 @@ const emit = defineEmits<IEmit>();
     :global(.vuecal__headings) {
       color: var(--color-white);
       background-color: var(--color-black);
+      border-right: 1px solid var(--color-gray-dark-extra);
       border-bottom: none;
+      border-left: 1px solid var(--color-gray-dark-extra);
     }
 
     :global(.vuecal--default-theme .vuecal__weekday) {
@@ -234,6 +236,10 @@ const emit = defineEmits<IEmit>();
 
     :global(.vuecal--default-theme:is(.vuecal--sm, .vuecal--lg) .vuecal__scrollable--month-view .vuecal__cell-date) {
       color: var(--color-white);
+    }
+
+    :global(.vuecal--default-theme .vuecal__cell) {
+      box-shadow: 0 0 0 0.2px var(--color-gray-dark) inset;
     }
   }
 }
