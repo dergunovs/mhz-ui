@@ -29,6 +29,9 @@ export function useTimer() {
       clearInterval(interval);
       interval = null;
     }
+
+    secondsRaw.value = 0;
+    minutesRaw.value = 0;
   }
 
   return { timer, duration, startTimer, stopTimer };
