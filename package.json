@@ -28,13 +28,13 @@
     "prettier": "3.6.2",
     "turbo": "2.5.8"
   },
-  "packageManager": "npm@11.5.1",
+  "packageManager": "npm@11.6.1",
   "workspaces": [
     "packages/*"
   ],
   "engines": {
-    "npm": ">=11.5.1",
-    "node": ">=24.6.0"
+    "npm": ">=11.6.1",
+    "node": ">=24.10.0"
   },
   "keywords": [
     "monorepo",

@@ -6,7 +6,7 @@ import { RuleItem, Rules } from 'async-validator';
 import { TLocale } from '@/locales/types';
 import { MESSAGES } from '@/locales';
 
-export function useValidator<T>(
+export function useValidate<T>(
   formData: Ref<T>,
   rules: Partial<{ [fieldName in keyof T]: (RuleItem | ((locale: TLocale) => RuleItem))[] }>,
   locale: TLocale = 'ru'

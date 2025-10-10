@@ -2,15 +2,15 @@ import { describe, expect, it } from 'vitest';
 import { nextTick, ref } from 'vue';
 
 import { withSetup } from '..';
-import { useValidator, required, email, letters, min, max } from '.';
+import { useValidate, required, email, letters, min, max } from '.';
 
-describe('useValidator', () => {
+describe('useValidate', () => {
   it('validates required field correctly', async () => {
     await withSetup(async () => {
       const formData = ref({ name: '' });
       const rules = { name: [required] };
 
-      const { isValid, error } = useValidator(formData, rules);
+      const { isValid, error } = useValidate(formData, rules);
 
       await nextTick();
 
@@ -33,7 +33,7 @@ describe('useValidator', () => {
 
       formData.value = { email: '123123' };
 
-      const { isValid, error } = useValidator(formData, rules);
+      const { isValid, error } = useValidate(formData, rules);
 
       await nextTick();
 
@@ -61,7 +61,7 @@ describe('useValidator', () => {
       const formData = ref({ name: '' });
       const rules = { name: [letters] };
 
-      const { isValid, error } = useValidator(formData, rules);
+      const { isValid, error } = useValidate(formData, rules);
 
       await nextTick();
 
@@ -91,7 +91,7 @@ describe('useValidator', () => {
 
       formData.value = { password: '1' };
 
-      const { isValid, error } = useValidator(formData, rules);
+      const { isValid, error } = useValidate(formData, rules);
 
       await nextTick();
 
@@ -114,7 +114,7 @@ describe('useValidator', () => {
 
       formData.value = { name: 'name' };
 
-      const { isValid, error } = useValidator(formData, rules);
+      const { isValid, error } = useValidate(formData, rules);
 
       await nextTick();
 
@@ -138,7 +138,7 @@ describe('useValidator', () => {
         email: [required, email],
       };
 
-      const { isValid, error } = useValidator(formData, rules);
+      const { isValid, error } = useValidate(formData, rules);
 
       await nextTick();
 
@@ -161,7 +161,7 @@ describe('useValidator', () => {
       const formData = ref({ name: '' });
       const rules = { name: [required] };
 
-      const { isValid, error } = useValidator(formData, rules, 'en');
+      const { isValid, error } = useValidate(formData, rules, 'en');
 
       await nextTick();
 
@@ -175,7 +175,7 @@ describe('useValidator', () => {
       const formData = ref({ name: '' });
       const rules = { name: [required] };
 
-      const { errors, isValid } = useValidator(formData, rules);
+      const { errors, isValid } = useValidate(formData, rules);
 
       await nextTick();
 

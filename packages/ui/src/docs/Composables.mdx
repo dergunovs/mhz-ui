@@ -6,17 +6,17 @@ npm i mhz-helpers
 
 ## useAuth
 
-`isAuth: Readonly<Ref<boolean>>` получить статус авторизации пользователя
+`isAuth: Readonly<Ref<boolean>>` - получить статус авторизации пользователя
 
-`setAuth(auth: boolean)` установить статус авторизации пользователя
+`setAuth(auth: boolean)` - установить статус авторизации пользователя
 
-`logout(url: string, deleteAuthHeader: () => void, tokenName: string)` логаут пользователя
+`logout(url: string, deleteAuthHeader: () => void, tokenName: string)` - логаут пользователя
 
-`getCookieToken(tokenName: string): string | undefined` получение в cookie токена авторизации
+`getCookieToken(tokenName: string): string | undefined` - получение в cookie токена авторизации
 
-`setCookieToken(token: string, tokenName: string)` установка cookie с токеном авторизации на год
+`setCookieToken(token: string, tokenName: string)` - установка cookie с токеном авторизации на год
 
-`deleteCookieToken(tokenName: string)` удаление в cookie токена авторизации
+`deleteCookieToken(tokenName: string)` - удаление в cookie токена авторизации
 
 ```
 useAuth(): {
@@ -25,7 +25,7 @@ useAuth(): {
 }
 ```
 
-Функции авторизации и редиректа на указанный url при авторизации.
+Композабл для авторизации пользователя. Предоставляет функции авторизации и редиректа на указанный url при авторизации.
 
 ## useCalendar
 
@@ -38,7 +38,7 @@ useCalendar(): {
 }
 ```
 
-Композабл для календаря, предоставляющий первую и последнюю дату, готовность календаря и событие смены месяца.
+Композабл для календаря, предоставляющий первую и последнюю дату, готовность календаря и функцию обновления дат.
 
 ## useInfiniteScroll
 
@@ -105,7 +105,7 @@ usePwa(): {
 ## useValidate
 
 ```
-useValidator<T>(formData: Ref<T>, rules: Partial<{ [fieldName in keyof T]: (RuleItem | ((locale: TLocale) => RuleItem))[] }>, locale?: TLocale): {
+useValidate<T>(formData: Ref<T>, rules: Partial<{ [fieldName in keyof T]: (RuleItem | ((locale: TLocale) => RuleItem))[] }>, locale?: TLocale): {
     error: (field: string) => string | undefined;
     errors: ComputedRef<Record<string, ValidateError[]> | undefined>;
     isValid: () => boolean;
@@ -151,7 +151,7 @@ useDarkMode(): {
 ## usePageLock
 
 ```
-usePageLock() => void
+usePageLock(): void
 ```
 
-Композабл, позволяющий запретить блокировку экрана на мобильном устройстве на конкретной странице приложения.
+Композабл, позволяющий запретить блокировку экрана на мобильном устройстве на конкретной странице приложения. Автоматически устанавливает и снимает WakeLock при монтировании/размонтировании компонента.
