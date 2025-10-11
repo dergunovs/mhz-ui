@@ -1,76 +1,311 @@
 <template>
   <div :class="$style.container">
-    <VueCal
-      eventsOnMonthView
-      view="month"
-      :views="['month']"
-      :viewsBar="false"
-      :time="false"
-      :events="props.events"
-      :minDate="props.minDate"
-      :locale="props.lang === 'en' ? 'en-gb' : props.lang"
-      :todayButton="false"
-      @ready="
-        (dates: ICalendarReady) =>
-          emit('ready', { dateFrom: dates?.view?.firstCellDate, dateTo: dates?.view?.lastCellDate })
-      "
-      @viewChange="
-        (dates: ICalendarUpdate) => emit('update', { dateFrom: dates?.extendedStart, dateTo: dates?.extendedEnd })
-      "
-      @event:click="(event: ICalendarEventClick) => emit('eventClick', event?.event)"
-      @cell:click="(event: ICalendarCellClick) => emit('chooseDate', event?.cell?.start)"
-      data-test="ui-calendar"
-    >
-      <template #event="{ event }">
-        <div :class="$style.title" :style="`background: ${event.color}`">
-          {{ event.title }}
+    <div :class="$style.header">
+      <div :class="$style.titleBar">
+        <button @click="prevMonth" :class="$style.navButton" type="button" data-test="ui-calendar-prev-month">
+          {{ '<' }}
+        </button>
+
+        <span data-test="ui-calendar-current-month">{{ formattedCurrentMonth }}</span>
+
+        <button @click="nextMonth" :class="$style.navButton" type="button" data-test="ui-calendar-next-month">
+          {{ '>' }}
+        </button>
+      </div>
+
+      <div :class="$style.headings">
+        <div v-for="day in weekdays" :key="day" :class="$style.weekday" data-test="ui-calendar-week-day">
+          {{ day }}
         </div>
-      </template>
-    </VueCal>
+      </div>
+    </div>
+
+    <div :class="$style.body">
+      <div
+        v-for="(date, index) in calendarDays"
+        :key="index"
+        :class="[$style.cell, { [$style.today]: isToday(date), [$style.outOfRange]: isOutOfRange(date) }]"
+        @click="onCellClick(date)"
+        data-test="ui-calendar-calendar-day"
+      >
+        <div :class="$style.cellDate" data-test="ui-calendar-cell-date">
+          {{ date.getDate() }}
+        </div>
+
+        <div :class="$style.cellEvents">
+          <div
+            v-for="event in getEventsForDate(date)"
+            :key="event.id"
+            :class="$style.event"
+            :style="{ background: event.color }"
+            @click.stop="onEventClick(event)"
+            data-test="ui-calendar-event"
+          >
+            <div :class="$style.title" data-test="ui-calendar-event-title">{{ event.title }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { VueCal } from 'vue-cal';
-// eslint-disable-next-line import-x/no-unassigned-import
-import 'vue-cal/style';
+import { computed, ref, onBeforeMount } from 'vue';
 
-import {
-  ICalendarEvent,
-  ICalendarDates,
-  ICalendarReady,
-  ICalendarUpdate,
-  ICalendarEventClick,
-  ICalendarCellClick,
-} from './interface';
-
-import { TLocale } from '@/components/locales/types';
+import { TLocale } from '../locales/types';
+import { ICalendarDates, ICalendarEvent } from './interface';
 
 interface IProps {
-  minDate?: Date;
+  isDisablePastDates?: boolean;
   events?: ICalendarEvent<unknown>[];
   lang?: TLocale;
 }
 
 interface IEmit {
-  ready: [dates: ICalendarDates];
   update: [dates: ICalendarDates];
   eventClick: [event: ICalendarEvent<unknown>];
   chooseDate: [date: Date];
 }
 
 const props = withDefaults(defineProps<IProps>(), {
-  minDate: undefined,
   events: () => [],
   lang: 'ru',
 });
 
 const emit = defineEmits<IEmit>();
+
+const currentMonth = ref(new Date());
+
+const today = computed(() => {
+  const todayDate = new Date();
+
+  todayDate.setHours(0, 0, 0, 0);
+
+  return todayDate;
+});
+
+const currentMonthValue = computed(() => new Date(currentMonth.value.getFullYear(), currentMonth.value.getMonth(), 1));
+
+const formattedCurrentMonth = computed(() => {
+  const options: Intl.DateTimeFormatOptions = { month: 'long', year: 'numeric' };
+  let monthName = currentMonthValue.value.toLocaleDateString(props.lang, options);
+
+  if (monthName.length > 0) monthName = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+  if (props.lang === 'ru') monthName = monthName.replace(/ г\.$/, '');
+
+  return monthName;
+});
+
+const weekdays = computed(() => {
+  const startOfWeek = new Date(currentMonthValue.value);
+
+  startOfWeek.setDate(1);
+
+  const dayOffset = (startOfWeek.getDay() + 6) % 7;
+
+  startOfWeek.setDate(startOfWeek.getDate() - dayOffset);
+
+  return Array.from({ length: 7 }, (_, i) => {
+    const date = new Date(startOfWeek);
+
+    date.setDate(startOfWeek.getDate() + i);
+
+    return date.toLocaleDateString(props.lang, { weekday: 'short' });
+  });
+});
+
+const calendarDays = computed(() => {
+  const startOfMonth = new Date(currentMonth.value.getFullYear(), currentMonth.value.getMonth(), 1);
+  const endOfMonth = new Date(currentMonth.value.getFullYear(), currentMonth.value.getMonth() + 1, 0);
+
+  const startDayOffset = (startOfMonth.getDay() + 6) % 7;
+  const startDate = new Date(startOfMonth);
+
+  startDate.setDate(startOfMonth.getDate() - startDayOffset);
+
+  const endDayOffset = (7 - endOfMonth.getDay()) % 7;
+  const endDate = new Date(endOfMonth);
+
+  endDate.setDate(endOfMonth.getDate() + endDayOffset);
+
+  const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+
+  const days: Date[] = [];
+
+  for (let i = 0; i < totalDays; i++) {
+    const date = new Date(startDate);
+
+    date.setDate(startDate.getDate() + i);
+    days.push(date);
+  }
+
+  return days;
+});
+
+const emitUpdate = () => {
+  const dates = { dateFrom: calendarDays.value[0], dateTo: calendarDays.value.at(-1) as Date };
+
+  emit('update', dates);
+};
+
+const getEventsForDate = (date: Date) => {
+  return props.events.filter((event) => {
+    if (!event.start) return false;
+    const eventDate = new Date(event.start);
+
+    return (
+      eventDate.getDate() === date.getDate() &&
+      eventDate.getMonth() === date.getMonth() &&
+      eventDate.getFullYear() === date.getFullYear()
+    );
+  });
+};
+
+const isToday = (date: Date) => {
+  return date.toDateString() === today.value.toDateString();
+};
+
+const isOutOfRange = (date: Date) => {
+  if (props.isDisablePastDates) {
+    const dateWithoutTime = new Date(date);
+
+    dateWithoutTime.setHours(0, 0, 0, 0);
+
+    if (dateWithoutTime < today.value) return true;
+  }
+
+  return false;
+};
+
+const prevMonth = () => {
+  currentMonth.value = new Date(currentMonth.value.getFullYear(), currentMonth.value.getMonth() - 1, 1);
+  emitUpdate();
+};
+
+const nextMonth = () => {
+  currentMonth.value = new Date(currentMonth.value.getFullYear(), currentMonth.value.getMonth() + 1, 1);
+  emitUpdate();
+};
+
+const onEventClick = (event: ICalendarEvent<unknown>) => {
+  emit('eventClick', event);
+};
+
+const onCellClick = (date: Date) => {
+  if (isOutOfRange(date)) return;
+  emit('chooseDate', date);
+};
+
+onBeforeMount(() => {
+  emitUpdate();
+});
 </script>
 
 <style module lang="scss">
 .container {
   width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-gray);
+  border-radius: 8px;
+
+  .titleBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 8px;
+    font-weight: 700;
+    background-color: var(--color-gray-light-extra);
+    border-bottom: 1px solid var(--color-gray);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    .navButton {
+      padding: 0 8px;
+      font-size: 1.25rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+  }
+
+  .headings {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    height: 37px;
+    border-bottom: 1px solid var(--color-gray);
+
+    .weekday {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: capitalize;
+    }
+  }
+
+  .body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: minmax(72px, auto);
+    gap: 0;
+  }
+
+  .cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 72px;
+    padding: 2px;
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 0.2px var(--color-gray) inset;
+    transition: all 300ms;
+
+    &.today .cellDate {
+      font-weight: 700;
+    }
+
+    &.outOfRange {
+      cursor: not-allowed;
+
+      .cellDate {
+        color: var(--color-gray);
+      }
+    }
+  }
+
+  .cellDate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cellEvents {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    justify-content: flex-start;
+    max-height: calc(100% - 24px);
+    padding-bottom: 6px;
+  }
+
+  .event {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    border: none;
+    border-radius: 12px;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
 
   .title {
     display: flex;
@@ -80,166 +315,49 @@ const emit = defineEmits<IEmit>();
     height: 100%;
     font-size: 1.125rem;
     font-weight: 700;
+    line-height: 1;
     color: var(--color-gray-light);
-  }
-
-  :global(.vuecal) {
-    --vuecal-primary-color: var(--color-gray-light);
-    --vuecal-secondary-color: var(--color-white);
-    --vuecal-base-color: var(--color-black);
-    --vuecal-contrast-color: var(--color-black);
-    --vuecal-border-color: var(--color-gray);
-    --vuecal-header-color: var(--color-black);
-    --vuecal-event-color: var(--color-white);
-    --vuecal-border-radius: 8px;
-    --vuecal-height: auto;
-    --vuecal-transition-duration: 0;
-  }
-
-  :global(.vuecal-event-delete-leave-active) {
-    transition: 0ms;
-  }
-
-  :global(.vuecal-event-delete-leave-to) {
-    transform: none;
-  }
-
-  :global(.vuecal__header) {
-    background-color: var(--color-gray-light-extra);
-    border: 1px solid var(--color-gray);
-  }
-
-  :global(.vuecal__title-bar) {
-    padding-top: 7px;
-    padding-bottom: 6px;
-    background-color: var(--color-gray-light-extra);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-  }
-
-  :global(.vuecal__headings) {
-    height: 36px;
-    padding-top: 4px;
-    border-bottom: 1px solid var(--color-gray-light);
-  }
-
-  :global(.vuecal--default-theme .vuecal__weekday) {
-    font-size: 1rem;
-    letter-spacing: 0;
-  }
-
-  :global(.vuecal__body) {
-    grid-template-rows: auto;
-  }
-
-  :global(.vuecal--default-theme .vuecal__scrollable--month-view .vuecal__cell) {
-    align-items: center;
-    min-height: 72px;
-  }
-
-  :global(.vuecal--default-theme:is(.vuecal--sm, .vuecal--lg) .vuecal__scrollable--month-view .vuecal__cell-date) {
-    aspect-ratio: 6/5;
-    padding: 2px 0 0;
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 0;
-    background-color: var(--color-transparent);
-  }
-
-  :global(
-    .vuecal--default-theme.vuecal--light:is(.vuecal--sm, .vuecal--lg)
-      .vuecal__scrollable--month-view
-      .vuecal__cell--today
-      .vuecal__cell-date
-  ),
-  :global(
-    .vuecal--default-theme.vuecal--light:is(.vuecal--sm, .vuecal--lg)
-      .vuecal__scrollable--month-view
-      .vuecal__cell--selected
-      .vuecal__cell-date
-  ) {
-    font-weight: 700;
-    background-color: unset;
-  }
-
-  :global(.vuecal--default-theme .vuecal__cell) {
-    box-shadow: 0 0 0 0.2px var(--color-gray) inset;
-  }
-
-  :global(.vuecal--default-theme.vuecal--timeless .vuecal__cell-events) {
-    align-items: center;
-    justify-content: center;
-    padding-top: 0;
-    padding-bottom: 7px;
-  }
-
-  :global(.vuecal__scrollable--month-view .vuecal__event) {
-    width: 36px;
-    height: 36px;
-    padding-top: 0;
-    padding-bottom: 0;
-    cursor: pointer;
-    border: none;
-  }
-
-  :global(.vuecal__scrollable--month-view .vuecal__event),
-  :global(.vuecal--default-theme .vuecal__event-details) {
-    padding: 0;
-    -webkit-user-select: none;
-    user-select: none;
-    background: none;
-    border-radius: 12px;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-  }
-
-  :global(.vuecal--default-theme .vuecal__cell--disabled .vuecal__cell-date),
-  :global(.vuecal__cell--out-of-range) {
-    color: var(--color-gray-dark);
-    opacity: 1;
-  }
-
-  :global(.vuecal--default-theme .vuecal__weekday-day) {
-    opacity: 1;
   }
 }
 
 :global(.dark) {
   .container {
-    :global(.vuecal--default-theme .vuecal__scrollable-wrap) {
-      border: 1px solid var(--color-gray-dark-extra);
-      border-top: none;
-    }
+    border-color: var(--color-gray-dark-extra);
 
-    :global(.vuecal__header) {
+    .header {
       color: var(--color-white);
       background-color: var(--color-primary-dark);
-      border: 1px solid var(--color-gray-dark-extra);
+      border-bottom-color: var(--color-gray-dark-extra);
+
+      .titleBar {
+        background-color: var(--color-primary-dark);
+        border-bottom-color: var(--color-gray-dark-extra);
+      }
+
+      .navButton {
+        color: var(--color-gray-dark);
+      }
+
+      .headings {
+        color: var(--color-white);
+        background-color: var(--color-black);
+        border-right: 1px solid var(--color-gray-dark-extra);
+        border-bottom: none;
+        border-left: 1px solid var(--color-gray-dark-extra);
+      }
     }
 
-    :global(.vuecal__title-bar) {
-      background-color: var(--color-primary-dark);
-    }
-
-    :global(.vuecal__headings) {
-      color: var(--color-white);
+    .cell {
       background-color: var(--color-black);
-      border-right: 1px solid var(--color-gray-dark-extra);
-      border-bottom: none;
-      border-left: 1px solid var(--color-gray-dark-extra);
-    }
-
-    :global(.vuecal--default-theme .vuecal__weekday) {
-      background-color: var(--color-black);
-    }
-
-    :global(.vuecal--default-theme:is(.vuecal--sm, .vuecal--lg) .vuecal__scrollable--month-view .vuecal__cell-date) {
-      color: var(--color-white);
-    }
-
-    :global(.vuecal--default-theme .vuecal__cell) {
       box-shadow: 0 0 0 0.2px var(--color-gray-dark) inset;
+
+      .cellDate {
+        color: var(--color-white);
+      }
+
+      &.outOfRange .cellDate {
+        color: var(--color-gray-dark);
+      }
     }
   }
 }

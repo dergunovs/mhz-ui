@@ -31,8 +31,8 @@ useAuth(): {
 
 ```
 useCalendar(): {
-    dateFrom: Ref<string>;
-    dateTo: Ref<string>;
+    dateFrom: Ref<Date | undefined>;
+    dateTo: Ref<Date | undefined>;
     isDatesReady: Ref<boolean>;
     updateDates: (dates: ICalendarDates) => void;
 }

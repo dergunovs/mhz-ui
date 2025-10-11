@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui",
   "description": "Mhz ui kit",
-  "version": "1.2.45",
+  "version": "1.2.46",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -35,7 +35,6 @@
     "mhz-helpers": "*",
     "perfect-debounce": "2.0.0",
     "vue": "3.5.22",
-    "vue-cal": "5.0.1-rc.28",
     "vue-chartjs": "5.3.2",
     "vue-router": "4.5.1"
   },
@@ -45,7 +44,7 @@
     "@storybook/addon-themes": "9.1.10",
     "@storybook/vue3": "9.1.10",
     "@storybook/vue3-vite": "9.1.10",
-    "@types/node": "24.7.1",
+    "@types/node": "24.7.2",
     "@vitejs/plugin-vue": "6.0.1",
     "@vitest/coverage-istanbul": "3.2.4",
     "@vue/test-utils": "2.4.6",

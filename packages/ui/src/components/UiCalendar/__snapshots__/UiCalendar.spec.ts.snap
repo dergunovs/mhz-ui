@@ -2,6 +2,166 @@
 
 exports[`UiCalendar > matches snapshot 1`] = `
 "<div class="_container_4b457f">
-  <index-stub views="month" alldayevents="false" stackevents="false" dark="false" datepicker="false" disabledays="" editableevents="false" eventcreatemindrag="15" events="[object Object],[object Object]" eventcount="false" eventsonmonthview="true" hideweekdays="" hideweekends="false" locale="ru" maxdate="" mindate="" selecteddate="" sm="false" specialhours="[object Object]" schedules="" snaptointerval="0" startweekonsunday="false" theme="default" time="false" timeatcursor="false" timecellheight="40" timeformat="" timefrom="0" timestep="60" timeto="1440" titlebar="true" todaybutton="false" twelvehour="false" view="month" viewdate="" viewdayoffset="0" viewsbar="false" watchrealtime="false" weeknumbers="false" xs="false" data-test="ui-calendar"></index-stub>
+  <div class="_header_4b457f">
+    <div class="_titleBar_4b457f"><button class="_navButton_4b457f" type="button" data-test="ui-calendar-prev-month">&lt;</button><span data-test="ui-calendar-current-month">Октябрь 2025</span><button class="_navButton_4b457f" type="button" data-test="ui-calendar-next-month">&gt;</button></div>
+    <div class="_headings_4b457f">
+      <div class="_weekday_4b457f" data-test="ui-calendar-week-day">пн</div>
+      <div class="_weekday_4b457f" data-test="ui-calendar-week-day">вт</div>
+      <div class="_weekday_4b457f" data-test="ui-calendar-week-day">ср</div>
+      <div class="_weekday_4b457f" data-test="ui-calendar-week-day">чт</div>
+      <div class="_weekday_4b457f" data-test="ui-calendar-week-day">пт</div>
+      <div class="_weekday_4b457f" data-test="ui-calendar-week-day">сб</div>
+      <div class="_weekday_4b457f" data-test="ui-calendar-week-day">вс</div>
+    </div>
+  </div>
+  <div class="_body_4b457f">
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">29</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">30</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">1</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">2</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">3</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">4</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">5</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">6</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">7</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">8</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">9</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">10</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f _today_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">11</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">12</div>
+      <div class="_cellEvents_4b457f">
+        <div class="_event_4b457f" data-test="ui-calendar-event">
+          <div class="_title_4b457f" data-test="ui-calendar-event-title">24</div>
+        </div>
+        <div class="_event_4b457f" data-test="ui-calendar-event">
+          <div class="_title_4b457f" data-test="ui-calendar-event-title">32</div>
+        </div>
+      </div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">13</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">14</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">15</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">16</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">17</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">18</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">19</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">20</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">21</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">22</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">23</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">24</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">25</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">26</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">27</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">28</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">29</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">30</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">31</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">1</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">2</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+  </div>
 </div>"
 `;

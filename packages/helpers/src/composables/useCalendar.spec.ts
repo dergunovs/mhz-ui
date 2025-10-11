@@ -8,8 +8,8 @@ describe('useCalendar', () => {
     await withSetup(async () => {
       const { dateFrom, dateTo, isDatesReady } = useCalendar();
 
-      expect(dateFrom.value).toStrictEqual('');
-      expect(dateTo.value).toStrictEqual('');
+      expect(dateFrom.value).toStrictEqual(undefined);
+      expect(dateTo.value).toStrictEqual(undefined);
       expect(isDatesReady.value).toStrictEqual(false);
     });
   });
@@ -19,25 +19,8 @@ describe('useCalendar', () => {
       const { dateFrom, dateTo, isDatesReady, updateDates } = useCalendar();
 
       const dates = {
-        dateFrom: '2023-01-01',
-        dateTo: '2023-12-31',
-      };
-
-      updateDates(dates);
-
-      expect(dateFrom.value).toStrictEqual(dates.dateFrom);
-      expect(dateTo.value).toStrictEqual(dates.dateTo);
-      expect(isDatesReady.value).toStrictEqual(true);
-    });
-  });
-
-  it('handles empty dates object', async () => {
-    await withSetup(async () => {
-      const { dateFrom, dateTo, isDatesReady, updateDates } = useCalendar();
-
-      const dates = {
-        dateFrom: '',
-        dateTo: '',
+        dateFrom: new Date('2023-01-01'),
+        dateTo: new Date('2023-12-31'),
       };
 
       updateDates(dates);

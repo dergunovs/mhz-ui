@@ -1,4 +1,3 @@
-import { DefineComponent, nextTick } from 'vue';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest } from 'mhz-helpers';
@@ -6,10 +5,16 @@ import { dataTest } from 'mhz-helpers';
 import UiCalendar from './UiCalendar.vue';
 
 import { EVENTS, LANG } from './constants';
-import { ICalendarEvent } from './interface';
 import { wrapperFactory } from '@/test';
 
-const calendar = dataTest('ui-calendar');
+const prevMonth = dataTest('ui-calendar-prev-month');
+const currentMonth = dataTest('ui-calendar-current-month');
+const nextMonth = dataTest('ui-calendar-next-month');
+const weekDay = dataTest('ui-calendar-week-day');
+const calendarDay = dataTest('ui-calendar-calendar-day');
+const cellDate = dataTest('ui-calendar-cell-date');
+const event = dataTest('ui-calendar-event');
+const eventTitle = dataTest('ui-calendar-event-title');
 
 let wrapper: VueWrapper<InstanceType<typeof UiCalendar>>;
 
@@ -31,91 +36,156 @@ describe('UiCalendar', async () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('sets events to calendar', async () => {
-    expect(
-      wrapper.findComponent<DefineComponent<{ events: ICalendarEvent<unknown>[] }>>(calendar).props('events')
-    ).toStrictEqual(EVENTS);
+  it('shows current month in title', async () => {
+    const currentMonthElement = wrapper.find(currentMonth);
+
+    expect(currentMonthElement.exists()).toBe(true);
+
+    const now = new Date();
+    const expectedMonth = now.toLocaleDateString(LANG, { month: 'long', year: 'numeric' });
+    const capitalizedMonth = expectedMonth.charAt(0).toUpperCase() + expectedMonth.slice(1);
+
+    expect(currentMonthElement.text()).toBe(capitalizedMonth.replace(/ г\.$/, ''));
   });
 
-  it('emits calendar events', async () => {
-    const date = new Date();
-    const date2 = new Date();
+  it('shows weekdays in header', async () => {
+    const weekdayElements = wrapper.findAll(weekDay);
 
-    const formattedDates = { dateFrom: date, dateTo: date2 };
+    expect(weekdayElements.length).toBe(7);
 
-    const readyEvent = { view: { firstCellDate: date, lastCellDate: date2 } };
-    const updateEvent = { extendedStart: date, extendedEnd: date2 };
-    const clickEvent = { event: EVENTS[0] };
-    const cellEvent = { cell: { start: date } };
-
-    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('ready', readyEvent);
-    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('viewChange', updateEvent);
-    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('event:click', clickEvent);
-    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('cell:click', cellEvent);
-
-    await nextTick();
-
-    expect(wrapper.emitted('ready')).toHaveLength(1);
-    expect(wrapper.emitted()['ready'][0]).toEqual([formattedDates]);
-
-    expect(wrapper.emitted('update')).toHaveLength(1);
-    expect(wrapper.emitted()['update'][0]).toEqual([formattedDates]);
-
-    expect(wrapper.emitted('eventClick')).toHaveLength(1);
-    expect(wrapper.emitted()['eventClick'][0]).toEqual([EVENTS[0]]);
-
-    expect(wrapper.emitted('chooseDate')).toHaveLength(1);
-    expect(wrapper.emitted()['chooseDate'][0]).toEqual([date]);
+    weekdayElements.forEach((element) => {
+      expect(element.exists()).toBe(true);
+      expect(element.text().length).toBeGreaterThan(0);
+    });
   });
 
-  it('emits ready event with correct date format', async () => {
-    const date = new Date();
-    const date2 = new Date();
+  it('shows calendar days', async () => {
+    const dayElements = wrapper.findAll(calendarDay);
 
-    const readyEvent = { view: { firstCellDate: date, lastCellDate: date2 } };
+    expect(dayElements.length).toBeGreaterThan(28);
 
-    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('ready', readyEvent);
+    dayElements.forEach((element) => {
+      expect(element.exists()).toBe(true);
+      const cellDateElement = element.find(cellDate);
 
-    await nextTick();
-
-    expect(wrapper.emitted('ready')).toHaveLength(1);
-    expect(wrapper.emitted()['ready'][0]).toEqual([{ dateFrom: date, dateTo: date2 }]);
+      expect(cellDateElement.exists()).toBe(true);
+    });
   });
 
-  it('emits update event with correct date format', async () => {
-    const date = new Date();
-    const date2 = new Date();
+  it('navigates to previous month on prev button click', async () => {
+    const prevButton = wrapper.find(prevMonth);
 
-    const updateEvent = { extendedStart: date, extendedEnd: date2 };
+    expect(prevButton.exists()).toBe(true);
 
-    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('viewChange', updateEvent);
+    const initialMonthText = wrapper.find(currentMonth).text();
 
-    await nextTick();
+    await prevButton.trigger('click');
 
-    expect(wrapper.emitted('update')).toHaveLength(1);
-    expect(wrapper.emitted()['update'][0]).toEqual([{ dateFrom: date, dateTo: date2 }]);
+    const newMonthText = wrapper.find(currentMonth).text();
+
+    expect(newMonthText).not.toBe(initialMonthText);
   });
 
-  it('emits eventClick with correct event data', async () => {
-    const clickEvent = { event: EVENTS[0] };
+  it('navigates to next month on next button click', async () => {
+    const nextButton = wrapper.find(nextMonth);
 
-    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('event:click', clickEvent);
+    expect(nextButton.exists()).toBe(true);
 
-    await nextTick();
+    const initialMonthText = wrapper.find(currentMonth).text();
 
-    expect(wrapper.emitted('eventClick')).toHaveLength(1);
-    expect(wrapper.emitted()['eventClick'][0]).toEqual([EVENTS[0]]);
+    await nextButton.trigger('click');
+
+    const newMonthText = wrapper.find(currentMonth).text();
+
+    expect(newMonthText).not.toBe(initialMonthText);
   });
 
-  it('emits chooseDate with correct date', async () => {
-    const date = new Date();
-    const cellEvent = { cell: { start: date } };
+  it('shows events for dates', async () => {
+    expect(wrapper.findAll(event).length).toStrictEqual(EVENTS.length);
+  });
 
-    wrapper.findComponent<DefineComponent>(calendar).vm.$emit('cell:click', cellEvent);
+  it('emits eventClick when event is clicked', async () => {
+    const eventElement = wrapper.find(event);
 
-    await nextTick();
+    expect(eventElement.exists()).toBe(true);
 
-    expect(wrapper.emitted('chooseDate')).toHaveLength(1);
-    expect(wrapper.emitted()['chooseDate'][0]).toEqual([date]);
+    await eventElement.trigger('click');
+
+    const emittedEvents = wrapper.emitted('eventClick');
+
+    expect(emittedEvents).toHaveLength(1);
+    expect(emittedEvents?.[0]).toHaveLength(1);
+  });
+
+  it('emits chooseDate when date cell is clicked', async () => {
+    const dayElement = wrapper.find(calendarDay);
+
+    expect(dayElement.exists()).toBe(true);
+
+    await dayElement.trigger('click');
+
+    const emittedDates = wrapper.emitted('chooseDate');
+
+    expect(emittedDates).toHaveLength(1);
+    expect(emittedDates?.[0]).toHaveLength(1);
+    expect(emittedDates?.[0]?.[0]).toBeInstanceOf(Date);
+  });
+
+  it('does not emit chooseDate when out of range date is clicked', async () => {
+    await wrapper.setProps({ isDisablePastDates: true });
+
+    const outOfRangeElements = wrapper.findAll('[data-test="ui-calendar-calendar-day"]');
+    const outOfRangeElement = outOfRangeElements.find((element) => {
+      return element.classes().includes('outOfRange');
+    });
+
+    if (outOfRangeElement) {
+      await outOfRangeElement.trigger('click');
+
+      const emittedDates = wrapper.emitted('chooseDate');
+
+      expect(emittedDates).toBeUndefined();
+    }
+  });
+
+  it('emits update when month changes', async () => {
+    const emittedUpdates = wrapper.emitted('update');
+
+    expect(emittedUpdates).toHaveLength(1);
+
+    const prevButton = wrapper.find(prevMonth);
+
+    await prevButton.trigger('click');
+
+    expect(emittedUpdates).toHaveLength(2);
+    expect(emittedUpdates?.[0]).toHaveLength(1);
+
+    const updateData = emittedUpdates?.[0]?.[0];
+
+    if (updateData && typeof updateData === 'object') {
+      expect(updateData).toHaveProperty('dateFrom');
+      expect(updateData).toHaveProperty('dateTo');
+      expect((updateData as { dateFrom: Date; dateTo: Date }).dateFrom).toBeInstanceOf(Date);
+      expect((updateData as { dateFrom: Date; dateTo: Date }).dateTo).toBeInstanceOf(Date);
+    }
+  });
+
+  it('shows event titles', async () => {
+    const eventElements = wrapper.findAll(event);
+
+    eventElements.forEach((element) => {
+      const titleElement = element.find(eventTitle);
+
+      expect(titleElement.exists()).toBe(true);
+      expect(titleElement.text().length).toBeGreaterThan(0);
+    });
+  });
+
+  it('handles empty events array', async () => {
+    await wrapper.setProps({ events: [] });
+
+    const eventElements = wrapper.findAll(event);
+
+    expect(eventElements.length).toBe(0);
   });
 });
