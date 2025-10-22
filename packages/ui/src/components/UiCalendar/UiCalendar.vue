@@ -260,7 +260,6 @@ onBeforeMount(() => {
     padding: 2px;
     background-color: var(--color-white);
     box-shadow: 0 0 0 0.2px var(--color-gray) inset;
-    transition: all 300ms;
 
     &.today .cellDate {
       font-weight: 700;

@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui",
   "description": "Mhz ui kit",
-  "version": "1.2.49",
+  "version": "1.2.50",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
