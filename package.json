@@ -1,6 +1,6 @@
 {
   "name": "mhz-ui-helpers",
-  "description": "Fake PC hardware store monorepo",
+  "description": "mhz-ui and mhz-helpers monorepo",
   "version": "1.2.3",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",

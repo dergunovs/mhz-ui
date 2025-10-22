@@ -29,12 +29,14 @@ export default defineConfig({
     environment: 'happy-dom',
     include: ['**/*.spec.ts'],
     coverage: {
-      provider: 'istanbul',
+      provider: 'v8',
       reporter: ['text'],
-      all: true,
+      exclude: ['src/index.ts', 'src/composables/index.ts', 'src/helpers/index.ts'],
     },
     css: false,
-    deps: { inline: true },
+    server: {
+      deps: { inline: [/^(?!.*vitest).*$/] },
+    },
     env: { TZ: 'UTC' },
   },
 });

@@ -3,11 +3,11 @@ import { describe, expect, it, vi } from 'vitest';
 import { withSetup } from '..';
 import { useTimer } from '.';
 
-const mockSetTimeout = vi.fn();
-const mockClearTimeout = vi.fn();
+const mockSetInterval = vi.fn(() => ({ unref: vi.fn() }));
+const mockClearInterval = vi.fn();
 
-Object.defineProperty(globalThis, 'setTimeout', { writable: true, value: mockSetTimeout });
-Object.defineProperty(globalThis, 'clearTimeout', { writable: true, value: mockClearTimeout });
+Object.defineProperty(globalThis, 'setInterval', { writable: true, value: mockSetInterval });
+Object.defineProperty(globalThis, 'clearInterval', { writable: true, value: mockClearInterval });
 
 describe('useTimer', () => {
   it('initializes timer values correctly', async () => {

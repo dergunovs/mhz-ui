@@ -1,4 +1,5 @@
 import { vi, describe, expect, it } from 'vitest';
+import type { RootNode } from '@vue/compiler-core';
 
 import { dataTest, removeDataTest, wait, withSetup } from '.';
 
@@ -28,9 +29,9 @@ describe('test', () => {
       ],
     };
 
-    removeDataTest(node);
+    removeDataTest(node as unknown as RootNode);
 
-    expect(node.props).toHaveLength(1);
+    expect(node.props.length).toBe(1);
     expect(node.props[0].name).toBe('class');
   });
 
@@ -43,9 +44,9 @@ describe('test', () => {
       ],
     };
 
-    removeDataTest(node);
+    removeDataTest(node as unknown as RootNode);
 
-    expect(node.props).toHaveLength(2);
+    expect(node.props.length).toBe(2);
     expect(node.props[0].name).toBe('class');
     expect(node.props[1].name).toBe('id');
   });
@@ -56,9 +57,9 @@ describe('test', () => {
       props: [{ type: 6, name: 'data-test', value: 'test-value' }],
     };
 
-    removeDataTest(node);
+    removeDataTest(node as unknown as RootNode);
 
-    expect(node.props).toHaveLength(1);
+    expect(node.props.length).toBe(1);
     expect(node.props[0].name).toBe('data-test');
   });
 
@@ -73,9 +74,9 @@ describe('test', () => {
       ],
     };
 
-    removeDataTest(node);
+    removeDataTest(node as unknown as RootNode);
 
-    expect(node.props).toHaveLength(3);
+    expect(node.props.length).toBe(3);
     expect(node.props[0].name).toBe('class');
     expect(node.props[1].name).toBe('data-test2');
     expect(node.props[2].name).toBe('id');
@@ -87,9 +88,9 @@ describe('test', () => {
       props: [{ type: 6, name: 'data-test', value: 'test-value' }],
     };
 
-    removeDataTest(node);
+    removeDataTest(node as unknown as RootNode);
 
-    expect(node.props).toHaveLength(0);
+    expect(node.props.length).toBe(0);
   });
 
   it('waits for timeout', async () => {

@@ -1,20 +1,18 @@
 import { createApp, defineComponent } from 'vue';
+import type { RootNode, TemplateChildNode } from '@vue/compiler-core';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const template = '<template><div></div></template>';
-
-interface NodeWithProps {
-  type: number;
-  props: { type: number; name: string }[];
-}
 
 export function dataTest(value: string): string {
   return `[data-test="${value}"]`;
 }
 
-export function removeDataTest(node: NodeWithProps) {
-  if (node.type === 1 /* NodeTypes.ELEMENT */) {
-    node.props = node.props.filter((prop) => (prop.type === 6 ? prop.name !== 'data-test' : true));
+export function removeDataTest(node: RootNode | TemplateChildNode) {
+  if (node.type === 1 /* NodeTypes.ELEMENT */ && 'props' in node) {
+    node.props = node.props.filter((prop: { type: number; name: string }) =>
+      prop.type === 6 ? prop.name !== 'data-test' : true
+    );
   }
 }
 

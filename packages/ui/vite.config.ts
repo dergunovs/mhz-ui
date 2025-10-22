@@ -1,4 +1,4 @@
-/// <reference types="vitest" />
+/// <reference types="vitest/config" />
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -90,7 +90,7 @@ export default defineConfig({
       name: 'add-css-link',
       apply: 'build',
 
-      writeBundle(option, bundle) {
+      writeBundle(_option, bundle) {
         const cssFiles = Object.keys(bundle)
           .filter((file) => file.endsWith('.css') && !file.includes('-'))
           .map((file) => file.replace('.css', ''));
@@ -115,13 +115,14 @@ export default defineConfig({
     environment: 'happy-dom',
     include: ['**/*.spec.ts'],
     coverage: {
-      provider: 'istanbul',
+      provider: 'v8',
       reporter: ['text'],
       include: ['src/**/Ui*.vue', 'src/toast/toast.ts'],
-      all: true,
     },
     css: false,
-    deps: { inline: true },
+    server: {
+      deps: { inline: [/^(?!.*vitest).*$/] },
+    },
     env: { TZ: 'UTC' },
   },
 });
