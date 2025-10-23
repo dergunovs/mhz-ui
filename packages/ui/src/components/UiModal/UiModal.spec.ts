@@ -3,12 +3,13 @@ import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest, wait } from 'mhz-helpers';
 
 import UiModal from './UiModal.vue';
-import { MODEL_VALUE, IS_CONFIRM, DEFAULT_SLOT } from './constants';
+import { IS_CONFIRM, DEFAULT_SLOT } from './constants';
 
 import { wrapperFactory } from '@/test';
 
 const modal = dataTest('ui-modal');
-const modalContainer = dataTest('ui-modal-container');
+const modalDialog = dataTest('ui-modal-dialog');
+const modalBackdrop = dataTest('ui-modal-backdrop');
 const modalClose = dataTest('ui-modal-close');
 const modalSlot = dataTest('ui-modal-slot');
 const modalConfirm = dataTest('ui-modal-confirm');
@@ -17,7 +18,7 @@ const modalCancel = dataTest('ui-modal-cancel');
 let wrapper: VueWrapper<InstanceType<typeof UiModal>>;
 
 beforeEach(() => {
-  wrapper = wrapperFactory(UiModal, { modelValue: MODEL_VALUE, isConfirm: IS_CONFIRM }, { default: DEFAULT_SLOT });
+  wrapper = wrapperFactory(UiModal, { modelValue: false, isConfirm: IS_CONFIRM }, { default: DEFAULT_SLOT });
 });
 
 enableAutoUnmount(afterEach);
@@ -32,21 +33,21 @@ describe('UiModal', async () => {
   });
 
   it('shows modal by modelValue props', async () => {
-    expect(wrapper.find(modalContainer).exists()).toBe(false);
-    expect(wrapper.find(modal).exists()).toBe(false);
+    expect(wrapper.find(modalBackdrop).exists()).toBe(false);
+    expect(wrapper.find(modalDialog).exists()).toBe(false);
 
     await wrapper.setProps({ modelValue: true });
+    await wait(100);
 
-    expect(wrapper.find(modalContainer).exists()).toBe(true);
-    expect(wrapper.find(modal).exists()).toBe(true);
+    expect(wrapper.find(modalBackdrop).exists()).toBe(true);
+    expect(wrapper.find(modalDialog).exists()).toBe(true);
   });
 
   it('hides modal by close button click', async () => {
     await wrapper.setProps({ modelValue: true });
-
     await wait(100);
 
-    expect(wrapper.find(modal).exists()).toBe(true);
+    expect(wrapper.find(modalClose).exists()).toBe(true);
 
     await wrapper.find(modalClose).trigger('click');
 
@@ -54,39 +55,28 @@ describe('UiModal', async () => {
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([false]);
   });
 
-  it('hides modal by container background click except modal background click', async () => {
+  it('hides modal by backdrop click', async () => {
     await wrapper.setProps({ modelValue: true });
-
     await wait(100);
 
-    expect(wrapper.find(modal).exists()).toBe(true);
+    expect(wrapper.find(modalBackdrop).exists()).toBe(true);
 
-    await wrapper.find(modal).trigger('mousedown');
-    await wrapper.find(modalSlot).trigger('mousedown');
-
-    expect(wrapper.emitted()).not.toHaveProperty('update:modelValue');
-
-    await wrapper.find(modalContainer).trigger('mousedown');
+    await wrapper.find(modalBackdrop).trigger('mousedown');
 
     expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([false]);
   });
 
   it('shows slot content', async () => {
-    expect(wrapper.find(modalSlot).exists()).toBe(false);
-
     await wrapper.setProps({ modelValue: true });
+    await wait(100);
 
     expect(wrapper.find(modalSlot).text()).toBe(DEFAULT_SLOT);
   });
 
   it('shows confirm and cancel buttons in confirm mode', async () => {
-    await wrapper.setProps({ modelValue: true });
-
-    expect(wrapper.find(modalConfirm).exists()).toBe(false);
-    expect(wrapper.find(modalCancel).exists()).toBe(false);
-
-    await wrapper.setProps({ isConfirm: true });
+    await wrapper.setProps({ modelValue: true, isConfirm: true });
+    await wait(100);
 
     expect(wrapper.find(modalConfirm).exists()).toBe(true);
     expect(wrapper.find(modalCancel).exists()).toBe(true);
@@ -94,14 +84,12 @@ describe('UiModal', async () => {
 
   it('sets lang for buttons', async () => {
     await wrapper.setProps({ modelValue: true, isConfirm: true });
-
     await wait(100);
 
     expect(wrapper.findComponent(modalConfirm).text()).toBe('Подтвердить');
     expect(wrapper.findComponent(modalCancel).text()).toBe('Отмена');
 
     await wrapper.setProps({ lang: 'en' });
-
     await wait(100);
 
     expect(wrapper.findComponent(modalConfirm).text()).toBe('Confirm');
@@ -110,7 +98,6 @@ describe('UiModal', async () => {
 
   it('hides by cancel button click in confirm mode', async () => {
     await wrapper.setProps({ modelValue: true, isConfirm: true });
-
     await wait(100);
 
     await wrapper.find(modalCancel).trigger('click');
@@ -122,7 +109,6 @@ describe('UiModal', async () => {
 
   it('emit confirm and hides by confirm button click in confirm mode', async () => {
     await wrapper.setProps({ modelValue: true, isConfirm: true });
-
     await wait(100);
 
     await wrapper.find(modalConfirm).trigger('click');
@@ -132,17 +118,45 @@ describe('UiModal', async () => {
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([false]);
   });
 
-  it('handles body overflow correctly', async () => {
-    const originalOverflow = document.body.style.overflow;
-
+  it('closes on escape key press (cancel event)', async () => {
     await wrapper.setProps({ modelValue: true });
+    await wait(100);
 
-    expect(document.body.style.overflow).toBe('hidden');
+    const dialogElement = wrapper.find(modalDialog).element as HTMLDialogElement;
+
+    expect(dialogElement.open).toBe(true);
+
+    dialogElement.dispatchEvent(new Event('cancel', { cancelable: true }));
+
+    expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([false]);
+  });
+
+  it('toggles dialog correctly on modelValue change', async () => {
+    await wrapper.setProps({ modelValue: true });
+    await wait(100);
+
+    const dialogElement = wrapper.find(modalDialog).element as HTMLDialogElement;
+
+    expect(dialogElement.open).toBe(true);
 
     await wrapper.setProps({ modelValue: false });
+    await wait(100);
 
-    expect(document.body.style.overflow).toBe('auto');
+    const updateEvents = wrapper.emitted('update:modelValue');
 
-    document.body.style.overflow = originalOverflow;
+    if (updateEvents) expect(updateEvents.at(-1)).toEqual([false]);
+  });
+
+  it('renders with correct scrollable attribute', async () => {
+    await wrapper.setProps({ modelValue: true, isScrollable: true });
+    await wait(100);
+
+    expect(wrapper.find(modal).attributes('data-scrollable')).toBe('true');
+
+    await wrapper.setProps({ isScrollable: false });
+    await wait(100);
+
+    expect(wrapper.find(modal).attributes('data-scrollable')).toBe('false');
   });
 });

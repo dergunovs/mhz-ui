@@ -13,7 +13,11 @@ export function wrapperFactory<T>(
 
   return shallowMount(component, {
     global: {
-      stubs: { ...uiStubs, RouterLink: { template: '<a><slot></slot></a>' } },
+      stubs: {
+        ...uiStubs,
+        RouterLink: { template: '<a><slot></slot></a>' },
+        Teleport: { template: '<div><slot></slot></div>' },
+      },
     },
     props: props as ComponentPublicInstance<T>['$props'],
     slots: slots as undefined,

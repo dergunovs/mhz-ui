@@ -27,6 +27,7 @@ const props = defineProps<IProps>();
   height: 36px;
   color: var(--color-white);
   cursor: pointer;
+  outline: none;
   background-color: var(--color-gray-dark);
   border: none;
   border-radius: 50%;

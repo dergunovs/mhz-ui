@@ -107,12 +107,16 @@ exports[`UiCalendar > matches snapshot 1`] = `
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">21</div>
       <div class="_cellEvents_4b457f"></div>
     </div>
-    <div class="_cell_4b457f _today_4b457f" data-test="ui-calendar-calendar-day">
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">22</div>
       <div class="_cellEvents_4b457f"></div>
     </div>
-    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+    <div class="_cell_4b457f _today_4b457f" data-test="ui-calendar-calendar-day">
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">23</div>
+      <div class="_cellEvents_4b457f"></div>
+    </div>
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">24</div>
       <div class="_cellEvents_4b457f">
         <div class="_event_4b457f" data-test="ui-calendar-event">
           <div class="_title_4b457f" data-test="ui-calendar-event-title">24</div>
@@ -121,10 +125,6 @@ exports[`UiCalendar > matches snapshot 1`] = `
           <div class="_title_4b457f" data-test="ui-calendar-event-title">32</div>
         </div>
       </div>
-    </div>
-    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
-      <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">24</div>
-      <div class="_cellEvents_4b457f"></div>
     </div>
     <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">25</div>
