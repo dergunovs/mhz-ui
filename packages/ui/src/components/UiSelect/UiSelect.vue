@@ -115,6 +115,8 @@ const optionsElement = ref<HTMLElement>();
 const optionsInnerElement = ref<HTMLElement>();
 const optionElement = ref<HTMLElement[]>([]);
 
+const MIN_OPTIONS_HEIGHT = 240;
+
 const isObject = computed(() => {
   const firstOption = props.options?.[0];
 
@@ -175,13 +177,23 @@ const toggleOptions = () => {
 const checkOpenDirection = () => {
   if (!containerElement.value) return false;
 
-  const BOTTOM_SCREEN_MARGIN = 232;
+  const dialogElement = containerElement.value.closest('dialog') as HTMLElement | null;
 
+  if (!dialogElement) {
+    const containerRect = containerElement.value.getBoundingClientRect();
+    const spaceBelow = window.innerHeight - containerRect.bottom;
+    const spaceAbove = containerRect.top;
+
+    return spaceBelow < MIN_OPTIONS_HEIGHT && spaceAbove > spaceBelow;
+  }
+
+  const dialogRect = dialogElement.getBoundingClientRect();
   const containerRect = containerElement.value.getBoundingClientRect();
-  const spaceBelow = window.innerHeight - containerRect.bottom;
-  const spaceAbove = containerRect.top;
 
-  return spaceBelow < BOTTOM_SCREEN_MARGIN && spaceAbove > spaceBelow;
+  const spaceBelowContainer = dialogRect.bottom - containerRect.bottom;
+  const spaceAboveContainer = containerRect.top - dialogRect.top;
+
+  return spaceBelowContainer < MIN_OPTIONS_HEIGHT && spaceAboveContainer > spaceBelowContainer;
 };
 
 function hideOptions() {

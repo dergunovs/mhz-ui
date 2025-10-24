@@ -116,6 +116,7 @@ onMounted(() => {
   max-width: 100%;
   height: auto;
   padding: 24px;
+  outline: none;
   box-shadow: 0 0 16px 0 var(--color-gray-transparent);
 
   &[data-scrollable='true'] {

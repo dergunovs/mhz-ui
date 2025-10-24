@@ -102,7 +102,6 @@ function updateValue(value: number | Event) {
 }
 
 .input {
-  flex-grow: 1;
   min-width: 60px;
   max-width: 80px;
   font-size: 1rem;
