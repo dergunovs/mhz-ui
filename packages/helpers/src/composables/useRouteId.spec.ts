@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { createApp, defineComponent, Ref } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
-import { useRouteId } from '.';
+import { useRouteId } from '..';
 
 const template = { template: '<template><div></div></template>' };
 

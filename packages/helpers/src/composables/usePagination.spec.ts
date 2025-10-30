@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { ref } from 'vue';
 
-import { withSetup } from '..';
-import { usePagination } from '.';
+import { usePagination, withSetup } from '..';
 
 describe('usePagination', () => {
   it('initializes with undefined data and total', async () => {

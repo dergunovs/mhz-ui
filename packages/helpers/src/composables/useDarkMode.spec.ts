@@ -1,8 +1,7 @@
 import { nextTick } from 'vue';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { withSetup } from '..';
-import { useDarkMode } from '.';
+import { useDarkMode, withSetup } from '..';
 
 describe('useDarkMode', () => {
   beforeEach(() => {

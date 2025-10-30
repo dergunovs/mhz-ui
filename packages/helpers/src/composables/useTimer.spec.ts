@@ -1,7 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { withSetup } from '..';
-import { useTimer } from '.';
+import { useTimer, withSetup } from '..';
 
 const mockSetInterval = vi.fn(() => ({ unref: vi.fn() }));
 const mockClearInterval = vi.fn();

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { localeField } from '.';
+import { localeField } from '..';
 
 describe('localeField', () => {
   it('returns field name for ru locale', async () => {

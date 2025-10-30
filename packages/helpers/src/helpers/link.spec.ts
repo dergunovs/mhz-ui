@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { isLinkActive } from '.';
+import { isLinkActive } from '..';
 
 describe('link', () => {
   it('checks is link active - exact match', async () => {

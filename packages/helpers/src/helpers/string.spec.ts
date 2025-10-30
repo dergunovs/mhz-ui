@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { html } from './string';
+import { html } from '..';
 
 describe('html', () => {
   it('returns plain string when no expressions provided', () => {

@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { withSetup } from '..';
-import { useCalendar } from '.';
+import { withSetup, useCalendar } from '..';
 
 describe('useCalendar', () => {
   it('initializes with empty dates and isDatesReady as false', async () => {

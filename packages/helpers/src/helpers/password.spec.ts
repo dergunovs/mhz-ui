@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { generatePassword } from '.';
+import { generatePassword } from '..';
 
 describe('password', () => {
   it('generates string password', async () => {

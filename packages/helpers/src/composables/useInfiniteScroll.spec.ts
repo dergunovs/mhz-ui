@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { withSetup } from '..';
-import { useInfiniteScroll } from '.';
+import { useInfiniteScroll, withSetup } from '..';
 
 interface IData {
   id: number;

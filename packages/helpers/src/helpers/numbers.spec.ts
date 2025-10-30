@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { formatPercent, getPercentDiff } from '.';
+import { formatPercent, getPercentDiff } from '..';
 
 describe('numbers', () => {
   it('formats null percent', async () => {

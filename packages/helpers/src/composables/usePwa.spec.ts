@@ -1,8 +1,7 @@
 import { nextTick } from 'vue';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { withSetup } from '..';
-import { usePwa } from '.';
+import { usePwa, withSetup } from '..';
 
 describe('usePwa', () => {
   const mockPrompt = vi.fn();

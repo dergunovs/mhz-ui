@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue';
 
-import { addZero } from '../helpers';
+import { addZero } from '..';
 
 export function useTimer() {
   const secondsRaw = ref(0);

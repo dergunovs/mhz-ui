@@ -1,7 +1,7 @@
 import { vi, describe, expect, it } from 'vitest';
 import type { RootNode } from '@vue/compiler-core';
 
-import { dataTest, removeDataTest, wait, withSetup } from '.';
+import { dataTest, removeDataTest, wait, withSetup } from '..';
 
 describe('test', () => {
   it('returns data test element - basic functionality', async () => {

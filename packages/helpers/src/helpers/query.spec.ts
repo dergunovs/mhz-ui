@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { QueryCache, QueryClient } from '@tanstack/vue-query';
 
 import { logout } from '../composables/useAuth';
-import { handleError, deleteAuthHeader } from './api';
 
-import { queryClient, vueQueryOptions } from '.';
+import { queryClient, vueQueryOptions } from '..';
+import { handleError, deleteAuthHeader } from './api';
 
 describe('query', () => {
   it('exports queryClient', async () => {

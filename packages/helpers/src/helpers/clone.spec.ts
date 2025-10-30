@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue';
 import { describe, expect, it } from 'vitest';
 
-import { clone } from '.';
+import { clone } from '..';
 
 describe('clone', () => {
   it('clones object', async () => {

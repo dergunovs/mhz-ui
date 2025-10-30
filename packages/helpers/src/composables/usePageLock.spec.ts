@@ -1,8 +1,7 @@
 import { nextTick } from 'vue';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { withSetup } from '..';
-import { usePageLock } from '.';
+import { usePageLock, withSetup } from '..';
 
 const mockRequest = vi.fn();
 const mockRelease = vi.fn();

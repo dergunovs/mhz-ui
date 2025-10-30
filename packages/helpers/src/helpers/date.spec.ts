@@ -9,7 +9,7 @@ import {
   getDatesByDayGap,
   getFirstAndLastDays,
   getOneYearFromNow,
-} from '.';
+} from '..';
 
 describe('date', () => {
   it('adds zero to number if its less than 10', async () => {

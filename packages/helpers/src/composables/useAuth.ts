@@ -1,7 +1,7 @@
 import { readonly, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { getOneYearFromNow } from '../helpers';
+import { getOneYearFromNow } from '..';
 
 const isAuthLocal = ref(false);
 

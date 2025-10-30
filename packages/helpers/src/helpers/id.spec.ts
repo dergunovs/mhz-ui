@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { createTempId, deleteTempId } from '.';
+import { createTempId, deleteTempId } from '..';
 
 describe('id', () => {
   it('creates temp id with different format', async () => {

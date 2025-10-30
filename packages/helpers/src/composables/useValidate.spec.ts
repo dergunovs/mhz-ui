@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { nextTick, ref } from 'vue';
 
-import { withSetup } from '..';
-import { useValidate, required, email, letters, min, max } from '.';
+import { useValidate, required, email, letters, min, max, withSetup } from '..';
 
 describe('useValidate', () => {
   it('validates required field correctly', async () => {

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { scrollToTop } from '.';
+import { scrollToTop } from '..';
 
 const mockScrollTo = vi.fn();
 const mockQuerySelector = vi.fn();
