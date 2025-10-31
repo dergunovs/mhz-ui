@@ -56,7 +56,7 @@ export default defineConfig({
       exclude: ['**/*.spec.ts'],
     }),
     {
-      name: 'generate-index-files',
+      name: 'generate-index-files-and-copy-dts',
       apply: 'build',
       closeBundle() {
         const distDir = path.resolve('dist');
@@ -72,9 +72,7 @@ export default defineConfig({
               const name = file.replace('.d.ts', '');
               const destDir = path.join(distDir, name);
 
-              if (!fs.existsSync(destDir)) {
-                fs.mkdirSync(destDir, { recursive: true });
-              }
+              if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
 
               const dest = path.join(destDir, 'index.d.ts');
 
