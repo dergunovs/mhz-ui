@@ -9,36 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
       - name: Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: "24.10.0"
       - name: Install
         run: npm i
       - name: Build
         run: npm run build
-      - name: Debug List mhz-helpers files in node_modules
-        run: |
-          echo "=== Structure of node_modules/mhz-helpers ==="
-          ls -R node_modules/mhz-helpers/
-          echo "=== Contents of node_modules/mhz-helpers/dist/index.d.ts ==="
-          cat node_modules/mhz-helpers/dist/index.d.ts
-          echo "=== Contents of node_modules/mhz-helpers/dist/test/index.d.ts ==="
-          cat node_modules/mhz-helpers/dist/test/index.d.ts
-      - name: Debug Try to compile debug.ts with tsc
-        run: |
-          cd packages/ui
-          npx tsc --noEmit src/debug.ts
-          echo "If no error above, types are resolved correctly."
-      - name: Debug Show current tsconfig.json for mhz-ui
-        run: |
-          cd packages/ui
-          cat tsconfig.json
-      - name: TS check (verbose)
-        run: |
-          cd packages/ui
-          npx vue-tsc --noEmit --diagnostics
       - name: Lint check
         run: npm run lint
       - name: TS check
