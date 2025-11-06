@@ -39,20 +39,13 @@ exports[`UiCalendar > matches snapshot 1`] = `
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">1</div>
       <div class="_cellEvents_4b457f"></div>
     </div>
-    <div class="_cell_4b457f _today_4b457f" data-test="ui-calendar-calendar-day">
+    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">2</div>
       <div class="_cellEvents_4b457f"></div>
     </div>
     <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">3</div>
-      <div class="_cellEvents_4b457f">
-        <div class="_event_4b457f" data-test="ui-calendar-event">
-          <div class="_title_4b457f" data-test="ui-calendar-event-title">24</div>
-        </div>
-        <div class="_event_4b457f" data-test="ui-calendar-event">
-          <div class="_title_4b457f" data-test="ui-calendar-event-title">32</div>
-        </div>
-      </div>
+      <div class="_cellEvents_4b457f"></div>
     </div>
     <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">4</div>
@@ -62,13 +55,20 @@ exports[`UiCalendar > matches snapshot 1`] = `
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">5</div>
       <div class="_cellEvents_4b457f"></div>
     </div>
-    <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
+    <div class="_cell_4b457f _today_4b457f" data-test="ui-calendar-calendar-day">
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">6</div>
       <div class="_cellEvents_4b457f"></div>
     </div>
     <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">7</div>
-      <div class="_cellEvents_4b457f"></div>
+      <div class="_cellEvents_4b457f">
+        <div class="_event_4b457f" data-test="ui-calendar-event">
+          <div class="_title_4b457f" data-test="ui-calendar-event-title">24</div>
+        </div>
+        <div class="_event_4b457f" data-test="ui-calendar-event">
+          <div class="_title_4b457f" data-test="ui-calendar-event-title">32</div>
+        </div>
+      </div>
     </div>
     <div class="_cell_4b457f" data-test="ui-calendar-calendar-day">
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">8</div>

@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui-helpers",
   "description": "mhz-ui and mhz-helpers monorepo",
-  "version": "1.3.8",
+  "version": "1.3.9",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "homepage": "https://ui.9000mhz.ru",
