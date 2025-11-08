@@ -6,37 +6,22 @@ import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import vue from '@vitejs/plugin-vue';
 
-const composables = fs
-  .readdirSync('./src/composables')
-  .filter((file) => file.endsWith('.ts') && !file.endsWith('.spec.ts'))
-  .reduce<{ [key: string]: string }>((obj, file) => {
-    const name = file.replace('.ts', '');
+function createEntries(dir: string) {
+  return Object.fromEntries(
+    fs
+      .readdirSync(dir)
+      .filter((file) => file.endsWith('.ts') && !file.endsWith('.spec.ts'))
+      .map((file) => [file.replace('.ts', ''), `${dir}/${file}`])
+  );
+}
 
-    obj[name] = `src/composables/${file}`;
-
-    return obj;
-  }, {});
-
-const helpers = fs
-  .readdirSync('./src/helpers')
-  .filter((file) => file.endsWith('.ts') && !file.endsWith('.spec.ts'))
-  .reduce<{ [key: string]: string }>((obj, file) => {
-    const name = file.replace('.ts', '');
-
-    obj[name] = `src/helpers/${file}`;
-
-    return obj;
-  }, {});
+const entry = { ...createEntries('./src/composables'), ...createEntries('./src/helpers') };
 
 export default defineConfig({
   build: {
     target: 'es2022',
     copyPublicDir: false,
-    lib: {
-      name: 'mhz-helpers',
-      entry: { ...composables, ...helpers },
-      formats: ['es'],
-    },
+    lib: { entry, name: 'mhz-helpers', formats: ['es'] },
     rollupOptions: {
       external: ['vue', 'vue-router'],
       output: {

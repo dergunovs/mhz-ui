@@ -11,25 +11,21 @@ import { removeDataTest } from 'mhz-helpers';
 
 const files = fs.readdirSync('./src/components').filter((file) => file.includes('Ui'));
 
-const components = files.reduce<{ [key: string]: string }>((obj, component) => {
+const entry = files.reduce<{ [key: string]: string }>((obj, component) => {
   obj[component.split('.')[0]] = `src/components/${component}/${component}.vue`;
 
   return obj;
 }, {});
 
-components['toast'] = `src/components/toast/toast.ts`;
-components['stubs'] = `src/components/stubs/stubs.ts`;
+entry.toast = `src/components/toast/toast.ts`;
+entry.stubs = `src/components/stubs/stubs.ts`;
 
 export default defineConfig({
   build: {
     target: 'es2022',
     cssCodeSplit: true,
     copyPublicDir: false,
-    lib: {
-      name: 'mhz-ui',
-      entry: components,
-      formats: ['es'],
-    },
+    lib: { entry, name: 'mhz-ui', formats: ['es'] },
     rollupOptions: {
       external: ['vue', 'vue-router'],
       output: {
@@ -91,14 +87,15 @@ export default defineConfig({
       apply: 'build',
 
       writeBundle(_option, bundle) {
-        const cssFiles = Object.keys(bundle)
-          .filter((file) => file.endsWith('.css') && !file.includes('-'))
-          .map((file) => file.replace('.css', ''));
+        const cssFiles = Object.keys(bundle).filter((file) => file.endsWith('.css') && !file.includes('-'));
 
-        for (const file of cssFiles) {
-          const filePath = path.resolve('', 'dist', `${file}.js`);
-          const cssImport = `import "./${file.split('/')[0]}.css";`;
-          const data = fs.readFileSync(filePath, { encoding: 'utf8' });
+        for (const cssFile of cssFiles) {
+          const jsFileName = cssFile.replace('.css', '');
+          const filePath = path.resolve('dist', `${jsFileName}.js`);
+
+          const cssFileName = path.basename(cssFile);
+          const cssImport = `import "./${cssFileName}";`;
+          const data = fs.readFileSync(filePath, 'utf8');
 
           fs.writeFileSync(filePath, `${cssImport}\n${data}`);
         }
