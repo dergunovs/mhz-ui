@@ -142,13 +142,13 @@ const calendarDays = computed(() => {
   return days;
 });
 
-const emitUpdate = () => {
+function emitUpdate() {
   const dates = { dateFrom: calendarDays.value[0], dateTo: calendarDays.value.at(-1) as Date };
 
   emit('update', dates);
-};
+}
 
-const getEventsForDate = (date: Date) => {
+function getEventsForDate(date: Date) {
   return props.events.filter((event) => {
     if (!event.start) return false;
     const eventDate = new Date(event.start);
@@ -159,13 +159,13 @@ const getEventsForDate = (date: Date) => {
       eventDate.getFullYear() === date.getFullYear()
     );
   });
-};
+}
 
-const isToday = (date: Date) => {
+function isToday(date: Date) {
   return date.toDateString() === today.value.toDateString();
-};
+}
 
-const isOutOfRange = (date: Date) => {
+function isOutOfRange(date: Date) {
   if (props.isDisablePastDates) {
     const dateWithoutTime = new Date(date);
 
@@ -175,26 +175,26 @@ const isOutOfRange = (date: Date) => {
   }
 
   return false;
-};
+}
 
-const prevMonth = () => {
+function prevMonth() {
   currentMonth.value = new Date(currentMonth.value.getFullYear(), currentMonth.value.getMonth() - 1, 1);
   emitUpdate();
-};
+}
 
-const nextMonth = () => {
+function nextMonth() {
   currentMonth.value = new Date(currentMonth.value.getFullYear(), currentMonth.value.getMonth() + 1, 1);
   emitUpdate();
-};
+}
 
-const onEventClick = (event: ICalendarEvent<unknown>) => {
+function onEventClick(event: ICalendarEvent<unknown>) {
   emit('eventClick', event);
-};
+}
 
-const onCellClick = (date: Date) => {
+function onCellClick(date: Date) {
   if (isOutOfRange(date)) return;
   emit('chooseDate', date);
-};
+}
 
 onBeforeMount(() => {
   emitUpdate();

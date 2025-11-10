@@ -1,5 +1,4 @@
 import { readonly, ref } from 'vue';
-import { useRouter } from 'vue-router';
 
 import { getOneYearFromNow } from '..';
 
@@ -34,17 +33,11 @@ export function deleteCookieToken(tokenName: string) {
 }
 
 export function useAuth() {
-  const router = useRouter();
-
   function auth(token: string, setAuthHeader: (token: string) => void, tokenName: string) {
     setCookieToken(token, tokenName);
     setAuthHeader(token);
     setAuth(true);
   }
 
-  function redirectIfAuth(url: string) {
-    if (isAuth.value) router.push(url);
-  }
-
-  return { auth, redirectIfAuth };
+  return { auth };
 }
