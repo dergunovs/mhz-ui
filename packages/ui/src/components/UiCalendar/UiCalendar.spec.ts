@@ -1,10 +1,11 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest } from 'mhz-helpers';
 
 import UiCalendar from './UiCalendar.vue';
 
-import { EVENTS, LANG } from './constants';
+import { EVENTS as ORIGINAL_EVENTS, LANG } from './constants';
+import { ICalendarEvent } from './interface';
 import { wrapperFactory } from '@/test';
 
 const prevMonth = dataTest('ui-calendar-prev-month');
@@ -18,7 +19,18 @@ const eventTitle = dataTest('ui-calendar-event-title');
 
 let wrapper: VueWrapper<InstanceType<typeof UiCalendar>>;
 
+const FIXED_DATE = new Date('2023-10-15T12:00:00Z');
+
+const EVENTS: ICalendarEvent<object>[] = ORIGINAL_EVENTS.map((eventToUpdate) => ({
+  ...eventToUpdate,
+  start: new Date('2023-10-16T00:00:00Z'),
+  end: new Date('2023-10-16T00:00:00Z'),
+}));
+
 beforeEach(() => {
+  vi.useFakeTimers();
+  vi.setSystemTime(FIXED_DATE);
+
   wrapper = wrapperFactory(UiCalendar, {
     events: EVENTS,
     lang: LANG,
@@ -26,6 +38,10 @@ beforeEach(() => {
 });
 
 enableAutoUnmount(afterEach);
+
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 describe('UiCalendar', async () => {
   it('exists', async () => {
@@ -41,8 +57,7 @@ describe('UiCalendar', async () => {
 
     expect(currentMonthElement.exists()).toBe(true);
 
-    const now = new Date();
-    const expectedMonth = now.toLocaleDateString(LANG, { month: 'long', year: 'numeric' });
+    const expectedMonth = FIXED_DATE.toLocaleDateString(LANG, { month: 'long', year: 'numeric' });
     const capitalizedMonth = expectedMonth.charAt(0).toUpperCase() + expectedMonth.slice(1);
 
     expect(currentMonthElement.text()).toBe(capitalizedMonth.replace(/ г\.$/, ''));
@@ -158,9 +173,9 @@ describe('UiCalendar', async () => {
     await prevButton.trigger('click');
 
     expect(emittedUpdates).toHaveLength(2);
-    expect(emittedUpdates?.[0]).toHaveLength(1);
+    expect(emittedUpdates?.[1]).toHaveLength(1);
 
-    const updateData = emittedUpdates?.[0]?.[0];
+    const updateData = emittedUpdates?.[1]?.[0];
 
     if (updateData && typeof updateData === 'object') {
       expect(updateData).toHaveProperty('dateFrom');
