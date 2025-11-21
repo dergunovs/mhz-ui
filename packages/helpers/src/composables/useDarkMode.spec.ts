@@ -1,9 +1,26 @@
 import { nextTick } from 'vue';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
 import { useDarkMode, withSetup } from '..';
 
 describe('useDarkMode', () => {
+  beforeAll(() => {
+    const mockStorage = {
+      store: {} as { [key: string]: string },
+      getItem(key: string) {
+        return this.store[key] || null;
+      },
+      setItem(key: string, value: string) {
+        this.store[key] = value;
+      },
+      clear() {
+        this.store = {};
+      },
+    };
+
+    Object.defineProperty(globalThis, 'localStorage', { value: mockStorage, writable: true });
+  });
+
   beforeEach(() => {
     localStorage.clear();
     if (document.body) document.body.className = '';
