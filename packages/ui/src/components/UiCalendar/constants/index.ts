@@ -5,8 +5,8 @@ export const LANG = 'ru';
 export const EVENTS: ICalendarEvent<object>[] = [
   {
     id: 'id of event 1',
-    start: new Date(new Date().setDate(new Date().getDate() + 1)),
-    end: new Date(new Date().setDate(new Date().getDate() + 1)),
+    start: new Date(),
+    end: new Date(),
     title: '24',
     content: [{ id: 1, text: 'Text' }],
     color:

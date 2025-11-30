@@ -26,6 +26,7 @@
         :key="index"
         :class="[$style.cell, { [$style.today]: isToday(date), [$style.outOfRange]: isOutOfRange(date) }]"
         @click="onCellClick(date)"
+        :data-choose="props.isDisablePastDates"
         data-test="ui-calendar-calendar-day"
       >
         <div :class="$style.cellDate" data-test="ui-calendar-cell-date">
@@ -143,7 +144,10 @@ const calendarDays = computed(() => {
 });
 
 function emitUpdate() {
-  const dates = { dateFrom: calendarDays.value[0], dateTo: calendarDays.value.at(-1) as Date };
+  const dates = {
+    dateFrom: calendarDays.value[0],
+    dateTo: new Date(calendarDays.value.at(-1)?.setHours(23, 59, 59) as unknown as Date),
+  };
 
   emit('update', dates);
 }
@@ -263,6 +267,10 @@ onBeforeMount(() => {
 
     &.today .cellDate {
       font-weight: 700;
+    }
+
+    &[data-choose='true'] {
+      cursor: pointer;
     }
 
     &.outOfRange {
