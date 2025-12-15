@@ -7,8 +7,6 @@
     :data-justify="props.justify"
     :data-wrap="props.wrap"
     :data-gap="props.gap"
-    :data-shrink="props.shrink"
-    :data-grow="props.grow"
     data-test="ui-flex"
   >
     <slot></slot>
@@ -34,8 +32,6 @@ interface IProps {
     | 'space-evenly';
   wrap?: boolean;
   gap?: string;
-  shrink?: boolean;
-  grow?: boolean;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -46,33 +42,20 @@ const props = withDefaults(defineProps<IProps>(), {
 });
 
 const flexDirectionComputed = computed(() => (props.column ? 'column' : 'row'));
-
 const alignItemsComputed = computed(() => props.align);
-
 const justifyContentComputed = computed(() => props.justify);
-
 const wrapComputed = computed(() => (props.wrap ? 'wrap' : 'nowrap'));
-
 const gapComputed = computed(() => (props.gap ? `${props.gap}px` : '0'));
-
-const shrinkComputed = computed(() => (props.shrink ? '1' : '0'));
-
-const growComputed = computed(() => (props.grow ? '1' : '0'));
-
-const widthComputed = computed(() => (props.grow ? '100%' : 'auto'));
 </script>
 
 <style module lang="scss">
 .flex {
   display: flex;
-  flex-grow: v-bind(growComputed);
-  flex-shrink: v-bind(shrinkComputed);
   flex-direction: v-bind(flexDirectionComputed);
   flex-wrap: v-bind(wrapComputed);
   gap: v-bind(gapComputed);
   align-items: v-bind(alignItemsComputed);
   justify-content: v-bind(justifyContentComputed);
-  width: v-bind(widthComputed);
 }
 
 :global(.dark) {

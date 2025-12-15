@@ -54,20 +54,4 @@ describe('UiFlex', async () => {
 
     expect(wrapper.find(flex).attributes('data-wrap')).toBe('true');
   });
-
-  it('sets shrink by props', async () => {
-    expect(wrapper.find(flex).attributes('data-shrink')).toBe('false');
-
-    await wrapper.setProps({ shrink: true });
-
-    expect(wrapper.find(flex).attributes('data-shrink')).toBe('true');
-  });
-
-  it('sets grow by props', async () => {
-    expect(wrapper.find(flex).attributes('data-grow')).toBe('false');
-
-    await wrapper.setProps({ grow: true });
-
-    expect(wrapper.find(flex).attributes('data-grow')).toBe('true');
-  });
 });

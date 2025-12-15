@@ -1,3 +1,3 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`UiFlex > matches snapshot 1`] = `"<div class="_flex_987349" data-column="false" data-align="normal" data-justify="normal" data-wrap="false" data-gap="8" data-shrink="false" data-grow="false" data-test="ui-flex">Content inside first div</div>"`;
+exports[`UiFlex > matches snapshot 1`] = `"<div class="_flex_987349" data-column="false" data-align="normal" data-justify="normal" data-wrap="false" data-gap="8" data-test="ui-flex">Content inside first div</div>"`;
