@@ -115,12 +115,13 @@ onMounted(() => {
   width: v-bind(widthComputed);
   max-width: 100%;
   height: auto;
+  min-height: 200px;
   padding: 24px;
   outline: none;
   box-shadow: 0 0 16px 0 var(--color-gray-transparent);
 
   &[data-scrollable='true'] {
-    max-height: 64dvh;
+    height: 64dvh;
     overflow-y: auto;
   }
 }
