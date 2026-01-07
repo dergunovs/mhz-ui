@@ -113,6 +113,14 @@ useValidate<T>(formData: Ref<T>, rules: Partial<{ [fieldName in keyof T]: (RuleI
 
 Валидация полей реактивного объекта по правилам `required, email, letters, min(value: number), max(value: number)`.
 
+Правила:
+
+- `required(locale?: TLocale): RuleItem`
+- `email(locale?: TLocale): RuleItem`
+- `letters(locale?: TLocale): RuleItem`
+- `min(value: number, locale?: TLocale): RuleItem`
+- `max(value: number, locale?: TLocale): RuleItem`
+
 ## useRouteId
 
 ```

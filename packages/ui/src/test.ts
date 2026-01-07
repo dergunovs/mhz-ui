@@ -4,11 +4,15 @@ import { debounce } from 'perfect-debounce';
 
 import { uiStubs } from './components/stubs/stubs';
 
-export function wrapperFactory<T>(
-  component: Component<T>,
-  props?: Partial<ComponentPublicInstance<T>['$props']>,
-  slots?: { default: string }
-) {
+// eslint-disable-next-line @typescript-eslint/no-type-alias
+type TFilteredProps<T> = {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  [K in keyof T as K extends `$${infer _U}` ? never : K extends `on${infer _V}` ? never : K]: T[K];
+};
+
+type TComponentProps<T> = Partial<TFilteredProps<ComponentPublicInstance<T>['$props']>>;
+
+export function wrapperFactory<T>(component: Component<T>, props?: TComponentProps<T>, slots?: { default: string }) {
   document.body.innerHTML = '<div id="app"></div>';
 
   return shallowMount(component, {

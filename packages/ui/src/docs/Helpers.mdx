@@ -8,7 +8,7 @@ npm i mhz-helpers
 
 `api: typeof axios` единый инстанс axios
 
-`setBaseURL(url: string) ` установка базового url
+`setBaseURL(url: string)` установка базового url
 
 `setAuthHeader(token: string)` установка заголовка авторизации
 
@@ -80,8 +80,8 @@ npm i mhz-helpers
 
 `dataTest(value: string): string` возврат элемента с указанным data-test аттрибутом со скобками и кавычками
 
-`removeDataTest(node: NodeWithProps)` убрать аттрибуты data-test при билде в продакшен
+`removeDataTest(node: RootNode | TemplateChildNode)` убрать аттрибуты data-test при билде в продакшен
 
 `wait(time?: number): Promise<void>` подождать указанное количество милисекунд внутри теста для проверки setTimeout
 
-`withSetup<T>(composable: () => T)` функция для настройки тестов с использованием Vue композаблов
+`withSetup<T>(composable: () => Promise<T>)` функция для настройки тестов с использованием Vue композаблов (асинхронная)
