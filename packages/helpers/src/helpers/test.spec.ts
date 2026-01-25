@@ -1,7 +1,9 @@
 import { vi, describe, expect, it } from 'vitest';
-import type { RootNode } from '@vue/compiler-core';
+import type { RootNode, TransformContext } from '@vue/compiler-core';
 
 import { dataTest, removeDataTest, wait, withSetup } from '..';
+
+const context = {} as TransformContext;
 
 describe('test', () => {
   it('returns data test element - basic functionality', async () => {
@@ -29,7 +31,7 @@ describe('test', () => {
       ],
     };
 
-    removeDataTest(node as unknown as RootNode);
+    removeDataTest(node as unknown as RootNode, context);
 
     expect(node.props.length).toBe(1);
     expect(node.props[0].name).toBe('class');
@@ -44,7 +46,7 @@ describe('test', () => {
       ],
     };
 
-    removeDataTest(node as unknown as RootNode);
+    removeDataTest(node as unknown as RootNode, context);
 
     expect(node.props.length).toBe(2);
     expect(node.props[0].name).toBe('class');
@@ -57,7 +59,7 @@ describe('test', () => {
       props: [{ type: 6, name: 'data-test', value: 'test-value' }],
     };
 
-    removeDataTest(node as unknown as RootNode);
+    removeDataTest(node as unknown as RootNode, context);
 
     expect(node.props.length).toBe(1);
     expect(node.props[0].name).toBe('data-test');
@@ -74,7 +76,7 @@ describe('test', () => {
       ],
     };
 
-    removeDataTest(node as unknown as RootNode);
+    removeDataTest(node as unknown as RootNode, context);
 
     expect(node.props.length).toBe(3);
     expect(node.props[0].name).toBe('class');
@@ -88,7 +90,7 @@ describe('test', () => {
       props: [{ type: 6, name: 'data-test', value: 'test-value' }],
     };
 
-    removeDataTest(node as unknown as RootNode);
+    removeDataTest(node as unknown as RootNode, context);
 
     expect(node.props.length).toBe(0);
   });
