@@ -1,7 +1,6 @@
 import { toRaw } from 'vue';
 
 function deepClone<T>(obj: T): T {
-  // eslint-disable-next-line sonarjs/different-types-comparison
   if (obj === null) {
     return obj as T;
   }
