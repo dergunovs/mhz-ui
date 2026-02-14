@@ -102,10 +102,10 @@ exports[`UiCalendar > matches snapshot 1`] = `
     <div class="_cell_4b457f" data-choose="false" data-test="ui-calendar-calendar-day">
       <div class="_cellDate_4b457f" data-test="ui-calendar-cell-date">16</div>
       <div class="_cellEvents_4b457f">
-        <div class="_event_4b457f" data-test="ui-calendar-event">
+        <div class="_event_4b457f" style="background: linear-gradient(135deg, rgb(196, 30, 58) 35%, rgb(218, 112, 214) 35%, rgb(218, 112, 214) 68%, rgb(255, 140, 0) 68%, rgb(255, 140, 0) 100%);" data-test="ui-calendar-event">
           <div class="_title_4b457f" data-test="ui-calendar-event-title">24</div>
         </div>
-        <div class="_event_4b457f" data-test="ui-calendar-event">
+        <div class="_event_4b457f" style="background: linear-gradient(135deg, rgb(255, 140, 0) 37%, rgb(196, 30, 58) 37%, rgb(196, 30, 58) 71%, rgb(50, 205, 50) 71%, rgb(50, 205, 50) 100%);" data-test="ui-calendar-event">
           <div class="_title_4b457f" data-test="ui-calendar-event-title">32</div>
         </div>
       </div>

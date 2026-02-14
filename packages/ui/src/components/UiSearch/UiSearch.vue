@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { shallowRef, computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { onClickOutside } from '@vueuse/core';
 import { debounce } from 'perfect-debounce';
@@ -90,7 +90,7 @@ const props = withDefaults(defineProps<IProps>(), {
 });
 const emit = defineEmits<IEmit>();
 
-const isShowResults = ref(false);
+const isShowResults = shallowRef(false);
 
 const debounced = debounce(async (value: string) => {
   emit('update:modelValue', value);
@@ -113,7 +113,7 @@ const isResults = computed(() => {
   return props.results ? Object.values(props.results).reduce((acc, val) => acc + (val ? val.length : 0), 0) : false;
 });
 
-const containerElement = ref<HTMLElement>();
+const containerElement = shallowRef<HTMLElement>();
 
 onClickOutside(containerElement, () => {
   hideResults();

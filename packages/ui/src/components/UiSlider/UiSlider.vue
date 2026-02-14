@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { shallowRef } from 'vue';
 
 interface IProps {
   thumbs: string[];
@@ -43,7 +43,7 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
-const currentSlide = ref(0);
+const currentSlide = shallowRef(0);
 </script>
 
 <style module lang="scss">

@@ -1,12 +1,12 @@
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, shallowRef, onMounted, onBeforeUnmount } from 'vue';
 
 export interface IPromptEvent extends Event {
   prompt: () => Promise<void>;
 }
 
 export function usePwa() {
-  const isShowInstallPWA = ref(false);
-  const isPWACanBeInstalled = ref(false);
+  const isShowInstallPWA = shallowRef(false);
+  const isPWACanBeInstalled = shallowRef(false);
   const installPWAPrompt = ref<IPromptEvent | undefined>();
 
   async function installPWA(): Promise<void> {

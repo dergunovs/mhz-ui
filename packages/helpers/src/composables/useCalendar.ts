@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { shallowRef } from 'vue';
 
 export interface ICalendarDates {
   dateFrom: Date;
@@ -6,10 +6,10 @@ export interface ICalendarDates {
 }
 
 export function useCalendar() {
-  const dateFrom = ref<Date>();
-  const dateTo = ref<Date>();
+  const dateFrom = shallowRef<Date>();
+  const dateTo = shallowRef<Date>();
 
-  const isDatesReady = ref(false);
+  const isDatesReady = shallowRef(false);
 
   function updateDates(dates: ICalendarDates) {
     dateFrom.value = dates.dateFrom;

@@ -1,7 +1,7 @@
-import { ref, Ref } from 'vue';
+import { ref, shallowRef, Ref } from 'vue';
 
 export function useInfiniteScroll<T>() {
-  const page = ref(1);
+  const page = shallowRef(1);
   const allData = ref<T[]>([]) as Ref<T[]>;
 
   function addData(data: T[]) {

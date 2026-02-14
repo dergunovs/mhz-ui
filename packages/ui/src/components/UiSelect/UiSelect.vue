@@ -67,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, shallowRef, computed } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 
 import UiInput from '../UiInput/UiInput.vue';
@@ -107,13 +107,13 @@ const props = withDefaults(defineProps<IProps>(), {
 const emit = defineEmits<IEmit>();
 
 const filterQuery = ref('');
-const isShowOptions = ref(false);
-const isOpenUp = ref(false);
+const isShowOptions = shallowRef(false);
+const isOpenUp = shallowRef(false);
 
-const containerElement = ref<HTMLElement>();
-const optionsElement = ref<HTMLElement>();
-const optionsInnerElement = ref<HTMLElement>();
-const optionElement = ref<HTMLElement[]>([]);
+const containerElement = shallowRef<HTMLElement>();
+const optionsElement = shallowRef<HTMLElement>();
+const optionsInnerElement = shallowRef<HTMLElement>();
+const optionElement = shallowRef<HTMLElement[]>([]);
 
 const MIN_OPTIONS_HEIGHT = 240;
 

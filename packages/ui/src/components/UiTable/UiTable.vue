@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { shallowRef, onMounted, onBeforeUnmount } from 'vue';
 
 import { TLocale } from '@/components/locales/types';
 import { MESSAGES } from '@/components/locales';
@@ -85,10 +85,10 @@ const props = withDefaults(defineProps<IProps>(), {
 });
 const emit = defineEmits<IEmit>();
 
-const tableBlock = ref<HTMLElement>();
-const table = ref<HTMLElement>();
+const tableBlock = shallowRef<HTMLElement>();
+const table = shallowRef<HTMLElement>();
 
-const isScrollable = ref(false);
+const isScrollable = shallowRef(false);
 
 function checkTableSize() {
   if (tableBlock.value && table.value) {

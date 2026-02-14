@@ -1,4 +1,4 @@
-import { ref, computed, Ref } from 'vue';
+import { shallowRef, computed, Ref } from 'vue';
 
 import { useAsyncValidator } from '@vueuse/integrations/useAsyncValidator';
 import { RuleItem, Rules } from 'async-validator';
@@ -25,7 +25,7 @@ export function useValidate<T>(
     validateOption: { suppressWarning: true },
   });
 
-  const tries = ref(0);
+  const tries = shallowRef(0);
 
   function isValid(): boolean {
     tries.value++;

@@ -1,7 +1,7 @@
-import { ref, onBeforeMount, readonly } from 'vue';
+import { shallowRef, onBeforeMount, readonly } from 'vue';
 
 export function useDarkMode() {
-  const isDarkModeState = ref(false);
+  const isDarkModeState = shallowRef(false);
   const isDarkMode = readonly(isDarkModeState);
 
   onBeforeMount(() => {

@@ -1,8 +1,8 @@
-import { readonly, ref } from 'vue';
+import { readonly, shallowRef } from 'vue';
 
 import { getOneYearFromNow } from '..';
 
-const isAuthLocal = ref(false);
+const isAuthLocal = shallowRef(false);
 
 export const isAuth = readonly(isAuthLocal);
 

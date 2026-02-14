@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { shallowRef, computed } from 'vue';
 
 import UiButton from '../UiButton/UiButton.vue';
 import IconUpload from './icons/upload.svg?component';
@@ -110,8 +110,8 @@ const props = withDefaults(defineProps<IProps>(), {
 
 const emit = defineEmits<IEmit>();
 
-const input = ref<HTMLElement>();
-const inputKey = ref(0);
+const input = shallowRef<HTMLElement>();
+const inputKey = shallowRef(0);
 
 const accept = computed(() => props.extensions.map((extension) => `.${extension}`).join(','));
 

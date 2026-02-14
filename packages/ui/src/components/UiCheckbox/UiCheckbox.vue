@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { shallowRef } from 'vue';
 import { DEFAULT_LABEL, DEFAULT_MODEL_VALUE } from './constants';
 
 type TInitialValue = boolean | string | number;
@@ -79,7 +79,7 @@ const props = withDefaults(defineProps<IProps>(), {
 
 const emit = defineEmits<IEmit>();
 
-const checkbox = ref<HTMLInputElement>();
+const checkbox = shallowRef<HTMLInputElement>();
 
 function handleChange() {
   if (checkbox.value) {

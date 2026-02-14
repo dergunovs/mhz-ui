@@ -1,4 +1,4 @@
-import { ref, watch, Ref } from 'vue';
+import { ref, shallowRef, watch, Ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 export interface ISortOption {
@@ -88,7 +88,7 @@ export function usePageNumber() {
   const router = useRouter();
   const route = useRoute();
 
-  const page = ref(Number(route.query.page || 1));
+  const page = shallowRef(Number(route.query.page || 1));
 
   function resetPage() {
     page.value = 1;

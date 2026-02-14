@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { FunctionalComponent, onMounted, nextTick, ref, computed } from 'vue';
+import { FunctionalComponent, onMounted, nextTick, shallowRef, computed } from 'vue';
 
 import IconCopy from './icons/copy.svg?component';
 import IconPasswordHide from './icons/password-hide.svg?component';
@@ -68,9 +68,9 @@ const props = withDefaults(defineProps<IProps>(), {
 
 const emit = defineEmits<IEmit>();
 
-const input = ref<HTMLElement>();
+const input = shallowRef<HTMLElement>();
 
-const isShowPassword = ref(false);
+const isShowPassword = shallowRef(false);
 
 const icon = computed(() => {
   if (props.isCopy) return IconCopy;

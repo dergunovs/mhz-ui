@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onBeforeMount } from 'vue';
+import { computed, shallowRef, onBeforeMount } from 'vue';
 
 import { TLocale } from '../locales/types';
 import { ICalendarDates, ICalendarEvent } from './interface';
@@ -75,7 +75,7 @@ const props = withDefaults(defineProps<IProps>(), {
 
 const emit = defineEmits<IEmit>();
 
-const currentMonth = ref(new Date());
+const currentMonth = shallowRef(new Date());
 
 const today = computed(() => {
   const todayDate = new Date();

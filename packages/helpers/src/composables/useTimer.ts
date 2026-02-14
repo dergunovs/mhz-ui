@@ -1,10 +1,10 @@
-import { computed, ref } from 'vue';
+import { computed, shallowRef } from 'vue';
 
 import { addZero } from '..';
 
 export function useTimer() {
-  const secondsRaw = ref(0);
-  const minutesRaw = ref(0);
+  const secondsRaw = shallowRef(0);
+  const minutesRaw = shallowRef(0);
 
   const timer = computed(() => `${addZero(minutesRaw.value)}:${addZero(secondsRaw.value)}`);
   const duration = computed(() => minutesRaw.value * 60 + secondsRaw.value);

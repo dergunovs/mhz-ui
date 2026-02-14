@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick, onMounted } from 'vue';
+import { shallowRef, watch, computed, nextTick, onMounted } from 'vue';
 
 import UiButton from '../UiButton/UiButton.vue';
 import UiClose from '../UiClose/UiClose.vue';
@@ -56,7 +56,7 @@ const emit = defineEmits<IEmit>();
 defineOptions({ inheritAttrs: false });
 
 const widthComputed = computed(() => `${props.width}px`);
-const dialogRef = ref<HTMLDialogElement | null>(null);
+const dialogRef = shallowRef<HTMLDialogElement | null>(null);
 
 function toggleDialog() {
   nextTick(() => {
