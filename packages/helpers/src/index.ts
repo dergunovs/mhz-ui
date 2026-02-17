@@ -1,4 +1,3 @@
-export * from './locales/types';
 export * from './composables/useAuth';
 export * from './composables/useInfiniteScroll';
 export * from './composables/usePage';

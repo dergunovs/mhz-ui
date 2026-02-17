@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "Mhz helpers and composables",
-  "version": "1.4.2",
+  "version": "1.3.27",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -17,23 +17,25 @@
     "directory": "packages/helpers"
   },
   "scripts": {
-    "build": "tsdown",
+    "build": "vite build",
     "lint": "eslint **/*.{js,ts}",
     "ts": "vue-tsc --noEmit",
     "test": "vitest run",
     "test:cov": "vitest run --coverage"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "@tanstack/vue-query": "5.92.9",
     "@vueuse/core": "14.2.1",
     "@vueuse/integrations": "14.2.1",
     "async-validator": "4.2.5",
     "axios": "1.13.5",
     "vue": "3.6.0-beta.6",
-    "vue-router": "5.0.2",
+    "vue-router": "5.0.2"
+  },
+  "devDependencies": {
     "@eslint/js": "9.39.2",
     "@types/node": "25.2.3",
+    "@vitejs/plugin-vue": "6.0.4",
     "@vitest/coverage-v8": "4.1.0-beta.3",
     "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
@@ -53,9 +55,10 @@
     "stylelint-config-recommended-vue": "1.6.1",
     "stylelint-order": "7.0.1",
     "stylelint-prettier": "5.0.3",
-    "tsdown": "0.20.3",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.56.0",
+    "typescript-eslint": "8.55.0",
+    "vite": "7.3.1",
+    "vite-plugin-dts": "4.5.4",
     "vitest": "4.1.0-beta.3",
     "vue-eslint-parser": "10.4.0",
     "vue-linters-config": "0.5.5",
