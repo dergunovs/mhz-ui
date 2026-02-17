@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const api = axios;
+export const api: typeof axios = axios;
 
 export function setBaseURL(url: string) {
   api.defaults.baseURL = url;
@@ -15,5 +15,5 @@ export function deleteAuthHeader() {
 }
 
 export function handleError(error: unknown): string {
-  return api.isAxiosError(error) ? error.response?.data.message : 'Ошибка';
+  return axios.isAxiosError(error) ? error.response?.data.message : 'Ошибка';
 }
