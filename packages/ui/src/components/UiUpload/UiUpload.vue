@@ -20,8 +20,7 @@
         </UiButton>
 
         <div :class="$style.text" :data-error="!!props.error" data-test="ui-upload-text">
-          {{ MESSAGES[props.lang].sizeUpTo }} {{ FILE_SIZE_LIMIT / (1024 * 1024) }} Mb,
-          {{ props.extensions.join(', ') }}.
+          {{ MESSAGES[props.lang].sizeUpTo }} {{ props.limit / (1024 * 1024) }} Mb, {{ props.extensions.join(', ') }}.
         </div>
       </div>
 
