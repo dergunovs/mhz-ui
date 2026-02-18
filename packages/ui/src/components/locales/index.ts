@@ -2,6 +2,7 @@ export const MESSAGES = {
   en: {
     cancel: 'Cancel',
     confirm: 'Confirm',
+    add: 'Add',
     of: 'of',
     enterMoreSymbols: 'Enter 3 or more symbols',
     loading: 'Loading',
@@ -10,11 +11,13 @@ export const MESSAGES = {
     filter: 'Filter',
     remove: 'Remove',
     upload: 'Upload',
+    sizeUpTo: 'Size up to',
     tableIsScrollable: 'Table is scrollable →',
   },
   ru: {
     cancel: 'Отмена',
     confirm: 'Подтвердить',
+    add: 'Добавить',
     of: 'из',
     enterMoreSymbols: 'Введите хотя бы 3 символа',
     loading: 'Загрузка',
@@ -23,6 +26,7 @@ export const MESSAGES = {
     filter: 'Фильтровать',
     remove: 'Убрать',
     upload: 'Загрузить',
+    sizeUpTo: 'Размер до',
     tableIsScrollable: 'Таблицу можно скроллить →',
   },
 } as const;

@@ -16,11 +16,12 @@
           :icon="IconUpload"
           data-test="ui-upload-add"
         >
-          Add file<template v-if="!props.isSingle">s</template>
+          {{ MESSAGES[props.lang].add }}
         </UiButton>
 
         <div :class="$style.text" :data-error="!!props.error" data-test="ui-upload-text">
-          Size up to {{ FILE_SIZE_LIMIT / (1024 * 1024) }} Mb, {{ props.extensions.join(', ') }}.
+          {{ MESSAGES[props.lang].sizeUpTo }} {{ FILE_SIZE_LIMIT / (1024 * 1024) }} Mb,
+          {{ props.extensions.join(', ') }}.
         </div>
       </div>
 
@@ -44,7 +45,12 @@
         >
           <div :class="$style.name" data-test="ui-upload-file-name">{{ fileToUpload.name }}</div>
 
-          <UiButton @click="remove(fileToUpload)" layout="plain" data-test="ui-upload-file-remove">
+          <UiButton
+            @click="remove(fileToUpload)"
+            :isDisabled="props.isDisabled"
+            layout="plain"
+            data-test="ui-upload-file-remove"
+          >
             {{ MESSAGES[props.lang].remove }}
           </UiButton>
         </div>
@@ -53,7 +59,12 @@
       <div v-if="props.isSingle && props.file" :class="$style.file" data-test="ui-upload-file-single">
         <div :class="$style.name" data-test="ui-upload-file-name-single">{{ props.file.name }}</div>
 
-        <UiButton @click="remove(props.file)" layout="plain" data-test="ui-upload-file-remove-single">
+        <UiButton
+          @click="remove(props.file)"
+          :isDisabled="props.isDisabled"
+          layout="plain"
+          data-test="ui-upload-file-remove-single"
+        >
           {{ MESSAGES[props.lang].remove }}
         </UiButton>
       </div>
@@ -64,7 +75,7 @@
       :class="$style.uploadButton"
       :data-label="!!props.label"
     >
-      <UiButton @click="emit('upload')" data-test="ui-upload">
+      <UiButton @click="emit('upload')" :isDisabled="props.isDisabled" data-test="ui-upload">
         {{ MESSAGES[props.lang].upload }}
       </UiButton>
     </div>
@@ -91,6 +102,7 @@ interface IProps {
   isRequired?: boolean;
   isSingle?: boolean;
   lang?: TLocale;
+  limit?: number;
 }
 
 interface IEmit {
@@ -106,6 +118,7 @@ const props = withDefaults(defineProps<IProps>(), {
   files: () => [],
   extensions: () => ['jpg', 'png'],
   lang: 'ru',
+  limit: FILE_SIZE_LIMIT,
 });
 
 const emit = defineEmits<IEmit>();
@@ -130,14 +143,14 @@ function handleFileChange(target: EventTarget | null) {
   if (props.isSingle) {
     const file = (target as HTMLInputElement).files?.[0];
 
-    if (file?.size && file.size < FILE_SIZE_LIMIT) emit('add', file);
+    if (file?.size && file.size < props.limit) emit('add', file);
   } else {
     const files = (target as HTMLInputElement).files;
 
     if (files === null) return;
 
     for (const file of files) {
-      if (file.size > 0 && file.size < FILE_SIZE_LIMIT) emit('add', file);
+      if (file.size > 0 && file.size < props.limit) emit('add', file);
     }
   }
 }

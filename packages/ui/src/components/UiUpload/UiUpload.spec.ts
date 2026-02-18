@@ -106,7 +106,6 @@ describe('UiUpload', async () => {
 
     const text = wrapper.find(uploadText);
 
-    expect(text.text()).toContain('Size up to');
     expect(text.text()).toContain('Mb');
     expect(text.text()).toContain('jpg, png');
   });
