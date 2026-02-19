@@ -75,7 +75,7 @@
       :data-label="!!props.label"
     >
       <UiButton @click="emit('upload')" :isDisabled="props.isDisabled" data-test="ui-upload">
-        {{ MESSAGES[props.lang].upload }}
+        {{ props.uploadButtonText || MESSAGES[props.lang].upload }}
       </UiButton>
     </div>
   </div>
@@ -102,6 +102,7 @@ interface IProps {
   isSingle?: boolean;
   lang?: TLocale;
   limit?: number;
+  uploadButtonText?: string;
 }
 
 interface IEmit {
@@ -118,6 +119,7 @@ const props = withDefaults(defineProps<IProps>(), {
   extensions: () => ['jpg', 'png'],
   lang: 'ru',
   limit: FILE_SIZE_LIMIT,
+  uploadButtonText: '',
 });
 
 const emit = defineEmits<IEmit>();
@@ -191,7 +193,6 @@ function handleFileChange(target: EventTarget | null) {
   max-width: 136px;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 0.875rem;
 }
 
 .file {
