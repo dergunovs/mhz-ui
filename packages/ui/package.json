@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui",
   "description": "Mhz ui kit",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -36,7 +36,7 @@
     "perfect-debounce": "2.1.0",
     "vue": "3.6.0-beta.6",
     "vue-chartjs": "5.3.3",
-    "vue-router": "5.0.2"
+    "vue-router": "5.0.3"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
@@ -44,20 +44,20 @@
     "@storybook/addon-themes": "10.2.10",
     "@storybook/vue3": "10.2.10",
     "@storybook/vue3-vite": "10.2.10",
-    "@types/node": "25.2.3",
+    "@types/node": "25.3.0",
     "@vitejs/plugin-vue": "6.0.4",
-    "@vitest/coverage-v8": "4.1.0-beta.3",
+    "@vitest/coverage-v8": "4.1.0-beta.4",
     "@vue/test-utils": "2.4.6",
-    "eslint": "10.0.0",
+    "eslint": "10.0.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-import-resolver-typescript": "4.4.4",
     "eslint-plugin-import-x": "4.16.1",
     "eslint-plugin-prettier": "5.5.5",
-    "eslint-plugin-sonarjs": "3.0.7",
+    "eslint-plugin-sonarjs": "4.0.0",
     "eslint-plugin-unicorn": "63.0.0",
     "eslint-plugin-vue": "10.8.0",
     "globals": "17.3.0",
-    "happy-dom": "20.6.2",
+    "happy-dom": "20.7.0",
     "postcss-html": "1.8.1",
     "postcss-scss": "4.0.9",
     "prettier": "3.8.1",
@@ -75,14 +75,14 @@
     "vite-plugin-dts": "4.5.4",
     "vite-plugin-static-copy": "3.2.0",
     "vite-svg-loader": "5.1.0",
-    "vitest": "4.1.0-beta.3",
+    "vitest": "4.1.0-beta.4",
     "vue-eslint-parser": "10.4.0",
     "vue-linters-config": "0.5.5",
-    "vue-tsc": "3.2.4"
+    "vue-tsc": "3.2.5"
   },
   "peerDependencies": {
     "vue": "3.6.0-beta.6",
-    "vue-router": "5.0.2"
+    "vue-router": "5.0.3"
   },
   "engines": {
     "npm": ">=11.7.0",
