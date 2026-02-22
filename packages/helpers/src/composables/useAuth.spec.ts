@@ -43,7 +43,7 @@ describe('useAuth', () => {
 
     logout(URL, spyDeleteAuthHeader, tokenName);
 
-    expect(spyDeleteAuthHeader).toBeCalledTimes(1);
+    expect(spyDeleteAuthHeader).toHaveBeenCalledTimes(1);
     expect(globalThis.location.href).toStrictEqual(`${SITE}/${URL}`);
   });
 
@@ -80,8 +80,8 @@ describe('useAuth', () => {
 
       expect(getCookieToken(tokenName)).toStrictEqual(newTokenValue);
 
-      expect(spySetAuthHeader).toBeCalledTimes(1);
-      expect(spySetAuthHeader).toBeCalledWith(newTokenValue);
+      expect(spySetAuthHeader).toHaveBeenCalledTimes(1);
+      expect(spySetAuthHeader).toHaveBeenCalledWith(newTokenValue);
       expect(isAuth.value).toStrictEqual(true);
     });
   });
