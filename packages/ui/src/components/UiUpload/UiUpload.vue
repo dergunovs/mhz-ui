@@ -193,6 +193,7 @@ function handleFileChange(target: EventTarget | null) {
   max-width: 136px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .file {
