@@ -22,7 +22,7 @@ export default defineConfig({
     target: 'es2022',
     copyPublicDir: false,
     lib: { entry, name: 'mhz-helpers', formats: ['es'] },
-    rollupOptions: {
+    rolldownOptions: {
       external: ['vue', 'vue-router'],
       output: {
         entryFileNames: `[name]/index.js`,

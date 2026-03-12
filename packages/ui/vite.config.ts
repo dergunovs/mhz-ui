@@ -26,7 +26,7 @@ export default defineConfig({
     cssCodeSplit: true,
     copyPublicDir: false,
     lib: { entry, name: 'mhz-ui', formats: ['es'] },
-    rollupOptions: {
+    rolldownOptions: {
       external: ['vue', 'vue-router'],
       output: {
         entryFileNames: `[name]/[name].js`,
@@ -87,17 +87,43 @@ export default defineConfig({
       apply: 'build',
 
       writeBundle(_option, bundle) {
-        const cssFiles = Object.keys(bundle).filter((file) => file.endsWith('.css') && !file.includes('-'));
+        const allFiles = Object.keys(bundle);
+        const cssFiles = allFiles.filter((f) => f.endsWith('.css'));
+        const jsFiles = allFiles.filter((f) => f.endsWith('.js'));
 
         for (const cssFile of cssFiles) {
-          const jsFileName = cssFile.replace('.css', '');
-          const filePath = path.resolve('dist', `${jsFileName}.js`);
+          const cssBasePath = cssFile.slice(0, -4);
+          const cssFileName = path.basename(cssBasePath);
 
-          const cssFileName = path.basename(cssFile);
-          const cssImport = `import "./${cssFileName}";`;
-          const data = fs.readFileSync(filePath, 'utf8');
+          const wrapperFile = jsFiles.find((file) => {
+            const jsBasePath = file.slice(0, -3);
+            const fileName = path.basename(jsBasePath);
 
-          fs.writeFileSync(filePath, `${cssImport}\n${data}`);
+            return jsBasePath === cssBasePath && !/-\w{8}$/.test(fileName);
+          });
+
+          if (!wrapperFile) continue;
+
+          const wrapperContent = fs.readFileSync(path.resolve('dist', wrapperFile), 'utf8');
+          const hashImportMatch = wrapperContent.match(
+            new RegExp(String.raw`from\s+["']\.?\.?/(${cssFileName}-\w{8}\.js)["']`)
+          );
+
+          const targetFile = hashImportMatch ? hashImportMatch[1] : wrapperFile;
+
+          if (!jsFiles.includes(targetFile)) continue;
+
+          const jsDir = path.dirname(targetFile);
+          const relativePath = path.relative(jsDir, cssFile).replace(/\\/g, '/');
+          const cssPath = relativePath.startsWith('../') ? relativePath : `./${relativePath}`;
+          const cssImport = `import "${cssPath}";`;
+
+          const fullPath = path.resolve('dist', targetFile);
+          const data = fs.readFileSync(fullPath, 'utf8');
+
+          if (!data.includes(cssImport)) {
+            fs.writeFileSync(fullPath, `${cssImport}\n${data}`);
+          }
         }
       },
     },
