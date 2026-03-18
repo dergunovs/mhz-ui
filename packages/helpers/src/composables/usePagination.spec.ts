@@ -11,7 +11,7 @@ describe('usePagination', () => {
 
       expect(data.value).toStrictEqual([]);
       expect(total.value).toBe(0);
-      expect(setPaginationPage(1, 1)).toStrictEqual(1);
+      expect(setPaginationPage(1)).toStrictEqual(1);
     });
   });
 
@@ -23,10 +23,10 @@ describe('usePagination', () => {
       });
       const { setPaginationPage } = usePagination(dataRaw);
 
-      expect(setPaginationPage(1, 1)).toStrictEqual(1);
-      expect(setPaginationPage(3, 1)).toStrictEqual(3);
-      expect(setPaginationPage(0, 1)).toStrictEqual(1);
-      expect(setPaginationPage(6, 1)).toStrictEqual(1);
+      expect(setPaginationPage(1)).toStrictEqual(1);
+      expect(setPaginationPage(3)).toStrictEqual(3);
+      expect(setPaginationPage(0)).toStrictEqual(1);
+      expect(setPaginationPage(6)).toStrictEqual(1);
     });
   });
 

@@ -1,7 +1,7 @@
 {
   "name": "mhz-helpers",
   "description": "Mhz helpers and composables",
-  "version": "1.4.13",
+  "version": "1.4.14",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "type": "module",
@@ -29,7 +29,7 @@
     "@vueuse/integrations": "14.2.1",
     "async-validator": "4.2.5",
     "axios": "1.13.6",
-    "vue": "3.6.0-beta.7",
+    "vue": "3.6.0-beta.8",
     "vue-router": "5.0.3"
   },
   "devDependencies": {
@@ -46,26 +46,26 @@
     "eslint-plugin-unicorn": "63.0.0",
     "eslint-plugin-vue": "10.8.0",
     "globals": "17.4.0",
-    "happy-dom": "20.8.3",
+    "happy-dom": "20.8.4",
     "postcss-html": "1.8.1",
     "prettier": "3.8.1",
     "stylelint": "17.4.0",
-    "stylelint-config-recess-order": "7.6.1",
+    "stylelint-config-recess-order": "7.7.0",
     "stylelint-config-recommended-scss": "17.0.0",
     "stylelint-config-recommended-vue": "1.6.1",
-    "stylelint-order": "8.0.0",
+    "stylelint-order": "8.1.1",
     "stylelint-prettier": "5.0.3",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.57.0",
+    "typescript-eslint": "8.57.1",
     "vite": "8.0.0",
     "vite-plugin-dts": "4.5.4",
     "vitest": "4.1.0",
     "vue-eslint-parser": "10.4.0",
     "vue-linters-config": "0.5.5",
-    "vue-tsc": "3.2.5"
+    "vue-tsc": "3.2.6"
   },
   "peerDependencies": {
-    "vue": "3.6.0-beta.7",
+    "vue": "3.6.0-beta.8",
     "vue-router": "5.0.3"
   },
   "engines": {

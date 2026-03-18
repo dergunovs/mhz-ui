@@ -43,7 +43,7 @@ export function usePage(filter?: object) {
   const route = useRoute();
 
   const query: Ref<IPageQuery> = ref({
-    page: route.query.page && Number((route.query.page as unknown as number) > 0) ? Number(route.query.page) : 1,
+    page: Number(route.query.page) || 1,
     sort: { value: route.query.sort?.toString(), isAsc: route.query.dir !== 'desc' },
     filter: { ...filter },
   });
@@ -59,7 +59,7 @@ export function usePage(filter?: object) {
     query.value.page = pageToSet > 0 ? pageToSet : 1;
   }
 
-  function setQueryFilter(filterToSet?: object) {
+  function setQueryFilter(filterToSet: object = {}) {
     query.value = {
       page: 1,
       sort: query.value.sort,
