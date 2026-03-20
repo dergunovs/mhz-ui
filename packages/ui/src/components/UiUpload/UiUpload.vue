@@ -70,6 +70,7 @@
     </div>
 
     <div
+      v-if="!props.isHideUploadButton"
       v-show="(props.isSingle && props.file) || props.files.length > 0"
       :class="$style.uploadButton"
       :data-label="!!props.label"
@@ -100,6 +101,7 @@ interface IProps {
   isDisabled?: boolean;
   isRequired?: boolean;
   isSingle?: boolean;
+  isHideUploadButton?: boolean;
   lang?: TLocale;
   limit?: number;
   uploadButtonText?: string;
