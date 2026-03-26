@@ -61,7 +61,7 @@ export default defineConfig({
         {
           src: 'src/components/index.ts',
           dest: '',
-          rename: 'index.js',
+          rename: (name) => `../../${name}.js`,
           transform: (contents) =>
             contents
               .toString()
@@ -69,17 +69,12 @@ export default defineConfig({
               .replace('./toast/toast', './toast/toast.js')
               .replace('./stubs/stubs', './stubs/stubs.js'),
         },
-        {
-          src: 'src/components/index.ts',
-          dest: '',
-          rename: 'index.d.ts',
-          transform: (contents) => contents.toString().replace(/.(vue|ts)/g, ''),
-        },
-        { src: 'src/assets/styles/base.scss', dest: '' },
-        { src: 'src/assets/styles/breakpoints.scss', dest: '' },
-        { src: 'src/assets/styles/colors.scss', dest: '' },
-        { src: 'src/assets/styles/fonts.scss', dest: '' },
-        { src: 'src/assets/styles/transitions.scss', dest: '' },
+
+        { src: 'src/assets/styles/base.scss', dest: '', rename: { stripBase: 3 } },
+        { src: 'src/assets/styles/breakpoints.scss', dest: '', rename: { stripBase: 3 } },
+        { src: 'src/assets/styles/colors.scss', dest: '', rename: { stripBase: 3 } },
+        { src: 'src/assets/styles/fonts.scss', dest: '', rename: { stripBase: 3 } },
+        { src: 'src/assets/styles/transitions.scss', dest: '', rename: { stripBase: 3 } },
       ],
     }),
     {
