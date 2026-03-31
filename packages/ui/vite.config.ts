@@ -55,6 +55,7 @@ export default defineConfig({
       cleanVueFileName: true,
       entryRoot: './src/components',
       exclude: ['**/*.spec.ts', '**/*.stories.ts', '**/*.css', '**/constants/**'],
+      compilerOptions: { rootDir: './src' },
     }),
     viteStaticCopy({
       targets: [

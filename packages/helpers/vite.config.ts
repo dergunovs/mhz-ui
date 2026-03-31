@@ -39,6 +39,7 @@ export default defineConfig({
     dts({
       entryRoot: './src',
       exclude: ['**/*.spec.ts'],
+      compilerOptions: { rootDir: './src' },
     }),
     {
       name: 'generate-index-files-and-copy-dts',

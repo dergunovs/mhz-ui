@@ -18,8 +18,7 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "types": ["vite/client", "vite-svg-loader", "node"],
-    "baseUrl": "./",
-    "paths": { "@/*": ["src/*"] },
+    "paths": { "@/*": ["./src/*"] },
     "noEmit": true
   },
   "include": ["src/**/*.ts", "src/*.d.ts", "src/components/**/*.vue"],
