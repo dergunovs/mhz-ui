@@ -7,14 +7,17 @@ export function addZero(value: number): string {
   return value < 10 ? `0${value}` : `${value}`;
 }
 
-export function formatDuration(duration?: number, lang: TLocale = 'ru'): string {
+export function formatDuration(duration?: number, lang: TLocale = 'ru', isHideSeconds?: boolean): string {
   if (!duration || duration < 0) return '0';
 
   const minutes = Math.floor(duration / 60);
   const seconds = duration % 60;
-  const minutesFormatted = minutes ? `${minutes} ${MESSAGES[lang].min}. ` : ``;
+  const minutesFormatted = minutes ? `${minutes} ${MESSAGES[lang].min}.` : ``;
+  const duraionFormatted = isHideSeconds
+    ? `${minutesFormatted}`
+    : `${minutesFormatted} ${addZero(seconds)} ${MESSAGES[lang].sec}.`.trim();
 
-  return `${minutesFormatted}${addZero(seconds)} ${MESSAGES[lang].sec}.`;
+  return duraionFormatted;
 }
 
 export function formatDate(dateRaw?: TDate, lang: TLocale = 'ru'): string {
