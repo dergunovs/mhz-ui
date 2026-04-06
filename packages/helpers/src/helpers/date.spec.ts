@@ -32,7 +32,7 @@ describe('date', () => {
 
     expect(formatDuration(DURATION_SECONDS)).toStrictEqual(`09 сек.`);
     expect(formatDuration(DURATION_MINUTES)).toStrictEqual(`1 мин. 09 сек.`);
-    expect(formatDuration(DURATION_SECONDS, 'ru', true)).toStrictEqual(``);
+    expect(formatDuration(DURATION_SECONDS, 'ru', true)).toStrictEqual(`0`);
     expect(formatDuration(DURATION_MINUTES, 'ru', true)).toStrictEqual(`1 мин.`);
     expect(formatDuration()).toStrictEqual(`0`);
     expect(formatDuration(-5)).toStrictEqual(`0`);

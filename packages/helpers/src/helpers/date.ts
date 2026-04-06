@@ -14,7 +14,7 @@ export function formatDuration(duration?: number, lang: TLocale = 'ru', isHideSe
   const seconds = duration % 60;
   const minutesFormatted = minutes ? `${minutes} ${MESSAGES[lang].min}.` : ``;
   const duraionFormatted = isHideSeconds
-    ? `${minutesFormatted}`
+    ? `${minutesFormatted}` || '0'
     : `${minutesFormatted} ${addZero(seconds)} ${MESSAGES[lang].sec}.`.trim();
 
   return duraionFormatted;
