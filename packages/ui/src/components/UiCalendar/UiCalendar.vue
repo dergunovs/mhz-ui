@@ -226,7 +226,8 @@ onBeforeMount(() => {
 
     .navButton {
       padding: 0 8px;
-      font-size: 1.25rem;
+      font-size: 1.5rem;
+      font-weight: 700;
       cursor: pointer;
       background: none;
       border: none;
@@ -342,7 +343,7 @@ onBeforeMount(() => {
       }
 
       .navButton {
-        color: var(--color-gray-dark);
+        color: var(--color-white);
       }
 
       .headings {
