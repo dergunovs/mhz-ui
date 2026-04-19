@@ -20,33 +20,35 @@
       </div>
     </div>
 
-    <div :class="$style.body">
-      <div
-        v-for="(date, index) in calendarDays"
-        :key="index"
-        :class="[$style.cell, { [$style.today]: isToday(date), [$style.outOfRange]: isOutOfRange(date) }]"
-        @click="onCellClick(date)"
-        :data-choose="props.isDisablePastDates"
-        data-test="ui-calendar-calendar-day"
-      >
-        <div :class="$style.cellDate" data-test="ui-calendar-cell-date">
-          {{ date.getDate() }}
-        </div>
+    <Transition :name="direction > 0 ? 'slide-right' : 'slide-left'" mode="out-in">
+      <div :key="currentMonthValue.toString()" :class="$style.body">
+        <div
+          v-for="(date, index) in calendarDays"
+          :key="index"
+          :class="[$style.cell, { [$style.today]: isToday(date), [$style.outOfRange]: isOutOfRange(date) }]"
+          @click="onCellClick(date)"
+          :data-choose="props.isDisablePastDates"
+          data-test="ui-calendar-calendar-day"
+        >
+          <div :class="$style.cellDate" data-test="ui-calendar-cell-date">
+            {{ date.getDate() }}
+          </div>
 
-        <div :class="$style.cellEvents">
-          <div
-            v-for="event in getEventsForDate(date)"
-            :key="event.id"
-            :class="$style.event"
-            :style="{ background: event.color }"
-            @click.stop="onEventClick(event)"
-            data-test="ui-calendar-event"
-          >
-            <div :class="$style.title" data-test="ui-calendar-event-title">{{ event.title }}</div>
+          <div :class="$style.cellEvents">
+            <div
+              v-for="event in getEventsForDate(date)"
+              :key="event.id"
+              :class="$style.event"
+              :style="{ background: event.color }"
+              @click.stop="onEventClick(event)"
+              data-test="ui-calendar-event"
+            >
+              <div :class="$style.title" data-test="ui-calendar-event-title">{{ event.title }}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Transition>
   </div>
 </template>
 
@@ -76,6 +78,7 @@ const props = withDefaults(defineProps<IProps>(), {
 const emit = defineEmits<IEmit>();
 
 const currentMonth = shallowRef(new Date());
+const direction = shallowRef<-1 | 0 | 1>(0);
 
 const today = computed(() => {
   const todayDate = new Date();
@@ -182,11 +185,13 @@ function isOutOfRange(date: Date) {
 }
 
 function prevMonth() {
+  direction.value = -1;
   currentMonth.value = new Date(currentMonth.value.getFullYear(), currentMonth.value.getMonth() - 1, 1);
   emitUpdate();
 }
 
 function nextMonth() {
+  direction.value = 1;
   currentMonth.value = new Date(currentMonth.value.getFullYear(), currentMonth.value.getMonth() + 1, 1);
   emitUpdate();
 }
@@ -368,5 +373,26 @@ onBeforeMount(() => {
       }
     }
   }
+}
+</style>
+
+<style lang="scss">
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 200ms ease;
+}
+
+.slide-right-enter-from,
+.slide-left-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.slide-right-leave-to,
+.slide-left-enter-from {
+  opacity: 0;
+  transform: translateX(-20px);
 }
 </style>

@@ -83,6 +83,10 @@ function updateValue(value: number | Event) {
   background-color: var(--color-gray-light);
   border: none;
 
+  &:hover {
+    background-color: var(--color-gray);
+  }
+
   &:first-child {
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
@@ -119,6 +123,10 @@ function updateValue(value: number | Event) {
 
   .button {
     background-color: var(--color-gray-dark);
+
+    &:hover {
+      background-color: var(--color-gray);
+    }
 
     &[data-current='true'] {
       color: var(--color-white);

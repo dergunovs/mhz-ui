@@ -24,11 +24,11 @@
     "test:cov": "NODE_OPTIONS='--no-experimental-webstorage' vitest run --coverage"
   },
   "dependencies": {
-    "@tanstack/vue-query": "5.99.1",
+    "@tanstack/vue-query": "5.99.2",
     "@vueuse/core": "14.2.1",
     "@vueuse/integrations": "14.2.1",
     "async-validator": "4.2.5",
-    "axios": "1.15.0",
+    "axios": "1.15.1",
     "vue": "3.6.0-beta.10",
     "vue-router": "5.0.4"
   },
