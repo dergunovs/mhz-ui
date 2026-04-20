@@ -1,4 +1,4 @@
-import { DefineComponent, nextTick } from 'vue';
+import { nextTick } from 'vue';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest } from 'mhz-helpers';
@@ -8,7 +8,8 @@ import { MIN, MAX, MODEL_VALUE } from './constants';
 
 import { wrapperFactory } from '@/test';
 
-const range = dataTest('ui-range');
+const rangeMin = dataTest('ui-range-min');
+const rangeMax = dataTest('ui-range-max');
 
 let wrapper: VueWrapper<InstanceType<typeof UiRange>>;
 
@@ -27,20 +28,57 @@ describe('UiRange', async () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('passes props to range component', async () => {
-    expect(wrapper.find(range).attributes('modelvalue')).toBe(MODEL_VALUE.join(','));
-    expect(wrapper.find(range).attributes('min')).toBe(MIN.toString());
-    expect(wrapper.find(range).attributes('max')).toBe(MAX.toString());
+  it('has two range inputs with correct attributes', async () => {
+    const minInput = wrapper.find(rangeMin);
+    const maxInput = wrapper.find(rangeMax);
+
+    expect(minInput.exists()).toBe(true);
+    expect(maxInput.exists()).toBe(true);
+    expect(minInput.attributes('min')).toBe(MIN.toString());
+    expect(minInput.attributes('max')).toBe(MAX.toString());
+    expect(minInput.attributes('value')).toBe(MODEL_VALUE[0].toString());
+    expect(maxInput.attributes('value')).toBe(MODEL_VALUE[1].toString());
   });
 
-  it('emits update:modelValue event when slider value changes', async () => {
-    const newValue: [number, number] = [200, 700];
+  it('emits update:modelValue event when min slider value changes', async () => {
+    const newValue: [number, number] = [200, 600];
 
-    wrapper.findComponent<DefineComponent>(range).vm.$emit('update:modelValue', newValue);
+    wrapper.find(rangeMin).setValue(newValue[0]);
 
     await nextTick();
 
     expect(wrapper.emitted('update:modelValue')).toBeTruthy();
     expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([newValue]);
+  });
+
+  it('emits update:modelValue event when max slider value changes', async () => {
+    const newValue: [number, number] = [100, 700];
+
+    wrapper.find(rangeMax).setValue(newValue[1]);
+
+    await nextTick();
+
+    expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([newValue]);
+  });
+
+  it('prevents min value from exceeding max value', async () => {
+    wrapper.find(rangeMin).setValue(800);
+
+    await nextTick();
+
+    const emitted = wrapper.emitted<[[number, number]]>('update:modelValue');
+
+    expect(emitted?.[0]?.[0]?.[0]).toBeLessThanOrEqual(MODEL_VALUE[1]);
+  });
+
+  it('prevents max value from being less than min value', async () => {
+    wrapper.find(rangeMax).setValue(50);
+
+    await nextTick();
+
+    const emitted = wrapper.emitted<[[number, number]]>('update:modelValue');
+
+    expect(emitted?.[0]?.[0]?.[1]).toBeGreaterThanOrEqual(MODEL_VALUE[0]);
   });
 });
