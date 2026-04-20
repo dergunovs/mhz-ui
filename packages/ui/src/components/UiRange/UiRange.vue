@@ -24,6 +24,7 @@
         :max="props.max"
         :value="localMin"
         @input="handleMinInput"
+        @change="handleMinChange"
         data-test="ui-range-min"
       />
 
@@ -35,6 +36,7 @@
         :max="props.max"
         :value="localMax"
         @input="handleMaxInput"
+        @change="handleMaxChange"
         data-test="ui-range-max"
       />
     </div>
@@ -85,7 +87,6 @@ function handleMinInput(event: Event) {
   const value = Number(target.value);
 
   localMin.value = Math.min(value, localMax.value);
-  emit('update:modelValue', [localMin.value, localMax.value]);
 }
 
 function handleMaxInput(event: Event) {
@@ -93,6 +94,13 @@ function handleMaxInput(event: Event) {
   const value = Number(target.value);
 
   localMax.value = Math.max(value, localMin.value);
+}
+
+function handleMinChange() {
+  emit('update:modelValue', [localMin.value, localMax.value]);
+}
+
+function handleMaxChange() {
   emit('update:modelValue', [localMin.value, localMax.value]);
 }
 </script>
@@ -182,6 +190,7 @@ function handleMaxInput(event: Event) {
   z-index: 10;
   width: 100%;
   height: 0;
+  margin-left: 0;
   appearance: none;
   background: transparent;
   transform: translateY(-50%);
