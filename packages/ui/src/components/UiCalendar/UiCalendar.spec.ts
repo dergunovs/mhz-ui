@@ -203,4 +203,26 @@ describe('UiCalendar', async () => {
 
     expect(eventElements.length).toBe(0);
   });
+
+  it('emits update on next month click', async () => {
+    const emittedUpdates = wrapper.emitted('update');
+
+    expect(emittedUpdates).toHaveLength(1);
+
+    const nextButton = wrapper.find(nextMonth);
+
+    await nextButton.trigger('click');
+
+    expect(emittedUpdates).toHaveLength(2);
+    expect(emittedUpdates?.[1]).toHaveLength(1);
+
+    const updateData = emittedUpdates?.[1]?.[0];
+
+    if (updateData && typeof updateData === 'object') {
+      expect(updateData).toHaveProperty('dateFrom');
+      expect(updateData).toHaveProperty('dateTo');
+      expect((updateData as { dateFrom: Date; dateTo: Date }).dateFrom).toBeInstanceOf(Date);
+      expect((updateData as { dateFrom: Date; dateTo: Date }).dateTo).toBeInstanceOf(Date);
+    }
+  });
 });

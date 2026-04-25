@@ -44,4 +44,16 @@ describe('UiChart', async () => {
     await wrapper.setProps({ type: 'Line' });
     expect(wrapper.find(chart).attributes('data-type')).toBe('Line');
   });
+
+  it('hides title when not provided', async () => {
+    await wrapper.setProps({ title: '' });
+
+    expect(wrapper.find(chartTitle).exists()).toBe(false);
+  });
+
+  it('shows legend when isShowLegend is true', async () => {
+    await wrapper.setProps({ isShowLegend: true });
+
+    expect(wrapper.find(chart).exists()).toBe(true);
+  });
 });

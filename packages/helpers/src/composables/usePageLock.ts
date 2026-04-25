@@ -4,7 +4,11 @@ export function usePageLock() {
   const pageLock = ref<WakeLockSentinel>();
 
   async function lockPage() {
-    pageLock.value = await navigator.wakeLock?.request();
+    releasePage();
+
+    try {
+      pageLock.value = await navigator.wakeLock?.request();
+    } catch {}
   }
 
   function releasePage() {
@@ -27,7 +31,6 @@ export function usePageLock() {
 
   onBeforeUnmount(() => {
     releasePage();
-
     document.removeEventListener('visibilitychange', updatePageVisibility);
   });
 }

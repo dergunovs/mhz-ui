@@ -99,9 +99,22 @@ export function usePageNumber() {
   }
 
   watch(
+    () => route.query.page,
+    (queryPage) => {
+      const next = Number(queryPage || 1);
+
+      if (page.value !== next) page.value = next;
+    }
+  );
+
+  watch(
     () => page.value,
-    () => {
-      router.push({ path: route.path, query: { page: page.value } });
+    (nextPage) => {
+      const queryPage = Number(route.query.page || 1);
+
+      if (nextPage !== queryPage) {
+        router.replace({ path: route.path, query: { page: nextPage } });
+      }
     }
   );
 

@@ -72,6 +72,20 @@ describe('date', () => {
     expect(formatDateTime(INVALID_DATE)).toStrictEqual(`0`);
   });
 
+  it('formats date when Intl returns empty string', async () => {
+    const spy = vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(function () {
+      return {
+        format: () => '',
+      } as unknown as Intl.DateTimeFormat;
+    });
+
+    const DATE = new Date('2025-02-09T17:13:17.427Z');
+
+    expect(formatDate(DATE, 'ru')).toStrictEqual('0');
+
+    spy.mockRestore();
+  });
+
   it('subtracts dates', async () => {
     const DATE_BIG = new Date('2025-02-09T17:13:17.427Z');
     const DATE_SMALL = new Date('2025-02-09T17:01:17.427Z');

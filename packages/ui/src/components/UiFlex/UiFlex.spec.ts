@@ -54,4 +54,20 @@ describe('UiFlex', async () => {
 
     expect(wrapper.find(flex).attributes('data-wrap')).toBe('true');
   });
+
+  it('sets column by props', async () => {
+    expect(wrapper.find(flex).attributes('data-column')).toBe('false');
+
+    await wrapper.setProps({ column: true });
+
+    expect(wrapper.find(flex).attributes('data-column')).toBe('true');
+  });
+
+  it('sets tag by props', async () => {
+    expect(wrapper.find(flex).element.tagName.toLowerCase()).toBe(DEFAULT_TAG);
+
+    await wrapper.setProps({ tag: 'span' });
+
+    expect(wrapper.find(flex).element.tagName.toLowerCase()).toBe('span');
+  });
 });

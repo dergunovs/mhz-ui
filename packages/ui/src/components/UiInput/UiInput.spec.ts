@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
+import { nextTick } from 'vue';
 import { dataTest } from 'mhz-helpers';
 
 import UiInput from './UiInput.vue';
@@ -124,5 +125,13 @@ describe('UiInput', async () => {
     await wrapper.setProps({ isCenter: true });
 
     expect(wrapper.find(input).attributes('data-center')).toBe('true');
+  });
+
+  it('focuses input when isFocus prop is true', async () => {
+    await wrapper.setProps({ isFocus: true });
+
+    await nextTick();
+
+    expect(wrapper.find(input).attributes('autofocus')).toBeUndefined();
   });
 });

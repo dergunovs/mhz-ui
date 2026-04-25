@@ -13,6 +13,7 @@ const tableHeaderTitle = dataTest('ui-table-header-title');
 const tableHeaderSort = dataTest('ui-table-header-sort');
 const tableHeaderSortAsc = dataTest('ui-table-header-sort-asc');
 const tableHeaderSortDesc = dataTest('ui-table-header-sort-desc');
+const tableScrollMessage = dataTest('ui-table-scroll-message');
 
 let wrapper: VueWrapper<InstanceType<typeof UiTable>>;
 
@@ -89,5 +90,9 @@ describe('UiTable', async () => {
     expect(wrapper.find(tableHeaderLabel).attributes('data-loading')).toBe('true');
     expect(wrapper.find(tableHeaderSortAsc).attributes('data-loading')).toBe('true');
     expect(wrapper.find(tableHeaderSortDesc).attributes('data-loading')).toBe('true');
+  });
+
+  it('shows scroll message when table is scrollable', async () => {
+    expect(wrapper.find(tableScrollMessage).exists()).toBe(false);
   });
 });

@@ -55,4 +55,16 @@ describe('usePwa', () => {
 
     expect(globalThis.addEventListener).toHaveBeenCalledWith('beforeinstallprompt', expect.any(Function));
   });
+
+  it('removes event listener on unmount', async () => {
+    const { app } = await withSetup(async () => {
+      usePwa();
+    });
+
+    expect(globalThis.addEventListener).toHaveBeenCalledWith('beforeinstallprompt', expect.any(Function));
+
+    app.unmount();
+
+    expect(globalThis.removeEventListener).toHaveBeenCalledWith('beforeinstallprompt', expect.any(Function));
+  });
 });

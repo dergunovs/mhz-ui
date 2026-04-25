@@ -172,6 +172,13 @@ describe('clone', () => {
     expect(clonedFunc).toBe(func);
   });
 
+  it('handles bigint input', async () => {
+    const big = 9007199254740991n;
+    const clonedBig = clone(big);
+
+    expect(clonedBig).toBe(big);
+  });
+
   it('clones complex nested structure', async () => {
     const complexObj = {
       string: 'test',

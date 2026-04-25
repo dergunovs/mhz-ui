@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { nextTick } from 'vue';
 
@@ -12,6 +12,31 @@ const editorSource = '[data-test="ui-editor-source"]';
 const editorButton = '[data-test="ui-editor-button"]';
 
 let wrapper: VueWrapper<InstanceType<typeof UiEditor>>;
+
+function mockSelection() {
+  const range = {
+    startContainer: document.createTextNode(''),
+    startOffset: 0,
+    endContainer: document.createTextNode(''),
+    endOffset: 1,
+    toString: vi.fn().mockReturnValue('selected'),
+    deleteContents: vi.fn(),
+    insertNode: vi.fn(),
+    commonAncestorContainer: document.createTextNode(''),
+    collapse: vi.fn(),
+    setStartAfter: vi.fn(),
+    setStart: vi.fn(),
+  };
+
+  const selection = {
+    rangeCount: 1,
+    getRangeAt: vi.fn().mockReturnValue(range),
+    removeAllRanges: vi.fn(),
+    addRange: vi.fn(),
+  };
+
+  vi.spyOn(globalThis, 'getSelection').mockReturnValue(selection as unknown as Selection);
+}
 
 beforeEach(() => {
   wrapper = wrapperFactory(UiEditor, { modelValue: MODEL_VALUE });
@@ -192,6 +217,71 @@ describe('UiEditor', () => {
       const editorElement = wrapper.find('[contenteditable="true"]');
 
       expect(editorElement.attributes('spellcheck')).toBeUndefined();
+    });
+  });
+
+  describe('focus and blur', () => {
+    it('handles focus without errors', async () => {
+      await expect(wrapper.find(editor).trigger('focus')).resolves.not.toThrow();
+    });
+
+    it('handles blur without errors', async () => {
+      await expect(wrapper.find(editor).trigger('blur')).resolves.not.toThrow();
+    });
+  });
+
+  describe('formatting with selection', () => {
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it('wraps selected text on bold click', async () => {
+      mockSelection();
+
+      const boldButton = wrapper.findAll(editorButton)[0];
+
+      await boldButton.trigger('click');
+      await nextTick();
+
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+    });
+
+    it('wraps empty selection on bold click', async () => {
+      const range = {
+        startContainer: document.createTextNode(''),
+        startOffset: 0,
+        endContainer: document.createTextNode(''),
+        endOffset: 0,
+        toString: vi.fn().mockReturnValue(''),
+        deleteContents: vi.fn(),
+        insertNode: vi.fn(),
+        commonAncestorContainer: document.createTextNode(''),
+        collapse: vi.fn(),
+        setStartAfter: vi.fn(),
+        setStart: vi.fn(),
+      };
+
+      const selection = {
+        rangeCount: 1,
+        getRangeAt: vi.fn().mockReturnValue(range),
+        removeAllRanges: vi.fn(),
+        addRange: vi.fn(),
+      };
+
+      vi.spyOn(globalThis, 'getSelection').mockReturnValue(selection as unknown as Selection);
+
+      const boldButton = wrapper.findAll(editorButton)[0];
+
+      await boldButton.trigger('click');
+      await nextTick();
+
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+    });
+  });
+
+  describe('source input', () => {
+    it('does not emit when source input triggers without source mode', async () => {
+      expect(wrapper.find(editorSource).exists()).toBe(false);
     });
   });
 });

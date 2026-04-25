@@ -214,4 +214,36 @@ describe('UiSelect', async () => {
 
     expect(wrapper.findAll(selectOption)[0].attributes('tabindex')).toBe('0');
   });
+
+  it('sets locale field title_en', async () => {
+    await wrapper.setProps({ options: OPTIONS_OBJECTS, isLocaleField: true });
+
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
+
+    await nextTick();
+
+    expect(wrapper.findAll(selectOption)[0].text()).toBe(OPTIONS_OBJECTS[0].title_en);
+  });
+
+  it('handles keyboard events on options', async () => {
+    await wrapper.setProps({ isFilter: false });
+
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
+
+    await nextTick();
+
+    const firstOption = wrapper.findAll(selectOption)[0];
+
+    await firstOption.trigger('keydown.enter');
+
+    expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
+
+    wrapper.findComponent<DefineComponent>(selectInput).vm.$emit('toggle');
+
+    await nextTick();
+
+    await wrapper.findAll(selectOption)[0].trigger('keydown.space');
+
+    expect(wrapper.emitted('update:modelValue')).toHaveLength(2);
+  });
 });

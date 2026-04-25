@@ -154,4 +154,10 @@ describe('UiCheckbox', async () => {
     expect(wrapper.find(checkboxFake).attributes('data-switcher')).toBe('true');
     expect(wrapper.findAll(checkboxLine).length).toBe(0);
   });
+
+  it('clicks checkbox on fake space keydown', async () => {
+    await wrapper.find(checkboxFake).trigger('keydown.space');
+
+    expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+  });
 });

@@ -6,6 +6,12 @@ import { usePageLock, withSetup } from '..';
 const mockRequest = vi.fn();
 const mockRelease = vi.fn();
 
+function flushPromises() {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 0);
+  });
+}
+
 describe('usePageLock', () => {
   beforeEach(() => {
     mockRequest.mockClear();
@@ -23,60 +29,72 @@ describe('usePageLock', () => {
   });
 
   it('initializes and locks page on mount', async () => {
-    await withSetup(async () => {
+    const { app } = await withSetup(async () => {
       usePageLock();
 
-      await nextTick();
+      await flushPromises();
 
       expect(mockRequest).toHaveBeenCalledTimes(1);
     });
+
+    app.unmount();
   });
 
   it('releases lock on unmount', async () => {
-    await withSetup(async () => {
+    const { app } = await withSetup(async () => {
       usePageLock();
 
-      await nextTick();
+      await flushPromises();
 
       expect(mockRequest).toHaveBeenCalledTimes(1);
     });
 
     expect(mockRelease).toHaveBeenCalledTimes(0);
+
+    app.unmount();
+
+    expect(mockRelease).toHaveBeenCalledTimes(1);
   });
 
   it('handles visibility change to visible', async () => {
-    await withSetup(async () => {
+    const { app } = await withSetup(async () => {
       usePageLock();
 
-      await nextTick();
+      await flushPromises();
 
       mockRequest.mockClear();
 
       Object.defineProperty(document, 'visibilityState', { writable: true, value: 'visible' });
       document.dispatchEvent(new Event('visibilitychange'));
 
-      expect(mockRequest).toHaveBeenCalledTimes(2);
+      await flushPromises();
+
+      expect(mockRequest).toHaveBeenCalledTimes(1);
     });
+
+    app.unmount();
   });
 
   it('handles visibility change to hidden', async () => {
-    await withSetup(async () => {
+    const { app } = await withSetup(async () => {
       usePageLock();
 
-      await nextTick();
+      await flushPromises();
 
       Object.defineProperty(document, 'visibilityState', { writable: true, value: 'hidden' });
       document.dispatchEvent(new Event('visibilitychange'));
 
-      expect(mockRelease).toHaveBeenCalledTimes(3);
+      expect(mockRelease).toHaveBeenCalledTimes(1);
     });
+
+    app.unmount();
   });
 
   it('handles multiple visibility changes', async () => {
-    await withSetup(async () => {
+    const { app } = await withSetup(async () => {
       usePageLock();
 
-      await nextTick();
+      await flushPromises();
 
       mockRequest.mockClear();
       mockRelease.mockClear();
@@ -87,22 +105,28 @@ describe('usePageLock', () => {
       Object.defineProperty(document, 'visibilityState', { writable: true, value: 'visible' });
       document.dispatchEvent(new Event('visibilitychange'));
 
+      await flushPromises();
+
       expect(mockRelease).toHaveBeenCalledTimes(1);
-      expect(mockRequest).toHaveBeenCalledTimes(4);
+      expect(mockRequest).toHaveBeenCalledTimes(1);
     });
+
+    app.unmount();
   });
 
   it('handles wake lock API not available', async () => {
     vi.stubGlobal('navigator', {} as Navigator);
 
-    await withSetup(async () => {
+    const { app } = await withSetup(async () => {
       expect(() => usePageLock()).not.toThrow();
       expect(mockRequest).not.toHaveBeenCalled();
     });
+
+    app.unmount();
   });
 
   it('handles release when no active lock', async () => {
-    await withSetup(async () => {
+    const { app } = await withSetup(async () => {
       usePageLock();
 
       await nextTick();
@@ -112,5 +136,7 @@ describe('usePageLock', () => {
         document.dispatchEvent(new Event('visibilitychange'));
       }).not.toThrow();
     });
+
+    app.unmount();
   });
 });

@@ -53,6 +53,21 @@ describe('useAuth', () => {
     expect(getCookieToken(tokenName)).toStrictEqual(tokenValue);
   });
 
+  it('returns undefined when document cookie is empty', async () => {
+    const originalCookie = Object.getOwnPropertyDescriptor(document, 'cookie');
+
+    Object.defineProperty(document, 'cookie', {
+      get: () => '',
+      configurable: true,
+    });
+
+    expect(getCookieToken(tokenName)).toBeUndefined();
+
+    if (originalCookie) {
+      Object.defineProperty(document, 'cookie', originalCookie);
+    }
+  });
+
   it('sets cookie token', async () => {
     setCookieToken(newTokenValue, tokenName);
 

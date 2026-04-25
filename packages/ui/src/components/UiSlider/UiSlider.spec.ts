@@ -50,4 +50,14 @@ describe('UiSlider', async () => {
 
     expect(wrapper.find(sliderSlide).attributes('data-slide')).toBe(slideToSet.toString());
   });
+
+  it('uses path prefix for images', async () => {
+    const path = '/images/';
+
+    await wrapper.setProps({ path });
+
+    const firstThumb = wrapper.findAll(sliderThumb)[0].find('img');
+
+    expect(firstThumb.attributes('src')).toContain(path);
+  });
 });

@@ -60,4 +60,43 @@ describe('useTimer', () => {
 
     vi.useRealTimers();
   });
+
+  it('clears interval on unmount', async () => {
+    vi.useFakeTimers();
+
+    const { app } = await withSetup(async () => {
+      const { startTimer, timer } = useTimer();
+
+      startTimer();
+
+      vi.advanceTimersByTime(2000);
+
+      expect(timer.value).toStrictEqual('00:02');
+    });
+
+    app.unmount();
+
+    vi.advanceTimersByTime(5000);
+
+    vi.useRealTimers();
+  });
+
+  it('does not create duplicate intervals', async () => {
+    vi.useFakeTimers();
+
+    await withSetup(async () => {
+      const { timer, startTimer, stopTimer } = useTimer();
+
+      startTimer();
+      startTimer();
+
+      vi.advanceTimersByTime(1000);
+
+      expect(timer.value).toStrictEqual('00:01');
+
+      stopTimer();
+    });
+
+    vi.useRealTimers();
+  });
 });

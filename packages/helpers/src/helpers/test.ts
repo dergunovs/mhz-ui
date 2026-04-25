@@ -48,4 +48,6 @@ export async function withSetup<T>(composable: () => Promise<T>) {
   app.mount(wrapper);
 
   await composableResult;
+
+  return { app, router };
 }

@@ -184,4 +184,44 @@ describe('useValidate', () => {
       expect(errors.value?.name).toBeDefined();
     });
   });
+
+  it('returns undefined errors before validation', async () => {
+    await withSetup(async () => {
+      const formData = ref({ name: 'John' });
+      const rules = { name: [required] };
+
+      const { errors } = useValidate(formData, rules);
+
+      await nextTick();
+
+      expect(errors.value).toBeUndefined();
+    });
+  });
+
+  it('handles function rules with locale parameter', async () => {
+    await withSetup(async () => {
+      const formData = ref({ name: '' });
+      const rules = { name: [(locale: 'en' | 'ru') => required(locale)] };
+
+      const { isValid, error } = useValidate(formData, rules, 'en');
+
+      await nextTick();
+
+      expect(isValid()).toBe(false);
+      expect(error('name')).toBe('This field is required');
+    });
+  });
+
+  it('handles non-array rules gracefully', async () => {
+    await withSetup(async () => {
+      const formData = ref({ name: 'John' });
+      const rules = { name: undefined as unknown as (object | (() => object))[] };
+
+      const { isValid } = useValidate(formData, rules);
+
+      await nextTick();
+
+      expect(isValid()).toBe(true);
+    });
+  });
 });

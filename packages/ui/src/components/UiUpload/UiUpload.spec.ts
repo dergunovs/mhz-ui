@@ -117,4 +117,59 @@ describe('UiUpload', async () => {
     await wrapper.setProps({ lang: 'ru' });
     expect(wrapper.find(uploadFileRemoveSingle).text()).toContain('Убрать');
   });
+
+  it('adds multiple files via input', async () => {
+    await wrapper.setProps({ file: undefined, files: [], isSingle: false });
+
+    const inputElement = wrapper.find('[data-test="ui-upload-input"]').element as HTMLInputElement;
+    const files = [new File(['a'], 'a.jpg'), new File(['b'], 'b.png')];
+
+    Object.defineProperty(inputElement, 'files', { value: files });
+
+    await wrapper.find('[data-test="ui-upload-input"]').trigger('input');
+
+    expect(wrapper.emitted('add')).toHaveLength(2);
+    expect(wrapper.emitted('add')?.[0]).toEqual([files[0]]);
+    expect(wrapper.emitted('add')?.[1]).toEqual([files[1]]);
+  });
+
+  it('filters files exceeding limit', async () => {
+    await wrapper.setProps({ file: undefined, files: [], isSingle: false, limit: 1 });
+
+    const inputElement = wrapper.find('[data-test="ui-upload-input"]').element as HTMLInputElement;
+    const bigFile = new File(['big'], 'big.jpg');
+
+    Object.defineProperty(bigFile, 'size', { value: 100 });
+    Object.defineProperty(inputElement, 'files', { value: [bigFile] });
+
+    await wrapper.find('[data-test="ui-upload-input"]').trigger('input');
+
+    expect(wrapper.emitted('add')).toBeFalsy();
+  });
+
+  it('does not remove when file is undefined', async () => {
+    await wrapper.setProps({ file: undefined, isSingle: true });
+
+    expect(wrapper.find(uploadFileRemoveSingle).exists()).toBe(false);
+  });
+
+  it('hides label when not provided', async () => {
+    await wrapper.setProps({ label: undefined });
+
+    expect(wrapper.find(uploadLabel).exists()).toBe(false);
+  });
+
+  it('hides upload button when isHideUploadButton is true', async () => {
+    await wrapper.setProps({ isHideUploadButton: true });
+
+    expect(wrapper.find(upload).exists()).toBe(false);
+  });
+
+  it('uses custom upload button text', async () => {
+    const customText = 'Custom Upload';
+
+    await wrapper.setProps({ uploadButtonText: customText });
+
+    expect(wrapper.find(upload).text()).toBe(customText);
+  });
 });

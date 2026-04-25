@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui-helpers",
   "description": "mhz-ui and mhz-helpers monorepo",
-  "version": "1.4.27",
+  "version": "1.4.28",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "homepage": "https://ui.9000mhz.ru",
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@changesets/cli": "2.31.0",
-    "ajv": "8.18.0"
+    "ajv": "8.20.0"
   },
   "devDependencies": {
     "@turbo/gen": "2.9.6",

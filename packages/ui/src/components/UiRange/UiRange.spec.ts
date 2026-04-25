@@ -81,4 +81,13 @@ describe('UiRange', async () => {
 
     expect(emitted?.[0]?.[0]?.[1]).toBeGreaterThanOrEqual(MODEL_VALUE[0]);
   });
+
+  it('updates local values when modelValue changes externally', async () => {
+    const newValue: [number, number] = [300, 700];
+
+    await wrapper.setProps({ modelValue: newValue });
+
+    expect(wrapper.find(rangeMin).attributes('value')).toBe(newValue[0].toString());
+    expect(wrapper.find(rangeMax).attributes('value')).toBe(newValue[1].toString());
+  });
 });

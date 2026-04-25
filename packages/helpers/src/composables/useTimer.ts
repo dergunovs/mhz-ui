@@ -1,4 +1,4 @@
-import { computed, shallowRef } from 'vue';
+import { computed, shallowRef, onBeforeUnmount } from 'vue';
 
 import { addZero } from '..';
 
@@ -33,6 +33,13 @@ export function useTimer() {
     secondsRaw.value = 0;
     minutesRaw.value = 0;
   }
+
+  onBeforeUnmount(() => {
+    if (interval) {
+      clearInterval(interval);
+      interval = null;
+    }
+  });
 
   return { timer, duration, startTimer, stopTimer };
 }
