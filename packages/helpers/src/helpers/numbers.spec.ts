@@ -28,7 +28,7 @@ describe('numbers', () => {
   });
 
   it('formats NaN percent', async () => {
-    const nanPercent = Number.NaN;
+    const nanPercent = NaN;
 
     expect(formatPercent(nanPercent)).toBe('');
   });
@@ -70,11 +70,11 @@ describe('numbers', () => {
     const current = 2;
     const prev = 0;
 
-    expect(getPercentDiff(current, prev)).toBe(0);
+    expect(getPercentDiff(current, prev)).toBe(100);
   });
 
   it('gets percent diff - NaN values', async () => {
-    const current = Number.NaN;
+    const current = NaN;
     const prev = 2;
 
     expect(getPercentDiff(current, prev)).toBe(0);

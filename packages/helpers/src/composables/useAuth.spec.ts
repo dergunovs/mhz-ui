@@ -4,14 +4,14 @@ import { isAuth, setAuth, logout, getCookieToken, setCookieToken, deleteCookieTo
 
 const tokenName = 'token';
 
-let tokenValue = '1231231231';
+const tokenState = { value: '1231231231' };
 const newTokenValue = '123';
 
 vi.spyOn(document, 'cookie', 'set').mockImplementation((value: string) => {
-  tokenValue = value.split(`${tokenName}=`)[1].split(';')[0];
+  tokenState.value = value.split(`${tokenName}=`, 2)[1]?.split(';', 2)[0] ?? '';
 });
 
-vi.spyOn(document, 'cookie', 'get').mockImplementation(() => `${tokenName}=${tokenValue}`);
+vi.spyOn(document, 'cookie', 'get').mockImplementation(() => `${tokenName}=${tokenState.value}`);
 
 describe('useAuth', () => {
   it('exports is user auth', async () => {
@@ -36,21 +36,21 @@ describe('useAuth', () => {
     const SITE = 'https://site.ru';
     const URL = 'login';
 
-    globalThis.location.href = SITE;
+    location.assign(SITE);
 
-    expect(getCookieToken(tokenName)).toStrictEqual(tokenValue);
-    expect(globalThis.location.href).toStrictEqual(`${SITE}/`);
+    expect(getCookieToken(tokenName)).toStrictEqual(tokenState.value);
+    expect(location.href).toStrictEqual(`${SITE}/`);
 
     logout(URL, spyDeleteAuthHeader, tokenName);
 
     expect(spyDeleteAuthHeader).toHaveBeenCalledTimes(1);
-    expect(globalThis.location.href).toStrictEqual(`${SITE}/${URL}`);
+    expect(location.href).toStrictEqual(`${SITE}/${URL}`);
   });
 
   it('gets cookie token', async () => {
-    tokenValue = '';
+    tokenState.value = '';
 
-    expect(getCookieToken(tokenName)).toStrictEqual(tokenValue);
+    expect(getCookieToken(tokenName)).toStrictEqual(tokenState.value);
   });
 
   it('returns undefined when document cookie is empty', async () => {

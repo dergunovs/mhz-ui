@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.tableBlock" ref="tableBlock">
+  <div v-if="!props.isDisableScrollWrapper" :class="$style.tableBlock" ref="tableBlock">
     <div v-if="isScrollable" :class="$style.scrollMessage">{{ MESSAGES[props.lang].tableIsScrollable }}</div>
 
     <table :class="$style.table" cellpadding="8" cellspacing="0" :border="0" ref="table">
@@ -49,10 +49,57 @@
       </tbody>
     </table>
   </div>
+
+  <table v-else :class="$style.table" cellpadding="8" cellspacing="0" :border="0" ref="table">
+    <thead>
+      <tr>
+        <th
+          v-for="header in props.headers"
+          :key="`${header.value}${header.title}`"
+          :class="$style.th"
+          data-test="ui-table-header"
+        >
+          <label :class="$style.label" :data-loading="props.isLoading" data-test="ui-table-header-label">
+            <span data-test="ui-table-header-title">{{ header.title }}</span>
+
+            <button
+              v-if="header.value"
+              @click="sort(header.value)"
+              :class="$style.sort"
+              type="button"
+              :data-current="props.modelValue?.value === header.value"
+              data-test="ui-table-header-sort"
+            >
+              <span
+                :class="$style.arrow"
+                :data-current="props.modelValue?.isAsc && props.modelValue?.value === header.value"
+                :data-loading="props.isLoading"
+                data-test="ui-table-header-sort-asc"
+              >
+                ↑
+              </span>
+              <span
+                :class="$style.arrow"
+                :data-current="!props.modelValue?.isAsc && props.modelValue?.value === header.value"
+                :data-loading="props.isLoading"
+                data-test="ui-table-header-sort-desc"
+              >
+                ↓
+              </span>
+            </button>
+          </label>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <slot></slot>
+    </tbody>
+  </table>
 </template>
 
 <script setup lang="ts">
-import { shallowRef, onMounted, onBeforeUnmount } from 'vue';
+import { shallowRef, computed, onMounted, onBeforeUnmount } from 'vue';
 
 import { TLocale } from '@/components/locales/types';
 import { MESSAGES } from '@/components/locales';
@@ -72,6 +119,7 @@ interface IProps {
   modelValue?: IModelValue;
   isLoading?: boolean;
   lang?: TLocale;
+  isDisableScrollWrapper?: boolean;
 }
 
 interface IEmit {
@@ -88,15 +136,17 @@ const emit = defineEmits<IEmit>();
 const tableBlock = shallowRef<HTMLElement>();
 const table = shallowRef<HTMLElement>();
 
-const isScrollable = shallowRef(false);
+const tableSizeDiff = shallowRef(0);
+
+const isScrollable = computed(() => !props.isDisableScrollWrapper && tableSizeDiff.value > 0);
 
 function checkTableSize() {
-  if (tableBlock.value && table.value) {
-    const tableBlockSize = Number(getComputedStyle(tableBlock.value).width.slice(0, -2));
-    const tableSize = Number(getComputedStyle(table.value).width.slice(0, -2));
+  if (!tableBlock.value || !table.value) return;
 
-    isScrollable.value = tableSize - 2 > tableBlockSize;
-  }
+  const tableBlockSize = Number(getComputedStyle(tableBlock.value).width.slice(0, -2));
+  const tableSize = Number(getComputedStyle(table.value).width.slice(0, -2));
+
+  tableSizeDiff.value = tableSize - tableBlockSize - 2;
 }
 
 function sort(value: string) {
@@ -110,12 +160,12 @@ function sort(value: string) {
 }
 
 onMounted(() => {
-  checkTableSize();
-  window.addEventListener('resize', checkTableSize, true);
+  requestAnimationFrame(checkTableSize);
+  window.addEventListener('resize', checkTableSize, { capture: true });
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', checkTableSize, true);
+  window.removeEventListener('resize', checkTableSize, { capture: true });
 });
 </script>
 

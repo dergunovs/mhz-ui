@@ -13,15 +13,15 @@ const paginationPrev = dataTest('ui-pagination-prev');
 const paginationNext = dataTest('ui-pagination-next');
 const paginationLast = dataTest('ui-pagination-last');
 
-let wrapper: VueWrapper<InstanceType<typeof UiPagination>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiPagination, { page: PAGE, total: TOTAL });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiPagination', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiPagination>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiPagination, { page: PAGE, total: TOTAL });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiPagination)).toBeTruthy();
   });
@@ -63,21 +63,21 @@ describe('UiPagination', async () => {
   it('disables buttons by current and total pages condition', async () => {
     expect(wrapper.find(paginationPrev).attributes('disabled')).toBe('');
     expect(wrapper.find(paginationFirst).attributes('disabled')).toBe('');
-    expect(wrapper.find(paginationNext).attributes('disabled')).toBe(undefined);
-    expect(wrapper.find(paginationLast).attributes('disabled')).toBe(undefined);
+    expect(wrapper.find(paginationNext).attributes('disabled')).toBeUndefined();
+    expect(wrapper.find(paginationLast).attributes('disabled')).toBeUndefined();
 
     await wrapper.setProps({ page: TOTAL });
 
-    expect(wrapper.find(paginationPrev).attributes('disabled')).toBe(undefined);
-    expect(wrapper.find(paginationFirst).attributes('disabled')).toBe(undefined);
+    expect(wrapper.find(paginationPrev).attributes('disabled')).toBeUndefined();
+    expect(wrapper.find(paginationFirst).attributes('disabled')).toBeUndefined();
     expect(wrapper.find(paginationNext).attributes('disabled')).toBe('');
     expect(wrapper.find(paginationLast).attributes('disabled')).toBe('');
 
     await wrapper.setProps({ page: TOTAL - 1 });
 
-    expect(wrapper.find(paginationPrev).attributes('disabled')).toBe(undefined);
-    expect(wrapper.find(paginationFirst).attributes('disabled')).toBe(undefined);
-    expect(wrapper.find(paginationNext).attributes('disabled')).toBe(undefined);
-    expect(wrapper.find(paginationLast).attributes('disabled')).toBe(undefined);
+    expect(wrapper.find(paginationPrev).attributes('disabled')).toBeUndefined();
+    expect(wrapper.find(paginationFirst).attributes('disabled')).toBeUndefined();
+    expect(wrapper.find(paginationNext).attributes('disabled')).toBeUndefined();
+    expect(wrapper.find(paginationLast).attributes('disabled')).toBeUndefined();
   });
 });

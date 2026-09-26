@@ -50,23 +50,23 @@ export default defineConfig({
         const moveDts = (subDir: string) => {
           const dir = path.join(distDir, subDir);
 
-          if (fs.existsSync(dir)) {
-            const files = fs.readdirSync(dir).filter((f: string) => f.endsWith('.d.ts'));
+          if (!fs.existsSync(dir)) return;
 
-            for (const file of files) {
-              const src = path.join(dir, file);
-              const name = file.replace('.d.ts', '');
-              const destDir = path.join(distDir, name);
+          const files = fs.readdirSync(dir).filter((f: string) => f.endsWith('.d.ts'));
 
-              if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+          for (const file of files) {
+            const src = path.join(dir, file);
+            const name = file.replace('.d.ts', '');
+            const destDir = path.join(distDir, name);
 
-              const dest = path.join(destDir, 'index.d.ts');
+            if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
 
-              fs.renameSync(src, dest);
-            }
+            const dest = path.join(destDir, 'index.d.ts');
 
-            fs.rmdirSync(dir);
+            fs.renameSync(src, dest);
           }
+
+          fs.rmdirSync(dir);
         };
 
         moveDts('composables');

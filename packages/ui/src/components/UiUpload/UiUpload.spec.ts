@@ -19,15 +19,15 @@ const uploadFileNameSingle = dataTest('ui-upload-file-name-single');
 const uploadFileRemove = dataTest('ui-upload-file-remove');
 const uploadFileRemoveSingle = dataTest('ui-upload-file-remove-single');
 
-let wrapper: VueWrapper<InstanceType<typeof UiUpload>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiUpload, { label: LABEL, file: FILE, isSingle: true });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiUpload', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiUpload>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiUpload, { label: LABEL, file: FILE, isSingle: true });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiUpload)).toBeTruthy();
   });
@@ -83,7 +83,7 @@ describe('UiUpload', async () => {
   it('shows multiple files', async () => {
     await wrapper.setProps({ file: undefined, files: FILES, isSingle: false });
 
-    expect(wrapper.findAll(uploadFile).length).toBe(FILES.length);
+    expect(wrapper.findAll(uploadFile)).toHaveLength(FILES.length);
     expect(wrapper.findAll(uploadFileName)[0].text()).toBe(FILES[0].name);
   });
 

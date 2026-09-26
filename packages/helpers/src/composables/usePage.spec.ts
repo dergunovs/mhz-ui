@@ -3,6 +3,11 @@ import { describe, expect, it } from 'vitest';
 
 import { convertParams, usePage, usePageNumber, withSetup } from '..';
 
+const flushPromises = () =>
+  new Promise<void>((resolve) => {
+    setTimeout(resolve, 0);
+  });
+
 const newPage = 2;
 const newFilter = { _id: '123' };
 
@@ -101,8 +106,8 @@ describe('usePage', () => {
       expect(page.value).toStrictEqual(1);
     });
 
-    await router.push({ path: '/', query: { page: '3' } });
-    await nextTick();
+    router.push({ path: '/', query: { page: '3' } });
+    await flushPromises();
 
     expect(pageRef.value).toStrictEqual(3);
 
@@ -178,8 +183,8 @@ describe('usePage', () => {
       expect(page.value).toStrictEqual(1);
     });
 
-    await router.push({ path: '/', query: { page: '3' } });
-    await nextTick();
+    router.push({ path: '/', query: { page: '3' } });
+    await flushPromises();
 
     expect(pageRef.value).toStrictEqual(3);
 

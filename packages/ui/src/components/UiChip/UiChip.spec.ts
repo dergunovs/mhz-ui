@@ -12,15 +12,15 @@ const chip = dataTest('ui-chip');
 const chipEdit = dataTest('ui-chip-edit');
 const chipDelete = dataTest('ui-chip-delete');
 
-let wrapper: VueWrapper<InstanceType<typeof UiChip>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiChip, { type: DEFAULT_TYPE }, { default: DEFAULT_SLOT });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiChip', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiChip>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiChip, { type: DEFAULT_TYPE }, { default: DEFAULT_SLOT });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiChip)).toBeTruthy();
   });

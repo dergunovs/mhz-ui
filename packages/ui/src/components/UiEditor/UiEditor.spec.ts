@@ -11,8 +11,6 @@ const editor = '[data-test="ui-editor"]';
 const editorSource = '[data-test="ui-editor-source"]';
 const editorButton = '[data-test="ui-editor-button"]';
 
-let wrapper: VueWrapper<InstanceType<typeof UiEditor>>;
-
 function mockSelection() {
   const range = {
     startContainer: document.createTextNode(''),
@@ -38,13 +36,15 @@ function mockSelection() {
   vi.spyOn(globalThis, 'getSelection').mockReturnValue(selection as unknown as Selection);
 }
 
-beforeEach(() => {
-  wrapper = wrapperFactory(UiEditor, { modelValue: MODEL_VALUE });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiEditor', () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiEditor>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiEditor, { modelValue: MODEL_VALUE });
+  });
+
   it('exists', () => {
     expect(wrapper.findComponent(UiEditor).exists()).toBe(true);
   });
@@ -58,7 +58,7 @@ describe('UiEditor', () => {
   });
 
   it('has 5 action buttons', () => {
-    expect(wrapper.findAll(editorButton).length).toBe(5);
+    expect(wrapper.findAll(editorButton)).toHaveLength(5);
   });
 
   it('has buttons with correct labels', () => {

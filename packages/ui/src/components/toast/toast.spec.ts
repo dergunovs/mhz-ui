@@ -8,7 +8,7 @@ describe('toast', () => {
   beforeEach(() => {
     body = document.body;
 
-    while (body.firstChild) body.firstChild.remove();
+    body.replaceChildren();
 
     vi.useFakeTimers();
   });
@@ -72,7 +72,7 @@ describe('toast', () => {
 
     const toastBlocks = document.querySelectorAll('.uiToastBlock');
 
-    expect(toastBlocks.length).toBe(1);
+    expect(toastBlocks).toHaveLength(1);
   });
 
   it('should remove toast after timeout', () => {
@@ -82,7 +82,7 @@ describe('toast', () => {
 
     const toastElements = document.querySelectorAll('.uiToast');
 
-    expect(toastElements.length).toBe(0);
+    expect(toastElements).toHaveLength(0);
   });
 
   it('should remove toast when toast is clicked', () => {
@@ -94,13 +94,13 @@ describe('toast', () => {
 
     const toastElements = document.querySelectorAll('.uiToast');
 
-    expect(toastElements.length).toBe(1);
+    expect(toastElements).toHaveLength(1);
 
     vi.advanceTimersByTime(200);
 
     const remainingToasts = document.querySelectorAll('.uiToast');
 
-    expect(remainingToasts.length).toBe(0);
+    expect(remainingToasts).toHaveLength(0);
   });
 
   it('should remove toast block when last toast is removed', () => {
@@ -110,6 +110,6 @@ describe('toast', () => {
 
     const toastBlocks = document.querySelectorAll('.uiToastBlock');
 
-    expect(toastBlocks.length).toBe(0);
+    expect(toastBlocks).toHaveLength(0);
   });
 });

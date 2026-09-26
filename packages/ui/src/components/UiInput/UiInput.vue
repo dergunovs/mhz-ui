@@ -70,14 +70,14 @@ const emit = defineEmits<IEmit>();
 
 const input = shallowRef<HTMLElement>();
 
+// eslint-disable-next-line unicorn/consistent-boolean-name
 const isShowPassword = shallowRef(false);
 
 const icon = computed(() => {
   if (props.isCopy) return IconCopy;
   if (props.isPassword && isShowPassword.value) return IconPasswordHide;
-  if (props.isPassword && !isShowPassword.value) return IconPasswordShow;
 
-  return props.appendIcon;
+  return props.isPassword && !isShowPassword.value ? IconPasswordShow : props.appendIcon;
 });
 
 function handleInput(target: EventTarget | null) {
@@ -90,10 +90,10 @@ function handleIconClick() {
 }
 
 onMounted(async () => {
-  if (props.isFocus) {
-    await nextTick();
-    input.value?.focus();
-  }
+  if (!props.isFocus) return;
+
+  await nextTick();
+  input.value?.focus();
 });
 </script>
 

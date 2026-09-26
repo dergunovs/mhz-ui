@@ -1,2 +1,2 @@
 export const TITLE = 'Spoiler title';
-export const MODEL_VALUE = false;
+export const IS_MODEL_VALUE = false;

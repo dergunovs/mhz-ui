@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/consistent-boolean-name */
 import { readonly, shallowRef } from 'vue';
 
 import { getOneYearFromNow } from '..';
@@ -6,22 +7,22 @@ const isAuthLocal = shallowRef(false);
 
 export const isAuth = readonly(isAuthLocal);
 
-export function setAuth(auth: boolean) {
-  isAuthLocal.value = auth;
+export function setAuth(isAuthValue: boolean) {
+  isAuthLocal.value = isAuthValue;
 }
 
 export function logout(url: string, deleteAuthHeader: () => void, tokenName: string) {
   deleteCookieToken(tokenName);
   deleteAuthHeader();
-  globalThis.location.href = url;
+  location.assign(url);
 }
 
 export function getCookieToken(tokenName: string): string | undefined {
   if (!document.cookie) return;
 
-  const { [tokenName]: token } = Object.fromEntries(document.cookie.split('; ').map((v) => v.split('=')));
+  const cookie = document.cookie.split('; ').find((item) => item.startsWith(`${tokenName}=`));
 
-  return token;
+  return cookie ? cookie.slice(`${tokenName}=`.length) : undefined;
 }
 
 export function setCookieToken(token: string, tokenName: string) {

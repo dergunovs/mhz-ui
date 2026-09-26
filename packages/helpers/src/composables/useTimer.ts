@@ -14,10 +14,12 @@ export function useTimer() {
   function updateTime() {
     secondsRaw.value++;
 
-    if (secondsRaw.value === 60) {
-      minutesRaw.value++;
-      secondsRaw.value = 0;
+    if (secondsRaw.value !== 60) {
+      return;
     }
+
+    minutesRaw.value++;
+    secondsRaw.value = 0;
   }
 
   function startTimer() {
@@ -25,20 +27,20 @@ export function useTimer() {
   }
 
   function stopTimer() {
-    if (interval) {
-      clearInterval(interval);
-      interval = null;
-    }
+    if (!interval) return;
+
+    clearInterval(interval);
+    interval = null;
 
     secondsRaw.value = 0;
     minutesRaw.value = 0;
   }
 
   onBeforeUnmount(() => {
-    if (interval) {
-      clearInterval(interval);
-      interval = null;
-    }
+    if (!interval) return;
+
+    clearInterval(interval);
+    interval = null;
   });
 
   return { timer, duration, startTimer, stopTimer };

@@ -17,7 +17,7 @@ describe('date', () => {
     const BIG_NUMBER = 10;
 
     expect(addZero(SMALL_NUMBER)).toStrictEqual(`0${SMALL_NUMBER}`);
-    expect(addZero(BIG_NUMBER)).toStrictEqual(`${BIG_NUMBER}`);
+    expect(addZero(BIG_NUMBER)).toStrictEqual(String(BIG_NUMBER));
   });
 
   it('adds zero to number - edge cases', async () => {

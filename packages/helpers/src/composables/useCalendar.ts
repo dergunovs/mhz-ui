@@ -9,6 +9,7 @@ export function useCalendar() {
   const dateFrom = shallowRef<Date>();
   const dateTo = shallowRef<Date>();
 
+  // eslint-disable-next-line unicorn/consistent-boolean-name
   const isDatesReady = shallowRef(false);
 
   function updateDates(dates: ICalendarDates) {

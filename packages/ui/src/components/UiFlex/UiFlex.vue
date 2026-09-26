@@ -22,14 +22,7 @@ interface IProps {
   column?: boolean;
   align?: 'normal' | 'stretch' | 'center' | 'flex-start' | 'flex-end';
   justify?:
-    | 'normal'
-    | 'stretch'
-    | 'center'
-    | 'flex-start'
-    | 'flex-end'
-    | 'space-between'
-    | 'space-around'
-    | 'space-evenly';
+    'normal' | 'stretch' | 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';
   wrap?: boolean;
   gap?: string;
 }

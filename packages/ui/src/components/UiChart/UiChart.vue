@@ -52,9 +52,8 @@ const props = withDefaults(defineProps<IProps>(), {
 
 const chartComponent = computed(() => {
   if (props.type === 'Pie') return Pie;
-  if (props.type === 'Line') return Line;
 
-  return Bar;
+  return props.type === 'Line' ? Line : Bar;
 });
 
 const isShowLegendComputed = computed(() => props.isShowLegend);

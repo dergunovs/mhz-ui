@@ -5,8 +5,10 @@ import { useTimer, withSetup } from '..';
 const mockSetInterval = vi.fn(() => ({ unref: vi.fn() }));
 const mockClearInterval = vi.fn();
 
-Object.defineProperty(globalThis, 'setInterval', { writable: true, value: mockSetInterval });
-Object.defineProperty(globalThis, 'clearInterval', { writable: true, value: mockClearInterval });
+Object.defineProperties(globalThis, {
+  setInterval: { writable: true, value: mockSetInterval },
+  clearInterval: { writable: true, value: mockClearInterval },
+});
 
 describe('useTimer', () => {
   it('initializes timer values correctly', async () => {

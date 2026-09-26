@@ -69,8 +69,8 @@ describe('html', () => {
   it('handles complex template with multiple expressions', () => {
     const user = 'Alice';
     const score = 95;
-    const passed = true;
-    const result = html`User ${user} scored ${score} points and ${passed ? 'passed' : 'failed'} the test`;
+    const isPassed = true;
+    const result = html`User ${user} scored ${score} points and ${isPassed ? 'passed' : 'failed'} the test`;
 
     expect(result).toBe('User Alice scored 95 points and passed the test');
   });

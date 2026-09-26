@@ -18,15 +18,15 @@ const input = dataTest('ui-input');
 const inputBlock = dataTest('ui-input-block');
 const inputIcon = dataTest('ui-input-icon');
 
-let wrapper: VueWrapper<InstanceType<typeof UiInput>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiInput, { modelValue: MODEL_VALUE });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiInput', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiInput>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiInput, { modelValue: MODEL_VALUE });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiInput)).toBeTruthy();
   });
@@ -89,7 +89,7 @@ describe('UiInput', async () => {
   });
 
   it('disables input by props', async () => {
-    expect(wrapper.find(input).attributes('disabled')).toBe(undefined);
+    expect(wrapper.find(input).attributes('disabled')).toBeUndefined();
 
     await wrapper.setProps({ isDisabled: true });
 

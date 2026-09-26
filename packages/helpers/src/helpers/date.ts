@@ -4,7 +4,7 @@ import { TLocale } from '@/locales/types';
 type TDate = string | Date | null;
 
 export function addZero(value: number): string {
-  return value < 10 ? `0${value}` : `${value}`;
+  return value < 10 ? `0${value}` : String(value);
 }
 
 export function formatDuration(duration?: number, lang: TLocale = 'ru', isHideSeconds?: boolean): string {
@@ -12,22 +12,20 @@ export function formatDuration(duration?: number, lang: TLocale = 'ru', isHideSe
 
   const minutes = Math.floor(duration / 60);
   const seconds = duration % 60;
-  const minutesFormatted = minutes ? `${minutes} ${MESSAGES[lang].min}.` : ``;
+  const minutesFormatted = minutes ? `${minutes} ${MESSAGES[lang].min}.` : '';
   const duraionFormatted = isHideSeconds
-    ? `${minutesFormatted}` || '0'
+    ? minutesFormatted || '0'
     : `${minutesFormatted} ${addZero(seconds)} ${MESSAGES[lang].sec}.`.trim();
 
   return duraionFormatted;
 }
 
 export function formatDate(dateRaw?: TDate, lang: TLocale = 'ru'): string {
-  if (!dateRaw || Number.isNaN(new Date(dateRaw).getTime())) return '0';
-
-  return (
-    new Intl.DateTimeFormat(MESSAGES[lang].locale, { year: 'numeric', month: 'short', day: 'numeric' }).format(
-      new Date(dateRaw)
-    ) || '0'
-  );
+  return !dateRaw || Number.isNaN(new Date(dateRaw).getTime())
+    ? '0'
+    : new Intl.DateTimeFormat(MESSAGES[lang].locale, { year: 'numeric', month: 'short', day: 'numeric' }).format(
+        new Date(dateRaw)
+      ) || '0';
 }
 
 export function formatDateTime(dateRaw?: TDate, lang: TLocale = 'ru'): string {

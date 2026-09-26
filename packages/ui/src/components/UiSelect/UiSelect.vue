@@ -107,7 +107,9 @@ const props = withDefaults(defineProps<IProps>(), {
 const emit = defineEmits<IEmit>();
 
 const filterQuery = ref('');
+// eslint-disable-next-line unicorn/consistent-boolean-name
 const isShowOptions = shallowRef(false);
+// eslint-disable-next-line unicorn/consistent-boolean-name
 const isOpenUp = shallowRef(false);
 
 const containerElement = shallowRef<HTMLElement>();
@@ -154,9 +156,8 @@ const getOptionTitle = (option: IOption) => (props.isLocaleField ? option.title_
 
 const isCurrentOption = (option: IOption) => {
   if (isPrimitiveValue(props.modelValue)) return props.modelValue === (option._id || option.title);
-  if (props.modelValue) return props.modelValue._id === option._id;
 
-  return false;
+  return props.modelValue ? props.modelValue._id === option._id : false;
 };
 
 const setFocusedOptionIndex = (index: number) => {

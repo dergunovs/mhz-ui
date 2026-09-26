@@ -13,19 +13,19 @@ import { wrapperFactory } from '@/test';
 const button = dataTest('ui-button');
 const buttonIcon = dataTest('ui-button-icon');
 
-let wrapper: VueWrapper<InstanceType<typeof UiButton>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(
-    UiButton,
-    { layout: DEFAULT_LAYOUT, type: DEFAULT_TYPE, icon: DEFAULT_ICON },
-    { default: DEFAULT_SLOT }
-  );
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiButton', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiButton>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(
+      UiButton,
+      { layout: DEFAULT_LAYOUT, type: DEFAULT_TYPE, icon: DEFAULT_ICON },
+      { default: DEFAULT_SLOT }
+    );
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiButton)).toBeTruthy();
   });
@@ -67,7 +67,7 @@ describe('UiButton', async () => {
   });
 
   it('disables button by props', async () => {
-    expect(wrapper.find(button).attributes('disabled')).toBe(undefined);
+    expect(wrapper.find(button).attributes('disabled')).toBeUndefined();
 
     await wrapper.setProps({ isDisabled: true });
 

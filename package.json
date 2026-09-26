@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui-helpers",
   "description": "mhz-ui and mhz-helpers monorepo",
-  "version": "1.4.29",
+  "version": "1.4.41",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "homepage": "https://ui.9000mhz.ru",
@@ -17,16 +17,15 @@
     "test:cov": "turbo run test:cov",
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "pub": "turbo run build && changeset version && changeset publish"
+    "pub": "turbo run build && changeset publish"
   },
   "dependencies": {
-    "@changesets/cli": "2.31.0",
+    "@changesets/cli": "3.0.3",
     "ajv": "8.20.0"
   },
   "devDependencies": {
-    "@turbo/gen": "2.9.16",
-    "prettier": "3.8.3",
-    "turbo": "2.9.16"
+    "prettier": "3.9.9",
+    "turbo": "2.11.4"
   },
   "packageManager": "npm@11.7.0",
   "workspaces": [
@@ -34,7 +33,7 @@
   ],
   "engines": {
     "npm": ">=11.7.0",
-    "node": ">=25.4.0"
+    "node": ">=26.5.0"
   },
   "keywords": [
     "monorepo",
@@ -42,5 +41,10 @@
     "typescript",
     "vue",
     "vite"
-  ]
+  ],
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "vue-demi@0.14.10": true,
+    "unrs-resolver@1.12.2": true
+  }
 }

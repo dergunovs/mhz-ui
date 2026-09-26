@@ -3,7 +3,7 @@ import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest } from 'mhz-helpers';
 
 import UiSpoiler from './UiSpoiler.vue';
-import { TITLE, MODEL_VALUE } from './constants';
+import { TITLE, IS_MODEL_VALUE } from './constants';
 
 import { wrapperFactory } from '@/test';
 
@@ -11,15 +11,15 @@ const spoiler = dataTest('ui-spoiler');
 const spoilerButton = dataTest('ui-spoiler-button');
 const spoilerButtonTitle = dataTest('ui-spoiler-button-title');
 
-let wrapper: VueWrapper<InstanceType<typeof UiSpoiler>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiSpoiler, { title: TITLE, modelValue: MODEL_VALUE });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiSpoiler', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiSpoiler>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiSpoiler, { title: TITLE, modelValue: IS_MODEL_VALUE });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiSpoiler)).toBeTruthy();
   });
@@ -44,6 +44,6 @@ describe('UiSpoiler', async () => {
     await wrapper.find(spoilerButton).trigger('click');
 
     expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
-    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([!MODEL_VALUE]);
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([!IS_MODEL_VALUE]);
   });
 });

@@ -12,15 +12,15 @@ const fieldLabel = dataTest('ui-field-label');
 const fieldRequired = dataTest('ui-field-required');
 const fieldError = dataTest('ui-field-error');
 
-let wrapper: VueWrapper<InstanceType<typeof UiField>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiField, { label: LABEL }, { default: DEFAULT_SLOT });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiField', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiField>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiField, { label: LABEL }, { default: DEFAULT_SLOT });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiField)).toBeTruthy();
   });

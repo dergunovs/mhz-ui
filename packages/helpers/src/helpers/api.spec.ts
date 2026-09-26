@@ -11,7 +11,7 @@ describe('api', () => {
   });
 
   it('sets base url', async () => {
-    expect(axios.defaults.baseURL).toStrictEqual(undefined);
+    expect(axios.defaults.baseURL).toBeUndefined();
 
     const BASE_URL = 'site.ru';
 
@@ -27,7 +27,7 @@ describe('api', () => {
   });
 
   it('sets auth header', async () => {
-    expect(api.defaults.headers.common['Authorization']).toStrictEqual(undefined);
+    expect(api.defaults.headers.common['Authorization']).toBeUndefined();
 
     setAuthHeader(TOKEN);
 
@@ -47,7 +47,7 @@ describe('api', () => {
 
     deleteAuthHeader();
 
-    expect(api.defaults.headers.common['Authorization']).toStrictEqual(undefined);
+    expect(api.defaults.headers.common['Authorization']).toBeUndefined();
   });
 
   it('handles error with axios error', async () => {

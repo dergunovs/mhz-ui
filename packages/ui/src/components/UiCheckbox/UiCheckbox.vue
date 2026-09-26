@@ -48,7 +48,7 @@
 
 <script setup lang="ts">
 import { shallowRef } from 'vue';
-import { DEFAULT_LABEL, DEFAULT_MODEL_VALUE } from './constants';
+import { DEFAULT_LABEL, IS_DEFAULT_MODEL_VALUE } from './constants';
 
 type TInitialValue = boolean | string | number;
 
@@ -69,8 +69,8 @@ interface IEmit {
 }
 
 const props = withDefaults(defineProps<IProps>(), {
-  modelValue: DEFAULT_MODEL_VALUE,
-  initialValue: DEFAULT_MODEL_VALUE,
+  modelValue: IS_DEFAULT_MODEL_VALUE,
+  initialValue: IS_DEFAULT_MODEL_VALUE,
   label: DEFAULT_LABEL,
   labelSub: DEFAULT_LABEL,
   labelSwitcher: DEFAULT_LABEL,
@@ -82,11 +82,11 @@ const emit = defineEmits<IEmit>();
 const checkbox = shallowRef<HTMLInputElement>();
 
 function handleChange() {
-  if (checkbox.value) {
-    const value = checkbox.value.checked ? props.initialValue || true : false;
+  if (!checkbox.value) return;
 
-    emit('update:modelValue', value);
-  }
+  const value = checkbox.value.checked && (props.initialValue || true);
+
+  emit('update:modelValue', value);
 }
 </script>
 

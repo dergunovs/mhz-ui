@@ -15,15 +15,15 @@ const tableHeaderSortAsc = dataTest('ui-table-header-sort-asc');
 const tableHeaderSortDesc = dataTest('ui-table-header-sort-desc');
 const tableScrollMessage = dataTest('ui-table-scroll-message');
 
-let wrapper: VueWrapper<InstanceType<typeof UiTable>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiTable, { modelValue: MODEL_VALUE, headers: HEADERS }, { default: DEFAULT_SLOT });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiTable', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiTable>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiTable, { modelValue: MODEL_VALUE, headers: HEADERS }, { default: DEFAULT_SLOT });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiTable)).toBeTruthy();
   });
@@ -33,12 +33,12 @@ describe('UiTable', async () => {
   });
 
   it('shows table headers', async () => {
-    expect(wrapper.findAll(tableHeader).length).toBe(HEADERS.length);
+    expect(wrapper.findAll(tableHeader)).toHaveLength(HEADERS.length);
     expect(wrapper.findAll(tableHeaderTitle)[0].text()).toBe(HEADERS[0].title);
   });
 
   it('shows header sort button if value exists', async () => {
-    expect(wrapper.findAll(tableHeaderSort).length).toBe(HEADERS.filter((header) => !!header.value).length);
+    expect(wrapper.findAll(tableHeaderSort)).toHaveLength(HEADERS.filter((header) => !!header.value).length);
   });
 
   it('highlights current sort header and direction', async () => {
@@ -72,12 +72,14 @@ describe('UiTable', async () => {
 
     const firstHeaderIndex = HEADERS.findIndex((header) => header.value);
 
-    if (firstHeaderIndex !== -1) {
-      await wrapper.findAll(tableHeaderSort)[firstHeaderIndex].trigger('click');
-
-      expect(wrapper.emitted('reset')).toHaveLength(1);
-      expect(wrapper.emitted('reset')?.[0]).toEqual([HEADERS[firstHeaderIndex].value]);
+    if (firstHeaderIndex === -1) {
+      return;
     }
+
+    await wrapper.findAll(tableHeaderSort)[firstHeaderIndex].trigger('click');
+
+    expect(wrapper.emitted('reset')).toHaveLength(1);
+    expect(wrapper.emitted('reset')?.[0]).toEqual([HEADERS[firstHeaderIndex].value]);
   });
 
   it('handles loading state', async () => {
@@ -94,5 +96,17 @@ describe('UiTable', async () => {
 
   it('shows scroll message when table is scrollable', async () => {
     expect(wrapper.find(tableScrollMessage).exists()).toBe(false);
+  });
+
+  it('renders scroll wrapper by default', async () => {
+    expect(wrapper.find('div').exists()).toBe(true);
+    expect(wrapper.find('table').exists()).toBe(true);
+  });
+
+  it('disables scroll wrapper when isDisableScrollWrapper is true', async () => {
+    await wrapper.setProps({ isDisableScrollWrapper: true });
+
+    expect(wrapper.find('div').exists()).toBe(false);
+    expect(wrapper.find('table').exists()).toBe(true);
   });
 });

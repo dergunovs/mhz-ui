@@ -31,7 +31,7 @@ export function convertParams(params: Ref<IPageQuery | number>, initiator?: stri
 
   return {
     page: page > 0 ? page : 1,
-    dir: sort.isAsc === false ? 'desc' : 'asc',
+    dir: sort.isAsc ? 'asc' : 'desc',
     sort: sort.value,
     initiator,
     ...filter,

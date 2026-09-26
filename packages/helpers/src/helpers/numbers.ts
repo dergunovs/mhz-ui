@@ -5,7 +5,13 @@ export function formatPercent(percent: number | null): string {
 }
 
 export function getPercentDiff(cur: number, prev: number): number {
-  if (prev === 0 || Number.isNaN(prev) || Number.isNaN(cur)) return 0;
+  if (Number.isNaN(prev) || Number.isNaN(cur)) return 0;
+
+  if (prev === 0) {
+    if (cur > 0) return 100;
+
+    return cur < 0 ? -100 : 0;
+  }
 
   return Math.round(((cur - prev) / prev) * 100);
 }

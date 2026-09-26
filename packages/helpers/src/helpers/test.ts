@@ -10,7 +10,7 @@ export function dataTest(value: string): string {
 
 export const removeDataTest: NodeTransform = (node) => {
   if (node.type === 1 /* NodeTypes.ELEMENT */ && 'props' in node) {
-    node.props = node.props.filter((prop) => (prop.type === 6 ? prop.name !== 'data-test' : true));
+    node.props = node.props.filter((prop) => prop.type !== 6 || prop.name !== 'data-test');
   }
 };
 

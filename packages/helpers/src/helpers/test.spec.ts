@@ -33,7 +33,7 @@ describe('test', () => {
 
     removeDataTest(node as unknown as RootNode, context);
 
-    expect(node.props.length).toBe(1);
+    expect(node.props).toHaveLength(1);
     expect(node.props[0].name).toBe('class');
   });
 
@@ -48,7 +48,7 @@ describe('test', () => {
 
     removeDataTest(node as unknown as RootNode, context);
 
-    expect(node.props.length).toBe(2);
+    expect(node.props).toHaveLength(2);
     expect(node.props[0].name).toBe('class');
     expect(node.props[1].name).toBe('id');
   });
@@ -61,7 +61,7 @@ describe('test', () => {
 
     removeDataTest(node as unknown as RootNode, context);
 
-    expect(node.props.length).toBe(1);
+    expect(node.props).toHaveLength(1);
     expect(node.props[0].name).toBe('data-test');
   });
 
@@ -78,7 +78,7 @@ describe('test', () => {
 
     removeDataTest(node as unknown as RootNode, context);
 
-    expect(node.props.length).toBe(3);
+    expect(node.props).toHaveLength(3);
     expect(node.props[0].name).toBe('class');
     expect(node.props[1].name).toBe('data-test2');
     expect(node.props[2].name).toBe('id');
@@ -92,7 +92,7 @@ describe('test', () => {
 
     removeDataTest(node as unknown as RootNode, context);
 
-    expect(node.props.length).toBe(0);
+    expect(node.props).toHaveLength(0);
   });
 
   it('waits for timeout', async () => {

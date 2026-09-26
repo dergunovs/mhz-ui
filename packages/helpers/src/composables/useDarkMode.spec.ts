@@ -5,16 +5,19 @@ import { useDarkMode, withSetup } from '..';
 
 describe('useDarkMode', () => {
   beforeAll(() => {
+    const store: { [key: string]: string } = {};
+
     const mockStorage = {
-      store: {} as { [key: string]: string },
       getItem(key: string) {
-        return this.store[key] || null;
+        return store[key] || null;
       },
       setItem(key: string, value: string) {
-        this.store[key] = value;
+        store[key] = value;
       },
       clear() {
-        this.store = {};
+        for (const key of Object.keys(store)) {
+          delete store[key];
+        }
       },
     };
 

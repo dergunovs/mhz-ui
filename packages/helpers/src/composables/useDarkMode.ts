@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/consistent-boolean-name */
 import { shallowRef, onBeforeMount, readonly } from 'vue';
 
 export function useDarkMode() {

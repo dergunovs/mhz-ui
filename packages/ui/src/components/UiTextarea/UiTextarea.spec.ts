@@ -9,15 +9,15 @@ import { wrapperFactory } from '@/test';
 
 const textarea = dataTest('ui-textarea');
 
-let wrapper: VueWrapper<InstanceType<typeof UiTextarea>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiTextarea, { modelValue: MODEL_VALUE });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiTextarea', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiTextarea>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiTextarea, { modelValue: MODEL_VALUE });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiTextarea)).toBeTruthy();
   });
@@ -38,7 +38,7 @@ describe('UiTextarea', async () => {
   });
 
   it('disables textarea by props', async () => {
-    expect(wrapper.find(textarea).attributes('disabled')).toBe(undefined);
+    expect(wrapper.find(textarea).attributes('disabled')).toBeUndefined();
 
     await wrapper.setProps({ isDisabled: true });
 

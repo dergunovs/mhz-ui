@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 import { html } from 'mhz-helpers';
 
-import { MODEL_VALUE, IS_CONFIRM } from './constants';
+import { IS_MODEL_VALUE, IS_CONFIRM } from './constants';
 
 import { UiModal, UiButton } from '@/components';
 
 const meta: Meta<typeof UiModal> = {
   component: UiModal,
   args: {
-    modelValue: MODEL_VALUE,
+    modelValue: IS_MODEL_VALUE,
     isConfirm: IS_CONFIRM,
   },
   argTypes: {
@@ -31,8 +31,8 @@ export const Primary: StoryObj<typeof UiModal> = {
     </div>`,
 
     methods: {
-      update(value: boolean) {
-        updateArgs({ modelValue: value });
+      update(isValue: boolean) {
+        updateArgs({ modelValue: isValue });
       },
     },
   }),

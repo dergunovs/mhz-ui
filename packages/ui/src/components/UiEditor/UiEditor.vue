@@ -52,9 +52,13 @@ const editorRef = ref<HTMLDivElement>();
 const isShowSource = ref(false);
 const sourceValue = ref('');
 
-let isRemoteUpdate = false;
-let savedSelection: { startNode: Node | null; startOffset: number; endNode: Node | null; endOffset: number } | null =
-  null;
+const isRemoteUpdate = ref(false);
+const savedSelection = ref<{
+  startNode: Node | null;
+  startOffset: number;
+  endNode: Node | null;
+  endOffset: number;
+} | null>(null);
 
 const actions = [
   { _id: 1, name: 'b', method: toggleBold },
@@ -71,7 +75,7 @@ function saveSelection() {
 
   const range = selection.getRangeAt(0);
 
-  savedSelection = {
+  savedSelection.value = {
     startNode: range.startContainer,
     startOffset: range.startOffset,
     endNode: range.endContainer,
@@ -80,11 +84,11 @@ function saveSelection() {
 }
 
 function restoreSelection() {
-  if (!savedSelection || !editorRef.value) return;
+  if (!savedSelection.value || !editorRef.value) return;
 
-  const { startNode, startOffset, endNode, endOffset } = savedSelection;
+  const { startNode, startOffset, endNode, endOffset } = savedSelection.value;
 
-  savedSelection = null;
+  savedSelection.value = null;
 
   if (!startNode || !endNode) return;
 
@@ -95,10 +99,12 @@ function restoreSelection() {
 
   const selection = globalThis.window?.getSelection();
 
-  if (selection) {
-    selection.removeAllRanges();
-    selection.addRange(range);
+  if (!selection) {
+    return;
   }
+
+  selection.removeAllRanges();
+  selection.addRange(range);
 }
 
 function focusEditor() {
@@ -116,6 +122,8 @@ function wrapSelection(tag: string) {
 
   const selectedText = range.toString();
 
+  let newRange: Range;
+
   if (selectedText) {
     const element = document.createElement(tag);
 
@@ -124,37 +132,35 @@ function wrapSelection(tag: string) {
     range.deleteContents();
     range.insertNode(element);
 
-    const newRange = document.createRange();
+    newRange = document.createRange();
 
     newRange.setStartAfter(element);
-    newRange.collapse(true);
-    selection.removeAllRanges();
-    selection.addRange(newRange);
   } else {
     range.collapse(true);
     const element = document.createElement(tag);
 
     range.insertNode(element);
 
-    const newRange = document.createRange();
+    newRange = document.createRange();
 
     newRange.setStart(element, 0);
-    newRange.collapse(true);
-    selection.removeAllRanges();
-    selection.addRange(newRange);
   }
+
+  newRange.collapse(true);
+  selection.removeAllRanges();
+  selection.addRange(newRange);
 }
 
 function toggleBold() {
   wrapSelection('b');
   focusEditor();
-  emit('update:modelValue', editorRef.value?.innerHTML);
+  emit('update:modelValue', editorRef.value?.getHTML());
 }
 
 function toggleItalic() {
   wrapSelection('i');
   focusEditor();
-  emit('update:modelValue', editorRef.value?.innerHTML);
+  emit('update:modelValue', editorRef.value?.getHTML());
 }
 
 function toggleHeading(level: 2 | 3) {
@@ -162,17 +168,17 @@ function toggleHeading(level: 2 | 3) {
 
   wrapSelection(tag);
   focusEditor();
-  emit('update:modelValue', editorRef.value?.innerHTML);
+  emit('update:modelValue', editorRef.value?.getHTML());
 }
 
 function handleInput() {
-  if (isRemoteUpdate) {
-    isRemoteUpdate = false;
+  if (isRemoteUpdate.value) {
+    isRemoteUpdate.value = false;
 
     return;
   }
 
-  emit('update:modelValue', editorRef.value?.innerHTML);
+  emit('update:modelValue', editorRef.value?.getHTML());
 }
 
 function handleFocus() {
@@ -187,15 +193,15 @@ function toggleSource() {
   if (isShowSource.value) {
     isShowSource.value = false;
     nextTick(() => {
-      if (editorRef.value) {
-        editorRef.value.innerHTML = sourceValue.value;
-        editorRef.value.focus();
-        emit('update:modelValue', editorRef.value.innerHTML);
-      }
+      if (!editorRef.value) return;
+
+      editorRef.value.innerHTML = sourceValue.value;
+      editorRef.value.focus();
+      emit('update:modelValue', editorRef.value.getHTML());
     });
   } else {
     if (editorRef.value) {
-      sourceValue.value = editorRef.value.innerHTML;
+      sourceValue.value = editorRef.value.getHTML();
     }
     isShowSource.value = true;
   }
@@ -218,19 +224,16 @@ function normalizeContent() {
   let hasChanges = false;
 
   for (const node of childNodes) {
-    if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
-      const div = document.createElement('div');
+    if (node.nodeType !== Node.TEXT_NODE || !node.textContent?.trim()) continue;
 
-      div.append(node.cloneNode(true));
-      node.replaceWith(div);
-      hasChanges = true;
-    }
+    const div = document.createElement('div');
+
+    div.append(node.cloneNode(true));
+    node.replaceWith(div);
+    hasChanges = true;
   }
 
-  if (childNodes.length === 0) {
-    editor.innerHTML = '<div><br></div>';
-    hasChanges = true;
-  } else if (childNodes.every((node) => node.nodeType === Node.TEXT_NODE && !node.textContent?.trim())) {
+  if (childNodes.every((node) => node.nodeType === Node.TEXT_NODE && !node.textContent?.trim())) {
     editor.innerHTML = '<div><br></div>';
     hasChanges = true;
   }
@@ -248,11 +251,11 @@ watch(
   (value) => {
     if (!editorRef.value) return;
 
-    const currentContent = editorRef.value.innerHTML;
+    const currentContent = editorRef.value.getHTML();
 
     if (currentContent === value) return;
 
-    isRemoteUpdate = true;
+    isRemoteUpdate.value = true;
     const wasFocused = document.activeElement === editorRef.value;
 
     if (wasFocused) {
@@ -272,7 +275,7 @@ watch(
 );
 
 onBeforeUnmount(() => {
-  savedSelection = null;
+  savedSelection.value = null;
 });
 </script>
 

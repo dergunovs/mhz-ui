@@ -11,15 +11,15 @@ import { wrapperFactory } from '@/test';
 const rangeMin = dataTest('ui-range-min');
 const rangeMax = dataTest('ui-range-max');
 
-let wrapper: VueWrapper<InstanceType<typeof UiRange>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiRange, { modelValue: MODEL_VALUE, min: MIN, max: MAX });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiRange', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiRange>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiRange, { modelValue: MODEL_VALUE, min: MIN, max: MAX });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiRange)).toBeTruthy();
   });

@@ -7,8 +7,8 @@ describe('useCalendar', () => {
     await withSetup(async () => {
       const { dateFrom, dateTo, isDatesReady } = useCalendar();
 
-      expect(dateFrom.value).toStrictEqual(undefined);
-      expect(dateTo.value).toStrictEqual(undefined);
+      expect(dateFrom.value).toBeUndefined();
+      expect(dateTo.value).toBeUndefined();
       expect(isDatesReady.value).toStrictEqual(false);
     });
   });

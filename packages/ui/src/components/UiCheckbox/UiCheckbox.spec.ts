@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest } from 'mhz-helpers';
 
-import { DEFAULT_LABEL, DEFAULT_MODEL_VALUE } from './constants';
+import { DEFAULT_LABEL, IS_DEFAULT_MODEL_VALUE } from './constants';
 import UiCheckbox from './UiCheckbox.vue';
 
 import { wrapperFactory } from '@/test';
@@ -18,20 +18,20 @@ const checkboxLabelSwitcher = dataTest('ui-checkbox-label-switcher');
 const checkboxRequired = dataTest('ui-checkbox-required');
 const checkboxRequiredSwitcher = dataTest('ui-checkbox-required-switcher');
 
-let wrapper: VueWrapper<InstanceType<typeof UiCheckbox>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiCheckbox, {
-    modelValue: DEFAULT_MODEL_VALUE,
-    label: DEFAULT_LABEL,
-    labelSub: DEFAULT_LABEL,
-    labelSwitcher: DEFAULT_LABEL,
-  });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiCheckbox', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiCheckbox>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiCheckbox, {
+      modelValue: IS_DEFAULT_MODEL_VALUE,
+      label: DEFAULT_LABEL,
+      labelSub: DEFAULT_LABEL,
+      labelSwitcher: DEFAULT_LABEL,
+    });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiCheckbox)).toBeTruthy();
   });
@@ -41,7 +41,7 @@ describe('UiCheckbox', async () => {
   });
 
   it('emits data by checkbox update', async () => {
-    expect(wrapper.find(checkboxInput).attributes('value')).toBe(DEFAULT_MODEL_VALUE.toString());
+    expect(wrapper.find(checkboxInput).attributes('value')).toBe(IS_DEFAULT_MODEL_VALUE.toString());
 
     await wrapper.find(checkboxInput).setValue(true);
 
@@ -65,7 +65,7 @@ describe('UiCheckbox', async () => {
   });
 
   it('handles boolean model value correctly', async () => {
-    expect(wrapper.props('modelValue')).toBe(DEFAULT_MODEL_VALUE);
+    expect(wrapper.props('modelValue')).toBe(IS_DEFAULT_MODEL_VALUE);
 
     await wrapper.setProps({ modelValue: true });
     expect(wrapper.props('modelValue')).toBe(true);
@@ -79,7 +79,7 @@ describe('UiCheckbox', async () => {
 
     await wrapper.setProps({ modelValue: stringValue });
     expect(wrapper.props('modelValue')).toBe(stringValue);
-    expect(wrapper.find(checkboxInput).attributes('value')).toBe(DEFAULT_MODEL_VALUE.toString());
+    expect(wrapper.find(checkboxInput).attributes('value')).toBe(IS_DEFAULT_MODEL_VALUE.toString());
   });
 
   it('handles numeric model value correctly', async () => {
@@ -88,12 +88,12 @@ describe('UiCheckbox', async () => {
     await wrapper.setProps({ modelValue: numericValue });
     expect(wrapper.props('modelValue')).toBe(numericValue);
 
-    expect(wrapper.find(checkboxInput).attributes('value')).toBe(DEFAULT_MODEL_VALUE.toString());
+    expect(wrapper.find(checkboxInput).attributes('value')).toBe(IS_DEFAULT_MODEL_VALUE.toString());
   });
 
   it('disables checkbox by props', async () => {
     expect(wrapper.find(checkbox).attributes('data-disabled')).toBe('false');
-    expect(wrapper.find(checkboxInput).attributes('disabled')).toBe(undefined);
+    expect(wrapper.find(checkboxInput).attributes('disabled')).toBeUndefined();
     expect(wrapper.find(checkboxFake).attributes('data-disabled')).toBe('false');
 
     await wrapper.setProps({ isDisabled: true });
@@ -147,12 +147,12 @@ describe('UiCheckbox', async () => {
 
   it('transforms checkbox to switcher by props', async () => {
     expect(wrapper.find(checkboxFake).attributes('data-switcher')).toBe('false');
-    expect(wrapper.findAll(checkboxLine).length).toBe(2);
+    expect(wrapper.findAll(checkboxLine)).toHaveLength(2);
 
     await wrapper.setProps({ isSwitcher: true });
 
     expect(wrapper.find(checkboxFake).attributes('data-switcher')).toBe('true');
-    expect(wrapper.findAll(checkboxLine).length).toBe(0);
+    expect(wrapper.findAll(checkboxLine)).toHaveLength(0);
   });
 
   it('clicks checkbox on fake space keydown', async () => {

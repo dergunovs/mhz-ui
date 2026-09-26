@@ -90,6 +90,7 @@ const props = withDefaults(defineProps<IProps>(), {
 });
 const emit = defineEmits<IEmit>();
 
+// eslint-disable-next-line unicorn/consistent-boolean-name
 const isShowResults = shallowRef(false);
 
 const debounced = debounce(async (value: string) => {
@@ -109,6 +110,7 @@ function clearSearch() {
   emit('update:modelValue', '');
 }
 
+// eslint-disable-next-line unicorn/consistent-boolean-name
 const isResults = computed(() => {
   return props.results ? Object.values(props.results).reduce((acc, val) => acc + (val ? val.length : 0), 0) : false;
 });

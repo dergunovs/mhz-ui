@@ -39,7 +39,7 @@ describe('usePwa', () => {
     await withSetup(async () => {
       const { isShowInstallPWA, isPWACanBeInstalled } = usePwa();
 
-      globalThis.dispatchEvent(new Event('beforeinstallprompt'));
+      dispatchEvent(new Event('beforeinstallprompt'));
 
       await nextTick();
 
@@ -53,7 +53,7 @@ describe('usePwa', () => {
       usePwa();
     });
 
-    expect(globalThis.addEventListener).toHaveBeenCalledWith('beforeinstallprompt', expect.any(Function));
+    expect(window.addEventListener).toHaveBeenCalledWith('beforeinstallprompt', expect.any(Function));
   });
 
   it('removes event listener on unmount', async () => {
@@ -61,10 +61,10 @@ describe('usePwa', () => {
       usePwa();
     });
 
-    expect(globalThis.addEventListener).toHaveBeenCalledWith('beforeinstallprompt', expect.any(Function));
+    expect(window.addEventListener).toHaveBeenCalledWith('beforeinstallprompt', expect.any(Function));
 
     app.unmount();
 
-    expect(globalThis.removeEventListener).toHaveBeenCalledWith('beforeinstallprompt', expect.any(Function));
+    expect(window.removeEventListener).toHaveBeenCalledWith('beforeinstallprompt', expect.any(Function));
   });
 });

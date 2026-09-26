@@ -14,15 +14,15 @@ const breadcrumbTitle = dataTest('ui-breadcrumb-title');
 const breadcrumbSlash = dataTest('ui-breadcrumb-slash');
 const breadcrumbPosition = dataTest('ui-breadcrumb-position');
 
-let wrapper: VueWrapper<InstanceType<typeof UiBreadcrumbs>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiBreadcrumbs, { color: DEFAULT_COLOR, links: LINKS });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiBreadcrumbs', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiBreadcrumbs>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiBreadcrumbs, { color: DEFAULT_COLOR, links: LINKS });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiBreadcrumbs)).toBeTruthy();
   });
@@ -32,7 +32,7 @@ describe('UiBreadcrumbs', async () => {
   });
 
   it('shows breadcrumbs', async () => {
-    expect(wrapper.findAll(breadcrumb).length).toBe(LINKS.length);
+    expect(wrapper.findAll(breadcrumb)).toHaveLength(LINKS.length);
   });
 
   it('shows breadcrumb title', async () => {
@@ -53,7 +53,7 @@ describe('UiBreadcrumbs', async () => {
   });
 
   it('shows slashes after links except last element', async () => {
-    expect(wrapper.findAll(breadcrumbSlash).length).toBe(LINKS.length - 1);
+    expect(wrapper.findAll(breadcrumbSlash)).toHaveLength(LINKS.length - 1);
   });
 
   it('changes color by props', async () => {
@@ -71,17 +71,17 @@ describe('UiBreadcrumbs', async () => {
   it('handles empty links array', async () => {
     await wrapper.setProps({ links: [] });
 
-    expect(wrapper.findAll(breadcrumb).length).toBe(0);
-    expect(wrapper.findAll(breadcrumbLink).length).toBe(0);
-    expect(wrapper.findAll(breadcrumbSlash).length).toBe(0);
+    expect(wrapper.findAll(breadcrumb)).toHaveLength(0);
+    expect(wrapper.findAll(breadcrumbLink)).toHaveLength(0);
+    expect(wrapper.findAll(breadcrumbSlash)).toHaveLength(0);
   });
 
   it('handles single link', async () => {
     await wrapper.setProps({ links: [LINKS[0]] });
 
-    expect(wrapper.findAll(breadcrumb).length).toBe(1);
-    expect(wrapper.findAll(breadcrumbLink).length).toBe(1);
-    expect(wrapper.findAll(breadcrumbSlash).length).toBe(0);
+    expect(wrapper.findAll(breadcrumb)).toHaveLength(1);
+    expect(wrapper.findAll(breadcrumbLink)).toHaveLength(1);
+    expect(wrapper.findAll(breadcrumbSlash)).toHaveLength(0);
   });
 
   it('sets aria-label for accessibility', async () => {

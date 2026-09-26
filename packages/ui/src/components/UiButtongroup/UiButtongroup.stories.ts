@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 import { html } from 'mhz-helpers';
 
-import { isTall, modelValue, options, title, isInput } from './constants';
+import { isTall, modelValue, options, title, isInput, isScrollable } from './constants';
 
 import { UiButtongroup } from '@/components';
 
@@ -13,6 +13,7 @@ const meta: Meta<typeof UiButtongroup> = {
     options,
     title,
     isInput,
+    isScrollable,
   },
   argTypes: {},
 };

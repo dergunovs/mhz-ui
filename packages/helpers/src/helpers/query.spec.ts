@@ -85,7 +85,7 @@ describe('query', () => {
 
     let capturedHref = '';
 
-    vi.spyOn(globalThis.location, 'href', 'set').mockImplementation((value) => {
+    vi.spyOn(location, 'href', 'set').mockImplementation((value) => {
       capturedHref = value;
     });
 
@@ -108,7 +108,7 @@ describe('query', () => {
 
     let capturedHref = '';
 
-    vi.spyOn(globalThis.location, 'href', 'set').mockImplementation((value) => {
+    vi.spyOn(location, 'href', 'set').mockImplementation((value) => {
       capturedHref = value;
     });
 

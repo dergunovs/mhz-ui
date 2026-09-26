@@ -108,6 +108,7 @@ const emit = defineEmits<IEmit>();
 }
 
 .spoilerContent {
+  min-width: 0;
   overflow: hidden;
 
   &[data-expanded='true'] {

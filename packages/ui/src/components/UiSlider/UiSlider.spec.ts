@@ -20,15 +20,15 @@ const thumbs = [thumb1, thumb2, thumb3];
 const sliderThumb = dataTest('ui-slider-thumb');
 const sliderSlide = dataTest('ui-slider-slide');
 
-let wrapper: VueWrapper<InstanceType<typeof UiSlider>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiSlider, { slides, thumbs });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiSlider', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiSlider>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiSlider, { slides, thumbs });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiSlider)).toBeTruthy();
   });
@@ -38,7 +38,7 @@ describe('UiSlider', async () => {
   });
 
   it('shows thumbs', async () => {
-    expect(wrapper.findAll(sliderThumb).length).toBe(slides.length);
+    expect(wrapper.findAll(sliderThumb)).toHaveLength(slides.length);
   });
 
   it('changes slides', async () => {

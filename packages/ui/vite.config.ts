@@ -12,7 +12,7 @@ import { removeDataTest } from 'mhz-helpers';
 const files = fs.readdirSync('./src/components').filter((file) => file.includes('Ui'));
 
 const entry = files.reduce<{ [key: string]: string }>((obj, component) => {
-  obj[component.split('.')[0]] = `src/components/${component}/${component}.vue`;
+  obj[component.split('.', 1)[0]] = `src/components/${component}/${component}.vue`;
 
   return obj;
 }, {});

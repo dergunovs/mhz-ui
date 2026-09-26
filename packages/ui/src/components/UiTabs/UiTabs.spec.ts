@@ -10,15 +10,15 @@ import { wrapperFactory } from '@/test';
 const tabs = dataTest('ui-tabs');
 const tab = dataTest('ui-tab');
 
-let wrapper: VueWrapper<InstanceType<typeof UiTabs>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiTabs, { tabs: TABS, modelValue: TABS[0].value });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiTabs', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiTabs>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiTabs, { tabs: TABS, modelValue: TABS[0].value });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiTabs)).toBeTruthy();
   });
@@ -28,7 +28,7 @@ describe('UiTabs', async () => {
   });
 
   it('renders tabs correctly', async () => {
-    expect(wrapper.findAll(tab).length).toBe(TABS.length);
+    expect(wrapper.findAll(tab)).toHaveLength(TABS.length);
 
     expect(wrapper.find(tab).text()).toBe(TABS[0].title);
     expect(wrapper.find(tab).attributes('data-active')).toBe('true');
@@ -56,7 +56,7 @@ describe('UiTabs', async () => {
   it('handles empty tabs array', async () => {
     await wrapper.setProps({ tabs: [] });
 
-    expect(wrapper.findAll(tab).length).toBe(0);
+    expect(wrapper.findAll(tab)).toHaveLength(0);
     expect(wrapper.find(tabs).exists()).toBe(true);
   });
 });

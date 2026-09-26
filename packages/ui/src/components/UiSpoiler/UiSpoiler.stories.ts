@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/vue3';
 import { html } from 'mhz-helpers';
 
-import { TITLE, MODEL_VALUE } from './constants';
+import { TITLE, IS_MODEL_VALUE } from './constants';
 
 import { UiSpoiler } from '@/components';
 
@@ -9,7 +9,7 @@ const meta: Meta<typeof UiSpoiler> = {
   component: UiSpoiler,
   args: {
     title: TITLE,
-    modelValue: MODEL_VALUE,
+    modelValue: IS_MODEL_VALUE,
   },
   argTypes: {},
 };
@@ -24,8 +24,8 @@ export const Primary: StoryObj<typeof UiSpoiler> = {
     template: html` <UiSpoiler v-bind="args" @update:modelValue="update">Inner Content</UiSpoiler>`,
 
     methods: {
-      update(value: boolean) {
-        updateArgs({ modelValue: value });
+      update(isValue: boolean) {
+        updateArgs({ modelValue: isValue });
       },
     },
   }),

@@ -39,13 +39,13 @@ describe('clone', () => {
   it('clones primitive values', async () => {
     const stringVal = 'test';
     const numberVal = 42;
-    const booleanVal = true;
+    const isBoolean = true;
     const nullVal = null;
     const undefinedVal = undefined;
 
     expect(clone(stringVal)).toStrictEqual(stringVal);
     expect(clone(numberVal)).toStrictEqual(numberVal);
-    expect(clone(booleanVal)).toStrictEqual(booleanVal);
+    expect(clone(isBoolean)).toStrictEqual(isBoolean);
     expect(clone(nullVal)).toStrictEqual(nullVal);
     expect(clone(undefinedVal)).toStrictEqual(undefinedVal);
   });

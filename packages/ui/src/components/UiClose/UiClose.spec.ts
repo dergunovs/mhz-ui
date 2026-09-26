@@ -8,15 +8,15 @@ import { wrapperFactory } from '@/test';
 
 const close = dataTest('ui-close');
 
-let wrapper: VueWrapper<InstanceType<typeof UiClose>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiClose);
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiClose', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiClose>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiClose);
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiClose)).toBeTruthy();
   });

@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UiDate > matches snapshot 1`] = `
+"<div class="_inputBlock_92a4fc" data-test="ui-date"><input type="text" inputmode="numeric" class="_input_92a4fc" placeholder="дд.мм.гггг" maxlength="10" lang="ru" data-test="ui-date-input" value=""><svg class="_icon_92a4fc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-test="ui-date-icon">
+    <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14
+           c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2
+           zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2
+           zm4 0h-2v-2h2v2z"></path>
+  </svg>
+  <!--v-if-->
+</div>"
+`;

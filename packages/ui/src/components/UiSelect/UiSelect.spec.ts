@@ -15,15 +15,15 @@ const selectOption = dataTest('ui-select-option');
 const selectNoResults = dataTest('ui-select-no-results');
 const selectClearButton = dataTest('ui-select-clear');
 
-let wrapper: VueWrapper<InstanceType<typeof UiSelect>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiSelect, { modelValue: MODEL_VALUE, options: OPTIONS, isFilter: IS_FILTER });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiSelect', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiSelect>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiSelect, { modelValue: MODEL_VALUE, options: OPTIONS, isFilter: IS_FILTER });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiSelect)).toBeTruthy();
   });
@@ -53,7 +53,7 @@ describe('UiSelect', async () => {
 
     await nextTick();
 
-    expect(wrapper.findAll(selectOption).length).toBe(OPTIONS.length);
+    expect(wrapper.findAll(selectOption)).toHaveLength(OPTIONS.length);
     expect(wrapper.findAll(selectOption)[0].text()).toBe(OPTIONS[0]);
   });
 
@@ -110,13 +110,13 @@ describe('UiSelect', async () => {
 
     await nextTick();
 
-    expect(wrapper.findAll(selectOption).length).toBe(OPTIONS.length);
+    expect(wrapper.findAll(selectOption)).toHaveLength(OPTIONS.length);
 
     wrapper.findComponent<DefineComponent>(selectInputFilter).vm.$emit('update:modelValue', OPTIONS[1]);
 
     await nextTick();
 
-    expect(wrapper.findAll(selectOption).length).toBe(
+    expect(wrapper.findAll(selectOption)).toHaveLength(
       OPTIONS.filter((option) => option.toLowerCase().includes(OPTIONS[1].toLowerCase())).length
     );
   });
@@ -134,7 +134,7 @@ describe('UiSelect', async () => {
 
     await nextTick();
 
-    expect(wrapper.findAll(selectOption).length).toBe(0);
+    expect(wrapper.findAll(selectOption)).toHaveLength(0);
     expect(wrapper.find(selectNoResults).exists()).toBe(true);
 
     await wrapper.find(selectNoResults).trigger('click');

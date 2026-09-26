@@ -3,7 +3,7 @@ import { VueWrapper, enableAutoUnmount } from '@vue/test-utils';
 import { dataTest, wait } from 'mhz-helpers';
 
 import UiModal from './UiModal.vue';
-import { IS_CONFIRM, DEFAULT_SLOT } from './constants';
+import { IS_CONFIRM, IS_MODEL_VALUE, DEFAULT_SLOT } from './constants';
 
 import { wrapperFactory } from '@/test';
 
@@ -15,15 +15,15 @@ const modalSlot = dataTest('ui-modal-slot');
 const modalConfirm = dataTest('ui-modal-confirm');
 const modalCancel = dataTest('ui-modal-cancel');
 
-let wrapper: VueWrapper<InstanceType<typeof UiModal>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiModal, { modelValue: false, isConfirm: IS_CONFIRM }, { default: DEFAULT_SLOT });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiModal', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiModal>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiModal, { modelValue: IS_MODEL_VALUE, isConfirm: IS_CONFIRM }, { default: DEFAULT_SLOT });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiModal)).toBeTruthy();
   });

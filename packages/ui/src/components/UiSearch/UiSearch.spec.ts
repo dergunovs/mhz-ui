@@ -16,21 +16,21 @@ const searchResultType = dataTest('ui-search-result-type');
 const searchResultLink = dataTest('ui-search-result-link');
 const searchResultLabel = dataTest('ui-search-result-label');
 
-let wrapper: VueWrapper<InstanceType<typeof UiSearch>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiSearch, {
-    modelValue: MODEL_VALUE,
-    lang: LANG,
-    isSuccess: IS_SUCCESS,
-    results: RESULTS,
-    searchScheme: SEARCH_SCHEME,
-  });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiSearch', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiSearch>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiSearch, {
+      modelValue: MODEL_VALUE,
+      lang: LANG,
+      isSuccess: IS_SUCCESS,
+      results: RESULTS,
+      searchScheme: SEARCH_SCHEME,
+    });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiSearch)).toBeTruthy();
   });
@@ -96,8 +96,8 @@ describe('UiSearch', async () => {
     await wrapper.setProps({ modelValue: '111' });
     await wrapper.find(search).trigger('click');
 
-    expect(wrapper.findAll(searchResult).length).toBe(Object.keys(RESULTS).length);
-    expect(wrapper.findAll(searchResultLink).length).toBe(Object.values(RESULTS).flat().length);
+    expect(wrapper.findAll(searchResult)).toHaveLength(Object.keys(RESULTS).length);
+    expect(wrapper.findAll(searchResultLink)).toHaveLength(Object.values(RESULTS).flat().length);
   });
 
   it('shows result type', async () => {

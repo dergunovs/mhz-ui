@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/consistent-boolean-name */
 import { ref, shallowRef, onMounted, onBeforeUnmount } from 'vue';
 
 export interface IPromptEvent extends Event {
@@ -10,14 +11,14 @@ export function usePwa() {
   const installPWAPrompt = ref<IPromptEvent | undefined>();
 
   async function installPWA(): Promise<void> {
-    if (installPWAPrompt.value) {
-      await installPWAPrompt.value.prompt();
+    if (!installPWAPrompt.value) return;
 
-      setTimeout(() => {
-        isShowInstallPWA.value = false;
-        installPWAPrompt.value = undefined;
-      }, 100);
-    }
+    await installPWAPrompt.value.prompt();
+
+    setTimeout(() => {
+      isShowInstallPWA.value = false;
+      installPWAPrompt.value = undefined;
+    }, 100);
   }
 
   function isInstallPromptEvent(e: Event): e is IPromptEvent {
@@ -25,19 +26,19 @@ export function usePwa() {
   }
 
   function installHandler(event: Event) {
-    if (isInstallPromptEvent(event)) {
-      isPWACanBeInstalled.value = true;
-      isShowInstallPWA.value = true;
-      installPWAPrompt.value = event;
-    }
+    if (!isInstallPromptEvent(event)) return;
+
+    isPWACanBeInstalled.value = true;
+    isShowInstallPWA.value = true;
+    installPWAPrompt.value = event;
   }
 
   onMounted(() => {
-    globalThis.addEventListener('beforeinstallprompt', installHandler);
+    addEventListener('beforeinstallprompt', installHandler);
   });
 
   onBeforeUnmount(() => {
-    globalThis.removeEventListener('beforeinstallprompt', installHandler);
+    removeEventListener('beforeinstallprompt', installHandler);
   });
 
   return {

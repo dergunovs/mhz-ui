@@ -83,18 +83,18 @@ function show(type: string, message: string) {
   }, 3800);
 
   toast.addEventListener('click', (e) => {
-    if (!(e.target as HTMLElement).classList.contains('uiToastClose')) {
-      toast.classList.remove('uiToastVisible');
+    if ((e.target as HTMLElement).classList.contains('uiToastClose')) return;
 
-      setTimeout(() => {
-        toast.remove();
-        const remainingToasts = document.querySelectorAll('.uiToast');
+    toast.classList.remove('uiToastVisible');
 
-        if (body && remainingToasts.length === 0) {
-          document.querySelector('.uiToastBlock')?.remove();
-        }
-      }, 200);
-    }
+    setTimeout(() => {
+      toast.remove();
+      const remainingToasts = document.querySelectorAll('.uiToast');
+
+      if (body && remainingToasts.length === 0) {
+        document.querySelector('.uiToastBlock')?.remove();
+      }
+    }, 200);
   });
 }
 

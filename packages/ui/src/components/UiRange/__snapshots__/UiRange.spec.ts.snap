@@ -3,8 +3,8 @@
 exports[`UiRange > matches snapshot 1`] = `
 "<div class="_range_99d685">
   <div class="_sliderContainer_99d685">
-    <div class="_tooltip_99d685">100</div>
-    <div class="_tooltip_99d685">600</div>
+    <div class="_tooltip_99d685" style="left: calc(9.090909090909092% + (10.181818181818182px));">100</div>
+    <div class="_tooltip_99d685" style="left: calc(59.59595959595959% + (0.08080808080808133px));">600</div>
     <div class="_sliderTrack_99d685"></div>
     <div class="_sliderActiveTrack_99d685" style="left: 9.090909090909092%; right: 40.40404040404041%;"></div><input type="range" class="_rangeInput_99d685" min="10" max="1000" data-test="ui-range-min" value="100"><input type="range" class="_rangeInput_99d685 _rangeInputMax_99d685" min="10" max="1000" data-test="ui-range-max" value="600">
   </div>

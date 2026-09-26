@@ -10,19 +10,19 @@ import { wrapperFactory } from '@/test';
 const chart = dataTest('ui-chart');
 const chartTitle = dataTest('ui-chart-title');
 
-let wrapper: VueWrapper<InstanceType<typeof UiChart>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(UiChart, {
-    labels: LABELS,
-    datasets: DATASETS,
-    title: TITLE,
-  });
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiChart', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiChart>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(UiChart, {
+      labels: LABELS,
+      datasets: DATASETS,
+      title: TITLE,
+    });
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiChart)).toBeTruthy();
   });

@@ -10,19 +10,19 @@ import { wrapperFactory } from '@/test';
 
 const flex = dataTest('ui-flex');
 
-let wrapper: VueWrapper<InstanceType<typeof UiFlex>>;
-
-beforeEach(() => {
-  wrapper = wrapperFactory(
-    UiFlex,
-    { tag: DEFAULT_TAG, align: DEFAULT_ALIGN, justify: DEFAULT_JUSTIFY, gap: DEFAULT_GAP },
-    { default: FIRST_SLOT }
-  );
-});
-
 enableAutoUnmount(afterEach);
 
 describe('UiFlex', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof UiFlex>>;
+
+  beforeEach(() => {
+    wrapper = wrapperFactory(
+      UiFlex,
+      { tag: DEFAULT_TAG, align: DEFAULT_ALIGN, justify: DEFAULT_JUSTIFY, gap: DEFAULT_GAP },
+      { default: FIRST_SLOT }
+    );
+  });
+
   it('exists', async () => {
     expect(wrapper.findComponent(UiFlex)).toBeTruthy();
   });
