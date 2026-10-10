@@ -4,7 +4,7 @@
 
 **Storybook:** https://ui.9000mhz.ru
 
-**Полный обзор:** https://deepwiki.com/dergunovs/mhz-ui или https://zread.ai/dergunovs/mhz-ui
+**Обзор:** https://deepwiki.com/dergunovs/mhz-ui
 
 **Примеры использования в приложениях:** https://github.com/dergunovs/fit и https://github.com/dergunovs/mhz
 

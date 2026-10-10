@@ -88,7 +88,7 @@ export function usePageNumber() {
   const router = useRouter();
   const route = useRoute();
 
-  const page = shallowRef(Number(route.query.page || 1));
+  const page = shallowRef(Number(route.query.page) || 1);
 
   function resetPage() {
     page.value = 1;
@@ -99,18 +99,16 @@ export function usePageNumber() {
   }
 
   watch(
-    () => route.query.page,
-    (queryPage) => {
-      const next = Number(queryPage || 1);
-
-      if (page.value !== next) page.value = next;
+    () => Number(route.query.page) || 1,
+    (nextPage) => {
+      if (page.value !== nextPage) page.value = nextPage;
     }
   );
 
   watch(
     () => page.value,
     (nextPage) => {
-      const queryPage = Number(route.query.page || 1);
+      const queryPage = Number(route.query.page) || 1;
 
       if (nextPage !== queryPage) {
         router.replace({ path: route.path, query: { page: nextPage } });

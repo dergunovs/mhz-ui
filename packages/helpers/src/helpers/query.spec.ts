@@ -1,10 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { QueryCache, QueryClient } from '@tanstack/vue-query';
 
-import { logout } from '../composables/useAuth';
-
 import { queryClient, vueQueryOptions } from '..';
-import { handleError, deleteAuthHeader } from './api';
 
 interface IQueryOptions {
   queryClientConfig: {
@@ -26,23 +23,15 @@ describe('query', () => {
   });
 
   it('exports query options', async () => {
-    const toast = { error: (text: string) => alert(text) };
+    const toast = { error: vi.fn() };
     const logoutUrl = '/';
     const tokenName = 'token';
 
-    const options = JSON.stringify(vueQueryOptions(toast, logoutUrl, tokenName));
+    const options = vueQueryOptions(toast, logoutUrl, tokenName) as unknown as IQueryOptions;
 
-    const optionsResult = JSON.stringify({
+    expect(options).toStrictEqual({
       queryClientConfig: {
-        queryCache: new QueryCache({
-          onError: (error: unknown) => {
-            if ((error as { response: { status: number } }).response?.status === 403) {
-              logout(logoutUrl, deleteAuthHeader, tokenName);
-            }
-
-            toast.error(handleError(error));
-          },
-        }),
+        queryCache: expect.any(QueryCache),
         defaultOptions: {
           queries: {
             refetchOnMount: false,
@@ -50,15 +39,11 @@ describe('query', () => {
             retry: false,
           },
           mutations: {
-            onError: (error: unknown) => {
-              toast.error(handleError(error));
-            },
+            onError: expect.any(Function),
           },
         },
       },
     });
-
-    expect(options).toStrictEqual(optionsResult);
   });
 
   it('handles network error in query cache', async () => {

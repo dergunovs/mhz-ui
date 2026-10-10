@@ -16,7 +16,7 @@
         :data-link="index !== props.links.length - 1"
         :data-color="props.color"
         :itemid="link.url"
-        itemtype="https://schema.org/Thing"
+        :itemtype="SCHEMA_THING_URL"
         itemscope
         itemprop="item"
         data-test="ui-breadcrumb-link"
@@ -41,7 +41,7 @@
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 
-import { DEFAULT_ARIA_LABEL, DEFAULT_COLOR } from './constants';
+import { DEFAULT_ARIA_LABEL, DEFAULT_COLOR, SCHEMA_THING_URL } from './constants';
 
 interface ILink {
   url: string;

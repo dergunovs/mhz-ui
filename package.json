@@ -1,7 +1,7 @@
 {
   "name": "mhz-ui-helpers",
   "description": "mhz-ui and mhz-helpers monorepo",
-  "version": "1.4.41",
+  "version": "1.4.42",
   "author": "Alexandr Dergunov <dergunovs@mail.ru> (https://github.com/dergunovs)",
   "license": "MIT",
   "homepage": "https://ui.9000mhz.ru",
@@ -24,8 +24,8 @@
     "ajv": "8.20.0"
   },
   "devDependencies": {
-    "prettier": "3.9.9",
-    "turbo": "2.11.4"
+    "prettier": "3.9.10",
+    "turbo": "2.11.7"
   },
   "packageManager": "npm@11.7.0",
   "workspaces": [

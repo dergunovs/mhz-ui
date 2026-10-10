@@ -14,9 +14,9 @@ export const removeDataTest: NodeTransform = (node) => {
   }
 };
 
-export async function wait(time?: number): Promise<void> {
+export async function wait(time = 10): Promise<void> {
   await new Promise((r) => {
-    setTimeout(r, time || 10);
+    setTimeout(r, time);
   });
 }
 

@@ -6,3 +6,5 @@ export const LINKS = [
 
 export const DEFAULT_COLOR = 'default';
 export const DEFAULT_ARIA_LABEL = 'Breadcrumb';
+
+export const SCHEMA_THING_URL = 'https://schema.org/Thing';
