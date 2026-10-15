@@ -280,9 +280,9 @@ function parseDate(value: string, locale: TLocale): string | undefined {
 
   const date = new Date(year, month - 1, day);
 
-  return date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day
-    ? undefined
-    : `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day
+    ? `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+    : undefined;
 }
 
 function dateToISO(date: Date): string {

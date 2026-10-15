@@ -155,9 +155,9 @@ const getOptionKey = (option: IOption, index: number) => `${option._id || option
 const getOptionTitle = (option: IOption) => (props.isLocaleField ? option.title_en : option.title);
 
 const isCurrentOption = (option: IOption) => {
-  if (isPrimitiveValue(props.modelValue)) return props.modelValue === (option._id || option.title);
-
-  return props.modelValue ? props.modelValue._id === option._id : false;
+  return isPrimitiveValue(props.modelValue)
+    ? props.modelValue === (option._id || option.title)
+    : !!props.modelValue && props.modelValue._id === option._id;
 };
 
 const setFocusedOptionIndex = (index: number) => {
@@ -175,7 +175,7 @@ const toggleOptions = () => {
   }
 };
 
-const checkOpenDirection = () => {
+const isCheckOpenDirection = () => {
   if (!containerElement.value) return false;
 
   const dialogElement = containerElement.value.closest('dialog') as HTMLElement | null;
@@ -207,7 +207,7 @@ function hideOptions() {
 function showOptions() {
   if (props.isDisabled) return;
 
-  isOpenUp.value = checkOpenDirection();
+  isOpenUp.value = isCheckOpenDirection();
   isShowOptions.value = true;
 
   if (!props.isFilter) {
