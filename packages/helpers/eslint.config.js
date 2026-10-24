@@ -29,7 +29,5 @@ export default defineConfig(
 
   { ...options(globals), ...settings, ...rules },
 
-  { rules: { 'unicorn/no-top-level-side-effects': 'off' } },
-
   pluginPrettierRecommended
 );
