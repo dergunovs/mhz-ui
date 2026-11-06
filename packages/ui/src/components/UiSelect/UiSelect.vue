@@ -298,7 +298,7 @@ onClickOutside(containerElement, hideOptions);
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  height: 40px;
+  min-height: 40px;
   padding: 0 16px;
   color: var(--color-black);
   cursor: pointer;
